@@ -5,3 +5,9 @@ node_modules/
 *.log
 *.dll
 *.exe
+
+#Parcel cache folder
+.cache/
+
+#Parcel build folder
+dist/
