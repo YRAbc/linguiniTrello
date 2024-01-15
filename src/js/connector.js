@@ -4,3 +4,8 @@
 console.log('Trello Power-Up Connector is loaded!');
 
 // Add any additional code or functionality here
+window.TrelloPowerUp.initialize({
+    'card-badges': function(t, opts) {
+        return[];
+    }
+});
