@@ -12,3 +12,5 @@ node_modules/
 #Parcel build folder
 dist/
 node_modules
+
+#Code to set in github
