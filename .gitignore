@@ -11,3 +11,4 @@ node_modules/
 
 #Parcel build folder
 dist/
+node_modules
