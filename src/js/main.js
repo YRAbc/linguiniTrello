@@ -8,6 +8,7 @@ console.log("Start Linguini");
 
 var t = window.TrelloPowerUp.iframe({
   appKey: 'fa9aab0039cce75efc142efc7e65a403',
+  appSecret: 'a54e7f3488ca0a442879d97a77b27993e7d6d36';
   appName: 'Linguini for Trello',
   appAuthor: 'Yoann Raton'
 });
