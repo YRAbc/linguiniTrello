@@ -35,20 +35,3 @@ window.TrelloPowerUp.initialize({
     }];
   }
 });
-
-// Authenticate with Trello
-window.TrelloPowerUp.authorize({
-  type: 'popup',
-  name: 'Linguini for Trello',
-  expiration: 'never',
-  success: authenticationSuccess,
-  error: authenticationFailure
-});
-
-function authenticationSuccess() {
-  console.log('Authentication to Linguini successful!');
-}
-
-function authenticationFailure() {
-  console.error('Authentication to Linguini failed.');
-}
