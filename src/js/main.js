@@ -15,21 +15,7 @@ var t = window.TrelloPowerUp.iframe({
 // Initialize TrelloPowerUp
 window.TrelloPowerUp.initialize({
   'card-buttons': function(t) {
-    return t.getRestApi()
-      .isAuthorized()
-      .then(function(isAuthorized) {
-        if (isAuthorized) {
-          return [{
-            text: 'David\'s Power-Up',
-            callback: showMenu
-          }];
-        } else {
-          return [{
-            text: 'David\'s Power-Up',
-            callback: showIframe
-          }];
-        }
-      });
+
   }
 }, {
   appKey: 'fa9aab0039cce75efc142efc7e65a403',
