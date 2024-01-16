@@ -21,7 +21,16 @@ window.TrelloPowerUp.initialize({
     return t.card('all')
     .then(function(card) {
       console.log(card);
-      return [{ text: card.idShort }];
+      return [
+        {
+          text: `#OPFTECH${card.idShort}`,
+          color: 'green', // Replace with your desired badge color
+        },
+        {
+          text: `Name: ${card.name}`,
+          color: 'blue', // Replace with your desired badge color
+        },
+      ];
     })
   }
 });
