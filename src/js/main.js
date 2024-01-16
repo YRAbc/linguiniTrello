@@ -18,11 +18,13 @@ var t = window.TrelloPowerUp.iframe({
 
 window.TrelloPowerUp.initialize({
   'card-badges': function(t, opts) {
-
-    console.log("Done");
-    return [];
+    return t.card('all')
+    .then(function(card) {
+      console.log(card);
+      return [];
+    })
   }
-})
+});
 
 
 console.log("End Linguini");
