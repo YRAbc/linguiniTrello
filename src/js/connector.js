@@ -7,7 +7,7 @@ console.log('Trello Power-Up Connector is loaded!');
 const apiKey = 'fa9aab0039cce75efc142efc7e65a403';
 
 // Initialize Trello Power-Up
-Trello.initialize({
+window.TrelloPowerUp.initialize({
   'board-buttons': function (t, options) {
     return [{
       icon: {
@@ -37,18 +37,18 @@ Trello.initialize({
 });
 
 // Authenticate with Trello
-Trello.authorize({
+window.TrelloPowerUp.authorize({
   type: 'popup',
-  name: 'Your Power-Up Name',
+  name: 'Linguini for Trello',
   expiration: 'never',
   success: authenticationSuccess,
   error: authenticationFailure
 });
 
 function authenticationSuccess() {
-  console.log('Authentication successful!');
+  console.log('Authentication to Linguini successful!');
 }
 
 function authenticationFailure() {
-  console.error('Authentication failed.');
+  console.error('Authentication to Linguini failed.');
 }
