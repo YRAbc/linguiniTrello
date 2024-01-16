@@ -10,28 +10,26 @@ export default class Connector {
     onPowerUpInit(t, options) {
       // ... (existing code)
   
-      // Add a listener for card creation events
-      t.card('created', (card) => {
-        // Handle card creation event
-        this.handleCardCreation(t, card);
+      // Add card-badges capability to display ID as a badge on the card
+      window.TrelloPowerUp.initialize({
+        'card-badges': (t, opts) => this.handleCardBadges(t, opts),
       });
     }
   
-    // Handle card creation event
-    handleCardCreation(t, card) {
-      // Add logic to modify card badges when a card is created
-      const badgeText = 'New Card';
-      const badgeColor = 'green';
-  
-      // Set the badge on the card
-      t.set('card', 'shared', 'badge', {
-        text: badgeText,
-        color: badgeColor,
-      });
-  
-      console.log(`Badge added to card ${card.id}: ${badgeText} (${badgeColor})`);
+    // Handle card badges
+    handleCardBadges(t, opts) {
+      return t.card('all')
+        .then((card) => {
+          console.log(card);
+          return [
+            {
+              text: `#OPFTECH-${card.idShort}`,
+            },
+          ];
+        });
     }
   
     // Add other methods and properties as needed
   }
+  
   
