@@ -6,6 +6,7 @@ import Connector from './classes/connector/connector.js';
 
 console.log("Start Linguini");
 
+/*
 // Initialize Trello Power-Up
 var t = window.TrelloPowerUp.iframe({
   appKey: 'fa9aab0039cce75efc142efc7e65a403',
@@ -13,21 +14,12 @@ var t = window.TrelloPowerUp.iframe({
   appName: 'Linguini for Trello',
   appAuthor: 'Yoann Raton'
 });
+*/
 
-// Connection security for server
-const serverUrl = 'https://linguini-trello.vercel.app/'; // Replace with your actual server URL
-const signedUrl = t.signUrl(serverUrl);
-window.location.href = signedUrl;
+window.TrelloPowerUp.initialize({
+  'card-badges': function(t, opts) {
 
-// Create an instance of the Connector
-const connector = new Connector();
 
-// Add listener for card creation event
-t.card('created', (card) => {
-  // Handle card creation event using the Connector class
-  connector.handleCardCreation(t, card);
-});
-
-// Rest of your code...
-
-console.log("End Linguini");
+    return [];
+  }
+})
