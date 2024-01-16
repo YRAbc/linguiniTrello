@@ -2,7 +2,7 @@
 // Made by Yoann Raton, 16/01/2024
 
 // Import the Card class
-import Card from './card.js';
+import Card from '././items/card.js';
 
 export default class Connector {
   constructor() {
