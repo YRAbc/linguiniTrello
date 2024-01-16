@@ -21,7 +21,7 @@ window.TrelloPowerUp.initialize({
     return t.card('all')
     .then(function(card) {
       console.log(card);
-      return [];
+      return [{ text: card.idShort }];
     })
   }
 });
