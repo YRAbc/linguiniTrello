@@ -27,7 +27,6 @@ window.open(signedUrl, '_blank');
 
 // Initialize your Connector class with Trello context
 const connector = new Connector();
-connector.onPowerUpInit(t, /* other parameters as needed */);
 
 // Rest of your code...
 
