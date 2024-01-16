@@ -12,14 +12,21 @@ var t = window.TrelloPowerUp.iframe({
   appAuthor: 'Yoann Raton'
 });
 
-// Initialize TrelloPowerUp
-window.TrelloPowerUp.initialize({
-  'card-buttons': function(t) {
+//Connection security for server
+const serverUrl = 'https://linguini-trello.vercel.app/'; // Replace with your actual server URL
+const signedUrl = t.signUrl(serverUrl);
+window.location.href = signedUrl;
 
-  }
-}, {
-  appKey: 'fa9aab0039cce75efc142efc7e65a403',
-  appName: 'Linguini for Trello',
-  appAuthor: 'Yoann Raton'
-});
+
+// Now you can use the signed URL for secure navigation
+window.open(signedUrl, '_blank');
+
+// If you have a specific use case, replace the example with your actual code
+// ...
+
+// Initialize your Connector class with Trello context
+const connector = new Connector();
+connector.onPowerUpInit(t, /* other parameters as needed */);
+
+// Rest of your code...
 
