@@ -4,6 +4,8 @@
 // Import the Connector class
 import Connector from './classes/connector/connector.js';
 
+console.log("Start Linguini");
+
 // Initialize TrelloPowerUp
 TrelloPowerUp.initialize({
   'connector': function (t, options) {
