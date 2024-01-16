@@ -7,29 +7,27 @@ export default class Connector {
     }
   
     // This method is called when the Power-Up is initialized
-    onPowerUpInit(t, options) {
+    async onPowerUpInit(t, options) {
       // ... (existing code)
   
       // Add card-badges capability to display ID as a badge on the card
-      window.TrelloPowerUp.initialize({
-        'card-badges': (t, opts) => this.handleCardBadges(t, opts),
+      await window.TrelloPowerUp.initialize({
+        'card-badges': async (t, opts) => await this.handleCardBadges(t, opts),
       });
     }
   
     // Handle card badges
-    handleCardBadges(t, opts) {
-      return t.card('all')
-        .then((card) => {
-          console.log(card);
-          return [
-            {
-              text: `#OPFTECH-${card.idShort}`,
-            },
-          ];
-        });
+    async handleCardBadges(t, opts) {
+      const card = await t.card('all');
+      console.log(card);
+      
+      return [
+        {
+          text: `#OPFTECH-${card.idShort}`,
+        },
+      ];
     }
   
     // Add other methods and properties as needed
   }
-  
   
