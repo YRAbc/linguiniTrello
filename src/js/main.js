@@ -19,7 +19,10 @@ var t = window.TrelloPowerUp.iframe({
 window.TrelloPowerUp.initialize({
   'card-badges': function(t, opts) {
 
-
+    console.log("Done");
     return [];
   }
 })
+
+
+console.log("End Linguini");
