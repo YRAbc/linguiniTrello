@@ -19,9 +19,6 @@ const serverUrl = 'https://linguini-trello.vercel.app/'; // Replace with your ac
 const signedUrl = t.signUrl(serverUrl);
 window.location.href = signedUrl;
 
-// Now you can use the signed URL for secure navigation
-window.open(signedUrl, '_blank');
-
 // Create an instance of the Connector
 const connector = new Connector();
 
