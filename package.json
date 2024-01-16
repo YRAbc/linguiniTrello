@@ -10,8 +10,8 @@
   },
   "platforms": {
     "trello": {
-      "baseUrl": "https://linguini-trello-6b7sowsho-yrabcs-projects.vercel.app/",
-      "externalUrl": "https://linguini-trello-6b7sowsho-yrabcs-projects.vercel.app/"
+      "baseUrl": "https://linguini-trello.vercel.app/",
+      "externalUrl": "https://linguini-trello.vercel.app/"
     }
   },
   "devDependencies": {
