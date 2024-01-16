@@ -1,9 +1,6 @@
 // connector.js
 // Made by Yoann Raton, 16/01/2024
 
-// Import the Card class
-import Card from '././items/card.js';
-
 export default class Connector {
   constructor() {
     this.boards = []; // Array to store information about boards
