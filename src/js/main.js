@@ -4,8 +4,12 @@
 // Import the Connector class
 import Connector from './classes/connector/connector.js';
 
-// Create an instance of the Connector
-const connector = new Connector();
-
-// Call onPowerUpInit with the required Trello arguments
-connector.onPowerUpInit(t, options);
+// Initialize TrelloPowerUp
+TrelloPowerUp.initialize({
+  'connector': function (t, options) {
+    const connector = new Connector();
+    connector.onPowerUpInit(t, options);
+    return connector;
+  },
+  // other Power-Up capabilities...
+});
