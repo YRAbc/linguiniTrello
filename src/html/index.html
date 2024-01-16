@@ -1,38 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trello Power-Up Connector and GitHub Repositories</title>
-</head>
-<body>
-  <h1>Trello Power-Up Connector for Linguini !!</h1>
-
-  <!-- Trello Power-Up script -->
-  <script src="https://p.trellocdn.com/power-up.min.js" crossorigin="anonymous"></script>
-  <script src="../js/connector.js"></script>
-
-  <!-- GitHub Repositories script -->
-  <h2>My GitHub Repositories</h2>
-  <ul id="repositories-list"></ul>
-
-  <script>
-    // Fetch GitHub repositories using the GitHub API
-    const username = "YOUR_USERNAME"; // Replace with your GitHub username
-    const apiUrl = `https://api.github.com/users/${username}/repos`;
-
-    fetch(apiUrl)
-      .then(response => response.json())
-      .then(repositories => {
-        const repositoriesList = document.getElementById("repositories-list");
-
-        repositories.forEach(repo => {
-          const listItem = document.createElement("li");
-          listItem.innerHTML = `<a href="${repo.html_url}" target="_blank">${repo.name}</a>`;
-          repositoriesList.appendChild(listItem);
-        });
-      })
-      .catch(error => console.error("Error fetching repositories:", error));
-  </script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Trello Power-Up Connector for Linguini !!</title>
+  </head>
+  <body>
+    <script src="https://p.trellocdn.com/power-up.min.js" crossorigin="anonymous"></script>
+    <script src="../js/connector.js"></script>
+  </body>
 </html>
