@@ -7,7 +7,7 @@ import Connector from './classes/connector/connector.js';
 console.log("Start Linguini");
 
 window.TrelloPowerUp.initialize({
-  'card-badges': function(t, opts) {
+  'board-buttons': function(t, opts) {
     // Get the Trello API key and token from the context
     const apiKey = t.arg('afa9aab0039cce75efc142efc7e65a403');
     const orgIdOrName = 'Linguini Tests';  // Replace with your actual organization ID or name
