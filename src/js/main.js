@@ -37,8 +37,8 @@ window.TrelloPowerUp.initialize({
                             console.log('Board Title:', board.name);
 
                             // Add the board to the workspace
-                            boardObj = new Board(boardId, board.name);
-                            opfwsp.addBoard(boardObj);
+                            //boardObj = 
+                            opfwsp.addBoard(new Board(boardId, board.name));
                         })
                         .catch(function (error) {
                             console.error('Error retrieving board information');
