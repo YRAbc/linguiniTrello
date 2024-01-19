@@ -5,17 +5,11 @@
 //import setPowerUp from './authSettings.js';
 //import authSettings from './authSettings.js';
 
-// Import the workspace class
+// Import the Items class
 import Workspace from './workspace.js';
-
-// Import the board class
 import Board from './board.js';
-
-// Import the list class
-//import list from './list.js';
-
-// Import the card class
-//import card from './card.js';
+import List from './list.js';
+import Card from './card.js';
 
 
 //Start info
