@@ -37,4 +37,4 @@ class Workspace {
 }
 
 
-const opfwsp = new Workspace(OpfWorkspace);
+const opfwsp = new Workspace('OpfWorkspace');
