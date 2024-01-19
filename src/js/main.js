@@ -37,7 +37,7 @@ window.TrelloPowerUp.initialize({
                             console.log('Board Title:', board.name);
 
                             // Add the board to the workspace
-                            board = new Board(boardId, board.name)
+                            board = new Board(boardId, board.name);
                             opfwsp.addBoard(board);
                         })
                         .catch(function (error) {
