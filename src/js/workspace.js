@@ -11,7 +11,7 @@ class Workspace {
         this.boards.push(board);
     }
 
-    removeBoard(boardId) {
+    removeBoardById(boardId) {
         const index = this.boards.findIndex(board => board.id === boardId);
 
         if (index !== -1) {

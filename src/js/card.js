@@ -72,37 +72,4 @@ class Card {
     this.updateCardProperty('cardIssuer', newCardIssuer);
   }
 
-  deleteCard() {
-    if (!this.cardId) {
-      console.error('Card not created yet. Call createCard() first.');
-      return;
-    }
-
-    try {
-      this.trello.deleteCard(this.cardId);
-      console.log(`Card with ID ${this.cardId} deleted.`);
-    } catch (error) {
-      console.error(`Error deleting card: ${error}`);
-    }
-  }
-
-  async updateCardProperty(propertyName, propertyValue) {
-    if (!this.cardId) {
-      console.error('Card not created yet. Call createCard() first.');
-      return;
-    }
-
-    try {
-      // You can customize this based on how you want to update properties
-      // For simplicity, I'm using updateCard to update the card name
-      this.trello.updateCardName(this.cardId, propertyValue);
-
-      // Update the property value in the class
-      this[propertyName] = propertyValue;
-
-      console.log(`Card ${propertyName} updated to '${propertyValue}'.`);
-    } catch (error) {
-      console.error(`Error updating ${propertyName}: ${error}`);
-    }
-  }
 }
