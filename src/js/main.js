@@ -1,10 +1,24 @@
 // main.js
 // Made by Yoann Raton, 16/01/2024
 
-// Import the Connector class
+// Import the setoAuth class
 import setPowerUp from './authSettings.js';
 import authSettings from './authSettings.js';
 
+// Import the workspace class
+import workspace from './workspace.js';
+
+// Import the board class
+import board from './board.js';
+
+// Import the list class
+import list from './list.js';
+
+// Import the card class
+import card from './card.js';
+
+
+//Start info
 console.log("Start Linguini");
 
 // Call the setPowerUp function from authSettings
@@ -15,58 +29,42 @@ window.TrelloPowerUp.initialize({
     'board-buttons': function (t, options) {
         // Return a board button
         return [{
-            text: 'Send Board Info',
+            text: 'Add board to workspace OPF',
             callback: function (t) {
-                // Handle the button click event
-                sendBoardInformation(t);
+                // Retrieve the board ID
+                const boardId = t.getContext().board;
+
+                // Retrieve the board name using Trello API
+                t.board('name')
+                    .then(function (board) {
+                        console.log('Board ID:', boardId);
+                        console.log('Board Title:', board.name);
+
+                        // Add the board to the workspace
+                        opfwsp.addBoard(new Board(boardId, board.name));
+
+                        // Print updated workspace data
+                        opfwsp.printAllBoardsData();
+                    })
+                    .catch(function (error) {
+                        console.error('Error retrieving board information:', error);
+                    });
             },
+
+            text: 'Remove board from workspace OPF',
+            callback: function (t) {
+                // Retrieve the board ID
+                const boardId = t.getContext().board;
+
+                // Remove the board from the workspace by ID
+                opfwsp.removeBoardById(boardId);
+
+                // Print updated workspace data
+                opfwsp.printAllBoardsData();
+            },
+
         }];
     },
 });
-
-function sendBoardInformation(t) {
-    // Get board information
-    const board = t.board('id', 'name', 'desc', 'url');
-
-    // Prepare data to be sent to the API
-    const data = {
-        boardId: board.id,
-        boardName: board.name,
-        boardDescription: board.desc,
-        boardUrl: board.url,
-    };
-
-    // Make a POST request to your API
-    fetch('https://linguini-trello.vercel.app/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-    })
-    .then(response => response.json())
-    .then(responseData => {
-        // Handle the response from the API
-        console.log('API Response:', responseData);
-
-        // Optionally, show a notification to the user
-        t.alert({
-            message: 'Board information sent successfully!',
-            duration: 3,
-        });
-    })
-    .catch(error => {
-        // Handle any errors
-        console.error('Error sending board information:', error);
-
-        // Optionally, show an error notification to the user
-        t.alert({
-            message: 'Error sending board information. Please try again.',
-            duration: 3,
-            display: 'error',
-        });
-    });
-}
-
 
 console.log("End Linguini");

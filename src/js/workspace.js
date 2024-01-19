@@ -5,19 +5,36 @@ class Workspace {
     constructor(name) {
         this.name = name;
         this.boards = [];
-        this.totalCards = 0;
     }
 
     addBoard(board) {
         this.boards.push(board);
-        this.totalCards += board.getNumCards();
     }
 
-    getTotalCards() {
-        return this.totalCards;
+    removeBoard(boardId) {
+        const index = this.boards.findIndex(board => board.id === boardId);
+
+        if (index !== -1) {
+            // If the board is found in the array, remove it
+            this.boards.splice(index, 1);
+        } else {
+            console.warn("Board not found in the workspace.");
+        }
     }
 
     getBoards() {
         return this.boards;
     }
+
+    printAllBoardsData() {
+        console.log(`Workspace Name: ${this.name}`);
+
+        this.boards.forEach(board => {
+            console.log(`Board Name: ${board.name}, Board ID: ${board.id}`);
+        });
+    }
+
 }
+
+
+const opfwsp = new Workspace(OpfWorkspace);
