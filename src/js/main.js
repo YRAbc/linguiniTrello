@@ -33,9 +33,7 @@ window.TrelloPowerUp.initialize({
                     // Retrieve the board name using Trello API
                     t.board('name')
                         .then(function (board) {
-                            console.log('Board ID:', boardId);
-                            console.log('Board Title:', board.name);
-
+                            
                             // Add the board to the workspace
                             boardObj = new Board(boardId, board.name);
                             opfwsp.addBoard(boardOj);
