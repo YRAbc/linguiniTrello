@@ -6,11 +6,11 @@
 //import authSettings from './authSettings.js';
 
 // Import the Items class
-import Workspace from './Workspace.js';
-import {opfwsp} from './Workspace.js';
-import Board from './Board.js';
-import List from './List.js';
-import Card from './Card.js';
+import Workspace from './workspace.js';
+import {opfwsp} from './workspace.js';
+import Board from './board.js';
+import List from './list.js';
+import Card from './card.js';
 
 
 //Start info
@@ -50,15 +50,6 @@ window.TrelloPowerUp.initialize({
                 callback: function (t) {
                     // Retrieve the board ID
                     const boardId = t.getContext().board;
-
-                    // Retrieve the board name using Trello API
-                    t.board('name')
-                        .then(function (board) {
-                            console.log('Board ID:', boardId);
-                            console.log('Board Title:', board.name);
-                        })
-
-                    // Remove the board from the workspace by ID
                     opfwsp.removeBoardById(boardId);
                 },
             }
