@@ -2,7 +2,7 @@
 // Made by Yoann Raton, 19/01/2024
 
 class Workspace {
-    constructor(name) {
+    constructor() {
         this.name = "OpfWorkspace";
         this.boards = [];
     }
