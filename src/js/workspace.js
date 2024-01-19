@@ -11,7 +11,7 @@ class Workspace {
 
     addBoard(board) {
         this.boards.push(board);
-        console.log('Board ID:', boardId);
+        console.log('Board ID:', board.id);
         console.log('Board Title:', board.name);
         console.log('Added to workspace:', this.name);
     }
