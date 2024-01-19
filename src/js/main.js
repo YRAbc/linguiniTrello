@@ -38,7 +38,7 @@ window.TrelloPowerUp.initialize({
 
                             // Add the board to the workspace
                             board = new Board(boardId, board.name);
-                            opfwsp.addBoard(board);
+                            //opfwsp.addBoard(board);
                         })
                         .catch(function (error) {
                             console.error('Error retrieving board information');

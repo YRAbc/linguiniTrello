@@ -24,14 +24,6 @@ class Workspace {
         }
     }
 
-    printAllBoardsData() {
-        console.log(`Workspace Name: ${this.name}`);
-
-        this.boards.forEach(board => {
-            console.log(`Board Name: ${board.name}, Board ID: ${board.id}`);
-        });
-    }
-
 }
 
 const opfwsp = new Workspace("OpfTechWorkspace");
