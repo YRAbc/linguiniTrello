@@ -1,8 +1,6 @@
 // main.js
 // Made by Yoann Raton, 19/01/2024
 
-import Workspace from "./workspace.js";
-
 class Workspace {
     constructor(name) {
         this.name = name;
@@ -34,5 +32,4 @@ class Workspace {
 
 }
 
-//Start workspace
 const opfwsp = new Workspace("OpfTechWorkspace");
