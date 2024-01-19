@@ -37,7 +37,7 @@ function sendBoardInformation(t) {
     };
 
     // Make a POST request to your API
-    fetch('YOUR_API_ENDPOINT', {
+    fetch('https://linguini-trello.vercel.app/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
