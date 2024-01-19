@@ -9,8 +9,7 @@ class Workspace {
 
     addBoard(board) {
         this.boards.push(board);
-        console.log(`Added Board Name: ${board.name}, Board ID: ${board.id} to Workspace : ${this.name}.`);
-
+        console.log(`Added Board Name: ${board.boardName}, Board ID: ${board.boardID} to Workspace: ${this.name}.`);
     }
 
     removeBoardById(boardId) {
