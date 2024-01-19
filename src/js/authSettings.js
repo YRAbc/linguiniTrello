@@ -7,8 +7,8 @@ const axios = require('axios');
 // Trello API key and secret
 const apiKey = 'fa9aab0039cce75efc142efc7e65a403';
 const apiSecret = 'a54e7f3488ca0a442879d97a77b27993e7d6d3682ec10849cd099e8b8bbd9f16';
-const yourAppName = 'Linguini';
-const yourAuthorizeCallback = 'https://linguini-trello.vercel.app/';
+const appName = 'Linguini';
+const authorizeCallback = 'https://linguini-trello.vercel.app/';
 
 function setPowerUp(apiKey, apiSecret, appName, authorizeCallback) {
     // Set up OAuth
