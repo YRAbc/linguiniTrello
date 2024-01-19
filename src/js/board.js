@@ -4,27 +4,17 @@
 class Board {
     
   constructor(id, name) {
-    this.boardID = null;
-    this.boardTitle = null;
+    this.boardID = id;
+    this.boardName = name;
     this.boardLists = [];
   }
   
-  addCard(card) {
-      this.cards.push(card);
+  getBoardID() {
+    return this.boardID;
   }
 
-  removeCard(card) {
-      const index = this.cards.indexOf(card);
-
-      if (index !== -1) {
-          this.cards.splice(index, 1);
-      } else {
-          console.warn("Card not found in the board.");
-      }
+  getBoardName() {
+    return this.boardName;
   }
 
-  getNumCards() {
-      return this.cards.length;
-  }
-  
 }
