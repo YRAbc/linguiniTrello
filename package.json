@@ -18,6 +18,7 @@
     "parcel-bundler": "^1.12.5"
   },
   "dependencies": {
+    "axios": "^1.6.5",
     "oauth": "^0.10.0"
   }
 }
