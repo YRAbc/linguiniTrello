@@ -1,4 +1,4 @@
-// main.js
+// workspace.js
 // Made by Yoann Raton, 19/01/2024
 
 import Board from './board.js';
@@ -11,7 +11,6 @@ class Workspace {
 
     addBoard(board) {
         this.boards.push(board);
-        console.log(`Added Board Name: ${board.boardName}, Board ID: ${board.boardID} to Workspace: ${this.name}.`);
     }
 
     removeBoardById(boardId) {
