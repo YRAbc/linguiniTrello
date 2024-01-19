@@ -3,7 +3,7 @@
 
 class Workspace {
     constructor(name) {
-        this.name = name;
+        this.name = "OpfWorkspace";
         this.boards = [];
     }
 
@@ -37,4 +37,4 @@ class Workspace {
 }
 
 
-const opfwsp = new Workspace('OpfWorkspace');
+const opfwsp = new Workspace();
