@@ -1,7 +1,7 @@
 // workspace.js
 // Made by Yoann Raton, 19/01/2024
 
-import Board from './board.js';
+import Board from './Board.js';
 
 class Workspace {
     constructor(name) {

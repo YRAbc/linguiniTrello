@@ -6,7 +6,6 @@ class Board {
   constructor(id, name) {
     this.boardID = id;
     this.boardName = name;
-    this.boardLists = [];
   }
   
   getBoardID() {
