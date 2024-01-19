@@ -1,8 +1,6 @@
 // card.js
 // Made by Yoann Raton, 19/01/2024
 
-const Trello = require('trello');
-
 class Card {
   constructor() { // TO DO
     this.cardId = null;
