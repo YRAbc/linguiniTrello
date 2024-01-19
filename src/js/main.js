@@ -10,20 +10,18 @@ console.log("Start Linguini");
 // Call the setPowerUp function from authSettings
 //setPowerUp(authSettings.apiKey, authSettings.apiSecret, authSettings.appName, authSettings.authorizeCallback);
 
-document.addEventListener('DOMContentLoaded', function () {
-    // Initialize Trello Power-Up
-    window.TrelloPowerUp.initialize({
-        'board-buttons': function (t, options) {
-            // Return a board button
-            return [{
-                text: 'Send Board Info',
-                callback: function (t) {
-                    // Handle the button click event
-                    sendBoardInformation(t);
-                },
-            }];
-        },
-    });
+// Initialize Trello Power-Up
+window.TrelloPowerUp.initialize({
+    'board-buttons': function (t, options) {
+        // Return a board button
+        return [{
+            text: 'Send Board Info',
+            callback: function (t) {
+                // Handle the button click event
+                sendBoardInformation(t);
+            },
+        }];
+    },
 });
 
 function sendBoardInformation(t) {
