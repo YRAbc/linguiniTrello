@@ -22,10 +22,6 @@ class Workspace {
         }
     }
 
-    getBoards() {
-        return this.boards;
-    }
-
     printAllBoardsData() {
         console.log(`Workspace Name: ${this.name}`);
 
