@@ -16,7 +16,7 @@ import Card from './card.js';
 console.log("Start Linguini");
 
 //Start workspace
-const opfwsp = new Workspace;
+const opfwsp = new Workspace("OpfTechWorkspace");
 
 // Call the setPowerUp function from authSettings
 //setPowerUp(authSettings.apiKey, authSettings.apiSecret, authSettings.appName, authSettings.authorizeCallback);

@@ -2,8 +2,8 @@
 // Made by Yoann Raton, 19/01/2024
 
 class Workspace {
-    constructor() {
-        this.name = "OpfWorkspace";
+    constructor(name) {
+        this.name = name;
         this.boards = [];
     }
 
