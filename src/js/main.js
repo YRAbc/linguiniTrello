@@ -2,8 +2,8 @@
 // Made by Yoann Raton, 16/01/2024
 
 // Import the setoAuth class
-import setPowerUp from './authSettings.js';
-import authSettings from './authSettings.js';
+//import setPowerUp from './authSettings.js';
+//import authSettings from './authSettings.js';
 
 // Import the workspace class
 import Workspace from './workspace.js';
@@ -12,10 +12,10 @@ import Workspace from './workspace.js';
 import Board from './board.js';
 
 // Import the list class
-import list from './list.js';
+//import list from './list.js';
 
 // Import the card class
-import card from './card.js';
+//import card from './card.js';
 
 
 //Start info
