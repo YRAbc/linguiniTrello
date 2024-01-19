@@ -2,6 +2,7 @@
 // Made by Yoann Raton, 18/01/2024
 
 const OAuth = require('oauth');
+const axios = require('axios');
 
 // Trello API key and secret
 const apiKey = 'fa9aab0039cce75efc142efc7e65a403';
