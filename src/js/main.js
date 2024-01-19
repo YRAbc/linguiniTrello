@@ -1,23 +1,12 @@
 // main.js
 // Made by Yoann Raton, 16/01/2024
 
-// Import the setoAuth class
-//import setPowerUp from './authSettings.js';
-//import authSettings from './authSettings.js';
-
 // Import the Items class
-import Workspace from './workspace.js';
-import {opfwsp} from './workspace.js';
+import { opfwsp } from './workspace.js';
 import Board from './board.js';
-import List from './list.js';
-import Card from './card.js';
 
-
-//Start info
+// Start info
 console.log("Start Linguini");
-
-// Call the setPowerUp function from authSettings
-//setPowerUp(authSettings.apiKey, authSettings.apiSecret, authSettings.appName, authSettings.authorizeCallback);
 
 // Initialize Trello Power-Up
 window.TrelloPowerUp.initialize({
@@ -36,12 +25,12 @@ window.TrelloPowerUp.initialize({
                             console.log('Board ID:', boardId);
                             console.log('Board Title:', board.name);
 
-                            // Add the board to the workspace
-                            //boardObj = new Board(boardId, board.name);
-                            //opfwsp.addBoard(boardObj);
+                            // Uncomment the following lines if you want to add the board to the workspace
+                            // const boardObj = new Board(boardId, board.name);
+                            // opfwsp.addBoard(boardObj);
                         })
                         .catch(function (error) {
-                            console.error('Error retrieving board information');
+                            console.error('Error retrieving board information:', error);
                         });
                 },
             },
