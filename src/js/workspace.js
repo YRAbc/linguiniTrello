@@ -11,6 +11,7 @@ class Workspace {
 
     addBoard(board) {
         this.boards.push(board);
+        console.log('Board added to OpfTechWorkspace');
     }
 
     removeBoardById(boardId) {
