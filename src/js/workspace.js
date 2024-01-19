@@ -35,6 +35,3 @@ class Workspace {
     }
 
 }
-
-
-const opfwsp = new Workspace();

@@ -21,6 +21,9 @@ import card from './card.js';
 //Start info
 console.log("Start Linguini");
 
+//Start workspace
+const opfwsp = new Workspace();
+
 // Call the setPowerUp function from authSettings
 //setPowerUp(authSettings.apiKey, authSettings.apiSecret, authSettings.appName, authSettings.authorizeCallback);
 
