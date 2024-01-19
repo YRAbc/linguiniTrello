@@ -50,9 +50,12 @@ window.TrelloPowerUp.initialize({
                     // Retrieve the board ID
                     const boardId = t.getContext().board;
 
-                    console.log('Board ID:', boardId);
-                    console.log('Board Title:', board.name);
-
+                    // Retrieve the board name using Trello API
+                    t.board('name')
+                        .then(function (board) {
+                            console.log('Board ID:', boardId);
+                            console.log('Board Title:', board.name);
+                        })
 
                     // Remove the board from the workspace by ID
                     //opfwsp.removeBoardById(boardId);
