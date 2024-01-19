@@ -6,10 +6,10 @@ import setPowerUp from './authSettings.js';
 import authSettings from './authSettings.js';
 
 // Import the workspace class
-import workspace from './workspace.js';
+import Workspace from './workspace.js';
 
 // Import the board class
-import board from './board.js';
+import Board from './board.js';
 
 // Import the list class
 import list from './list.js';
