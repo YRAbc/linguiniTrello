@@ -40,7 +40,7 @@ window.TrelloPowerUp.initialize({
                             opfwsp.addBoard(new Board(boardId, board.name));
                         })
                         .catch(function (error) {
-                            console.error('Error retrieving board information:', error);
+                            console.error('Error retrieving board information');
                         });
                 },
             },
@@ -52,9 +52,6 @@ window.TrelloPowerUp.initialize({
 
                     // Remove the board from the workspace by ID
                     opfwsp.removeBoardById(boardId);
-
-                    // Print updated workspace data
-                    opfwsp.printAllBoardsData();
                 },
             }
         ];
