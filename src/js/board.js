@@ -3,13 +3,13 @@
 
 class Board {
     
-    constructor(id, name) {
-      this.boardID = null;
-      this.boardTitle = null;
-      this.boardLists = [];
-    }
+  constructor(id, name) {
+    this.boardID = null;
+    this.boardTitle = null;
+    this.boardLists = [];
+  }
   
-    addCard(card) {
+  addCard(card) {
       this.cards.push(card);
   }
 

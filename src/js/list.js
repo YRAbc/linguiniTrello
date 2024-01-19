@@ -2,8 +2,7 @@
 // Made by Yoann Raton, 19/01/2024
 
 class List {
-  constructor(apiKey, token, boardId) {
-    this.trello = new Trello(apiKey, token);
+  constructor() { // TO CODE
     this.boardId = boardId;
     this.listId = null;
     this.listName = null;

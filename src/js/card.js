@@ -4,9 +4,7 @@
 const Trello = require('trello');
 
 class Card {
-  constructor(apiKey, token, listId) {
-    this.trello = new Trello(apiKey, token);
-    this.listId = listId;
+  constructor() { // TO DO
     this.cardId = null;
     this.cardOPFID = null;
     this.cardTitle = null;
