@@ -37,7 +37,7 @@ window.TrelloPowerUp.initialize({
                             console.log('Board Title:', board.name);
 
                             // Add the board to the workspace
-                            opfwsp.addBoard(new Board(boardId, board.name));
+                            //opfwsp.addBoard(new Board(boardId, board.name));
                         })
                         .catch(function (error) {
                             console.error('Error retrieving board information');
@@ -50,8 +50,12 @@ window.TrelloPowerUp.initialize({
                     // Retrieve the board ID
                     const boardId = t.getContext().board;
 
+                    console.log('Board ID:', boardId);
+                    console.log('Board Title:', board.name);
+
+
                     // Remove the board from the workspace by ID
-                    opfwsp.removeBoardById(boardId);
+                    //opfwsp.removeBoardById(boardId);
                 },
             }
         ];
