@@ -27,43 +27,45 @@ console.log("Start Linguini");
 // Initialize Trello Power-Up
 window.TrelloPowerUp.initialize({
     'board-buttons': function (t, options) {
-        // Return a board button
-        return [{
-            text: 'Add board to workspace OPF',
-            callback: function (t) {
-                // Retrieve the board ID
-                const boardId = t.getContext().board;
+        // Return an array of board buttons
+        return [
+            {
+                text: 'Add board to workspace OPF',
+                callback: function (t) {
+                    // Retrieve the board ID
+                    const boardId = t.getContext().board;
 
-                // Retrieve the board name using Trello API
-                t.board('name')
-                    .then(function (board) {
-                        console.log('Board ID:', boardId);
-                        console.log('Board Title:', board.name);
+                    // Retrieve the board name using Trello API
+                    t.board('name')
+                        .then(function (board) {
+                            console.log('Board ID:', boardId);
+                            console.log('Board Title:', board.name);
 
-                        // Add the board to the workspace
-                        opfwsp.addBoard(new Board(boardId, board.name));
+                            // Add the board to the workspace
+                            opfwsp.addBoard(new Board(boardId, board.name));
 
-                        // Print updated workspace data
-                        opfwsp.printAllBoardsData();
-                    })
-                    .catch(function (error) {
-                        console.error('Error retrieving board information:', error);
-                    });
+                            // Print updated workspace data
+                            opfwsp.printAllBoardsData();
+                        })
+                        .catch(function (error) {
+                            console.error('Error retrieving board information:', error);
+                        });
+                },
             },
+            {
+                text: 'Remove board from workspace OPF',
+                callback: function (t) {
+                    // Retrieve the board ID
+                    const boardId = t.getContext().board;
 
-            text: 'Remove board from workspace OPF',
-            callback: function (t) {
-                // Retrieve the board ID
-                const boardId = t.getContext().board;
+                    // Remove the board from the workspace by ID
+                    opfwsp.removeBoardById(boardId);
 
-                // Remove the board from the workspace by ID
-                opfwsp.removeBoardById(boardId);
-
-                // Print updated workspace data
-                opfwsp.printAllBoardsData();
-            },
-
-        }];
+                    // Print updated workspace data
+                    opfwsp.printAllBoardsData();
+                },
+            }
+        ];
     },
 });
 
