@@ -2,11 +2,10 @@
 // Made by Yoann Raton, 19/01/2024
 
 class List {
-  constructor() { // TO CODE
-    this.boardId = boardId;
-    this.listId = null;
-    this.listName = null;
-    this.listCards = [];
+  constructor(id, name, cards) { // TO CODE
+    this.listId = id;
+    this.listName = name;
+    this.listCards = cards;
   }
 
   getListId() {
