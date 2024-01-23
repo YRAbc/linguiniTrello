@@ -28,13 +28,10 @@ window.TrelloPowerUp.initialize({
                             const nam = board.name;
 
                             if (id && nam) {
-                            // Uncomment the following lines if you want to add the board to the workspace
-                            const boardObj = new Board(id, nam);
-                            opfwsp.addBoard(boardObj);
-
-                            // Print the properties
-                            console.log('Board ID:', boardObj.id);
-                            console.log('Board Title:', boardObj.name);
+                                // add the board to the workspace
+                                const boardObj = new Board(id, nam);
+                                opfwsp.addBoard(boardObj);
+                                opfwsp.printBoards();
                             }
                         })
                         .catch(function (error) {
