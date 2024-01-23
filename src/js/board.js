@@ -4,9 +4,7 @@
 class Board {
     
   constructor(id, name) {
-                                    // Print the properties
-                                    console.log('Boar     d ID:', id);
-                                    console.log('Board Tit    le:', name);
+
     this.boardID = id;
     this.boardName = name;
   }

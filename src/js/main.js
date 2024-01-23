@@ -19,7 +19,7 @@ window.TrelloPowerUp.initialize({
                 text: 'Add',
                 callback: function (t) {
                     // Retrieve the board ID
-                    const boardId = t.getContext().board;
+                    let boardId = t.getContext().board;
 
                     // Retrieve the board name using Trello API
                     t.board('name')
@@ -43,7 +43,7 @@ window.TrelloPowerUp.initialize({
                 text: 'Remove',
                 callback: function (t) {
                     // Retrieve the board ID
-                    boardId = t.getContext().board;
+                    let boardId = t.getContext().board;
                     opfwsp.removeBoardById(boardId);
                 },
             },
