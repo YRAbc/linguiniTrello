@@ -2,11 +2,13 @@
 // Made by Yoann Raton, 16/01/2024
 
 // Import the Items class
-import { opfwsp } from './workspace.js';
+import Workspace from './workspace.js';
 import Board from './board.js';
 
 // Start info
 console.log("Start Linguini");
+
+const opfwsp = new Workspace("OpfTechWorkspace");
 
 // Initialize Trello Power-Up
 window.TrelloPowerUp.initialize({
