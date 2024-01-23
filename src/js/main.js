@@ -33,7 +33,7 @@ window.TrelloPowerUp.initialize({
                             console.error('Error retrieving board information:', error);
                         });
                 },
-            },
+            }/*,
             {
                 text: 'Remove board from workspace OPF',
                 callback: function (t) {
@@ -41,7 +41,7 @@ window.TrelloPowerUp.initialize({
                     const boardId = t.getContext().board;
                     opfwsp.removeBoardById(boardId);
                 },
-            }
+            }*/
         ];
     },
 });
