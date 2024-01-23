@@ -28,3 +28,4 @@ class Workspace {
 }
 
 const opfwsp = new Workspace("OpfTechWorkspace");
+export default Workspace;
