@@ -24,16 +24,18 @@ window.TrelloPowerUp.initialize({
                     // Retrieve the board name using Trello API
                     t.board('name')
                         .then(function (board) {
-                            console.log('Board ID:', boardId);
-                            console.log('Board Title:', board.name);
+                            id = boardId;
+                            nam = board.name;
 
+                            if (id && nam) {
                             // Uncomment the following lines if you want to add the board to the workspace
-                            const boardObj = new Board(boardId, board.name);
+                            const boardObj = new Board(id, nam);
                             opfwsp.addBoard(boardObj);
 
                             // Print the properties
                             console.log('Board ID:', boardObj.id);
                             console.log('Board Title:', boardObj.name);
+                            }
                         })
                         .catch(function (error) {
                             console.error('Error retrieving board information:', error);
