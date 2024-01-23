@@ -24,7 +24,22 @@ class Workspace {
             console.warn("Board not found in the workspace.");
         }
     }
-
+    
+    printBoards() {
+        console.log(`Boards in ${this.name} Workspace:`);
+        
+        if (this.boards.length === 0) {
+            console.log('No boards in the workspace.');
+        } else {
+            this.boards.forEach((board, index) => {
+                console.log(`Board ${index + 1}:`);
+                console.log(`  Name: ${board.name}`);
+                console.log(`  ID: ${board.id}`);
+                // You can print other board details here
+            });
+        }
+    }
+    
 }
 
 export default Workspace;
