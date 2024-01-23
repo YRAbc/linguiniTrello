@@ -14,7 +14,7 @@ window.TrelloPowerUp.initialize({
         // Return an array of board buttons
         return [
             {
-                text: 'Add board to workspace OPF',
+                text: 'Add',
                 callback: function (t) {
                     // Retrieve the board ID
                     const boardId = t.getContext().board;
@@ -26,22 +26,22 @@ window.TrelloPowerUp.initialize({
                             console.log('Board Title:', board.name);
 
                             // Uncomment the following lines if you want to add the board to the workspace
-                            const boardObj = new Board(boardId, board.name);
-                            opfwsp.addBoard(boardObj);
+                            //const boardObj = new Board(boardId, board.name);
+                            //opfwsp.addBoard(boardObj);
                         })
                         .catch(function (error) {
                             console.error('Error retrieving board information:', error);
                         });
                 },
-            }/*,
+            },
             {
-                text: 'Remove board from workspace OPF',
+                text: 'Remove',
                 callback: function (t) {
                     // Retrieve the board ID
-                    const boardId = t.getContext().board;
+                    boardId = t.getContext().board;
                     opfwsp.removeBoardById(boardId);
                 },
-            }*/
+            }
         ];
     },
 });
