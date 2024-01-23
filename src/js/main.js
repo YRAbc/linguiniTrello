@@ -24,8 +24,8 @@ window.TrelloPowerUp.initialize({
                     // Retrieve the board name using Trello API
                     t.board('name')
                         .then(function (board) {
-                            id = boardId;
-                            nam = board.name;
+                            const id = boardId;
+                            const nam = board.name;
 
                             if (id && nam) {
                             // Uncomment the following lines if you want to add the board to the workspace
