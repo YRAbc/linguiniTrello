@@ -44,7 +44,10 @@ window.TrelloPowerUp.initialize({
                 callback: function (t) {
                     // Retrieve the board ID
                     let boardId = t.getContext().board;
-                    opfwsp.removeBoardById(boardId);
+                    if (boardId)
+                    {
+                        opfwsp.removeBoardById(boardId);
+                    }
                 },
             }
         ];

@@ -22,11 +22,12 @@ class Workspace {
     }
     
     removeBoardById(boardId) {
-        const index = this.boards.findIndex(board => board.id === boardId);
-
+        const index = this.boards.findIndex(board => board.getBoardID() === boardId);
+    
         if (index !== -1) {
             // If the board is found in the array, remove it
             this.boards.splice(index, 1);
+            console.log('Board removed from OpfTechWorkspace:', boardId);
         } else {
             console.warn("Board not found in the workspace.");
         }
