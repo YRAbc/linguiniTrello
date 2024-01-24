@@ -51,7 +51,6 @@ window.TrelloPowerUp.initialize({
                                         // Set the lists for the board object
                                         boardObj.setLists(listObjects);
                                         opfwsp.addBoard(boardObj);
-                                        opfwsp.printBoards();
 
                                         // Set the flag to indicate that the initialization has been done
                                         return t.set('board', 'private', 'initPowerUp', true)
@@ -84,6 +83,7 @@ window.TrelloPowerUp.initialize({
         }));
 
         return t.popup({
+            type: 'confirm',
             title: 'Power-Up Settings',
             items: settings,
         });
