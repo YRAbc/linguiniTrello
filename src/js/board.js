@@ -23,7 +23,6 @@ class Board {
   }
 
   addList(list) {
-    // Assuming 'list' is an instance of the List class
     this.lists.push(list);
   }
 
