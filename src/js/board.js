@@ -2,6 +2,7 @@
 // Made by Yoann Raton, 19/01/2024
 
 import List from './list.js';
+import Card from './card.js';
 
 class Board {
   constructor(id, name) {
