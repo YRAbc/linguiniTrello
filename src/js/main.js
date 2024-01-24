@@ -59,17 +59,28 @@ window.TrelloPowerUp.initialize({
                                     .then(function (lists) {
                                         // Create a list object for each Trello list
                                         const listObjects = lists.map((list) => {
+                                            // Create a List object for each Trello list
                                             const listObj = new List(list.id, list.name);
-
+                                            
+                                            // Log information about the current list
+                                            console.log(`List ID: ${list.id}`);
+                                            console.log(`List Name: ${list.name}`);
+                                        
                                             // For each card in the Trello list, create a Card object and add it to the list
                                             list.cards.forEach((card) => {
                                                 // Extract items from Trello card if available
                                                 const items = card.items || [];
-
+                                        
+                                                // Create a Card object for each Trello card
                                                 const cardObj = new Card(card.id, card.name, list.id, list.name, items);
                                                 listObj.addCard(cardObj);
+                                        
+                                                // Log information about the current card
+                                                console.log(`  Card ID: ${card.id}`);
+                                                console.log(`  Card Name: ${card.name}`);
+                                                console.log(`  Card Items: ${JSON.stringify(items)}`);
                                             });
-
+                                        
                                             return listObj;
                                         });
 
