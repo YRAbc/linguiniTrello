@@ -144,7 +144,7 @@ function setupPeriodicUpdates(t) {
         setInterval(() => {
             // Get the current boards' ids and name from opfwsp data
             const boards = opfwsp.getBoards();
-            opfwsp.getBoardsInfo();
+            opfwsp.printBoards();
 
             // Loop through each board and print information using Trello API
             boards.forEach(async (board, index) => {
