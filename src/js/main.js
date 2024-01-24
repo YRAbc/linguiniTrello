@@ -145,24 +145,9 @@ function setupPeriodicUpdates(t) {
             // Get the current boards' ids and name from opfwsp data
             const boards = opfwsp.getBoards();
 
-            // Loop through each board and print information using both opfwsp and Trello API
-            boards.forEach((board, index) => {
-                const boardId = board.getBoardID();
-                console.log('Board ID : ', board.getBoardID());
-
-                // Use Trello API to get information about the board
-                t.board(boardId).get()
-                    .then((trelloBoardData) => {
-                        // Print information about the board from opfwsp
-                        console.log(`Board ${index + 1} - Opfwsp Data:`, board);
-                        // Print information about the board from Trello API
-                        console.log(`Board ${index + 1} - Trello API Data:`, trelloBoardData);
-                        // Add more board data handling as needed
-                    })
-                    .catch((error) => {
-                        console.error(`Error fetching data for Board ${index + 1}:`, error);
-                    });
-            });
+            return t.organization("all").then(function (organization) {
+                console.log(JSON.stringify(organization, null, 2));
+              });
 
             // updater.checkForModifications(window.TrelloPowerUp.iframe());
         }, 2000); // Update every 2 seconds
