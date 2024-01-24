@@ -52,3 +52,5 @@ class oAuth {
     }
 
 }
+
+export default oAuth;
