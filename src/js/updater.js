@@ -11,7 +11,6 @@ class Updater {
     constructor(workspace, ruler) {
         this.workspace = workspace;
         this.ruler = ruler;
-        // You might want to include other initialization logic
     }
 
     checkForModifications() {

@@ -147,9 +147,11 @@ function setupPeriodicUpdates(t) {
 
             // Loop through each board and print information using both opfwsp and Trello API
             boards.forEach((board, index) => {
+                const boardId = board.getBoardID();
+                console.log('Board ID : ', board.getBoardID());
 
                 // Use Trello API to get information about the board
-                t.board(board.getBoardID()).get()
+                t.board(boardId).get()
                     .then((trelloBoardData) => {
                         // Print information about the board from opfwsp
                         console.log(`Board ${index + 1} - Opfwsp Data:`, board);
