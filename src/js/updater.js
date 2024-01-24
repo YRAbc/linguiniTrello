@@ -11,23 +11,19 @@ class Updater {
         // You might want to include other initialization logic
     }
 
-    checkForModifications(t) {
+    checkForModifications() {
         // Iterate through each board in the workspace
         this.workspace.getBoards().forEach((board) => {
-            // Retrieve the latest Trello data for the board
-            t.board('all')
-                .then((latestBoardData) => {
-                    // Compare the latest data with the existing data in opfwsp
-                    if (this.boardDataChanged(board, latestBoardData)) {
-                        // Logic to perform when board data needs to be updated
-                        console.log(`Board with ID ${board.getBoardID()} needs to be updated.`);
-                    }
-                })
-                .catch((error) => {
-                    console.error(`Error fetching latest board data for board ${board.getBoardID()}:`, error);
-                });
+            // Get the existing data for the board from opfwsp
+            const existingBoardData = opfwsp.getBoardById(board.getBoardID());
+    
+            // Compare the existing data with the latest Trello data
+            if (this.boardDataChanged(existingBoardData, board)) {
+                // Logic to perform when board data needs to be updated
+                console.log(`Board with ID ${board.getBoardID()} needs to be updated.`);
+            }
         });
-    }    
+    }
 
     // Method to compare the latest Trello data with existing data in opfwsp
     boardDataChanged(existingBoard, latestBoardData) {
