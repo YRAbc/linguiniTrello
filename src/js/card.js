@@ -7,7 +7,7 @@ class Card {
       this.cardTitle = name;
       this.listId = listId;
       this.listName = listName;
-      this.items = items || [];
+      this.items = items;
   }
 
   addItem(item) {

@@ -51,8 +51,6 @@ window.TrelloPowerUp.initialize({
                             const nam = board.name;
 
                             if (id && nam) {
-                                // add the board to the workspace
-                                const boardObj = new Board(id, nam);
 
                                 // For each Trello list, create a new List object and add it to the board
                                 t.lists('all')
@@ -86,8 +84,7 @@ window.TrelloPowerUp.initialize({
                                         return listObj;
                                     });
 
-                                    // Set the lists for the board object
-                                    boardObj.setLists(listObjects);
+                                    const boardObj = new Board(id, nam, listObjects);
                                     opfwsp.addBoard(boardObj);
                                     opfwsp.printBoards();
                                     console.log('Board added to workspace.');
