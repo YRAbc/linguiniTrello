@@ -37,8 +37,22 @@ class Updater {
             const existingList = existingBoard.getLists()[i];
             const latestList = latestBoardData.lists[i];
 
+            // Check if both existingList and latestList are defined
+            if (!existingList || !latestList) {
+                return true; // Consider data changed if either is undefined
+            }
+
+            // Compare the name of the list
+            if (existingList.getName() !== latestList.name) {
+                return true;
+            }
+
             // Compare the number of cards in the list
-            if (existingList.getListCards().length !== latestList.cards.length) {
+            if (
+                !existingList.getListCards() ||
+                !latestList.cards ||
+                existingList.getListCards().length !== latestList.cards.length
+            ) {
                 return true;
             }
 
@@ -47,8 +61,17 @@ class Updater {
                 const existingCard = existingList.getListCards()[j];
                 const latestCard = latestList.cards[j];
 
+                // Check if both existingCard and latestCard are defined
+                if (!existingCard || !latestCard) {
+                    return true; // Consider data changed if either is undefined
+                }
+
                 // Compare the number of items in the card
-                if (existingCard.getItems().length !== latestCard.items.length) {
+                if (
+                    !existingCard.getItems() ||
+                    !latestCard.items ||
+                    existingCard.getItems().length !== latestCard.items.length
+                ) {
                     return true;
                 }
 
@@ -56,6 +79,11 @@ class Updater {
                 for (let k = 0; k < existingCard.getItems().length; k++) {
                     const existingItem = existingCard.getItems()[k];
                     const latestItem = latestCard.items[k];
+
+                    // Check if both existingItem and latestItem are defined
+                    if (!existingItem || !latestItem) {
+                        return true; // Consider data changed if either is undefined
+                    }
 
                     // Compare properties of the item (adjust based on your item structure)
                     if (
@@ -72,6 +100,7 @@ class Updater {
         // If no differences are found, return false
         return false;
     }
+
 
 }
 

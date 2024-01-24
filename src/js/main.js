@@ -25,7 +25,7 @@ function setupPeriodicUpdates() {
     if (opfwsp.getBoards().length === 3) {
         setInterval(() => {
             updater.checkForModifications(window.TrelloPowerUp.iframe());
-        }, 1000); // Update every 1 second
+        }, 2000); // Update every 2 seconds
     } else {
         console.log('Updater not started - There must be exactly three boards in the workspace.');
     }
