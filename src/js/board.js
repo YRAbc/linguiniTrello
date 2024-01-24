@@ -5,10 +5,10 @@ import List from './list.js';
 import Card from './card.js';
 
 class Board {
-  constructor(id, name) {
+  constructor(id, name, lists) {
     this.boardID = id;
     this.boardName = name;
-    this.lists = [];
+    this.lists = lists || [];
   }
 
   getBoardID() {
