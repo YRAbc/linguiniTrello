@@ -23,33 +23,26 @@ let registeredBoardsCount = 0;
 function setupPeriodicUpdates() {
     // Set up periodic updates only if there are exactly three boards
     if (opfwsp.getBoards().length === 3) {
-        setInterval(async () => {
-            // Fetch the current Trello data
-            const currentTrelloData = await fetchTrelloData();
+        setInterval(() => {
+            // Get the current boards
+            const boards = opfwsp.getBoards();
 
-            // Print the current Trello data
-            console.log('Current Trello Data:', JSON.stringify(currentTrelloData, null, 2));
+            // Print current board data
+            boards.forEach((board, index) => {
+                console.log(`Board ${index + 1}:`);
+                console.log(`  Name: ${board.name}`);
+                console.log(`  ID: ${board.id}`);
+                // Add more board data as needed
 
-            // Check for modifications
-            updater.checkForModifications(window.TrelloPowerUp.iframe());
+                console.log('\n'); // Separate each board's data
+            });
+
+            // updater.checkForModifications(window.TrelloPowerUp.iframe());
         }, 2000); // Update every 2 seconds
     } else {
         console.log('Updater not started - There must be exactly three boards in the workspace.');
     }
 }
-
-// Function to fetch the latest Trello data
-async function fetchTrelloData() {
-    // Implement the logic to fetch the latest Trello data
-    try {
-        const trelloData = await t.someMethodToFetchData(); // Replace with the actual Trello API method
-        return trelloData;
-    } catch (error) {
-        console.error('Error fetching Trello data:', error);
-        throw error;
-    }
-}
-
 
 // Initialize Trello Power-Up
 window.TrelloPowerUp.initialize({
