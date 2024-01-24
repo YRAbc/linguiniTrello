@@ -1,10 +1,13 @@
 // list.js
 // Made by Yoann Raton, 19/01/2024
 
+import Card from './card.js';
+
 class List {
-  constructor(id, name, cards = []) {
+  constructor(id, name, cards) {
     this.listId = id;
     this.listName = name;
+    this.listCards = cards || [];
   }
 
   getListId() {
@@ -19,15 +22,17 @@ class List {
     return this.listCards;
   }
 
+  addCard(cardId, cardName) {
+    const card = new Card(cardId, cardName, this.listId, this.listName);
+    this.listCards.push(card);
+  }
+
   displayListDetails() {
     console.log(`List ID: ${this.listId}`);
     console.log(`List Name: ${this.listName}`);
     console.log('Cards:');
     this.listCards.forEach((card) => {
-        console.log(`  - Card ID: ${card.cardId}`);
-        console.log(`    Card Name: ${card.cardTitle}`);
-        console.log(`    List ID: ${card.listId}`);
-        console.log(`    List Name: ${card.listName}`);
+      console.log(`  - Card ID: ${card.cardId}, Card Name: ${card.cardTitle}`);
     });
   }
 }
