@@ -60,11 +60,11 @@ window.TrelloPowerUp.initialize({
                                         // Create a list object for each Trello list
                                         const listObjects = lists.map((list) => {
                                             // Create a List object for each Trello list
-                                            const listObj = new List(list.id, list.name);
-                                            
+                                            const listObj = new List(list.id, list.name || 'Unknown List'); // Use a default value if list name is undefined
+                                        
                                             // Log information about the current list
                                             console.log(`List ID: ${list.id}`);
-                                            console.log(`List Name: ${list.name}`);
+                                            console.log(`List Name: ${list.name || 'Unknown List'}`); // Use a default value if list name is undefined
                                         
                                             // For each card in the Trello list, create a Card object and add it to the list
                                             list.cards.forEach((card) => {
@@ -72,7 +72,7 @@ window.TrelloPowerUp.initialize({
                                                 const items = card.items || [];
                                         
                                                 // Create a Card object for each Trello card
-                                                const cardObj = new Card(card.id, card.name, list.id, list.name, items);
+                                                const cardObj = new Card(card.id, card.name, list.id, list.name || 'Unknown List', items); // Use a default value if list name is undefined
                                                 listObj.addCard(cardObj);
                                         
                                                 // Log information about the current card
@@ -82,7 +82,7 @@ window.TrelloPowerUp.initialize({
                                             });
                                         
                                             return listObj;
-                                        });
+                                        });                                        
 
                                         // Set the lists for the board object
                                         boardObj.setLists(listObjects);
