@@ -22,10 +22,14 @@ class List {
     return this.listCards;
   }
 
-  addCard(cardId, cardName, items) {
-    const card = new Card(cardId, cardName, this.listId, this.listName, items);
+  addCard(card) {
     this.listCards.push(card);
-}
+  }
+
+  setCards(cards) {
+    this.listCards = cards.map(cards => new Card(cardId, cardName, this.listId, this.listName, items));
+  }
+
 
   displayListDetails() {
     console.log(`List ID: ${this.listId}`);
