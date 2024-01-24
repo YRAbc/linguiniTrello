@@ -19,63 +19,6 @@ const updater = new Updater(opfwsp, ruler);
 // Counter to track the number of registered boards
 let registeredBoardsCount = 0;
 
-// Function to set up periodic updates
-function setupPeriodicUpdates() {
-    // Set up periodic updates only if there are exactly three boards
-    if (opfwsp.getBoards().length === 3) {
-        setInterval(() => {
-            // Get the current boards' ids and name from opfwsp data
-            const boards = opfwsp.getBoards();
-
-            // Loop through each board and fetch additional data from Trello using Trello Power-Up API
-            boards.forEach(async (board, index) => {
-                const boardId = board.id;
-                const boardNameFromOpfwsp = board.name;
-
-                try {
-                    // Fetch additional data from Trello using Trello Power-Up API
-                    const trelloBoardData = await getBoardDataFromTrelloPowerUp(boardId);
-
-                    // Compare data from opfwsp and Trello
-                    if (trelloBoardData && trelloBoardData.name === boardNameFromOpfwsp) {
-                        console.log(`Board ${index + 1}: Data is consistent.`);
-                    } else {
-                        console.log(`Board ${index + 1}: Data inconsistency detected.`);
-                    }
-                } catch (error) {
-                    console.error(`Error fetching data for Board ${index + 1}:`, error);
-                }
-            });
-
-            // updater.checkForModifications(window.TrelloPowerUp.iframe());
-        }, 2000); // Update every 2 seconds
-    } else {
-        console.log('Updater not started - There must be exactly three boards in the workspace.');
-    }
-}
-
-// Function to get board data from Trello Power-Up using the board ID
-function getBoardDataFromTrelloPowerUp(boardId) {
-    // Use Trello Power-Up API methods to retrieve the required board data
-    return new Promise((resolve, reject) => {
-        window.TrelloPowerUp.iframe({
-            type: 'board',
-            board: boardId,
-        }, (t) => {
-            // Use t methods to retrieve board data
-            // Example: t.card('name').get('name')
-            const boardName = t.board('name').get('name');
-
-            // Resolve with the retrieved board data
-            resolve({
-                name: boardName,
-                // Add more board data as needed
-            });
-        }, reject);
-    });
-}
-
-
 // Initialize Trello Power-Up
 window.TrelloPowerUp.initialize({
 
@@ -134,7 +77,7 @@ window.TrelloPowerUp.initialize({
 
                                     // Call the function to set up periodic updates after registering the third board
                                     registeredBoardsCount += 1;
-                                    setupPeriodicUpdates();
+                                    setupPeriodicUpdates(t);
                                 })
                                 .catch(function (error) {
                                     console.error('Error fetching lists:', error);
@@ -191,6 +134,40 @@ window.TrelloPowerUp.initialize({
         items: settings,
       });
     },
-  });
+    
+});
+  
+// Function to set up periodic updates
+function setupPeriodicUpdates(t) {
+    // Set up periodic updates only if there are exactly three boards
+    if (opfwsp.getBoards().length === 3) {
+        setInterval(() => {
+            // Get the current boards' ids and name from opfwsp data
+            const boards = opfwsp.getBoards();
+
+            // Loop through each board and print information using Trello API
+            boards.forEach(async (board, index) => {
+                const boardId = board.id;
+
+                try {
+                    // Use Trello API to get information about the board
+                    const boardData = await t.board(boardId).get();
+
+                    // Print information about the board
+                    console.log(`Board ${index + 1} - ID: ${boardId}, Name: ${boardData.name}`);
+                    // Add more board data as needed
+
+                } catch (error) {
+                    console.error(`Error fetching data for Board ${index + 1}:`, error);
+                }
+            });
+
+            // updater.checkForModifications(window.TrelloPowerUp.iframe());
+        }, 2000); // Update every 2 seconds
+    } else {
+        console.log('Updater not started - There must be exactly three boards in the workspace.');
+    }
+}
+
 
 console.log("End Linguini");
