@@ -53,16 +53,6 @@ class Updater {
                 return true;
             }
 
-            // Compare the number of cards in the list
-            if (
-                !existingList.getListCards() ||
-                !latestList.cards ||
-                existingList.getListCards().length !== latestList.cards.length
-            ) {
-                console.log(`Number of cards in the list changed. Existing: ${existingList.getListCards().length}, Latest: ${latestList.cards.length}`);
-                return true;
-            }
-
         }
 
         // If no differences are found, return false
