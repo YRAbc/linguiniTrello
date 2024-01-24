@@ -14,28 +14,14 @@ const opfwsp = new Workspace("OpfTechWorkspace");
 
 // Initialize Trello Power-Up
 window.TrelloPowerUp.initialize({
-    'authorization-status': function (t, options) {
-        // return a promise that resolves to the current authorization status
-        return t.get('member', 'private', 'authorized')
-            .then(authorized => {
-                if (!authorized) {
-                    // if the member is not authorized, we should ask them to
-                    // authorize your Power-Up. If the Power-Up is not currently authorized,
-                    // we should notify the user that they need to go to the Power-Ups
-                    // directory and authorize the Power-Up
-                    return { authorized: false };
-                }
-                return { authorized: true };
-            });
-    },
     'board-buttons': function (t, options) {
         // Retrieve the board ID
         let boardId = t.getContext().board;
 
         // Check if the flag has been set
-        return t.get('board', 'private', 'addActionDone')
-            .then(addActionDone => {
-                if (!addActionDone) {
+        return t.get('board', 'private', 'initPowerUp')
+            .then(initPowerUp => {
+                if (!initPowerUp) {
                     // Retrieve the board name using Trello API
                     return t.board('name')
                         .then(function (board) {
@@ -67,8 +53,8 @@ window.TrelloPowerUp.initialize({
                                         opfwsp.addBoard(boardObj);
                                         opfwsp.printBoards();
 
-                                        // Set the flag to indicate that the "Add" action has been done
-                                        return t.set('board', 'private', 'addActionDone', true)
+                                        // Set the flag to indicate that the initialization has been done
+                                        return t.set('board', 'private', 'initPowerUp', true)
                                             .then(function () {
                                                 return [];
                                             });
@@ -82,7 +68,7 @@ window.TrelloPowerUp.initialize({
                             console.error('Error retrieving board information:', error);
                         });
                 } else {
-                    // Return an empty array if the "Add" action has already been done
+                    // Return an empty array if the initialization has already been done
                     return [];
                 }
             });
