@@ -32,6 +32,7 @@ class Updater {
     boardDataChanged(existingBoard, latestBoardData) {
         // Compare the number of boards
         if (existingBoard.getLists().length !== latestBoardData.lists.length) {
+            console.log('Number of lists in the board changed.');
             return true;
         }
 
@@ -42,11 +43,13 @@ class Updater {
 
             // Check if both existingList and latestList are defined
             if (!existingList || !latestList) {
+                console.log('List data is undefined.');
                 return true; // Consider data changed if either is undefined
             }
 
             // Compare the name of the list
             if (existingList.getListName() !== latestList.name) {
+                console.log(`List name changed from '${existingList.getListName()}' to '${latestList.name}'.`);
                 return true;
             }
 
@@ -56,6 +59,7 @@ class Updater {
                 !latestList.cards ||
                 existingList.getListCards().length !== latestList.cards.length
             ) {
+                console.log('Number of cards in the list changed.');
                 return true;
             }
 
@@ -66,6 +70,7 @@ class Updater {
 
                 // Check if both existingCard and latestCard are defined
                 if (!existingCard || !latestCard) {
+                    console.log('Card data is undefined.');
                     return true; // Consider data changed if either is undefined
                 }
 
@@ -75,6 +80,7 @@ class Updater {
                     !latestCard.items ||
                     existingCard.getItems().length !== latestCard.items.length
                 ) {
+                    console.log('Number of items in the card changed.');
                     return true;
                 }
 
@@ -85,6 +91,7 @@ class Updater {
 
                     // Check if both existingItem and latestItem are defined
                     if (!existingItem || !latestItem) {
+                        console.log('Item data is undefined.');
                         return true; // Consider data changed if either is undefined
                     }
 
@@ -94,6 +101,7 @@ class Updater {
                         existingItem.property2 !== latestItem.property2
                         // Add more properties as needed
                     ) {
+                        console.log('Item properties changed.');
                         return true;
                     }
                 }
@@ -101,9 +109,9 @@ class Updater {
         }
 
         // If no differences are found, return false
+        console.log('No differences found.');
         return false;
     }
-
 
 }
 

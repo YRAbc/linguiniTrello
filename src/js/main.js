@@ -115,6 +115,8 @@ window.TrelloPowerUp.initialize({
                     const displayInfo = boardsInfo.map((board, index) => {
                         return `Board ${index + 1}: ID - ${board.id}, Name - ${board.name}`;
                     });
+
+                    opfwsp.printBoards();
     
                     // Show a popup or log the board information
                     window.alert(`Board IDs and Names in OpfTechWorkspace:\n${displayInfo.join('\n')}`);
