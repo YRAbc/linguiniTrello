@@ -4,6 +4,9 @@
 // Import the Items class
 import Workspace from './workspace.js';
 import Board from './board.js';
+import List from './list.js';
+import Card from './card.js';
+
 
 // Start info
 console.log("Start Linguini");
@@ -33,21 +36,28 @@ window.TrelloPowerUp.initialize({
 
                                 // Use t to get information about lists on the board
                                 t.lists('all')
-                                    .then(function (lists) {
-                                        // Log list details
-                                        lists.forEach((list) => {
-                                            console.log(`List ID: ${list.id}, List Name: ${list.name}`);
-                                            console.log('Cards:', list.cards);
+                                .then(function (lists) {
+                                    // Create a list object for each Trello list
+                                    const listObjects = lists.map((list) => {
+                                        const listObj = new List(list.id, list.name);
+
+                                        // For each card in the Trello list, create a Card object and add it to the list
+                                        list.cards.forEach((card) => {
+                                            const cardObj = new Card(card.id, card.name, list.id, list.name);
+                                            listObj.addCard(cardObj);
                                         });
 
-                                        boardObj.setLists(lists);
-                                        opfwsp.addBoard(boardObj);
-                                        opfwsp.printBoards();
-
-                                    })
-                                    .catch(function (error) {
-                                        console.error('Error fetching lists:', error);
+                                        return listObj;
                                     });
+
+                                    // Set the lists for the board object
+                                    boardObj.setLists(listObjects);
+                                    opfwsp.addBoard(boardObj);
+                                    opfwsp.printBoards();
+                                })
+                                .catch(function (error) {
+                                    console.error('Error fetching lists:', error);
+                                });
                             }
                         })
                         .catch(function (error) {
