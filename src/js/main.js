@@ -72,26 +72,6 @@ window.TrelloPowerUp.initialize({
                 }
             });
     },
-
-    'board-buttons': function (t, options) {
-      return [
-        {
-          text: 'See Workspace Settings',
-          callback: function (t) {
-            // Access opfwsp and retrieve board IDs and names
-            const boardsInfo = opfwsp.getBoardsInfo();
-  
-            // Format the board information for display
-            const displayInfo = boardsInfo.map((board, index) => {
-              return `Board ${index + 1}: ID - ${board.id}, Name - ${board.name}`;
-            });
-  
-            // Show a popup or log the board information
-            window.alert(`Board IDs and Names in OpfTechWorkspace:\n${displayInfo.join('\n')}`);
-          },
-        },
-      ];
-    },
   
     'show-settings': function (t, options) {
       // Use opfwsp to get board IDs and names and display them in the settings
