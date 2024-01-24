@@ -2,10 +2,10 @@
 // Made by Yoann Raton, 19/01/2024
 
 class List {
-  constructor(id, name, cards) { // TO CODE
+  constructor(id, name, cards) {
     this.listId = id;
     this.listName = name;
-    this.listCards = cards;
+    this.listCards = cards || [];
   }
 
   getListId() {
@@ -16,6 +16,10 @@ class List {
     return this.listName;
   }
 
+  getListCards() {
+    return this.listCards;
+  }
+
   addCard(cardName) {
     if (!this.listId) {
       console.error('List not created yet. Call createList() first.');
@@ -23,6 +27,7 @@ class List {
     }
 
     try {
+      // Assuming you have access to the Trello object in this.trello
       const newCard = this.trello.addCard(cardName, '', this.listId);
       this.listCards.push({ id: newCard.id, name: newCard.name });
       console.log(`Card '${cardName}' created with ID: ${newCard.id}`);

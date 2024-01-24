@@ -30,24 +30,24 @@ window.TrelloPowerUp.initialize({
                             if (id && nam) {
                                 // add the board to the workspace
                                 const boardObj = new Board(id, nam);
-                                boardObj.getLists();
-                                opfwsp.addBoard(boardObj);
-                                opfwsp.printBoards();
+
+                                // Use t to get information about lists on the board
+                                t.lists('all')
+                                    .then(function (lists) {
+                                        // 'lists' will be an array containing information about each list
+                                        // Each element of the array will have a 'name' property
+                                        boardObj.setLists(lists);
+                                        opfwsp.addBoard(boardObj);
+                                        opfwsp.printBoards();
+
+                                    })
+                                    .catch(function (error) {
+                                    console.error('Error fetching lists:', error);
+                                });
                             }
                         })
                         .catch(function (error) {
                             console.error('Error retrieving board information:', error);
-                        });
-
-                    // Use t to get information about lists on the board
-                    t.lists('all')
-                        .then(function (lists) {
-                            // 'lists' will be an array containing information about each list
-                            // Each element of the array will have a 'name' property
-                            console.log(lists);
-                        })
-                        .catch(function (error) {
-                            console.error('Error fetching lists:', error);
                         });
                 },
             },
