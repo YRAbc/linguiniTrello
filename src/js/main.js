@@ -145,7 +145,7 @@ function setupPeriodicUpdates(t) {
             // Get the current boards' ids and name from opfwsp data
             const boards = opfwsp.getBoards();
 
-            return t.organization("all").then(function (organization) {
+            return t.board("all").then(function (organization) {
                 console.log(JSON.stringify(organization, null, 2));
               });
 
