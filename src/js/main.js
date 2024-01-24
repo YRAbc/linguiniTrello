@@ -151,11 +151,14 @@ function setupPeriodicUpdates(t) {
 
                 try {
                     // Use Trello API to get information about the board
-                    const boardData = await t.board(boardId).get();
-
-                    // Print information about the board
-                    console.log(`Board ${index + 1} - ID: ${boardId}, Name: ${boardData.name}`);
-                    // Add more board data as needed
+                    console.log(`Fetching data for Board ${index + 1} - ID: ${boardId}`);
+                    try {
+                        const boardData = await t.board(boardId).get();
+                        console.log(`Board ${index + 1} Data:`, boardData);
+                        // Process the boardData
+                    } catch (error) {
+                        console.error(`Error fetching data for Board ${index + 1}:`, error);
+                    }
 
                 } catch (error) {
                     console.error(`Error fetching data for Board ${index + 1}:`, error);
