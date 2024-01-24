@@ -2,6 +2,8 @@
 // Made by Yoann Raton, 19/01/2024
 
 import Board from './board.js';
+import List from './list.js';
+import Card from './card.js';
 
 class Workspace {
     constructor(name) {

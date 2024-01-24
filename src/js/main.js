@@ -60,8 +60,8 @@ window.TrelloPowerUp.initialize({
                                         const listObj = new List(list.id, list.name || 'Unknown List');
 
                                         // Log information about the current list
-                                        console.log(`List ID: ${list.id}`);
-                                        console.log(`List Name: ${list.name || 'Unknown List'}`);
+                                        //console.log(`List ID: ${list.id}`);
+                                        //console.log(`List Name: ${list.name || 'Unknown List'}`);
 
                                         // For each card in the Trello list, create a Card object and add it to the list
                                         list.cards.forEach((card) => {
@@ -72,9 +72,9 @@ window.TrelloPowerUp.initialize({
                                             const cardObj = new Card(card.id, card.name, listObj.id, listObj.name || 'Unknown List', items);
 
                                             // Log information about the current card
-                                            console.log(`  Card ID: ${card.id}`);
-                                            console.log(`  Card Name: ${card.name}`);
-                                            console.log(`  Card Items: ${JSON.stringify(items)}`);
+                                            //console.log(`  Card ID: ${card.id}`);
+                                            //console.log(`  Card Name: ${card.name}`);
+                                            //console.log(`  Card Items: ${JSON.stringify(items)}`);
 
                                             // Add the card object to the list object
                                             listObj.addCard(cardObj);
@@ -86,7 +86,6 @@ window.TrelloPowerUp.initialize({
 
                                     const boardObj = new Board(id, nam, listObjects);
                                     opfwsp.addBoard(boardObj);
-                                    opfwsp.printBoards();
                                     console.log('Board added to workspace.');
 
                                     // Call the function to set up periodic updates after registering the third board
