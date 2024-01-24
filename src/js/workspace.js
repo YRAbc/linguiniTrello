@@ -17,9 +17,11 @@ class Workspace {
             this.boards.push(board);
             console.log('Board added to OpfTechWorkspace:', board.getBoardName(), board.getBoardID());
         } else {
-            console.warn('Board with the same ID already exists in OpfTechWorkspace.');
+            // Replace the existing board with the new one
+            this.boards[existingIndex] = board;
+            console.log('Board replaced in OpfTechWorkspace:', board.getBoardName(), board.getBoardID());
         }
-    }
+    }    
     
     removeBoardById(boardId) {
         const index = this.boards.findIndex(board => board.getBoardID() === boardId);
