@@ -24,17 +24,27 @@ function setupPeriodicUpdates() {
     // Set up periodic updates only if there are exactly three boards
     if (opfwsp.getBoards().length === 3) {
         setInterval(() => {
-            // Get the current boards
+            // Get the current boards' ids and name from opfwsp data
             const boards = opfwsp.getBoards();
 
-            // Print current board data
-            boards.forEach((board, index) => {
-                console.log(`Board ${index + 1}:`);
-                console.log(`  Name: ${board.name}`);
-                console.log(`  ID: ${board.id}`);
-                // Add more board data as needed
+            // Loop through each board and fetch additional data from Trello using Trello Power-Up API
+            boards.forEach(async (board, index) => {
+                const boardId = board.id;
+                const boardNameFromOpfwsp = board.name;
 
-                console.log('\n'); // Separate each board's data
+                try {
+                    // Fetch additional data from Trello using Trello Power-Up API
+                    const trelloBoardData = await getBoardDataFromTrelloPowerUp(boardId);
+
+                    // Compare data from opfwsp and Trello
+                    if (trelloBoardData && trelloBoardData.name === boardNameFromOpfwsp) {
+                        console.log(`Board ${index + 1}: Data is consistent.`);
+                    } else {
+                        console.log(`Board ${index + 1}: Data inconsistency detected.`);
+                    }
+                } catch (error) {
+                    console.error(`Error fetching data for Board ${index + 1}:`, error);
+                }
             });
 
             // updater.checkForModifications(window.TrelloPowerUp.iframe());
@@ -43,6 +53,28 @@ function setupPeriodicUpdates() {
         console.log('Updater not started - There must be exactly three boards in the workspace.');
     }
 }
+
+// Function to get board data from Trello Power-Up using the board ID
+function getBoardDataFromTrelloPowerUp(boardId) {
+    // Use Trello Power-Up API methods to retrieve the required board data
+    return new Promise((resolve, reject) => {
+        window.TrelloPowerUp.iframe({
+            type: 'board',
+            board: boardId,
+        }, (t) => {
+            // Use t methods to retrieve board data
+            // Example: t.card('name').get('name')
+            const boardName = t.board('name').get('name');
+
+            // Resolve with the retrieved board data
+            resolve({
+                name: boardName,
+                // Add more board data as needed
+            });
+        }, reject);
+    });
+}
+
 
 // Initialize Trello Power-Up
 window.TrelloPowerUp.initialize({
