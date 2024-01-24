@@ -23,6 +23,7 @@ window.TrelloPowerUp.initialize({
             .then(initPowerUp => {
                 if (!initPowerUp) {
                     // Retrieve the board name using Trello API
+                    console.log("Update Linguini");
                     return t.board('name')
                         .then(function (board) {
                             const id = boardId;
