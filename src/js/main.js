@@ -21,12 +21,6 @@ window.TrelloPowerUp.initialize({
             {
                 text: 'Add',
                 callback: function (t) {
-                    // Check the number of boards in the workspace
-                    if (opfwsp.getBoards().length >= 3) {
-                        console.warn('Cannot add more than three boards.');
-                        return;
-                    }
-
                     // Retrieve the board ID
                     let boardId = t.getContext().board;
     

@@ -10,6 +10,11 @@ class Workspace {
     }
 
     addBoard(board) {
+        if (this.boards.length >= 3) {
+            console.warn('Cannot add more than three boards to OpfTechWorkspace.');
+            return;
+        }
+    
         const existingIndex = this.boards.findIndex(existingBoard => existingBoard.getBoardID() === board.getBoardID());
     
         if (existingIndex === -1) {
@@ -21,7 +26,7 @@ class Workspace {
             this.boards[existingIndex] = board;
             console.log('Board replaced in OpfTechWorkspace:', board.getBoardName(), board.getBoardID());
         }
-    }    
+    }
     
     removeBoardById(boardId) {
         const index = this.boards.findIndex(board => board.getBoardID() === boardId);
