@@ -54,49 +54,51 @@ window.TrelloPowerUp.initialize({
                                 // add the board to the workspace
                                 const boardObj = new Board(id, nam);
 
-                                // Use t to get information about lists on the board
+                                // For each Trello list, create a new List object and add it to the board
                                 t.lists('all')
-                                    .then(function (lists) {
-                                        // Create a list object for each Trello list
-                                        const listObjects = lists.map((list) => {
-                                            // Create a List object for each Trello list
-                                            const listObj = new List(list.id, list.name || 'Unknown List'); // Use a default value if list name is undefined
-                                        
-                                            // Log information about the current list
-                                            console.log(`List ID: ${list.id}`);
-                                            console.log(`List Name: ${list.name || 'Unknown List'}`); // Use a default value if list name is undefined
-                                        
-                                            // For each card in the Trello list, create a Card object and add it to the list
-                                            list.cards.forEach((card) => {
-                                                // Extract items from Trello card if available
-                                                const items = card.items || [];
-                                        
-                                                // Create a Card object for each Trello card
-                                                const cardObj = new Card(card.id, card.name, list.id, list.name || 'Unknown List', items); // Use a default value if list name is undefined
-                                                listObj.addCard(cardObj);
-                                        
-                                                // Log information about the current card
-                                                console.log(`  Card ID: ${card.id}`);
-                                                console.log(`  Card Name: ${card.name}`);
-                                                console.log(`  Card Items: ${JSON.stringify(items)}`);
-                                            });
-                                        
-                                            return listObj;
-                                        });                                        
+                                .then(function (lists) {
+                                    const listObjects = lists.map((list) => {
+                                        // Create a new List object for each Trello list
+                                        const listObj = new List(list.id, list.name || 'Unknown List');
 
-                                        // Set the lists for the board object
-                                        boardObj.setLists(listObjects);
-                                        opfwsp.addBoard(boardObj);
-                                        opfwsp.printBoards();
-                                        console.log('Board added to workspace.');
+                                        // Log information about the current list
+                                        console.log(`List ID: ${list.id}`);
+                                        console.log(`List Name: ${list.name || 'Unknown List'}`);
 
-                                        // Call the function to set up periodic updates after registering the third board
-                                        registeredBoardsCount += 1;
-                                        setupPeriodicUpdates();
-                                    })
-                                    .catch(function (error) {
-                                        console.error('Error fetching lists:', error);
+                                        // For each card in the Trello list, create a Card object and add it to the list
+                                        list.cards.forEach((card) => {
+                                            // Extract items from Trello card if available
+                                            const items = card.items || [];
+
+                                            // Create a Card object for each Trello card
+                                            const cardObj = new Card(card.id, card.name, listObj.id, listObj.name || 'Unknown List', items);
+
+                                            // Log information about the current card
+                                            console.log(`  Card ID: ${card.id}`);
+                                            console.log(`  Card Name: ${card.name}`);
+                                            console.log(`  Card Items: ${JSON.stringify(items)}`);
+
+                                            // Add the card object to the list object
+                                            listObj.addCard(cardObj);
+                                        });
+
+                                        // Return the new List object
+                                        return listObj;
                                     });
+
+                                    // Set the lists for the board object
+                                    boardObj.setLists(listObjects);
+                                    opfwsp.addBoard(boardObj);
+                                    opfwsp.printBoards();
+                                    console.log('Board added to workspace.');
+
+                                    // Call the function to set up periodic updates after registering the third board
+                                    registeredBoardsCount += 1;
+                                    setupPeriodicUpdates();
+                                })
+                                .catch(function (error) {
+                                    console.error('Error fetching lists:', error);
+                                });
                             }
                         })
                         .catch(function (error) {
