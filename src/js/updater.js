@@ -15,7 +15,7 @@ class Updater {
         // Iterate through each board in the workspace
         this.workspace.getBoards().forEach((board) => {
             // Get the existing data for the board from opfwsp
-            const existingBoardData = opfwsp.getBoardById(board.getBoardID());
+            const existingBoardData = this.workspace.getBoardById(board.getBoardID());
     
             // Compare the existing data with the latest Trello data
             if (this.boardDataChanged(existingBoardData, board)) {
