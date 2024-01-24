@@ -70,6 +70,22 @@ class Workspace {
             });
         }
     }
+
+    getBoardsInfo() {
+        // Return an array containing information about each board
+        return this.boards.map(board => ({
+            id: board.getBoardID(),
+            name: board.getBoardName(),
+            lists: board.getLists().map(list => ({
+                id: list.getListId(),
+                name: list.getListName(),
+                cards: list.getListCards().map(card => ({
+                    id: card.id,
+                    name: card.name,
+                })),
+            })),
+        }));
+    }
     
 }
 
