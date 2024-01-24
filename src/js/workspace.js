@@ -70,6 +70,20 @@ class Workspace {
                                 console.log(`        Card ${cardIndex + 1}:`);
                                 console.log(`          Name: ${card.name}`);
                                 console.log(`          ID: ${card.id}`);
+                                
+                                // Print items for the current card
+                                const items = card.getItems();
+                                if (items.length === 0) {
+                                    console.log('            No items in this card.');
+                                } else {
+                                    console.log('            Items:');
+                                    items.forEach((item, itemIndex) => {
+                                        console.log(`              Item ${itemIndex + 1}:`);
+                                        console.log(`                Property 1: ${item.property1}`);
+                                        console.log(`                Property 2: ${item.property2}`);
+                                        // Add more properties as needed
+                                    });
+                                }
                             });
                         }
                     });
@@ -77,6 +91,7 @@ class Workspace {
             });
         }
     }
+    
 
     getBoardsInfo() {
         // Return an array containing information about each board
