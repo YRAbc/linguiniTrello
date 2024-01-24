@@ -59,7 +59,7 @@ class Updater {
                 !latestList.cards ||
                 existingList.getListCards().length !== latestList.cards.length
             ) {
-                console.log('Number of cards in the list changed.');
+                console.log(`Number of cards in the list changed. Existing: ${existingList.getListCards().length}, Latest: ${latestList.cards.length}`);
                 return true;
             }
 
