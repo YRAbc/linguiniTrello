@@ -36,10 +36,8 @@ class Board {
     console.log('Lists:');
     
     this.lists.forEach((list, index) => {
-      console.log(`  ${index + 1}. List ID: ${list.getListId()}, List Name: ${list.getListName()}`);
-      list.getListCards().forEach((card, cardIndex) => {
-        console.log(`    - Card ${cardIndex + 1}: Card ID: ${card.id}, Card Name: ${card.name}`);
-      });
+        console.log(`  ${index + 1}.`);
+        list.displayListDetails();
     });
   }
 }
