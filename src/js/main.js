@@ -22,9 +22,9 @@ let registeredBoardsCount = 0;
 // Function to set up periodic updates
 function setupPeriodicUpdates() {
     // Set up periodic updates only if there are exactly three boards
-    if (registeredBoardsCount === 3) {
+    if (opfwsp.getBoards().length === 3) {
         setInterval(() => {
-            updater.checkForModifications(t);
+            updater.checkForModifications(window.TrelloPowerUp.iframe());
         }, 1000); // Update every 1 second
     } else {
         console.log('Updater not started - There must be exactly three boards in the workspace.');
