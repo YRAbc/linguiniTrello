@@ -146,24 +146,21 @@ function setupPeriodicUpdates(t) {
             const boards = opfwsp.getBoards();
             opfwsp.printBoards();
 
-            // Loop through each board and print information using Trello API
-            boards.forEach(async (board, index) => {
-                const boardId = board.id;
+            // Loop through each board and print information using both opfwsp and Trello API
+            boards.forEach((board, index) => {
 
-                try {
-                    // Use Trello API to get information about the board
-                    console.log(`Fetching data for Board ${index + 1} - ID: ${boardId}`);
-                    try {
-                        const boardData = await t.board(boardId).get();
-                        console.log(`Board ${index + 1} Data:`, boardData);
-                        // Process the boardData
-                    } catch (error) {
+                // Use Trello API to get information about the board
+                t.board(board.getBoardID()).get()
+                    .then((trelloBoardData) => {
+                        // Print information about the board from opfwsp
+                        console.log(`Board ${index + 1} - Opfwsp Data:`, board);
+                        // Print information about the board from Trello API
+                        console.log(`Board ${index + 1} - Trello API Data:`, trelloBoardData);
+                        // Add more board data handling as needed
+                    })
+                    .catch((error) => {
                         console.error(`Error fetching data for Board ${index + 1}:`, error);
-                    }
-
-                } catch (error) {
-                    console.error(`Error fetching data for Board ${index + 1}:`, error);
-                }
+                    });
             });
 
             // updater.checkForModifications(window.TrelloPowerUp.iframe());
@@ -172,6 +169,3 @@ function setupPeriodicUpdates(t) {
         console.log('Updater not started - There must be exactly three boards in the workspace.');
     }
 }
-
-
-console.log("End Linguini");
