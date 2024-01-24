@@ -12,13 +12,11 @@ class Updater {
     }
 
     // Method to check for modifications based on rules
-    checkForModifications() {
-        // Assume you have access to Trello API methods via the 'Trello' object
-
+    checkForModifications(t) {
         // Iterate through each board in the workspace
         this.workspace.getBoards().forEach((board) => {
             // Retrieve the latest Trello data for the board
-            Trello.get(`/boards/${board.getBoardID()}/?cards=all&lists=all`)
+            t.get(`/boards/${board.getBoardID()}/?cards=all&lists=all`)
                 .then((latestBoardData) => {
                     // Compare the latest data with the existing data in opfwsp
                     if (this.boardDataChanged(board, latestBoardData)) {

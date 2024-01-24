@@ -24,7 +24,7 @@ function setupPeriodicUpdates() {
     // Set up periodic updates only if there are exactly three boards
     if (registeredBoardsCount === 3) {
         setInterval(() => {
-            updater.checkForModifications();
+            updater.checkForModifications(t);
         }, 1000); // Update every 1 second
     } else {
         console.log('Updater not started - There must be exactly three boards in the workspace.');
