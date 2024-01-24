@@ -63,7 +63,10 @@ window.TrelloPowerUp.initialize({
 
                                             // For each card in the Trello list, create a Card object and add it to the list
                                             list.cards.forEach((card) => {
-                                                const cardObj = new Card(card.id, card.name, list.id, list.name);
+                                                // Extract items from Trello card if available
+                                                const items = card.items || [];
+
+                                                const cardObj = new Card(card.id, card.name, list.id, list.name, items);
                                                 listObj.addCard(cardObj);
                                             });
 

@@ -2,6 +2,9 @@
 // Made by Yoann Raton, 24/01/2024
 
 import Workspace from './workspace.js';
+import Board from './board.js';
+import List from './list.js';
+import Card from './card.js';
 import Ruler from './ruler.js';
 
 class Updater {
@@ -43,7 +46,7 @@ class Updater {
             }
 
             // Compare the name of the list
-            if (existingList.getName() !== latestList.name) {
+            if (existingList.getListName() !== latestList.name) {
                 return true;
             }
 

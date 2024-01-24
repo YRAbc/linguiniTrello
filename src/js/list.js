@@ -22,9 +22,10 @@ class List {
     return this.listCards;
   }
 
-  addCard(cardId, cardName) {
-    const card = new Card(cardId, cardName, this.listId, this.listName);
-    this.listCards.push(card);
+  // Method to add a card to the list
+  addCard(cardId, cardName, items) {
+      const card = new Card(cardId, cardName, this.listId, this.listName, items);
+      this.listCards.push(card);
   }
 
   displayListDetails() {
