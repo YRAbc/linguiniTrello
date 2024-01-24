@@ -74,13 +74,16 @@ class Updater {
                     return true; // Consider data changed if either is undefined
                 }
 
-                // Compare the number of items in the card
+                // Compare the number of cards in the list
                 if (
-                    !existingCard.getItems() ||
-                    !latestCard.items ||
-                    existingCard.getItems().length !== latestCard.items.length
+                    (existingList.getListCards() && latestList.cards &&
+                    existingList.getListCards().length !== latestList.cards.length) ||
+                    (!existingList.getListCards() && latestList.cards)
                 ) {
-                    console.log('Number of items in the card changed.');
+                    const existingLength = existingList.getListCards() ? existingList.getListCards().length : 0;
+                    const latestLength = latestList.cards ? latestList.cards.length : 0;
+
+                    console.log(`Number of cards in the list changed. Existing: ${existingLength}, Latest: ${latestLength}`);
                     return true;
                 }
 
