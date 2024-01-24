@@ -16,7 +16,7 @@ class Updater {
         // Iterate through each board in the workspace
         this.workspace.getBoards().forEach((board) => {
             // Retrieve the latest Trello data for the board
-            t.get(`/boards/${board.getBoardID()}/?cards=all&lists=all`)
+            t.board('id', 'name', 'url', 'lists', 'cards')
                 .then((latestBoardData) => {
                     // Compare the latest data with the existing data in opfwsp
                     if (this.boardDataChanged(board, latestBoardData)) {
@@ -29,6 +29,7 @@ class Updater {
                 });
         });
     }
+
 
     // Method to compare the latest Trello data with existing data in opfwsp
     boardDataChanged(existingBoard, latestBoardData) {
