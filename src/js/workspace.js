@@ -99,6 +99,11 @@ class Workspace {
         return this.boards;
     }
 
+    // Method to get a board by ID
+    getBoardById(boardId) {
+        return this.boards.find(board => board.getBoardID() === boardId) || null;
+    }
+
 }
 
 export default Workspace;
