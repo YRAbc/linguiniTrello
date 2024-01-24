@@ -15,7 +15,7 @@ class Workspace {
         if (existingIndex === -1) {
             // Board with the same ID is not already in the workspace
             this.boards.push(board);
-            console.log('Board added to OpfTechWorkspace:', board.getBoardName(), board.getBoardID());
+            //console.log('Board added to OpfTechWorkspace:', board.getBoardName(), board.getBoardID());
         } else {
             console.warn('Board with the same ID already exists in OpfTechWorkspace.');
         }

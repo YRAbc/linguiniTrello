@@ -34,8 +34,6 @@ window.TrelloPowerUp.initialize({
                                 // Use t to get information about lists on the board
                                 t.lists('all')
                                     .then(function (lists) {
-                                        console.log('Fetched lists:', lists);
-
                                         // Log list details
                                         lists.forEach((list) => {
                                             console.log(`List ID: ${list.id}, List Name: ${list.name}`);
