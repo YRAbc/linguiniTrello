@@ -37,7 +37,6 @@ window.TrelloPowerUp.initialize({
     'board-buttons': function (t, options) {
         return [
             {
-                // Remove the 'initPowerUp' flag check
                 text: 'Add',
                 callback: function (t) {
                     // Retrieve the board ID
@@ -119,6 +118,7 @@ window.TrelloPowerUp.initialize({
                 callback: function (t) {
                     // Access opfwsp and retrieve board IDs and names
                     const boardsInfo = opfwsp.getBoardsInfo();
+                    opfwsp.printBoards();
     
                     // Format the board information for display
                     const displayInfo = boardsInfo.map((board, index) => {
