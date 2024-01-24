@@ -6,11 +6,15 @@ import Workspace from './workspace.js';
 import Board from './board.js';
 import List from './list.js';
 import Card from './card.js';
+import Ruler from './ruler.js';
+import Updater from './updater.js';
 
 // Start info
 console.log("Start Linguini");
 
 const opfwsp = new Workspace("OpfTechWorkspace");
+const ruler = new Ruler(opfwsp);
+const updater = new Updater(opfwsp, ruler);
 
 // Initialize Trello Power-Up
 window.TrelloPowerUp.initialize({
@@ -113,5 +117,15 @@ window.TrelloPowerUp.initialize({
       });
     },
   });
+
+
+// Set up periodic updates only if there are exactly three boards
+if (opfwsp.getBoards().length === 3) {
+    setInterval(() => {
+        updater.checkForModifications();
+    }, 1000); // Update every 1 seconds
+} else {
+    console.log('Updater not started - There must be exactly three boards in the workspace.');
+}
 
 console.log("End Linguini");
