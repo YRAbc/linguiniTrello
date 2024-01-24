@@ -46,4 +46,3 @@ function setPowerUp(apiKey, apiSecret, appName, authorizeCallback) {
       }
     });
   }
-  

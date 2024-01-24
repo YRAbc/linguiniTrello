@@ -8,9 +8,13 @@ import List from './list.js';
 import Card from './card.js';
 import Ruler from './ruler.js';
 import Updater from './updater.js';
+import './authSettings.js';
 
 // Start info
 console.log("Start Linguini For Trello *");
+
+// Call the function to initiate the authentication process
+setPowerUp(apiKey, apiSecret, appName, authorizeCallback);
 
 const opfwsp = new Workspace("OpfTechWorkspace");
 const ruler = new Ruler(opfwsp);
@@ -145,9 +149,7 @@ function setupPeriodicUpdates(t) {
             // Get the current boards' ids and name from opfwsp data
             const boards = opfwsp.getBoards();
 
-            return t.board("all").then(function (organization) {
-                console.log(JSON.stringify(organization, null, 2));
-              });
+            // use it there to retreive all boards data 
 
             // updater.checkForModifications(window.TrelloPowerUp.iframe());
         }, 2000); // Update every 2 seconds
