@@ -7,15 +7,13 @@ class Card {
       this.cardTitle = name;
       this.listId = listId;
       this.listName = listName;
-      this.items = items || []; // Initialize items as an empty array if not provided
+      this.items = items || [];
   }
 
-  // Method to add an item to the card
   addItem(item) {
       this.items.push(item);
   }
 
-  // Method to get the items of the card
   getItems() {
       return this.items;
   }
