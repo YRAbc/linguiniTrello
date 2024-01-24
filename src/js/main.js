@@ -16,9 +16,23 @@ const opfwsp = new Workspace("OpfTechWorkspace");
 const ruler = new Ruler(opfwsp);
 const updater = new Updater(opfwsp, ruler);
 
+// Counter to track the number of registered boards
+let registeredBoardsCount = 0;
+
+// Function to set up periodic updates
+function setupPeriodicUpdates() {
+    // Set up periodic updates only if there are exactly three boards
+    if (registeredBoardsCount === 3) {
+        setInterval(() => {
+            updater.checkForModifications();
+        }, 1000); // Update every 1 second
+    } else {
+        console.log('Updater not started - There must be exactly three boards in the workspace.');
+    }
+}
+
 // Initialize Trello Power-Up
 window.TrelloPowerUp.initialize({
-
 
     'board-buttons': function (t, options) {
         return [
@@ -61,6 +75,9 @@ window.TrelloPowerUp.initialize({
                                         opfwsp.addBoard(boardObj);
 
                                         console.log('Board added to workspace.');
+                                        
+                                        // Call the function to set up periodic updates after registering the third board
+                                        setupPeriodicUpdates();
                                     })
                                     .catch(function (error) {
                                         console.error('Error fetching lists:', error);
@@ -117,15 +134,5 @@ window.TrelloPowerUp.initialize({
       });
     },
   });
-
-
-// Set up periodic updates only if there are exactly three boards
-if (opfwsp.getBoards().length === 3) {
-    setInterval(() => {
-        updater.checkForModifications();
-    }, 1000); // Update every 1 seconds
-} else {
-    console.log('Updater not started - There must be exactly three boards in the workspace.');
-}
 
 console.log("End Linguini");
