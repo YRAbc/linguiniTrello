@@ -75,8 +75,9 @@ window.TrelloPowerUp.initialize({
                                         opfwsp.addBoard(boardObj);
 
                                         console.log('Board added to workspace.');
-                                        
+
                                         // Call the function to set up periodic updates after registering the third board
+                                        registeredBoardsCount += 1;
                                         setupPeriodicUpdates();
                                     })
                                     .catch(function (error) {
