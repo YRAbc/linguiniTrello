@@ -74,43 +74,39 @@ window.TrelloPowerUp.initialize({
     },
 
     'board-buttons': function (t, options) {
-        // Define a flag to control whether the button should be displayed
-        const showWorkspaceSettingsButton = false; // Set this based on your criteria
-
-        // Return an array of board buttons
-        return showWorkspaceSettingsButton ? [
-            {
-                text: 'See Workspace Settings',
-                callback: function (t) {
-                    // Access opfwsp and retrieve board IDs and names
-                    const boardsInfo = opfwsp.getBoardsInfo();
-
-                    // Format the board information for display
-                    const displayInfo = boardsInfo.map((board, index) => {
-                        return `Board ${index + 1}: ID - ${board.id}, Name - ${board.name}`;
-                    });
-
-                    // Show a popup or log the board information
-                    window.alert(`Board IDs and Names in OpfTechWorkspace:\n${displayInfo.join('\n')}`);
-                },
-            },
-        ] : [];
+      return [
+        {
+          text: 'See Workspace Settings',
+          callback: function (t) {
+            // Access opfwsp and retrieve board IDs and names
+            const boardsInfo = opfwsp.getBoardsInfo();
+  
+            // Format the board information for display
+            const displayInfo = boardsInfo.map((board, index) => {
+              return `Board ${index + 1}: ID - ${board.id}, Name - ${board.name}`;
+            });
+  
+            // Show a popup or log the board information
+            window.alert(`Board IDs and Names in OpfTechWorkspace:\n${displayInfo.join('\n')}`);
+          },
+        },
+      ];
     },
-
+  
     'show-settings': function (t, options) {
-        // Use opfwsp to get board IDs and names and display them in the settings
-        const boardsInfo = opfwsp.getBoardsInfo();
-        const settings = boardsInfo.map((board, index) => ({
-            name: `Board ${index + 1}`,
-            value: board.id,
-            context: 'board',
-        }));
-
-        return t.popup({
-            title: 'Power-Up Settings',
-            items: settings,
-        });
+      // Use opfwsp to get board IDs and names and display them in the settings
+      const boardsInfo = opfwsp.getBoardsInfo();
+      const settings = boardsInfo.map((board, index) => ({
+        name: `Board ${index + 1}`,
+        value: board.id,
+        context: 'board',
+      }));
+  
+      return t.popup({
+        title: 'Power-Up Settings',
+        items: settings,
+      });
     },
-});
+  });
 
 console.log("End Linguini");
