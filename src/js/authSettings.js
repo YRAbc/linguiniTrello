@@ -10,7 +10,7 @@ const apiSecret = 'a54e7f3488ca0a442879d97a77b27993e7d6d3682ec10849cd099e8b8bbd9
 const appName = 'Linguini';
 const authorizeCallback = 'https://linguini-trello.vercel.app/';
 
-function setPowerUp(apiKey, apiSecret, appName, authorizeCallback) {
+function setPowerUp() {
     // Set up OAuth
     const oauth = new OAuth.OAuth(
       'https://trello.com/1/OAuthGetRequestToken',

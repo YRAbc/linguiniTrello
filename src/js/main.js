@@ -8,13 +8,13 @@ import List from './list.js';
 import Card from './card.js';
 import Ruler from './ruler.js';
 import Updater from './updater.js';
-import './authSettings.js';
+import setPowerUp from './authSettings.js';
 
 // Start info
 console.log("Start Linguini For Trello *");
 
 // Call the function to initiate the authentication process
-setPowerUp(apiKey, apiSecret, appName, authorizeCallback);
+setPowerUp();
 
 const opfwsp = new Workspace("OpfTechWorkspace");
 const ruler = new Ruler(opfwsp);
