@@ -10,31 +10,16 @@ class Workspace {
     }
 
     addBoard(board) {
-        // Check for duplicate board by comparing board IDs
-        const duplicateBoard = this.boards.find(existingBoard => existingBoard.getBoardID() === board.getBoardID());
+        const existingIndex = this.boards.findIndex(existingBoard => existingBoard.getBoardID() === board.getBoardID());
     
-        if (!duplicateBoard) {
-          this.boards.push(board);
-          console.log(`Board ${board.getBoardName()} added to ${this.name} workspace.`);
+        if (existingIndex === -1) {
+            // Board with the same ID is not already in the workspace
+            this.boards.push(board);
+            //console.log('Board added to OpfTechWorkspace:', board.getBoardName(), board.getBoardID());
         } else {
-          // Show confirmation dialog before adding a duplicate board
-          window.TrelloPowerUp.confirm({
-            title: 'Duplicate Board',
-            text: `Board ${board.getBoardName()} is already in ${this.name} workspace. Do you want to add it again?`,
-            confirm: 'Add',
-            cancel: 'Cancel',
-          })
-            .then((result) => {
-              if (result) {
-                this.boards.push(board);
-                console.log(`Board ${board.getBoardName()} added to ${this.name} workspace.`);
-              } else {
-                console.log(`Board ${board.getBoardName()} was not added to ${this.name} workspace.`);
-              }
-            });
+            console.warn('Board with the same ID already exists in OpfTechWorkspace.');
         }
-      }
-    
+    }
     
     removeBoardById(boardId) {
         const index = this.boards.findIndex(board => board.getBoardID() === boardId);

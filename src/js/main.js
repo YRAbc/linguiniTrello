@@ -83,7 +83,6 @@ window.TrelloPowerUp.initialize({
         }));
 
         return t.popup({
-            type: 'confirm',
             title: 'Power-Up Settings',
             items: settings,
         });
