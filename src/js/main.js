@@ -40,7 +40,7 @@ window.TrelloPowerUp.initialize({
                         });
 
                     // Use Trello API to get information about lists on the board
-                    Trello.get(`/boards/${boardId}/lists`, { fields: 'name' })
+                    t.get(`/boards/${boardId}/lists`, { fields: 'name' })
                         .then(function (lists) {
                             // 'lists' will be an array containing information about each list
                             // Each element of the array will have a 'name' property
