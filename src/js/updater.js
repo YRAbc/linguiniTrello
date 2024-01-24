@@ -11,12 +11,11 @@ class Updater {
         // You might want to include other initialization logic
     }
 
-    // Method to check for modifications based on rules
     checkForModifications(t) {
         // Iterate through each board in the workspace
         this.workspace.getBoards().forEach((board) => {
             // Retrieve the latest Trello data for the board
-            t.board('id', 'name', 'url', 'lists', 'cards')
+            t.board('all')
                 .then((latestBoardData) => {
                     // Compare the latest data with the existing data in opfwsp
                     if (this.boardDataChanged(board, latestBoardData)) {
@@ -28,8 +27,7 @@ class Updater {
                     console.error(`Error fetching latest board data for board ${board.getBoardID()}:`, error);
                 });
         });
-    }
-
+    }    
 
     // Method to compare the latest Trello data with existing data in opfwsp
     boardDataChanged(existingBoard, latestBoardData) {
