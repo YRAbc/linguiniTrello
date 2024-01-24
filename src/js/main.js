@@ -10,7 +10,7 @@ import Ruler from './ruler.js';
 import Updater from './updater.js';
 
 // Start info
-console.log("Start Linguini");
+console.log("Start Linguini For Trello *");
 
 const opfwsp = new Workspace("OpfTechWorkspace");
 const ruler = new Ruler(opfwsp);
@@ -144,7 +144,6 @@ function setupPeriodicUpdates(t) {
         setInterval(() => {
             // Get the current boards' ids and name from opfwsp data
             const boards = opfwsp.getBoards();
-            opfwsp.printBoards();
 
             // Loop through each board and print information using both opfwsp and Trello API
             boards.forEach((board, index) => {
