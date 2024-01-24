@@ -7,7 +7,7 @@ class List {
   constructor(id, name, cards) {
     this.listId = id;
     this.listName = name;
-    this.listCards = cards;
+    this.listCards = cards || [];
   }
 
   getListId() {
