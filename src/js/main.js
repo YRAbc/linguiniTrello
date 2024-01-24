@@ -73,6 +73,21 @@ window.TrelloPowerUp.initialize({
                 }
             });
     },
+
+    'show-settings': function (t, options) {
+        // Use opfwsp to get board IDs and display them in the settings
+        const boardIds = opfwsp.getBoardIds();
+        const settings = boardIds.map((boardId, index) => ({
+            name: `Board ${index + 1}`,
+            value: boardId,
+            context: 'board',
+        }));
+
+        return t.popup({
+            title: 'Power-Up Settings',
+            items: settings,
+        });
+    },
 });
 
 console.log("End Linguini");
