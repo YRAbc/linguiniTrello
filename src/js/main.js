@@ -76,7 +76,7 @@ window.TrelloPowerUp.initialize({
                                         // Set the lists for the board object
                                         boardObj.setLists(listObjects);
                                         opfwsp.addBoard(boardObj);
-
+                                        opfwsp.printBoards();
                                         console.log('Board added to workspace.');
 
                                         // Call the function to set up periodic updates after registering the third board
@@ -116,8 +116,6 @@ window.TrelloPowerUp.initialize({
                         return `Board ${index + 1}: ID - ${board.id}, Name - ${board.name}`;
                     });
 
-                    opfwsp.printBoards();
-    
                     // Show a popup or log the board information
                     window.alert(`Board IDs and Names in OpfTechWorkspace:\n${displayInfo.join('\n')}`);
                 },
