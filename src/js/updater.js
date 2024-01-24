@@ -63,52 +63,6 @@ class Updater {
                 return true;
             }
 
-            // Iterate through each card in the existing list
-            for (let j = 0; j < existingList.getListCards().length; j++) {
-                const existingCard = existingList.getListCards()[j];
-                const latestCard = latestList.cards[j];
-
-                // Check if both existingCard and latestCard are defined
-                if (!existingCard || !latestCard) {
-                    console.log('Card data is undefined.');
-                    return true; // Consider data changed if either is undefined
-                }
-
-                // Compare the number of cards in the list
-                if (
-                    (existingList.getListCards() && latestList.cards &&
-                    existingList.getListCards().length !== latestList.cards.length) ||
-                    (!existingList.getListCards() && latestList.cards)
-                ) {
-                    const existingLength = existingList.getListCards() ? existingList.getListCards().length : 0;
-                    const latestLength = latestList.cards ? latestList.cards.length : 0;
-
-                    console.log(`Number of cards in the list changed. Existing: ${existingLength}, Latest: ${latestLength}`);
-                    return true;
-                }
-
-                // Iterate through each item in the existing card
-                for (let k = 0; k < existingCard.getItems().length; k++) {
-                    const existingItem = existingCard.getItems()[k];
-                    const latestItem = latestCard.items[k];
-
-                    // Check if both existingItem and latestItem are defined
-                    if (!existingItem || !latestItem) {
-                        console.log('Item data is undefined.');
-                        return true; // Consider data changed if either is undefined
-                    }
-
-                    // Compare properties of the item (adjust based on your item structure)
-                    if (
-                        existingItem.property1 !== latestItem.property1 ||
-                        existingItem.property2 !== latestItem.property2
-                        // Add more properties as needed
-                    ) {
-                        console.log('Item properties changed.');
-                        return true;
-                    }
-                }
-            }
         }
 
         // If no differences are found, return false
