@@ -34,16 +34,22 @@ window.TrelloPowerUp.initialize({
                                 // Use t to get information about lists on the board
                                 t.lists('all')
                                     .then(function (lists) {
-                                        // 'lists' will be an array containing information about each list
-                                        // Each element of the array will have a 'name' property
+                                        console.log('Fetched lists:', lists);
+
+                                        // Log list details
+                                        lists.forEach((list) => {
+                                            console.log(`List ID: ${list.id}, List Name: ${list.name}`);
+                                            console.log('Cards:', list.cards);
+                                        });
+
                                         boardObj.setLists(lists);
                                         opfwsp.addBoard(boardObj);
                                         opfwsp.printBoards();
 
                                     })
                                     .catch(function (error) {
-                                    console.error('Error fetching lists:', error);
-                                });
+                                        console.error('Error fetching lists:', error);
+                                    });
                             }
                         })
                         .catch(function (error) {
