@@ -93,7 +93,12 @@ class Workspace {
             })),
         }));
     }
-    
+
+    // Method to get the list of boards in the workspace
+    getBoards() {
+        return this.boards;
+    }
+
 }
 
 export default Workspace;
