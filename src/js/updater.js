@@ -25,7 +25,6 @@ class Updater {
 
             // Compare ID and name of boards
             if (this.boardDataChanged(existingBoardData, board)) {
-                // Logic to perform when board data needs to be updated
                 console.log(`Board with ID ${board.getBoardID()} needs to be updated.`);
             }
 
@@ -33,7 +32,6 @@ class Updater {
             for (const list of board.getLists()) {
                 const existingListData = await this.getter.getList(list.getListID());
                 if (this.listDataChanged(existingListData, list)) {
-                    // Logic to perform when list data needs to be updated
                     console.log(`List with ID ${list.getListID()} in Board ${board.getBoardID()} needs to be updated.`);
                 }
 
@@ -41,10 +39,27 @@ class Updater {
                 for (const card of list.getCards()) {
                     const existingCardData = await this.getter.getCard(card.getCardID());
                     if (this.cardDataChanged(existingCardData, card)) {
-                        // Logic to perform when card data needs to be updated
                         console.log(`Card with ID ${card.getCardID()} in List ${list.getListID()} needs to be updated.`);
                     }
                 }
+
+                // Check for new cards in Trello data
+                const newCards = existingListData.cards.filter(
+                    trelloCard => !list.getCards().some(existingCard => existingCard.getCardID() === trelloCard.id)
+                );
+
+                if (newCards.length > 0) {
+                    console.log(`New cards added to List ${list.getListID()}: `, newCards);
+                }
+            }
+
+            // Check for new lists in Trello data
+            const newLists = existingBoardData.lists.filter(
+                trelloList => !board.getLists().some(existingList => existingList.getListID() === trelloList.id)
+            );
+
+            if (newLists.length > 0) {
+                console.log(`New lists added to Board ${board.getBoardID()}: `, newLists);
             }
         }
     }
