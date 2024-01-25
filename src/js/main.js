@@ -150,25 +150,18 @@ window.TrelloPowerUp.initialize({
     
 });
   
-async function setupPeriodicUpdates(t) {
+function setupPeriodicUpdates(t) {
     // Set up periodic updates only if there are exactly three boards
     if (opfwsp.getBoards().length === 3) {
         setInterval(async () => {
-            // Get the current boards' ids and name from opfwsp data
-            const boardIds = opfwsp.getBoards();
+            // Get the boards from opfwsp data
+            const boards = opfwsp.getBoards();
 
-            // Retrieve data for each board
-            for (const boardId of boardIds) {
-                try {
-                    const boardData = await getter.getBoard(boardId);
-
-                    // Use 'boardData' as needed
-
-                    console.log(`Updated data for board ${boardId}:`, boardData);
-                } catch (error) {
-                    console.error(`Error updating data for board ${boardId}:`, error);
-                }
-            }
+            // Print each board ID individually
+            boards.forEach(board => {
+                const boardId = board.getBoardID();
+                console.log('Board ID:', boardId);
+            });
         }, 2000); // Update every 2 seconds
     } else {
         console.log('Updater not started - There must be exactly three boards in the workspace.');
