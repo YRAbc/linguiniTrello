@@ -58,17 +58,11 @@ class Updater {
                     } 
                     
                     else if (!existingInList) {
+
                         // Card has been moved
-                        const destinationList = board.getLists().find(destinationList => {
-                            return destinationList.getCards().some(destinationCard => destinationCard.getCardID() === card.getCardID());
-                        });
-                    
-                        if (destinationList) {
-                            console.log(`Card with ID ${card.getCardID()}, (${card.getCardName()}) in List ${list.getListID()} has been moved to List ${destinationList.getListID()}.`);
-                        } else {
-                            console.log(`Card with ID ${card.getCardID()}, (${card.getCardName()}) in List ${list.getListID()} has been moved to an unknown destination.`);
-                        }
+                        console.log(`Card with ID ${card.getCardID()}, (${card.getCardName()}) has been moved to ${list.getListID()}, name : ${list.getListName()}".`);
                     }
+
 
                     else if (this.cardDataChanged(existingInList, card)) {
                         // Card needs to be updated
