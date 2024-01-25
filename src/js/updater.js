@@ -48,32 +48,32 @@ class Updater {
                 const existingListCards = await this.getter.getListCards(list.getListID());
                 const existingBoardCards = await this.getter.getBoardCards(board.getBoardID());
 
-                // Compare cards for each list
                 for (const card of list.getCards()) {
                     const existingCardData = existingListCards.find(existingCard => existingCard.id === card.getCardID());
-
+                
                     if (!existingCardData) {
-                        console.log(`Card with ID ${card.getCardID()} , (${card.getCardName()}) in List ${list.getListID()} has been removed.`);
+                        // Card is removed
+                        console.log(`Card with ID ${card.getCardID()}, (${card.getCardName()}) in List ${list.getListID()} has been removed.`);
+                    } else if (this.cardDataChanged(existingCardData, card)) {
+                        // Card needs to be updated
+                        console.log(`Card with ID ${card.getCardID()} in List ${list.getListID()} needs to be updated.`);
                     } else {
-                        if (this.cardDataChanged(existingCardData, card)) {
-                            console.log(`Card with ID ${card.getCardID()} in List ${list.getListID()} needs to be updated.`);
+                        // Check for moved cards
+                        const cardStillExists = existingBoardCards.some(existingCard => existingCard.id === card.getCardID());
+                        if (!cardStillExists) {
+                            // Check if the card is present in the board's existing cards
+                            const cardMovedToAnotherList = existingBoardCards.some(boardCard => boardCard.id === card.getCardID());
+                            if (cardMovedToAnotherList) {
+                                // Card has been moved
+                                console.log(`Card with ID ${card.getCardID()}, (${card.getCardName()}) in List ${list.getListID()} has been moved to another list.`);
+                            } else {
+                                // Card is a new card
+                                console.log(`Card with ID ${card.getCardID()}, (${card.getCardName()}) in List ${list.getListID()} is a new card.`);
+                            }
                         }
                     }
                 }
-
-                // Check for moved cards
-                for (const existingCard of existingListCards) {
-                    const cardStillExists = list.getCards().some(card => card.getCardID() === existingCard.id);
-                    if (!cardStillExists) {
-                        // Check if the card is present in the board's existing cards
-                        const cardMovedToAnotherList = existingBoardCards.some(boardCard => boardCard.id === existingCard.id);
-                        if (cardMovedToAnotherList) {
-                            console.log(`Card with ID ${existingCard.id}, (${existingCard.name}) in List ${list.getListID()} has been moved to another list.`);
-                        } else {
-                            console.log(`Card with ID ${existingCard.id}, (${existingCard.name}) in List ${list.getListID()} is a new card.`);
-                        }
-                    }
-                }
+                
             }
     
             // Check for removed lists
@@ -95,7 +95,7 @@ class Updater {
         const nameChanged = existingBoard.name !== latestBoardData.getBoardName();
 
         if (idChanged || nameChanged) {
-            console.log(`Board ID or name changed: ID - ${existingBoard.id} to ${latestBoardData.getBoardID()}, Name - ${existingBoard.name} to ${latestBoardData.getBoardName()}`);
+            console.log(`Board Name change - ${existingBoard.name} from ${latestBoardData.getBoardName()}`);
         }
 
         return idChanged || nameChanged;
@@ -107,7 +107,7 @@ class Updater {
         const nameChanged = existingList.name !== latestListData.getListName();
 
         if (idChanged || nameChanged) {
-            console.log(`List ID or name changed: ID - ${existingList.id} to ${latestListData.getListID()}, Name - ${existingList.name} to ${latestListData.getListName()}`);
+            console.log(`List Name change - ${existingList.name} from ${latestListData.getListName()}`);
         }
 
         return idChanged || nameChanged;
@@ -119,7 +119,7 @@ class Updater {
         const nameChanged = existingCard.name !== latestCardData.getCardName();
 
         if (idChanged || nameChanged) {
-            console.log(`Card ID or name changed: ID - ${existingCard.id} to ${latestCardData.getCardID()}, Name - ${existingCard.name} to ${latestCardData.getCardName()}`);
+            console.log(`Card Name Change -  ${existingCard.name} from ${latestCardData.getCardName()}`);
         }
 
         //add additionnal modifications for card updates
