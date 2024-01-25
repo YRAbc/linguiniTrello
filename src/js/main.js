@@ -167,7 +167,7 @@ function setupPeriodicUpdates() {
             }
         }, 2000); // Update every 2 seconds
     } else {
-        console.log('Updater not started - There must be exactly three boards in the workspace.');
+        //console.log('Updater not started - There must be exactly three boards in the workspace.');
     }
 }
 

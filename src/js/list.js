@@ -18,16 +18,16 @@ class List {
     return this.listName;
   }
 
-  getListCards() {
-    return this.listCards;
-  }
-
   addCard(card) {
     this.listCards.push(card);
   }
 
   setCards(cards) {
     this.listCards = cards.map(cards => new Card(cardId, cardName, this.listId, this.listName, items));
+  }
+
+  getCards() {
+    return this.listCards;
   }
 
 
