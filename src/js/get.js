@@ -101,7 +101,7 @@ class Get {
     }
   }
 
-  async getCards(boardId) {
+  async getBoardCards(boardId) {
     try {
         const response = await axios.get(`https://api.trello.com/1/boards/${boardId}/cards?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`);
       
@@ -121,7 +121,7 @@ class Get {
     }
   }
 
-  async getCards(listId) {
+  async getListCards(listId) {
     try {
         const response = await axios.get(`https://api.trello.com/1/lists/${listId}/cards?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`);
       
