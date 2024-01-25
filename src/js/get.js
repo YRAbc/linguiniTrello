@@ -69,6 +69,26 @@ class Get {
     }
   }
 
+  async getCards(boardId) {
+    try {
+        const response = await axios.get(`https://api.trello.com/1/boards/${boardId}/cards?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`);
+      
+        //console.log('Full response:', response); // Log the entire response
+      
+        if (response.data && Array.isArray(response.data)) {
+            const cards = response.data;
+            //console.log('Cards:', cards);
+            return cards;
+        } else {
+            console.error('Invalid board response:', response.data);
+            throw new Error('Invalid board response');
+        }
+    } catch (error) {
+        console.error('Error getting board cards:', error.response ? error.response.data : error.message);
+        throw error;
+    }
+  }
+
   async getCards(listId) {
     try {
         const response = await axios.get(`https://api.trello.com/1/lists/${listId}/cards?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`);
