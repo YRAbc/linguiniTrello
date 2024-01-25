@@ -149,18 +149,31 @@ window.TrelloPowerUp.initialize({
     },
     
 });
-  
+
 function setupPeriodicUpdates(t) {
     // Set up periodic updates only if there are exactly three boards
     if (opfwsp.getBoards().length === 3) {
+        // Create an instance of oAuth and Get
+        const oauth = new oAuth();
+        const getter = new Get(oauth);
+
         setInterval(async () => {
             // Get the boards from opfwsp data
             const boards = opfwsp.getBoards();
 
-            // Print each board ID individually
-            boards.forEach(board => {
+            // Print details for each board
+            boards.forEach(async board => {
                 const boardId = board.getBoardID();
                 console.log('Board ID:', boardId);
+
+                // Use Get, getBoard to print the details of each board
+                try {
+                    const boardDetails = await getter.getBoard(boardId);
+                    // Modify the details printing based on your Board class structure
+                    console.log('Board Details:', boardDetails);
+                } catch (error) {
+                    console.error(`Error getting details for board ${boardId}:`, error);
+                }
             });
         }, 2000); // Update every 2 seconds
     } else {
