@@ -37,7 +37,7 @@ class Updater {
                 const existingListData = existingLists.find(existingList => existingList.id === list.getListID());
     
                 if (!existingListData) {
-                    console.log(`List with ID ${list.getListID()} in Board ${board.getBoardID()} is a new list.`);
+                    console.log(`List with ID ${list.getListID()}, name ${list.getListName()} in Board ${board.getBoardID()} is a new list.`);
                 } else {
                     if (this.listDataChanged(existingListData, list)) {
                         console.log(`List with ID ${list.getListID()} in Board ${board.getBoardID()} needs to be updated.`);
@@ -52,7 +52,7 @@ class Updater {
                     const existingCardData = existingCards.find(existingCard => existingCard.id === card.getCardID());
     
                     if (!existingCardData) {
-                        console.log(`Card with ID ${card.getCardID()} in List ${list.getListID()} is a new card.`);
+                        console.log(`Card with ID ${card.getCardID()} , name ${card.getCardName()} in List ${list.getListID()} is a new card.`);
                     } else {
                         if (this.cardDataChanged(existingCardData, card)) {
                             console.log(`Card with ID ${card.getCardID()} in List ${list.getListID()} needs to be updated.`);
@@ -64,7 +64,7 @@ class Updater {
                 for (const existingCard of existingCards) {
                     const cardStillExists = list.getCards().some(card => card.getCardID() === existingCard.id);
                     if (!cardStillExists) {
-                        console.log(`Card with ID ${existingCard.id} in List ${list.getListID()} has been removed.`);
+                        console.log(`Card with ID ${existingCard.id} (${existingCard.name}) in List ${list.getListID()} has been removed.`);
                     }
                 }
             }
@@ -73,7 +73,7 @@ class Updater {
             for (const existingList of existingLists) {
                 const listStillExists = board.getLists().some(list => list.getListID() === existingList.id);
                 if (!listStillExists) {
-                    console.log(`List with ID ${existingList.id} in Board ${board.getBoardID()} has been removed.`);
+                    console.log(`List with ID ${existingList.id} (${existingList.name}) in Board ${board.getBoardID()} has been removed.`);
                 }
             }
         }
