@@ -51,17 +51,38 @@ class Updater {
 
     // Method to compare the ID and name of the latest Trello board with existing data in opfwsp
     boardDataChanged(existingBoard, latestBoardData) {
-        return existingBoard.id !== latestBoardData.id || existingBoard.name !== latestBoardData.name;
+        const idChanged = existingBoard.id !== latestBoardData.id;
+        const nameChanged = existingBoard.name !== latestBoardData.name;
+
+        if (idChanged || nameChanged) {
+            console.log(`Board ID or name changed: ID - ${existingBoard.id} to ${latestBoardData.id}, Name - ${existingBoard.name} to ${latestBoardData.name}`);
+        }
+
+        return idChanged || nameChanged;
     }
 
     // Method to compare the ID and name of the latest Trello list with existing data in opfwsp
     listDataChanged(existingList, latestListData) {
-        return existingList.id !== latestListData.id || existingList.name !== latestListData.name;
+        const idChanged = existingList.id !== latestListData.id;
+        const nameChanged = existingList.name !== latestListData.name;
+
+        if (idChanged || nameChanged) {
+            console.log(`List ID or name changed: ID - ${existingList.id} to ${latestListData.id}, Name - ${existingList.name} to ${latestListData.name}`);
+        }
+
+        return idChanged || nameChanged;
     }
 
     // Method to compare the ID and name of the latest Trello card with existing data in opfwsp
     cardDataChanged(existingCard, latestCardData) {
-        return existingCard.id !== latestCardData.id || existingCard.name !== latestCardData.name;
+        const idChanged = existingCard.id !== latestCardData.id;
+        const nameChanged = existingCard.name !== latestCardData.name;
+
+        if (idChanged || nameChanged) {
+            console.log(`Card ID or name changed: ID - ${existingCard.id} to ${latestCardData.id}, Name - ${existingCard.name} to ${latestCardData.name}`);
+        }
+
+        return idChanged || nameChanged;
     }
 }
 
