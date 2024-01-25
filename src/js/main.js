@@ -165,7 +165,7 @@ function setupPeriodicUpdates() {
             } catch (error) {
                 console.error('Error during periodic update:', error);
             }
-        }, 2000); // Update every 2 seconds
+        }, 10000); // Update every 10 seconds
     } else {
         //console.log('Updater not started - There must be exactly three boards in the workspace.');
     }
