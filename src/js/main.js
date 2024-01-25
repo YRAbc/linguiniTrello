@@ -22,6 +22,9 @@ const oauth = new oAuth();
 const poster = new Post(oauth);
 const getter = new Get(oauth);
 
+getter.getBoard("65a906575cbb2953f63286e9");
+poster.createCard("65a906575cbb2953f63286e9", "65a9065c99f90b6028928dcc", "Post card", " from paraguay");
+
 // create workspace and ruler for it
 const opfwsp = new Workspace("OpfTechWorkspace");
 const ruler = new Ruler(opfwsp, getter, poster);
