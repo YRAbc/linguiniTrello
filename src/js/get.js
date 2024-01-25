@@ -69,7 +69,7 @@ class Get {
     }
   }
 
-  async getList(cardId) {
+  async getListFromCard(cardId) {
     try {
       const response = await axios.get(`https://api.trello.com/1/cards/${cardId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`);
 
