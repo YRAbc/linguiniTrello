@@ -55,7 +55,7 @@ class Updater {
         const nameChanged = existingBoard.name !== latestBoardData.name;
 
         if (idChanged || nameChanged) {
-            console.log(`Board ID or name changed: ID - ${existingBoard.id} to ${latestBoardData.id}, Name - ${existingBoard.name} to ${latestBoardData.name}`);
+            console.log(`Board ID or name changed: ID - ${existingBoard.id} to ${latestBoardData.getBoardID()}, Name - ${existingBoard.name} to ${latestBoardData.getBoardName()}`);
         }
 
         return idChanged || nameChanged;
