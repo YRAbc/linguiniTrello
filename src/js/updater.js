@@ -115,6 +115,8 @@ class Updater {
             console.log(`Card ID or name changed: ID - ${existingCard.id} to ${latestCardData.getCardID()}, Name - ${existingCard.name} to ${latestCardData.getCardName()}`);
         }
 
+        //add additionnal modifications for card updates
+        
         return idChanged || nameChanged;
     }
 

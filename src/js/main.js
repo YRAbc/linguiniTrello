@@ -32,6 +32,9 @@ const updater = new Updater(opfwsp, ruler, getter, poster);
 // Counter to track the number of registered boards
 let registeredBoardsCount = 0;
 
+//OPFTech-Number for cards
+let opfTechCardNumber = 1;
+
 // Initialize Trello Power-Up
 window.TrelloPowerUp.initialize({
 
