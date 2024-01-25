@@ -45,35 +45,23 @@ class Updater {
                 }
     
                 // Get existing cards for the list
-                const existingListCards = await this.getter.getCards(list.getListID());
-                // Get existing cards for the board
-                const existingBoardCards = await this.getter.getCards(board.getBoardID());
-    
+                const existingCards = await this.getter.getCards(list.getListID());
     
                 // Compare cards for each list
                 for (const card of list.getCards()) {
-                    const existingListCardData = existingListCards.find(existingListCard => existingListCard.id === card.getCardID());
-                    const existingBoardCardData = existingBoardCards.find(existingBoardCard => existingBoardCard.id === card.getCardID());
+                    const existingCardData = existingCards.find(existingCard => existingCard.id === card.getCardID());
 
-                    if (!existingListCardData && !existingBoardCardData) {
+                    if (!existingCardData) {
                         console.log(`Card with ID ${card.getCardID()} , (${card.getCardName()}) in List ${list.getListID()} has been removed.`);
-                    } 
-
-                    else if(!existingListCardData) {
-
-                        console.log(`Card with ID ${card.getCardID()} , (${card.getCardName()}) in List ${list.getListID()} has been moved to .... ?? .`);
-                    }
-                    
-                    else {
-                        
-                        if (this.cardDataChanged(existingListCardData, card)) {
+                    } else {
+                        if (this.cardDataChanged(existingCardData, card)) {
                             console.log(`Card with ID ${card.getCardID()} in List ${list.getListID()} needs to be updated.`);
                         }
                     }
                 }
     
-                // Check for added cards
-                for (const existingCard of existingListCards) {
+                // Check for removed cards
+                for (const existingCard of existingCards) {
                     const cardStillExists = list.getCards().some(card => card.getCardID() === existingCard.id);
                     if (!cardStillExists) {
                         console.log(`Card with ID ${existingCard.id}, (${existingCard.name}) in List ${list.getListID()} is a new card.`);
@@ -81,7 +69,7 @@ class Updater {
                 }
             }
     
-            // Check for added lists
+            // Check for removed lists
             for (const existingList of existingLists) {
                 const listStillExists = board.getLists().some(list => list.getListID() === existingList.id);
                 if (!listStillExists) {
