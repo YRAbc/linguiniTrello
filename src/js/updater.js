@@ -44,22 +44,18 @@ class Updater {
                 }
 
                 // Check for new cards in Trello data
-                const newCards = existingListData.cards.filter(
-                    trelloCard => !list.getCards().some(existingCard => existingCard.getCardID() === trelloCard.id)
-                );
+                const newCardCount = (existingListData.cards || []).length - list.getCards().length;
 
-                if (newCards.length > 0) {
-                    console.log(`New cards added to List ${list.getListID()}: `, newCards);
+                if (newCardCount > 0) {
+                    console.log(`New cards added to List ${list.getListID()}: ${newCardCount} cards`);
                 }
             }
-
+            
             // Check for new lists in Trello data
-            const newLists = existingBoardData.lists.filter(
-                trelloList => !board.getLists().some(existingList => existingList.getListID() === trelloList.id)
-            );
+            const newListCount = (existingBoardData.lists || []).length - board.getLists().length;
 
-            if (newLists.length > 0) {
-                console.log(`New lists added to Board ${board.getBoardID()}: `, newLists);
+            if (newListCount > 0) {
+                console.log(`New lists added to Board ${board.getBoardID()}: ${newListCount} lists`);
             }
         }
     }
