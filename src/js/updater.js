@@ -45,15 +45,15 @@ class Updater {
 
                 // Check for new cards in Trello data
                 const newCardCount = (existingListData.cards || []).length - list.getCards().length;
-
+                console.log(`Cards number var in ${list.getListID()}: ${newCardCount} cards`);
                 if (newCardCount > 0) {
                     console.log(`New cards added to List ${list.getListID()}: ${newCardCount} cards`);
                 }
             }
-            
+
             // Check for new lists in Trello data
             const newListCount = (existingBoardData.lists || []).length - board.getLists().length;
-
+            console.log(`list number var in ${board.getBoardID()}: ${newListCount} lists`);
             if (newListCount > 0) {
                 console.log(`New lists added to Board ${board.getBoardID()}: ${newListCount} lists`);
             }
