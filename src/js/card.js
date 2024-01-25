@@ -13,17 +13,17 @@ class Card {
     addItem(item) {
         this.items.push(item);
     }
-  
-    getItems() {
-        return this.items;
-    }
-  
-    getCardId() {
+    
+    getCardID() {
         return this.cardId;
     }
   
     getCardName() {
         return this.cardTitle;
+    }
+
+    getItems() {
+        return this.items;
     }
   }
   

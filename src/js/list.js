@@ -10,7 +10,7 @@ class List {
     this.listCards = cards || [];
   }
 
-  getListId() {
+  getListID() {
     return this.listId;
   }
 
