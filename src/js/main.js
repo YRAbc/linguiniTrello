@@ -154,20 +154,31 @@ window.TrelloPowerUp.initialize({
 function setupPeriodicUpdates() {
     // Set up periodic updates only if there are exactly three boards
     if (opfwsp.getBoards().length === 3) {
-        // Create an instance of oAuth and Get
-        const oauth = new oAuth();
-        const getter = new Get(oauth);
-
-        setInterval(async () => {
-            try {
-                // Check for modifications
-                await updater.checkForModifications();
-            } catch (error) {
-                console.error('Error during periodic update:', error);
-            }
-        }, 10000); // Update every 10 seconds
+      // Create an instance of oAuth and Get
+      const oauth = new oAuth();
+      const getter = new Get(oauth);
+  
+      setInterval(async () => {
+        try {
+          // Check for modifications
+          await updater.checkForModifications();
+        } catch (error) {
+          console.error('Error during periodic update:', error);
+  
+          if (error.response && error.response.status === 429) {
+            // Rate limiting error
+            const retryAfter = error.response.headers['retry-after'] || 10; // Default to 10 seconds
+            console.log(`Rate limiting error. Retrying after ${retryAfter} seconds.`);
+            await sleep(retryAfter * 1000); // Convert seconds to milliseconds
+          }
+        }
+      }, 10000); // Update every 10 seconds
     } else {
-        //console.log('Updater not started - There must be exactly three boards in the workspace.');
+      // console.log('Updater not started - There must be exactly three boards in the workspace.');
     }
+}
+  
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
