@@ -45,6 +45,7 @@ class Updater {
 
                 // Check for new cards in Trello data
                 const newCardCount = (existingListData.cards || []).length - list.getCards().length;
+                console.log('cards', (existingListData.cards || []).length);
                 console.log(`Cards number var in ${list.getListID()}: ${newCardCount} cards`);
                 if (newCardCount > 0) {
                     console.log(`New cards added to List ${list.getListID()}: ${newCardCount} cards`);
