@@ -21,6 +21,7 @@ const opfwsp = new Workspace("OpfTechWorkspace");
 const ruler = new Ruler(opfwsp);
 const updater = new Updater(opfwsp, ruler);
 
+/*
 // Counter to track the number of registered boards
 let registeredBoardsCount = 0;
 
@@ -158,3 +159,4 @@ function setupPeriodicUpdates(t) {
         console.log('Updater not started - There must be exactly three boards in the workspace.');
     }
 }
+*/
