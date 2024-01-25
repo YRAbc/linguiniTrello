@@ -73,7 +73,7 @@ class Updater {
 
                 // Check for added cards
                 for (const existingCard of existingListCards) {
-                    const cardStillExists = list.getCards().some(card => card.getCardID() === existingCard.id);
+                    const cardStillExists = board.getCards().some(card => card.getCardID() === existingCard.id);
                     if (!cardStillExists) {
                         console.log(`Card with ID ${existingCard.id}, (${existingCard.name}) in List ${list.getListID()} is a new card.`);
                     }

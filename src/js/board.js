@@ -23,6 +23,17 @@ class Board {
     return this.lists;
   }
 
+  getCards() {
+    const cards = [];
+  
+    for (const list of this.lists) {
+      cards.push(...list.getCards());
+    }
+  
+    return cards;
+  }
+  
+
   addList(list) {
     this.lists.push(list);
   }
