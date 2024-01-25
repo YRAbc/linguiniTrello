@@ -17,13 +17,16 @@ import Get from './get.js';
 // Start info
 console.log("Start Linguini For Trello *");
 
-// Call the function to initiate the authentication process
+// Call to have access to post and get
 const oauth = new oAuth();
 const poster = new Post(oauth);
 const getter = new Get(oauth);
 
+// create workspace and ruler for it
 const opfwsp = new Workspace("OpfTechWorkspace");
 const ruler = new Ruler(opfwsp, getter, poster);
+
+// update is made to see difference between current and opfwsp
 const updater = new Updater(opfwsp, ruler, getter, poster);
 
 // Counter to track the number of registered boards
