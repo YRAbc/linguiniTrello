@@ -6,9 +6,11 @@ import Board from './board.js';
 import List from './list.js';
 import Card from './card.js';
 import Ruler from './ruler.js';
+import Post from './post.js';
+import Get from './get.js';
 
 class Updater {
-    constructor(workspace, ruler) {
+    constructor(workspace, ruler, getter, poster) {
         this.workspace = workspace;
         this.ruler = ruler;
     }

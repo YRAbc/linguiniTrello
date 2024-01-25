@@ -8,19 +8,24 @@ import List from './list.js';
 import Card from './card.js';
 import Ruler from './ruler.js';
 import Updater from './updater.js';
+
 import oAuth from './authSettings.js';
+import Post from './post.js';
+import Get from './get.js';
+
 
 // Start info
 console.log("Start Linguini For Trello *");
 
 // Call the function to initiate the authentication process
 const oauth = new oAuth();
+const poster = new Post(oauth);
+const getter = new Get(oauth);
 
 const opfwsp = new Workspace("OpfTechWorkspace");
-const ruler = new Ruler(opfwsp);
-const updater = new Updater(opfwsp, ruler);
+const ruler = new Ruler(opfwsp, getter, poster);
+const updater = new Updater(opfwsp, ruler, getter, poster);
 
-/*
 // Counter to track the number of registered boards
 let registeredBoardsCount = 0;
 
@@ -158,4 +163,3 @@ function setupPeriodicUpdates(t) {
         console.log('Updater not started - There must be exactly three boards in the workspace.');
     }
 }
-*/
