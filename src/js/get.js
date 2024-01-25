@@ -27,7 +27,7 @@ class Get {
       console.error('Error getting board:', error.response ? error.response.data : error.message);
       throw error;
     }
-  }  
+  }
 
 }
 

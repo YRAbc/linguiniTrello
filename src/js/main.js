@@ -22,9 +22,6 @@ const oauth = new oAuth();
 const poster = new Post(oauth);
 const getter = new Get(oauth);
 
-getter.getBoard("65a906575cbb2953f63286e9");
-poster.createCard("65a906575cbb2953f63286e9", "65a9065c99f90b6028928dcc", "Post card", " from paraguay");
-
 // create workspace and ruler for it
 const opfwsp = new Workspace("OpfTechWorkspace");
 const ruler = new Ruler(opfwsp, getter, poster);
@@ -153,17 +150,25 @@ window.TrelloPowerUp.initialize({
     
 });
   
-// Function to set up periodic updates
-function setupPeriodicUpdates(t) {
+async function setupPeriodicUpdates(t) {
     // Set up periodic updates only if there are exactly three boards
     if (opfwsp.getBoards().length === 3) {
-        setInterval(() => {
+        setInterval(async () => {
             // Get the current boards' ids and name from opfwsp data
-            const boards = opfwsp.getBoards();
+            const boardIds = opfwsp.getBoards();
 
-            // use it there to retreive all boards data 
+            // Retrieve data for each board
+            for (const boardId of boardIds) {
+                try {
+                    const boardData = await getter.getBoard(boardId);
 
-            // updater.checkForModifications(window.TrelloPowerUp.iframe());
+                    // Use 'boardData' as needed
+
+                    console.log(`Updated data for board ${boardId}:`, boardData);
+                } catch (error) {
+                    console.error(`Error updating data for board ${boardId}:`, error);
+                }
+            }
         }, 2000); // Update every 2 seconds
     } else {
         console.log('Updater not started - There must be exactly three boards in the workspace.');
