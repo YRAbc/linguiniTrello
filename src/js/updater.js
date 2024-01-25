@@ -45,8 +45,8 @@ class Updater {
                 }
     
                 // Get existing cards for the list and the board
-                const existingListCards = await this.getter.getCards(list.getListID());
-                const existingBoardCards = await this.getter.getCards(board.getBoardID());
+                const existingListCards = await this.getter.getListCards(list.getListID());
+                const existingBoardCards = await this.getter.getBoardCards(board.getBoardID());
 
                 // Compare cards for each list
                 for (const card of list.getCards()) {
