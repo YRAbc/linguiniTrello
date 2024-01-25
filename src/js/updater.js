@@ -10,7 +10,7 @@ import Post from './post.js';
 import Get from './get.js';
 
 class Updater {
-    
+
     constructor(workspace, ruler, getter, poster) {
         this.workspace = workspace;
         this.ruler = ruler;
@@ -34,7 +34,7 @@ class Updater {
     
             // Compare lists for each board
             for (const list of board.getLists()) {
-                const existingListData = existingLists.find(existingList => existingList.getListID() === list.getListID());
+                const existingListData = existingLists.find(existingList => existingList.id === list.getListID());
     
                 if (!existingListData) {
                     console.log(`List with ID ${list.getListID()} in Board ${board.getBoardID()} is a new list.`);
@@ -49,7 +49,7 @@ class Updater {
     
                 // Compare cards for each list
                 for (const card of list.getCards()) {
-                    const existingCardData = existingCards.find(existingCard => existingCard.getCardID() === card.getCardID());
+                    const existingCardData = existingCards.find(existingCard => existingCard.id === card.getCardID());
     
                     if (!existingCardData) {
                         console.log(`Card with ID ${card.getCardID()} in List ${list.getListID()} is a new card.`);
