@@ -44,7 +44,7 @@ window.TrelloPowerUp.initialize({
                     let boardId = t.getContext().board;
 
                     // Retrieve the board name using Trello API
-                    console.log("Update Linguini");
+                    //console.log("Update Linguini");
                     t.board('name')
                         .then(function (board) {
                             const id = boardId;
@@ -86,11 +86,11 @@ window.TrelloPowerUp.initialize({
 
                                     const boardObj = new Board(id, nam, listObjects);
                                     opfwsp.addBoard(boardObj);
-                                    console.log('Board added to workspace.');
+                                    //console.log('Board added to workspace.');
 
                                     // Call the function to set up periodic updates after registering the third board
                                     registeredBoardsCount += 1;
-                                    setupPeriodicUpdates(t);
+                                    setupPeriodicUpdates();
                                 })
                                 .catch(function (error) {
                                     console.error('Error fetching lists:', error);
@@ -150,7 +150,8 @@ window.TrelloPowerUp.initialize({
     
 });
 
-function setupPeriodicUpdates(t) {
+
+function setupPeriodicUpdates() {
     // Set up periodic updates only if there are exactly three boards
     if (opfwsp.getBoards().length === 3) {
         // Create an instance of oAuth and Get
@@ -158,25 +159,15 @@ function setupPeriodicUpdates(t) {
         const getter = new Get(oauth);
 
         setInterval(async () => {
-            // Get the boards from opfwsp data
-            const boards = opfwsp.getBoards();
-
-            // Print details for each board
-            boards.forEach(async board => {
-                const boardId = board.getBoardID();
-                console.log('Board ID:', boardId);
-
-                // Use Get, getBoard to print the details of each board
-                try {
-                    const boardDetails = await getter.getBoard(boardId);
-                    // Modify the details printing based on your Board class structure
-                    console.log('Board Details:', boardDetails);
-                } catch (error) {
-                    console.error(`Error getting details for board ${boardId}:`, error);
-                }
-            });
+            try {
+                // Check for modifications
+                await updater.checkForModifications();
+            } catch (error) {
+                console.error('Error during periodic update:', error);
+            }
         }, 2000); // Update every 2 seconds
     } else {
         console.log('Updater not started - There must be exactly three boards in the workspace.');
     }
 }
+

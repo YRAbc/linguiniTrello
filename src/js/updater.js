@@ -13,54 +13,56 @@ class Updater {
     constructor(workspace, ruler, getter, poster) {
         this.workspace = workspace;
         this.ruler = ruler;
+        this.getter = getter;
+        this.poster = poster;
     }
 
-    checkForModifications() {
+    async checkForModifications() {
         // Iterate through each board in the workspace
-        this.workspace.getBoards().forEach((board) => {
+        for (const board of this.workspace.getBoards()) {
             // Get the existing data for the board from opfwsp
-            const existingBoardData = this.workspace.getBoardById(board.getBoardID());
-    
-            // Compare the existing data with the latest Trello data
+            const existingBoardData = await this.getter.getBoard(board.getBoardID());
+
+            // Compare ID and name of boards
             if (this.boardDataChanged(existingBoardData, board)) {
                 // Logic to perform when board data needs to be updated
                 console.log(`Board with ID ${board.getBoardID()} needs to be updated.`);
             }
-        });
+
+            // Compare lists for each board
+            for (const list of board.getLists()) {
+                const existingListData = await this.getter.getList(list.getListID());
+                if (this.listDataChanged(existingListData, list)) {
+                    // Logic to perform when list data needs to be updated
+                    console.log(`List with ID ${list.getListID()} in Board ${board.getBoardID()} needs to be updated.`);
+                }
+
+                // Compare cards for each list
+                for (const card of list.getCards()) {
+                    const existingCardData = await this.getter.getCard(card.getCardID());
+                    if (this.cardDataChanged(existingCardData, card)) {
+                        // Logic to perform when card data needs to be updated
+                        console.log(`Card with ID ${card.getCardID()} in List ${list.getListID()} needs to be updated.`);
+                    }
+                }
+            }
+        }
     }
 
-    // Method to compare the latest Trello data with existing data in opfwsp
+    // Method to compare the ID and name of the latest Trello board with existing data in opfwsp
     boardDataChanged(existingBoard, latestBoardData) {
-        // Compare the number of boards
-        if (existingBoard.getLists().length !== latestBoardData.lists.length) {
-            console.log('Number of lists in the board changed.');
-            return true;
-        }
-
-        // Iterate through each list in the existing board
-        for (let i = 0; i < existingBoard.getLists().length; i++) {
-            const existingList = existingBoard.getLists()[i];
-            const latestList = latestBoardData.lists[i];
-
-            // Check if both existingList and latestList are defined
-            if (!existingList || !latestList) {
-                console.log('List data is undefined.');
-                return true; // Consider data changed if either is undefined
-            }
-
-            // Compare the name of the list
-            if (existingList.getListName() !== latestList.name) {
-                console.log(`List name changed from '${existingList.getListName()}' to '${latestList.name}'.`);
-                return true;
-            }
-
-        }
-
-        // If no differences are found, return false
-        console.log('No differences found.');
-        return false;
+        return existingBoard.id !== latestBoardData.id || existingBoard.name !== latestBoardData.name;
     }
 
+    // Method to compare the ID and name of the latest Trello list with existing data in opfwsp
+    listDataChanged(existingList, latestListData) {
+        return existingList.id !== latestListData.id || existingList.name !== latestListData.name;
+    }
+
+    // Method to compare the ID and name of the latest Trello card with existing data in opfwsp
+    cardDataChanged(existingCard, latestCardData) {
+        return existingCard.id !== latestCardData.id || existingCard.name !== latestCardData.name;
+    }
 }
 
 export default Updater;
