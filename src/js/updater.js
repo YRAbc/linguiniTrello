@@ -50,12 +50,24 @@ class Updater {
                 // Compare cards for each list
                 for (const card of list.getCards()) {
                     const existingCardData = existingCards.find(existingCard => existingCard.id === card.getCardID());
-    
+
                     if (!existingCardData) {
                         console.log(`Card with ID ${card.getCardID()} , (${card.getCardName()}) in List ${list.getListID()} has been removed.`);
                     } else {
                         if (this.cardDataChanged(existingCardData, card)) {
                             console.log(`Card with ID ${card.getCardID()} in List ${list.getListID()} needs to be updated.`);
+                        }
+
+                        // Check if the card has been moved between lists
+                        const previousListID = existingCardData.idList;
+                        const currentListID = list.getListID();
+                        if (previousListID !== currentListID) {
+                            console.log(`Card with ID ${card.getCardID()} has been moved from List ${previousListID} to List ${currentListID}.`);
+                            // Check if the card is new in the current list
+                            const cardIsNewInCurrentList = list.getCards().every(card => card.getCardID() !== existingCardData.id);
+                            if (cardIsNewInCurrentList) {
+                                console.log(`Card with ID ${card.getCardID()} has been added to List ${currentListID}.`);
+                            }
                         }
                     }
                 }
@@ -116,7 +128,7 @@ class Updater {
         }
 
         //add additionnal modifications for card updates
-        
+
         return idChanged || nameChanged;
     }
 
