@@ -44,12 +44,13 @@ class Updater {
                     }
                 }
     
-                // Get existing cards for the list
-                const existingCards = await this.getter.getCards(list.getListID());
-    
+                // Get existing cards for the list and the board
+                const existingListCards = await this.getter.getCards(list.getListID());
+                const existingBoardCards = await this.getter.getCards(board.getBoardID());
+
                 // Compare cards for each list
                 for (const card of list.getCards()) {
-                    const existingCardData = existingCards.find(existingCard => existingCard.id === card.getCardID());
+                    const existingCardData = existingListCards.find(existingCard => existingCard.id === card.getCardID());
 
                     if (!existingCardData) {
                         console.log(`Card with ID ${card.getCardID()} , (${card.getCardName()}) in List ${list.getListID()} has been removed.`);
@@ -59,12 +60,18 @@ class Updater {
                         }
                     }
                 }
-    
-                // Check for removed cards
-                for (const existingCard of existingCards) {
+
+                // Check for moved cards
+                for (const existingCard of existingListCards) {
                     const cardStillExists = list.getCards().some(card => card.getCardID() === existingCard.id);
                     if (!cardStillExists) {
-                        console.log(`Card with ID ${existingCard.id}, (${existingCard.name}) in List ${list.getListID()} is a new card.`);
+                        // Check if the card is present in the board's existing cards
+                        const cardMovedToAnotherList = existingBoardCards.some(boardCard => boardCard.id === existingCard.id);
+                        if (cardMovedToAnotherList) {
+                            console.log(`Card with ID ${existingCard.id}, (${existingCard.name}) in List ${list.getListID()} has been moved to another list.`);
+                        } else {
+                            console.log(`Card with ID ${existingCard.id}, (${existingCard.name}) in List ${list.getListID()} is a new card.`);
+                        }
                     }
                 }
             }
