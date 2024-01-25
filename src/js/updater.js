@@ -51,8 +51,8 @@ class Updater {
 
     // Method to compare the ID and name of the latest Trello board with existing data in opfwsp
     boardDataChanged(existingBoard, latestBoardData) {
-        const idChanged = existingBoard.id !== latestBoardData.id;
-        const nameChanged = existingBoard.name !== latestBoardData.name;
+        const idChanged = existingBoard.id !== latestBoardData.getBoardID();
+        const nameChanged = existingBoard.name !== latestBoardData.getBoardName();
 
         if (idChanged || nameChanged) {
             console.log(`Board ID or name changed: ID - ${existingBoard.id} to ${latestBoardData.getBoardID()}, Name - ${existingBoard.name} to ${latestBoardData.getBoardName()}`);
@@ -63,11 +63,11 @@ class Updater {
 
     // Method to compare the ID and name of the latest Trello list with existing data in opfwsp
     listDataChanged(existingList, latestListData) {
-        const idChanged = existingList.id !== latestListData.id;
-        const nameChanged = existingList.name !== latestListData.name;
+        const idChanged = existingList.id !== latestListData.getListID();
+        const nameChanged = existingList.name !== latestListData.getListName();
 
         if (idChanged || nameChanged) {
-            console.log(`List ID or name changed: ID - ${existingList.id} to ${latestListData.id}, Name - ${existingList.name} to ${latestListData.name}`);
+            console.log(`List ID or name changed: ID - ${existingList.id} to ${latestListData.getListID()}, Name - ${existingList.name} to ${latestListData.getListName()}`);
         }
 
         return idChanged || nameChanged;
@@ -75,11 +75,11 @@ class Updater {
 
     // Method to compare the ID and name of the latest Trello card with existing data in opfwsp
     cardDataChanged(existingCard, latestCardData) {
-        const idChanged = existingCard.id !== latestCardData.id;
-        const nameChanged = existingCard.name !== latestCardData.name;
+        const idChanged = existingCard.id !== latestCardData.getCardID();
+        const nameChanged = existingCard.name !== latestCardData.getCardName();
 
         if (idChanged || nameChanged) {
-            console.log(`Card ID or name changed: ID - ${existingCard.id} to ${latestCardData.id}, Name - ${existingCard.name} to ${latestCardData.name}`);
+            console.log(`Card ID or name changed: ID - ${existingCard.id} to ${latestCardData.getCardID()}, Name - ${existingCard.name} to ${latestCardData.getCardName()}`);
         }
 
         return idChanged || nameChanged;
