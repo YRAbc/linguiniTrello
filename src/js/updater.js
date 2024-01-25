@@ -62,18 +62,18 @@ class Updater {
     
                 // Check for removed cards
                 for (const existingCard of existingCards) {
-                    const cardStillExists = list.getCards().some(card => card.getCardID() === existingCard.getCardID());
+                    const cardStillExists = list.getCards().some(card => card.getCardID() === existingCard.id);
                     if (!cardStillExists) {
-                        console.log(`Card with ID ${existingCard.getCardID()} in List ${list.getListID()} has been removed.`);
+                        console.log(`Card with ID ${existingCard.id} in List ${list.getListID()} has been removed.`);
                     }
                 }
             }
     
             // Check for removed lists
             for (const existingList of existingLists) {
-                const listStillExists = board.getLists().some(list => list.getListID() === existingList.getListID());
+                const listStillExists = board.getLists().some(list => list.getListID() === existingList.id);
                 if (!listStillExists) {
-                    console.log(`List with ID ${existingList.getListID()} in Board ${board.getBoardID()} has been removed.`);
+                    console.log(`List with ID ${existingList.id} in Board ${board.getBoardID()} has been removed.`);
                 }
             }
         }
