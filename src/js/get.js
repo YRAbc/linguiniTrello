@@ -69,6 +69,38 @@ class Get {
     }
   }
 
+  async getList(cardId) {
+    try {
+      const response = await axios.get(`https://api.trello.com/1/cards/${cardId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`);
+
+      // console.log('Full response:', response); // Log the entire response
+
+      if (response.data && typeof response.data === 'object') {
+          const card = response.data;
+          const listId = card.idList;
+
+          // Retrieve the list information using the listId
+          const listResponse = await axios.get(`https://api.trello.com/1/lists/${listId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`);
+          
+          // console.log('List information:', listResponse.data);
+          
+          if (listResponse.data && typeof listResponse.data === 'object') {
+              const list = listResponse.data;
+              return list;
+          } else {
+              console.error('Invalid list response:', listResponse.data);
+              throw new Error('Invalid list response');
+          }
+      } else {
+          console.error('Invalid card response:', response.data);
+          throw new Error('Invalid card response');
+      }
+    } catch (error) {
+      console.error('Error getting list for card:', error.response ? error.response.data : error.message);
+      throw error;
+    }
+  }
+
   async getCards(boardId) {
     try {
         const response = await axios.get(`https://api.trello.com/1/boards/${boardId}/cards?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`);
@@ -128,6 +160,7 @@ class Get {
       throw error;
     }
   }
+
 }
 
 export default Get;
