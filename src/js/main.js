@@ -15,7 +15,6 @@ console.log("Start Linguini For Trello *");
 
 // Call the function to initiate the authentication process
 const oauth = new oAuth();
-oauth.setPowerUp();
 
 const opfwsp = new Workspace("OpfTechWorkspace");
 const ruler = new Ruler(opfwsp);
