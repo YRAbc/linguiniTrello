@@ -1,7 +1,7 @@
 // post.js
 // Made by Yoann Raton, 25/01/2024
 
-const axios = require('axios');
+import axios from 'axios';
 import oAuth from './authSettings.js';
 
 class Post {
