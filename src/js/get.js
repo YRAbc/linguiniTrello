@@ -6,13 +6,12 @@ import oAuth from './authSettings.js';
 
 class Get {
   constructor(oauth) {
-    this.token = oauth.appAccessToken();
-    this.apiKey = oauth.apiKey();
+    this.oauth = oauth;
   }
 
   async getBoard(boardId) {
     try {
-      const response = await axios.get(`https://api.trello.com/1/boards/${boardId}?key=${this.apiKey}&token=${this.token}`);
+      const response = await axios.get(`https://api.trello.com/1/boards/${boardId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`);
       const board = response.data;
       console.log('Board information:', board);
       return board;
@@ -24,7 +23,7 @@ class Get {
 
   async getBoardLists(boardId) {
     try {
-      const response = await axios.get(`https://api.trello.com/1/boards/${boardId}/lists?key=${this.apiKey}&token=${this.token}`);
+      const response = await axios.get(`https://api.trello.com/1/boards/${boardId}/lists?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`);
       const lists = response.data;
       console.log('Lists on the board:', lists);
       return lists;
@@ -36,7 +35,7 @@ class Get {
 
   async getList(listId) {
     try {
-      const response = await axios.get(`https://api.trello.com/1/lists/${listId}?key=${this.apiKey}&token=${this.token}`);
+      const response = await axios.get(`https://api.trello.com/1/lists/${listId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`);
       const list = response.data;
       console.log('List information:', list);
       return list;
@@ -48,7 +47,7 @@ class Get {
 
   async getListCards(listId) {
     try {
-      const response = await axios.get(`https://api.trello.com/1/lists/${listId}/cards?key=${this.apiKey}&token=${this.token}`);
+      const response = await axios.get(`https://api.trello.com/1/lists/${listId}/cards?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`);
       const cards = response.data;
       console.log('Cards in the list:', cards);
       return cards;
@@ -60,7 +59,7 @@ class Get {
 
   async getCard(cardId) {
     try {
-      const response = await axios.get(`https://api.trello.com/1/cards/${cardId}?key=${this.apiKey}&token=${this.token}`);
+      const response = await axios.get(`https://api.trello.com/1/cards/${cardId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`);
       const card = response.data;
       console.log('Card information:', card);
       return card;

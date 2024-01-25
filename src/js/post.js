@@ -5,15 +5,14 @@ const axios = require('axios');
 import oAuth from './authSettings.js';
 
 class Post {
-    constructor(oauth) {
-        this.token = oauth.appAccessToken();
-        this.apiKey = oauth.apiKey();
-      }
-      
+  constructor(oauth) {
+    this.oauth = oauth;
+  }
+
   async createCard(boardId, listId, cardName, cardDescription) {
     try {
       const response = await axios.post(
-        `https://api.trello.com/1/cards?key=${this.apiKey}&token=${this.token}&idBoard=${boardId}&idList=${listId}&name=${encodeURIComponent(cardName)}&desc=${encodeURIComponent(cardDescription)}`
+        `https://api.trello.com/1/cards?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}&idBoard=${boardId}&idList=${listId}&name=${encodeURIComponent(cardName)}&desc=${encodeURIComponent(cardDescription)}`
       );
 
       const createdCard = response.data;
