@@ -101,7 +101,7 @@ class Workspace {
             id: board.getBoardID(),
             name: board.getBoardName(),
             lists: board.getLists().map(list => ({
-                id: list.getListId(),
+                id: list.getListID(),
                 name: list.getListName(),
                 cards: list.getListCards().map(card => ({
                     id: card.id,
