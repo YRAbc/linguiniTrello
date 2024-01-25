@@ -60,7 +60,8 @@ class Updater {
                     else if (!existingInList) {
 
                         // Card has been moved
-                        console.log(`Card with ID ${card.getCardID()}, (${card.getCardName()}) has been moved to ${list.getListID()}, name : ${list.getListName()}".`);
+                        const targetList = await this.getter.getListFromCard(card.card.getCardID());
+                        console.log(`Card with ID ${card.getCardID()}, (${card.getCardName()}) has been moved from ${list.getListName()} to ${targetList.getListName()}`);
                     }
 
 
