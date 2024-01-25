@@ -64,7 +64,7 @@ class Updater {
                     }
 
 
-                    else if (this.cardDataChanged(existingCardData, card)) {
+                    else if (this.cardDataChanged(existingInList, card)) {
                         // Card needs to be updated
                         console.log(`Card with ID ${card.getCardID()} in List ${list.getListID()} needs to be updated.`);
                     } 
