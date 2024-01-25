@@ -29,6 +29,26 @@ class Get {
     }
   }
 
+  async getLists(boardId) {
+    try {
+        const response = await axios.get(`https://api.trello.com/1/boards/${boardId}/lists?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`);
+      
+        //console.log('Full response:', response); // Log the entire response
+      
+        if (response.data && Array.isArray(response.data)) {
+            const lists = response.data;
+            //console.log('Lists:', lists);
+            return lists;
+        } else {
+            console.error('Invalid board response:', response.data);
+            throw new Error('Invalid board response');
+        }
+    } catch (error) {
+        console.error('Error getting board lists:', error.response ? error.response.data : error.message);
+        throw error;
+    }
+  }
+
   async getList(listId) {
     try {
       const response = await axios.get(`https://api.trello.com/1/lists/${listId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`);
@@ -46,6 +66,26 @@ class Get {
     } catch (error) {
       console.error('Error getting list:', error.response ? error.response.data : error.message);
       throw error;
+    }
+  }
+
+  async getCards(listId) {
+    try {
+        const response = await axios.get(`https://api.trello.com/1/lists/${listId}/cards?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`);
+      
+        //console.log('Full response:', response); // Log the entire response
+      
+        if (response.data && Array.isArray(response.data)) {
+            const cards = response.data;
+            //console.log('Cards:', cards);
+            return cards;
+        } else {
+            console.error('Invalid list response:', response.data);
+            throw new Error('Invalid list response');
+        }
+    } catch (error) {
+        console.error('Error getting list cards:', error.response ? error.response.data : error.message);
+        throw error;
     }
   }
 

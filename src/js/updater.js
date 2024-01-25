@@ -10,6 +10,7 @@ import Post from './post.js';
 import Get from './get.js';
 
 class Updater {
+    
     constructor(workspace, ruler, getter, poster) {
         this.workspace = workspace;
         this.ruler = ruler;
@@ -22,30 +23,62 @@ class Updater {
         for (const board of this.workspace.getBoards()) {
             // Get the existing data for the board from opfwsp
             const existingBoardData = await this.getter.getBoard(board.getBoardID());
-
+    
             // Compare ID and name of boards
             if (this.boardDataChanged(existingBoardData, board)) {
                 console.log(`Board with ID ${board.getBoardID()} needs to be updated.`);
             }
-
+    
+            // Get existing lists for the board
+            const existingLists = await this.getter.getLists(board.getBoardID());
+    
             // Compare lists for each board
             for (const list of board.getLists()) {
-                const existingListData = await this.getter.getList(list.getListID());
-
-                if (this.listDataChanged(existingListData, list)) {
-                    console.log(`List with ID ${list.getListID()} in Board ${board.getBoardID()} needs to be updated.`);
+                const existingListData = existingLists.find(existingList => existingList.getListID() === list.getListID());
+    
+                if (!existingListData) {
+                    console.log(`List with ID ${list.getListID()} in Board ${board.getBoardID()} is a new list.`);
+                } else {
+                    if (this.listDataChanged(existingListData, list)) {
+                        console.log(`List with ID ${list.getListID()} in Board ${board.getBoardID()} needs to be updated.`);
+                    }
                 }
-
+    
+                // Get existing cards for the list
+                const existingCards = await this.getter.getCards(list.getListID());
+    
                 // Compare cards for each list
                 for (const card of list.getCards()) {
-                    const existingCardData = await this.getter.getCard(card.getCardID());
-                    if (this.cardDataChanged(existingCardData, card)) {
-                        console.log(`Card with ID ${card.getCardID()} in List ${list.getListID()} needs to be updated.`);
+                    const existingCardData = existingCards.find(existingCard => existingCard.getCardID() === card.getCardID());
+    
+                    if (!existingCardData) {
+                        console.log(`Card with ID ${card.getCardID()} in List ${list.getListID()} is a new card.`);
+                    } else {
+                        if (this.cardDataChanged(existingCardData, card)) {
+                            console.log(`Card with ID ${card.getCardID()} in List ${list.getListID()} needs to be updated.`);
+                        }
                     }
+                }
+    
+                // Check for removed cards
+                for (const existingCard of existingCards) {
+                    const cardStillExists = list.getCards().some(card => card.getCardID() === existingCard.getCardID());
+                    if (!cardStillExists) {
+                        console.log(`Card with ID ${existingCard.getCardID()} in List ${list.getListID()} has been removed.`);
+                    }
+                }
+            }
+    
+            // Check for removed lists
+            for (const existingList of existingLists) {
+                const listStillExists = board.getLists().some(list => list.getListID() === existingList.getListID());
+                if (!listStillExists) {
+                    console.log(`List with ID ${existingList.getListID()} in Board ${board.getBoardID()} has been removed.`);
                 }
             }
         }
     }
+    
 
     // Method to compare the ID and name of the latest Trello board with existing data in opfwsp
     boardDataChanged(existingBoard, latestBoardData) {
