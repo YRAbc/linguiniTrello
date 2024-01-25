@@ -31,6 +31,11 @@ class Updater {
             // Compare lists for each board
             for (const list of board.getLists()) {
                 const existingListData = await this.getter.getList(list.getListID());
+
+                for (const element of existingListData) {
+                  console.log(element);
+                }
+
                 if (this.listDataChanged(existingListData, list)) {
                     console.log(`List with ID ${list.getListID()} in Board ${board.getBoardID()} needs to be updated.`);
                 }
@@ -45,7 +50,6 @@ class Updater {
 
                 // Check for new cards in Trello data
                 const newCardCount = (existingListData.cards || []).length - list.getCards().length;
-                console.log('cards', (existingListData.cards || []).length);
                 console.log(`Cards number var in ${list.getListID()}: ${newCardCount} cards`);
                 if (newCardCount > 0) {
                     console.log(`New cards added to List ${list.getListID()}: ${newCardCount} cards`);
