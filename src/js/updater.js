@@ -29,6 +29,7 @@ class Updater {
                 console.log(`Board with ID ${board.getBoardID()} needs to be updated.`);
 
                     //  -> BOARD MODIFIED
+                    this.ruler.boardModifiedRule(board.getBoardID())
                     this.updateWorkspace();
             }
     
@@ -43,6 +44,7 @@ class Updater {
                     console.log(`List with ID ${list.getListID()}, (${list.getListName()}) in Board ${board.getBoardID()} has been removed.`);
 
                         //  -> LIST REMOVE
+                        this.ruler.listRemovedFromBoardRule(list.getListID(), board.getBoardID());
                         this.updateWorkspace();
 
                 } else {
@@ -50,6 +52,7 @@ class Updater {
                         console.log(`List with ID ${list.getListID()} in Board ${board.getBoardID()} needs to be updated.`);
                         
                             //  -> LIST MODIFIED
+                            this.ruler.listModifiedInBoardRule(list.getListID(), board.getBoardID());
                             this.updateWorkspace();
                     }
                 }
@@ -67,6 +70,7 @@ class Updater {
                         console.log(`Card with ID ${card.getCardID()}, (${card.getCardName()}) in List ${list.getListID()} has been removed.`);
 
                             //  -> CARD REMOVED
+                            this.ruler.cardRemovedFromListRule(card.getCardID(), list.getListID(), board.getBoardID());
                             this.updateWorkspace();
                     } 
                     
@@ -76,6 +80,7 @@ class Updater {
                         console.log(`Card with ID ${card.getCardID()}, (${card.getCardName()}) has been moved from List ${list.getListName()} to List ${targetList.name}`);
 
                             //  -> CARD MOVED
+                            this.ruler.cardMovedToListRule(card.getCardID(), list.getListID(), board.getBoardID());
                             this.updateWorkspace();
                     }
 
@@ -84,6 +89,7 @@ class Updater {
                         console.log(`Card with ID ${card.getCardID()} in List ${list.getListID()} needs to be updated.`);
 
                             //  -> CARD MODIFIED
+                            this.ruler.cardModifiedInListRule(card.getCardID(), list.getListID(), board.getBoardID());
                             this.updateWorkspace();
                     } 
                     
@@ -96,6 +102,7 @@ class Updater {
                         console.log(`Card with ID ${existingCard.id}, (${existingCard.name}) in List ${list.getListID()} is a new card.`);
 
                             //  -> CARD ADDED
+                            this.ruler.cardAddedToListRule(existingCard.id, list.getListID(), board.getBoardID());
                             this.updateWorkspace();
                     }
                 }
@@ -108,6 +115,7 @@ class Updater {
                     console.log(`List with ID ${existingList.id}, (${existingList.name}) in Board ${board.getBoardID()} is a new list.`);
 
                         //  -> LIST ADDED
+                        this.ruler.listAddedToBoardRule(existingList.id, board.getBoardID());
                         this.updateWorkspace();
                 }
             }
