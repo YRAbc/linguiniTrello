@@ -89,10 +89,8 @@ class Post {
     }
   }
 
-  async setCustomField(cardId, fieldName, fieldValue) {
+  async setCustomField(customField , fieldValue) {
     try {
-      // Get the custom field by name
-      const customField = await this.getCustomFieldByName(fieldName);
 
       if (!customField) {
         throw new Error(`Custom field '${fieldName}' not found.`);

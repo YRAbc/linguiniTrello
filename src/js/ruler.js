@@ -50,8 +50,20 @@ class Ruler {
                 const nextOPFTechNumber = Number(maxOPFTechNumber) + 1;
                 await this.poster.addOPFTechNumber(cardID, nextOPFTechNumber);
 
-                //CUSTOM FIELDS SET
-                await this.poster.setCustomField(cardID, "Status", "Open");
+                //Status custom field
+                try {
+                    // Retrieve information about the 'Status' custom field for the specified card
+                    const statusCustomField = await this.getter.getCustomField(cardID, 'Status');
+                  
+                    if (statusCustomField) {
+                      // Set the value of the 'Status' custom field to "Open"
+                      await this.poster.setCustomField(statusCustomField.id, 'Open');
+                    } else {
+                      console.error('Custom field "Status" not found for the specified card.');
+                    }
+                  } catch (error) {
+                    console.error('Error setting custom field:', error.message);
+                }
 
 
                 // Get the updated value of 'Status' using the getCustomField method
