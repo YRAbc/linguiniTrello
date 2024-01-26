@@ -57,7 +57,7 @@ class Ruler {
                   
                     if (statusCustomField) {
                       // Set the value of the 'Status' custom field to "Open"
-                      await this.poster.setCustomField(statusCustomField.id, 'Open');
+                      await this.poster.setCustomField(cardID, statusCustomField.id, 'Status', 'Open');
                     } else {
                       console.error('Custom field "Status" not found for the specified card.');
                     }
