@@ -182,6 +182,20 @@ class Get {
         throw error;
     }
   }
+
+  async getCustomField(cardId, fieldName) {
+    try {
+      const response = await axios.get(
+        `https://api.trello.com/1/cards/${cardId}/customFields?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`
+      );
+  
+      const customFields = response.data;
+      return customFields.find(field => field.name === fieldName);
+    } catch (error) {
+      console.error(`Error getting custom fields:`, error.response ? error.response.data : error.message);
+      throw error;
+    }
+  }
 }
 
 export default Get;
