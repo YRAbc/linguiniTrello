@@ -57,7 +57,7 @@ class Ruler {
                 await this.poster.setCustomFieldDropdown(cardID, 'Issuer', 'To Qualify');*/
 
                 // Set custom field 'Status' for a new OPF Tech card
-                const statusField = await this.poster.setCustomFieldDropdown(cardID, 'Status', 'Open');
+                const statusField = await this.poster.setCustomFieldDropdown(cardID, 'Status', ['Open']);
 
                 // Get the updated value of 'Status' using the getCustomField method
                 const updatedStatusField = await this.getter.getCustomField(cardID, 'Status');
