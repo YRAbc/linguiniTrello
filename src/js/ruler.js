@@ -10,22 +10,22 @@ class Ruler {
         this.workspace = workspace;
     }
 
-    boardModifiedRule(boardID){
+    boardModifiedRule(boardID) {
 
         //Logic for board modified
     }
 
-    listAddedToBoardRule(listID, boardID){
+    listAddedToBoardRule(listID, boardID) {
 
         //Logic for list add
     }
 
-    listModifiedInBoardRule(listID, boardID){
+    listModifiedInBoardRule(listID, boardID) {
 
         //Logic for list modified
     }
 
-    listRemovedFromBoardRule(listID, boardID){
+    listRemovedFromBoardRule(listID, boardID) {
 
         //Logic for list remove
     }
@@ -40,7 +40,7 @@ class Ruler {
 
             // Check if the card is added to the OPF Tech list
             if (listID === opfTechListID) {
-                
+
                 // Get the maximum OPFTech number
                 const maxOPFTechNumber = await this.findMaxOPFTechNumber();
 
@@ -117,7 +117,7 @@ class Ruler {
         }
     }
 
-    cardRemovedFromListRule(cardID, listID, boardID){
+    cardRemovedFromListRule(cardID, listID, boardID) {
 
         //Logic for card remove
     }
