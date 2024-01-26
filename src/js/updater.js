@@ -157,7 +157,7 @@ class Updater {
             const existingBoardData = await this.getter.getBoard(board.getBoardID());
     
             // Get existing lists for the board
-            const existingLists = await this.getter.getLists(board.getBoardID());
+            const existingLists = await this.getter.getBoardLists(board.getBoardID());
     
             const listObjects = [];
     
