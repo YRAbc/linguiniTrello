@@ -49,7 +49,7 @@ class Ruler {
                 console.log('2');
                 // Set label to maxOPFTechNumber + 1
                 const nextOPFTechNumber = maxOPFTechNumber + 1;
-                await this.poster.addOPFTechNumberLabel(cardID, nextOPFTechNumber);
+                await this.poster.addOPFTechNumber(cardID, nextOPFTechNumber);
                 console.log('3');
                 // Set custom fields for a new OPF Tech card
                 await this.poster.setCustomField(cardID, 'Status', 'Open');
