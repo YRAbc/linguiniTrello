@@ -8,6 +8,8 @@ import Get from './get.js';
 class Ruler {
     constructor(workspace, getter, poster) {
         this.workspace = workspace;
+        this.getter = getter;
+        this.poster = poster;
     }
 
     boardModifiedRule(boardID) {
