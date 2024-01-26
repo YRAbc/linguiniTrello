@@ -88,34 +88,6 @@ class Post {
       throw error;
     }
   }
-
-  async setCustomField(cardId, customFieldId, fieldValue) {
-    try {
-
-      if (!customFieldId) {
-        throw new Error(`Custom field ID '${customFieldId}' not found.`);
-      }
-
-      // Make a POST request to set the custom field value for the card
-      const response = await axios.post(
-        `https://api.trello.com/1/card/${cardId}/customField/${customFieldId}/item`,
-        {
-          value: {
-            text: fieldValue,
-          },
-          key: this.oauth.apiKey,
-          token: this.oauth.appAccessToken,
-        }
-      );
-
-      const updatedCard = response.data;
-      console.log(`Custom field '${fieldName}' set to '${fieldValue}' on the card successfully:`, updatedCard);
-      return updatedCard;
-    } catch (error) {
-      console.error('Error setting custom field:', error.response ? error.response.data : error.message);
-      throw error;
-    }
-  }
   
 }
 
