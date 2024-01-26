@@ -47,19 +47,6 @@ class Post {
     }
   }
 
-  async setCardDescription(cardId, cardDescription) {
-    try {
-      await axios.put(
-        `https://api.trello.com/1/cards/${cardId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}&desc=${encodeURIComponent(cardDescription)}`
-      );
-
-      console.log('Card description updated successfully.');
-    } catch (error) {
-      console.error('Error updating card description:', error.response ? error.response.data : error.message);
-      throw error;
-    }
-  }
-
   async addOPFTechNumber(cardId, opfTechNumber) {
     let frontText;
     try {
@@ -85,6 +72,49 @@ class Post {
       }
     } catch (error) {
       console.error(`Error adding label ${frontText}:`, error.response ? error.response.data : error.message);
+      throw error;
+    }
+  }
+
+  async setCardDescription(cardId, cardDescription) {
+    try {
+      await axios.put(
+        `https://api.trello.com/1/cards/${cardId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}&desc=${encodeURIComponent(cardDescription)}`
+      );
+
+      console.log('Card description updated successfully.');
+    } catch (error) {
+      console.error('Error updating card description:', error.response ? error.response.data : error.message);
+      throw error;
+    }
+  }
+
+  async setCustomField(cardId, fieldName, fieldValue) {
+    try {
+      // Get the custom field by name
+      const customField = await this.getCustomFieldByName(fieldName);
+
+      if (!customField) {
+        throw new Error(`Custom field '${fieldName}' not found.`);
+      }
+
+      // Make a POST request to set the custom field value for the card
+      const response = await axios.post(
+        `https://api.trello.com/1/card/${cardId}/customField/${customField.id}/item`,
+        {
+          value: {
+            text: fieldValue,
+          },
+          key: this.oauth.apiKey,
+          token: this.oauth.appAccessToken,
+        }
+      );
+
+      const updatedCard = response.data;
+      console.log(`Custom field '${fieldName}' set to '${fieldValue}' on the card successfully:`, updatedCard);
+      return updatedCard;
+    } catch (error) {
+      console.error('Error setting custom field:', error.response ? error.response.data : error.message);
       throw error;
     }
   }
