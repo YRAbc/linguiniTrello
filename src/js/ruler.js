@@ -51,13 +51,10 @@ class Ruler {
                 await this.poster.addOPFTechNumber(cardID, nextOPFTechNumber);
 
                 // Set custom fields for a new OPF Tech card
-                /*await this.poster.setCustomFieldDropdown(cardID, 'Status', 'Open');
+                await this.poster.setCustomFieldDropdown(cardID, 'Status', 'Open');
                 await this.poster.setCustomFieldDropdown(cardID, 'Priority', 'To Qualify');
                 await this.poster.setCustomFieldDropdown(cardID, 'Tech', 'To Qualify');
-                await this.poster.setCustomFieldDropdown(cardID, 'Issuer', 'To Qualify');*/
-
-                // Set custom field 'Status' for a new OPF Tech card
-                const statusField = await this.poster.setCustomFieldDropdown(cardID, 'Status', ['Open']);
+                await this.poster.setCustomFieldDropdown(cardID, 'Issuer', 'To Qualify');
 
                 // Get the updated value of 'Status' using the getCustomField method
                 const updatedStatusField = await this.getter.getCustomField(cardID, 'Status');
