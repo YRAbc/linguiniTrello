@@ -88,6 +88,10 @@ class Post {
             // If the custom field doesn't exist, create it
             console.log(`Custom field ${fieldName} does not exist. Creating with value ${fieldValue}`);
             await axios.post(
+              `https://api.trello.com/1/customField/${fieldName}/item?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`,
+              { value: { option: { id: fieldValue } } }
+          );
+            await axios.post(
                 `https://api.trello.com/1/card/${cardId}/customField/${fieldName}/item?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`,
                 { value: { option: { id: fieldValue } } }
             );
@@ -156,7 +160,7 @@ class Post {
         if (!existingLabel) {
             const labelCreationResponse = await axios.post(
                 `https://api.trello.com/1/cards/${cardId}/labels?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`,
-                { name: frontText, color: "null" , pos: "top" }
+                { name: frontText, color: "null" , pos: "top" , display_cardFront: "true"}
             );
 
             console.log(`Label ${frontText} added successfully. Response:`, labelCreationResponse.data);
