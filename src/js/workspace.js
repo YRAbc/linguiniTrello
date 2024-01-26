@@ -45,7 +45,7 @@ class Workspace {
 
         // Replace the existing board with the new one
         this.boards[existingIndex] = newBoard;
-        console.log('Board updated in OpfTechWorkspace:', newBoard.getBoardName(), newBoard.getBoardID());
+        //console.log('Board updated in OpfTechWorkspace:', newBoard.getBoardName(), newBoard.getBoardID());
     }
     
     removeBoardById(boardId) {

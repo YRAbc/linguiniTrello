@@ -43,11 +43,14 @@ class Updater {
                     console.log(`List with ID ${list.getListID()}, (${list.getListName()}) in Board ${board.getBoardID()} has been removed.`);
 
                         //  -> LIST REMOVE
+                        this.updateWorkspace();
+
                 } else {
                     if (this.listDataChanged(existingListData, list)) {
                         console.log(`List with ID ${list.getListID()} in Board ${board.getBoardID()} needs to be updated.`);
                         
                             //  -> LIST MODIFIED
+                            this.updateWorkspace();
                     }
                 }
     
@@ -64,6 +67,7 @@ class Updater {
                         console.log(`Card with ID ${card.getCardID()}, (${card.getCardName()}) in List ${list.getListID()} has been removed.`);
 
                             //  -> CARD REMOVED
+                            this.updateWorkspace();
                     } 
                     
                     else if (!existingInList) {
@@ -72,6 +76,7 @@ class Updater {
                         console.log(`Card with ID ${card.getCardID()}, (${card.getCardName()}) has been moved from List ${list.getListName()} to List ${targetList.name}`);
 
                             //  -> CARD MOVED
+                            this.updateWorkspace();
                     }
 
                     else if (this.cardDataChanged(existingInList, card)) {
@@ -79,6 +84,7 @@ class Updater {
                         console.log(`Card with ID ${card.getCardID()} in List ${list.getListID()} needs to be updated.`);
 
                             //  -> CARD MODIFIED
+                            this.updateWorkspace();
                     } 
                     
                 }
@@ -90,6 +96,7 @@ class Updater {
                         console.log(`Card with ID ${existingCard.id}, (${existingCard.name}) in List ${list.getListID()} is a new card.`);
 
                             //  -> CARD ADDED
+                            this.updateWorkspace();
                     }
                 }
             }
@@ -101,6 +108,7 @@ class Updater {
                     console.log(`List with ID ${existingList.id}, (${existingList.name}) in Board ${board.getBoardID()} is a new list.`);
 
                         //  -> LIST ADDED
+                        this.updateWorkspace();
                 }
             }
         }
