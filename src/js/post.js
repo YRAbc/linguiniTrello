@@ -60,7 +60,7 @@ class Post {
     }
   }
 
-  async setCustomField(cardId, fieldName, fieldValue) {
+  async setCustomFieldDropdown(cardId, fieldName, fieldValue) {
     try {
         // Fetch the current custom fields data for the card
         const customFieldsResponse = await axios.get(
@@ -84,6 +84,40 @@ class Post {
             await axios.post(
                 `https://api.trello.com/1/card/${cardId}/customField/${fieldName}/item?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`,
                 { value: { option: { id: fieldValue } } }
+            );
+        }
+
+        console.log(`Card ${fieldName} updated successfully.`);
+    } catch (error) {
+        console.error(`Error updating card ${fieldName}:`, error.response ? error.response.data : error.message);
+        throw error;
+    }
+  }
+
+  async setCustomFieldText(cardId, fieldName, fieldValue) {
+    try {
+        // Fetch the current custom fields data for the card
+        const customFieldsResponse = await axios.get(
+            `https://api.trello.com/1/cards/${cardId}/customFieldItems?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`
+        );
+
+        const customFields = customFieldsResponse.data;
+
+        // Check if the custom field already exists
+        const existingField = customFields.find(field => field.name === fieldName);
+
+        if (existingField) {
+            // If the custom field exists, update the value
+            const customFieldId = existingField.id;
+            await axios.put(
+                `https://api.trello.com/1/card/${cardId}/customField/${customFieldId}/item?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`,
+                { value: { text: fieldValue } } // Assuming fieldValue is the text for the custom field
+            );
+        } else {
+            // If the custom field doesn't exist, create it
+            await axios.post(
+                `https://api.trello.com/1/card/${cardId}/customField/${fieldName}/item?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`,
+                { value: { text: fieldValue } }
             );
         }
 
