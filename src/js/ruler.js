@@ -43,15 +43,15 @@ class Ruler {
             // Check if the card is added to the OPF Tech list
             if (listID === opfTechListID) {
 
-                console.log('OPF Tech Card initialized successfully.');
+                console.log('1.');
                 // Get the maximum OPFTech number
                 const maxOPFTechNumber = await this.findMaxOPFTechNumber();
-                console.log('OPF Tech Card initialized successfully.');
+                console.log('2');
                 // Set label to maxOPFTechNumber + 1
                 const nextOPFTechNumber = maxOPFTechNumber + 1;
                 const labelToAdd = `OPFTech-${nextOPFTechNumber}`;
                 await this.poster.addOPFTechNumberLabel(cardID, labelToAdd);
-                console.log('OPF Tech Card initialized successfully.');
+                console.log('3');
                 // Set custom fields for a new OPF Tech card
                 await this.poster.setCustomField(cardID, 'Status', 'Open');
                 await this.poster.setCustomField(cardID, 'Priority', 'To Qualify');
