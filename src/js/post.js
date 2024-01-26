@@ -62,17 +62,17 @@ class Post {
 
   async setCustomFieldDropdown(cardId, fieldName, options) {
     try {
-        const url = `https://api.trello.com/1/cards/${cardId}/customFields`;
+        const url = `https://api.trello.com/1/cards/${cardId}/customField/${fieldName}`;
         const data = {
-            name: fieldName,
-            type: 'dropdown',
-            options: options
+            value: {
+                text: options[0] // Assuming 'options' is an array and you want to use the first element as the default value
+            }
         };
         const params = {
             key: this.oauth.apiKey,
             token: this.oauth.appAccessToken
         };
-        const response = await axios.post(url, data, { params });
+        const response = await axios.put(url, data, { params });
         console.log(`Custom field dropdown created successfully. Response:`, response.data);
     } catch (error) {
         console.error(`Error creating custom field dropdown:`, error.response ? error.response.data : error.message);
@@ -80,16 +80,27 @@ class Post {
     }
   }
 
-  async setCustomFieldText(cardId, fieldName) {
+
+  async setCustomFieldText(cardId, fieldName, textValue) {
     try {
-      const url = `https://api.trello.com/1/cards/${cardId}/customFields?name=${fieldName}&type=text&key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`;
-      const response = await axios.post(url);
-      console.log(`Custom field text created successfully. Response:`, response.data);
+        const url = `https://api.trello.com/1/cards/${cardId}/customField/${fieldName}/item`;
+        const data = {
+            value: {
+                text: textValue
+            }
+        };
+        const params = {
+            key: this.oauth.apiKey,
+            token: this.oauth.appAccessToken
+        };
+        const response = await axios.post(url, data, { params });
+        console.log(`Custom field text created successfully. Response:`, response.data);
     } catch (error) {
-      console.error(`Error creating custom field text:`, error.response ? error.response.data : error.message);
-      throw error;
+        console.error(`Error creating custom field text:`, error.response ? error.response.data : error.message);
+        throw error;
     }
   }
+
 
   async addOPFTechNumber(cardId, opfTechNumber) {
     try {
