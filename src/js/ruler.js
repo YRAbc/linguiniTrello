@@ -143,7 +143,7 @@ class Ruler {
 
                 // Iterate through each card to find the max OPFTech number
                 for (const card of cards) {
-                    const opfTechNumber = await this.getOPFTechNumber(card.id);
+                    const opfTechNumber = await this.getter.getOPFTechNumber(card.id);
 
                     if (!isNaN(opfTechNumber) && opfTechNumber > maxOPFTechNumber) {
                         maxOPFTechNumber = opfTechNumber;
