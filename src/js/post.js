@@ -96,20 +96,23 @@ class Post {
 
   async addOPFTechNumberLabel(cardId, opfTechNumber) {
     try {
-      // Make a POST request to add a label to the card
-      const response = await axios.post(
-        `https://api.trello.com/1/cards/${cardId}/idLabels?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`,
-        { value: opfTechNumber }
-      );
+        // Construct the comment text
+        const commentText = `#OPFTech-${opfTechNumber}`;
 
-      const updatedCard = response.data;
-      console.log('Label added to the card successfully:', updatedCard);
-      return updatedCard;
+        // Make a POST request to add a comment to the card
+        const response = await axios.post(
+            `https://api.trello.com/1/cards/${cardId}/actions/comments?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`,
+            { text: commentText }
+        );
+
+        const updatedCard = response.data;
+        console.log('Comment added to the card successfully:', updatedCard);
+        return updatedCard;
     } catch (error) {
-      console.error('Error adding label to the card:', error.response ? error.response.data : error.message);
-      throw error;
+        console.error('Error adding comment to the card:', error.response ? error.response.data : error.message);
+        throw error;
     }
-  }
+}
 
 }
 
