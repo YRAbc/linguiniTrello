@@ -195,6 +195,7 @@ class Updater {
             this.workspace.updateBoard(boardObj);
         }
     }    
+
 }
 
 export default Updater;

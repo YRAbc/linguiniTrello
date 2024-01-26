@@ -161,6 +161,27 @@ class Get {
     }
   }
 
+  async getOPFTechNumber(cardId) {
+    try {
+        // Get the card details
+        const cardDetails = await this.getCard(cardId);
+
+        // Check if the OPFTech label exists on the card
+        const opfTechLabel = cardDetails.labels.find(label => label.name.startsWith('#OPFTech-'));
+
+        if (opfTechLabel) {
+            // Extract the number from the label
+            const number = opfTechLabel.name.replace('#OPFTech-', '');
+            return number;
+        } else {
+            // Return null or another indicator if the OPFTech label is not found
+            return null;
+        }
+    } catch (error) {
+        console.error('Error in getOPFTechNumber:', error);
+        throw error;
+    }
+  }
 }
 
 export default Get;

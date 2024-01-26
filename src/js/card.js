@@ -2,22 +2,28 @@
 // Made by Yoann Raton, 19/01/2024
 
 class Card {
-    constructor(id, name, listId, listName, items) {
+    constructor(id, name, listId, listName, items, description, opfTechNumber, status, priority, tech, issuer) {
         this.cardId = id;
         this.cardTitle = name;
         this.listId = listId;
         this.listName = listName;
-        this.items = items;
+        this.items = items || [];
+        this.description = description || '';
+        this.opfTechNumber = opfTechNumber || '';
+        this.status = status || '';
+        this.priority = priority || '';
+        this.tech = tech || '';
+        this.issuer = issuer || '';
     }
-  
+
     addItem(item) {
         this.items.push(item);
     }
-    
+
     getCardID() {
         return this.cardId;
     }
-  
+
     getCardName() {
         return this.cardTitle;
     }
@@ -25,9 +31,58 @@ class Card {
     getItems() {
         return this.items;
     }
-  }
-  
-  export default Card;
+
+    getDescription() {
+        return this.description;
+    }
+
+    getOPFTechNumber() {
+        return this.opfTechNumber;
+    }
+
+    getStatus() {
+        return this.status;
+    }
+
+    getPriority() {
+        return this.priority;
+    }
+
+    getTech() {
+        return this.tech;
+    }
+
+    getIssuer() {
+        return this.issuer;
+    }
+
+    setDescription(description) {
+        this.description = description || '';
+    }
+
+    setOPFTechNumber(opfTechNumber) {
+        this.opfTechNumber = opfTechNumber || '';
+    }
+
+    setStatus(status) {
+        this.status = status || '';
+    }
+
+    setPriority(priority) {
+        this.priority = priority || '';
+    }
+
+    setTech(tech) {
+        this.tech = tech || '';
+    }
+
+    setIssuer(issuer) {
+        this.issuer = issuer || '';
+    }
+}
+
+export default Card;
+
 
   /* Cards
 
