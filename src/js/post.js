@@ -94,62 +94,35 @@ class Post {
     }
   }
 
-
-  async createBoardLabel(boardId, labelName, labelColor) {
+  async addOPFTechNumber(cardId, opfTechNumber) {
     try {
-      const response = await axios.post(
-        `https://api.trello.com/1/boards/${boardId}/labels`,
-        {
-          name: labelName,
-          color: labelColor,
-          key: this.oauth.apiKey,
-          token: this.oauth.appAccessToken,
+        // Check if the label already exists, or create a new one
+        const frontText = `OPFTech-${opfTechNumber}`;
+
+        // Fetch card details to get the current labels
+        const cardDetailsResponse = await axios.get(
+            `https://api.trello.com/1/cards/${cardId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`
+        );
+
+        const cardDetails = cardDetailsResponse.data;
+
+        // Check if the label already exists on the card
+        const existingLabel = cardDetails.labels.find(label => label.name === frontText);
+
+        if (!existingLabel) {
+            // If the label doesn't exist, create a new label with the front text
+            await axios.post(
+                `https://api.trello.com/1/cards/${cardId}/labels?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`,
+                { name: frontText, color: "green" } // Set the color as needed
+            );
+
+            console.log(`Label ${frontText} added successfully.`);
+        } else {
+            console.log(`Label ${frontText} already exists on the card.`);
         }
-      );
-
-      const createdLabel = response.data;
-      console.log('Label created successfully:', createdLabel);
-      return createdLabel;
     } catch (error) {
-      console.error('Error creating label:', error.response ? error.response.data : error.message);
-      throw error;
-    }
-  }
-
-  async addOPFTechNumberLabel(cardId, opfTechNumber) {
-    try {
-      // Check if the label already exists, or create a new one
-      const labelName = `OPFTech-${opfTechNumber}`;
-      const labelColor = 'green'; // You can choose a color
-
-      // Check if the label already exists on the board
-      const existingLabels = await axios.get(
-        `https://api.trello.com/1/cards/${cardId}/labels?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`
-      );
-
-      const existingLabel = existingLabels.data.find(label => label.name === labelName);
-
-      if (!existingLabel) {
-        // If the label doesn't exist, create it
-        await this.createBoardLabel(cardId, labelName, labelColor);
-      }
-
-      // Add the label to the card
-      const response = await axios.post(
-        `https://api.trello.com/1/cards/${cardId}/idLabels`,
-        {
-          value: existingLabel ? existingLabel.id : null,
-          key: this.oauth.apiKey,
-          token: this.oauth.appAccessToken,
-        }
-      );
-
-      const updatedCard = response.data;
-      console.log('Label added to the card successfully:', updatedCard);
-      return updatedCard;
-    } catch (error) {
-      console.error('Error adding label to the card:', error.response ? error.response.data : error.message);
-      throw error;
+        console.error(`Error adding label ${frontText}:`, error.response ? error.response.data : error.message);
+        throw error;
     }
   }
 
