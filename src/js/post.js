@@ -92,7 +92,7 @@ class Post {
   async setCustomField(cardId, customFieldId, fieldValue) {
     try {
 
-      if (!customField) {
+      if (!customFieldId) {
         throw new Error(`Custom field ID '${customFieldId}' not found.`);
       }
 
