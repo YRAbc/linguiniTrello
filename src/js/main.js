@@ -29,6 +29,7 @@ const ruler = new Ruler(opfwsp, getter, poster);
 // update is made to see difference between current and opfwsp
 const updater = new Updater(opfwsp, ruler, getter, poster);
 updater.updateWorkspace();
+setupPeriodicUpdates();
 
 //OPFTech-Number for cards
 let opfTechCardNumber = 1;
@@ -52,7 +53,6 @@ window.TrelloPowerUp.initialize({
     },
     
 });
-
 
 function setupPeriodicUpdates() {
     // Set up periodic updates only if there are exactly three boards
