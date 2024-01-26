@@ -29,7 +29,7 @@ class Get {
     }
   }
 
-  async getLists(boardId) {
+  async getBoardLists(boardId) {
     try {
         const response = await axios.get(`https://api.trello.com/1/boards/${boardId}/lists?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`);
       

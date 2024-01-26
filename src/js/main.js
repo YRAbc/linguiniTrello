@@ -29,9 +29,6 @@ const ruler = new Ruler(opfwsp, getter, poster);
 // update is made to see difference between current and opfwsp
 const updater = new Updater(opfwsp, ruler, getter, poster);
 
-// Counter to track the number of registered boards
-let registeredBoardsCount = 0;
-
 //OPFTech-Number for cards
 let opfTechCardNumber = 1;
 

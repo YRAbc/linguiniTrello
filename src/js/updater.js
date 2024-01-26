@@ -27,6 +27,9 @@ class Updater {
             // Compare ID and name of boards
             if (this.boardDataChanged(existingBoardData, board)) {
                 console.log(`Board with ID ${board.getBoardID()} needs to be updated.`);
+
+                    //  -> BOARD MODIFIED
+                    this.updateWorkspace();
             }
     
             // Get existing lists for the board
@@ -38,9 +41,13 @@ class Updater {
     
                 if (!existingListData) {
                     console.log(`List with ID ${list.getListID()}, (${list.getListName()}) in Board ${board.getBoardID()} has been removed.`);
+
+                        //  -> LIST REMOVE
                 } else {
                     if (this.listDataChanged(existingListData, list)) {
                         console.log(`List with ID ${list.getListID()} in Board ${board.getBoardID()} needs to be updated.`);
+                        
+                            //  -> LIST MODIFIED
                     }
                 }
     
@@ -55,17 +62,23 @@ class Updater {
                     if (!existingInBoard && !existingInList) {
                         // Card is removed
                         console.log(`Card with ID ${card.getCardID()}, (${card.getCardName()}) in List ${list.getListID()} has been removed.`);
+
+                            //  -> CARD REMOVED
                     } 
                     
                     else if (!existingInList) {
                         // Card has been moved
                         const targetList = await this.getter.getListFromCard(card.getCardID());
                         console.log(`Card with ID ${card.getCardID()}, (${card.getCardName()}) has been moved from List ${list.getListName()} to List ${targetList.name}`);
+
+                            //  -> CARD MOVED
                     }
 
                     else if (this.cardDataChanged(existingInList, card)) {
                         // Card needs to be updated
                         console.log(`Card with ID ${card.getCardID()} in List ${list.getListID()} needs to be updated.`);
+
+                            //  -> CARD MODIFIED
                     } 
                     
                 }
@@ -75,6 +88,8 @@ class Updater {
                     const cardStillExists = board.getCards().some(card => card.getCardID() === existingCard.id);
                     if (!cardStillExists) {
                         console.log(`Card with ID ${existingCard.id}, (${existingCard.name}) in List ${list.getListID()} is a new card.`);
+
+                            //  -> CARD ADDED
                     }
                 }
             }
@@ -84,6 +99,8 @@ class Updater {
                 const listStillExists = board.getLists().some(list => list.getListID() === existingList.id);
                 if (!listStillExists) {
                     console.log(`List with ID ${existingList.id}, (${existingList.name}) in Board ${board.getBoardID()} is a new list.`);
+
+                        //  -> LIST ADDED
                 }
             }
         }
@@ -130,11 +147,46 @@ class Updater {
         return idChanged || nameChanged;
     }
 
-    updateWorkspace(){
-
-        //Code to create
+    async updateWorkspace() {
+        // Code to create
         console.log("Update opfwsp");
-    }
+    
+        // Iterate through each board in the workspace
+        for (const board of this.workspace.getBoards()) {
+            // Get the existing data for the board from opfwsp
+            const existingBoardData = await this.getter.getBoard(board.getBoardID());
+    
+            // Get existing lists for the board
+            const existingLists = await this.getter.getLists(board.getBoardID());
+    
+            const listObjects = [];
+    
+            for (const list of existingLists) {
+                // Create a new List object for each Trello list
+                const listObj = new List(list.id, list.name || 'Unknown List');
+    
+                const existingListCards = await this.getter.getListCards(listObj.getListID());
+    
+                for (const card of existingListCards) {
+                    // Extract items from Trello card if available
+                    const items = card.items || [];
+    
+                    // Create a Card object for each Trello card
+                    const cardObj = new Card(card.id, card.name, listObj.id, listObj.name || 'Unknown List', items);
+    
+                    // Add the card object to the list object
+                    listObj.addCard(cardObj);
+                }
+    
+                // Add the list object to the array
+                listObjects.push(listObj);
+            }
+    
+            // Create a Board object and add it to opfwsp
+            const boardObj = new Board(existingBoardData.id, existingBoardData.name, listObjects);
+            opfwsp.addBoard(boardObj);
+        }
+    }    
 }
 
 export default Updater;

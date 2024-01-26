@@ -31,7 +31,7 @@ class Workspace {
         } else {
             // Replace the existing board with the new one
             this.boards[existingIndex] = board;
-            console.log('Board replaced in OpfTechWorkspace:', board.getBoardName(), board.getBoardID());
+            console.log('Board updated in OpfTechWorkspace:', board.getBoardName(), board.getBoardID());
         }
     }
     
