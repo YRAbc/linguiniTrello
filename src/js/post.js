@@ -60,18 +60,27 @@ class Post {
     }
   }
 
-  async createCustomFieldDropdown(cardId, fieldName, options) {
+  async setCustomFieldDropdown(cardId, fieldName, options) {
     try {
-      const url = `https://api.trello.com/1/cards/${cardId}/customFields?name=${fieldName}&type=dropdown&options=${encodeURIComponent(JSON.stringify(options))}&key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`;
-      const response = await axios.post(url);
-      console.log(`Custom field dropdown created successfully. Response:`, response.data);
+        const url = `https://api.trello.com/1/cards/${cardId}/customFields`;
+        const data = {
+            name: fieldName,
+            type: 'dropdown',
+            options: options
+        };
+        const params = {
+            key: this.oauth.apiKey,
+            token: this.oauth.appAccessToken
+        };
+        const response = await axios.post(url, data, { params });
+        console.log(`Custom field dropdown created successfully. Response:`, response.data);
     } catch (error) {
-      console.error(`Error creating custom field dropdown:`, error.response ? error.response.data : error.message);
-      throw error;
+        console.error(`Error creating custom field dropdown:`, error.response ? error.response.data : error.message);
+        throw error;
     }
   }
 
-  async createCustomFieldText(cardId, fieldName) {
+  async setCustomFieldText(cardId, fieldName) {
     try {
       const url = `https://api.trello.com/1/cards/${cardId}/customFields?name=${fieldName}&type=text&key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`;
       const response = await axios.post(url);
