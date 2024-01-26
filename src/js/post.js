@@ -109,7 +109,7 @@ class Post {
         if (!existingLabel) {
             const labelCreationResponse = await axios.post(
                 `https://api.trello.com/1/cards/${cardId}/labels?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`,
-                { name: frontText, color: "null" }
+                { name: frontText, color: "null" , pos: "top" }
             );
 
             console.log(`Label ${frontText} added successfully. Response:`, labelCreationResponse.data);
