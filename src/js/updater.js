@@ -184,7 +184,7 @@ class Updater {
     
             // Create a Board object and add it to opfwsp
             const boardObj = new Board(existingBoardData.id, existingBoardData.name, listObjects);
-            this.workspace.addBoard(boardObj);
+            this.workspace.updateBoard(boardObj);
         }
     }    
 }
