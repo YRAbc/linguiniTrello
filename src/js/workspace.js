@@ -5,6 +5,7 @@ import Board from './board.js';
 import List from './list.js';
 import Card from './card.js';
 import Get from './get.js';
+import ConfIds from './configIds.js';
 
 class Workspace {
     constructor(name) {
@@ -14,6 +15,8 @@ class Workspace {
         this.boards.push(new Board("65a5339acc54164519f0561a", "OPF Todo List", []));
         this.boards.push(new Board("65a906575cbb2953f63286e9", "Information System", []));
         this.boards.push(new Board("65a533acf8bdb823367134d5", "OPF Tech - Task Board Test", []));
+        this.config = new ConfIds();
+        this.config
     }
 
     addBoard(board) {

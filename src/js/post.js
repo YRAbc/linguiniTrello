@@ -76,6 +76,23 @@ class Post {
     }
   }
 
+  async setCustomField(cardId, customFieldId, valueId) {
+    try {
+        await axios.patch(
+            `https://api.trello.com/1/cards/${cardId}/customField/${customFieldId}/item?key=${YOUR_API_KEY}&token=${YOUR_TOKEN}`,
+            {
+                idValue: valueId,
+                // Add any other parameters required for your specific use case
+            }
+        );
+
+        console.log('Custom field updated successfully.');
+    } catch (error) {
+        console.error('Error updating custom field:', error.response ? error.response.data : error.message);
+        throw error;
+    }
+  }
+
   async setCardDescription(cardId, cardDescription) {
     try {
       await axios.put(
