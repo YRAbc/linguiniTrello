@@ -96,27 +96,23 @@ class Post {
 
   async addOPFTechNumber(cardId, opfTechNumber) {
     try {
-        // Check if the label already exists, or create a new one
         const frontText = `OPFTech-${opfTechNumber}`;
-
-        // Fetch card details to get the current labels
+        
         const cardDetailsResponse = await axios.get(
             `https://api.trello.com/1/cards/${cardId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`
         );
 
         const cardDetails = cardDetailsResponse.data;
 
-        // Check if the label already exists on the card
         const existingLabel = cardDetails.labels.find(label => label.name === frontText);
 
         if (!existingLabel) {
-            // If the label doesn't exist, create a new label with the front text
-            await axios.post(
+            const labelCreationResponse = await axios.post(
                 `https://api.trello.com/1/cards/${cardId}/labels?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`,
-                { name: frontText, color: "green" } // Set the color as needed
+                { name: frontText, color: "green" }
             );
 
-            console.log(`Label ${frontText} added successfully.`);
+            console.log(`Label ${frontText} added successfully. Response:`, labelCreationResponse.data);
         } else {
             console.log(`Label ${frontText} already exists on the card.`);
         }
