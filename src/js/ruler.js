@@ -53,7 +53,6 @@ class Ruler {
                 // Set Custom Fields
                 await this.poster.setCustomField(cardID, "65b3cb5da8d2096df151f434", "65b3eb34c91e150132d34f69");
 
-                
                 console.log('OPF Tech Card initialized successfully.');
 
             }

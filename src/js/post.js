@@ -78,8 +78,8 @@ class Post {
 
   async setCustomField(cardId, customFieldId, valueId) {
     try {
-        await axios.patch(
-            `https://api.trello.com/1/cards/${cardId}/customField/${customFieldId}/item?key=${YOUR_API_KEY}&token=${YOUR_TOKEN}`,
+        await axios.put(
+            `https://api.trello.com/1/cards/${cardId}/customField/${customFieldId}/item?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`,
             {
                 idValue: valueId,
                 // Add any other parameters required for your specific use case
