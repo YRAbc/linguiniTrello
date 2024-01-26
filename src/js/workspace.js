@@ -34,6 +34,19 @@ class Workspace {
             console.log('Board updated in OpfTechWorkspace:', board.getBoardName(), board.getBoardID());
         }
     }
+
+    updateBoard(newBoard) {
+        const existingIndex = this.boards.findIndex(existingBoard => existingBoard.getBoardID() === newBoard.getBoardID());
+
+        if (existingIndex === -1) {
+            console.warn('Board not found in OpfTechWorkspace:', newBoard.getBoardName(), newBoard.getBoardID());
+            return;
+        }
+
+        // Replace the existing board with the new one
+        this.boards[existingIndex] = newBoard;
+        console.log('Board updated in OpfTechWorkspace:', newBoard.getBoardName(), newBoard.getBoardID());
+    }
     
     removeBoardById(boardId) {
         const index = this.boards.findIndex(board => board.getBoardID() === boardId);
