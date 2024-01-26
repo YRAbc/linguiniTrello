@@ -47,7 +47,7 @@ class Ruler {
                 const maxOPFTechNumber = await this.findMaxOPFTechNumber();
 
                 // Set label to maxOPFTechNumber + 1
-                const nextOPFTechNumber = maxOPFTechNumber + 1;
+                const nextOPFTechNumber = Number(maxOPFTechNumber) + 1;
                 await this.poster.addOPFTechNumber(cardID, nextOPFTechNumber);
 
                 // Set custom fields for a new OPF Tech card
@@ -149,7 +149,6 @@ class Ruler {
 
                     if (!isNaN(opfTechNumber) && opfTechNumber > maxOPFTechNumber) {
                         maxOPFTechNumber = opfTechNumber;
-                        console.log(maxOPFTechNumber);
                     }
                 }
             }
