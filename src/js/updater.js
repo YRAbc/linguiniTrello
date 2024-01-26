@@ -33,7 +33,7 @@ class Updater {
             }
     
             // Get existing lists for the board
-            const existingLists = await this.getter.getLists(board.getBoardID());
+            const existingLists = await this.getter.getBoardLists(board.getBoardID());
     
             // Compare lists for each board
             for (const list of board.getLists()) {
