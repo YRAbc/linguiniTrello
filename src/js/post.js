@@ -60,43 +60,6 @@ class Post {
     }
   }
 
-  async setCustomFieldDropdown(cardId, fieldName, options) {
-    try {
-        const url = `https://api.trello.com/1/cards/${cardId}/customField/${encodeURIComponent(fieldName)}/item?` +
-            `key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`;
-        const data = {
-            value: {
-                text: options[0] // Assuming 'options' is an array and you want to use the first element as the default value
-            }
-        };
-        const response = await axios.put(url, data);
-        console.log(`Custom field '${fieldName}' updated successfully. Response:`, response.data);
-    } catch (error) {
-        console.error(`Error updating custom field '${fieldName}':`, error.response ? error.response.data : error.message);
-        throw error;
-    }
-  }
-
-  async setCustomFieldText(cardId, fieldName, textValue) {
-    try {
-        const url = `https://api.trello.com/1/cards/${cardId}/customField/${fieldName}/item`;
-        const data = {
-            value: {
-                text: textValue
-            }
-        };
-        const params = {
-            key: this.oauth.apiKey,
-            token: this.oauth.appAccessToken
-        };
-        const response = await axios.post(url, data, { params });
-        console.log(`Custom field text created successfully. Response:`, response.data);
-    } catch (error) {
-        console.error(`Error creating custom field text:`, error.response ? error.response.data : error.message);
-        throw error;
-    }
-  }
-
   async addOPFTechNumber(cardId, opfTechNumber) {
     let frontText;
     try {
