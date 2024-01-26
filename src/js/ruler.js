@@ -67,7 +67,8 @@ class Ruler {
 
     async cardModifiedInListRule(cardID, listID, boardID) {
 
-        /* ENTRANCE IN OPF TECH LIST ON TO DO LIST BOARD */
+        //Logic for card modified
+        /* ENTRANCE IN OPF TECH LIST ON TO DO LIST BOARD 
         try {
             // Get the card details
             const cardDetails = await this.getter.getCard(cardID);
@@ -93,14 +94,16 @@ class Ruler {
         } catch (error) {
             console.error('Error in cardModifiedInListRule:', error);
             throw error;
-        }
+        }*/
 
 
         /* CHECK FOR LISTS IF ON BOARD OPF TECH TASK BOARD */
     }
 
     async cardMovedToListRule(cardID, listID, boardID) {
-        try {
+        
+        //Logic for card move
+        /*try {
             // Assuming you have a method in your getter class to get the card details
             const cardDetails = await this.getter.getCard(cardID);
 
@@ -116,7 +119,7 @@ class Ruler {
         } catch (error) {
             console.error('Error in cardMovedToListRule:', error);
             throw error;
-        }
+        }*/
     }
 
     cardRemovedFromListRule(cardID, listID, boardID) {
