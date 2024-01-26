@@ -62,6 +62,8 @@ class Post {
 
   async setCustomFieldDropdown(cardId, fieldName, fieldValue) {
     try {
+        console.log(`Updating custom field ${fieldName} with dropdown value ${fieldValue} for card ${cardId}`);
+
         // Fetch the current custom fields data for the card
         const customFieldsResponse = await axios.get(
             `https://api.trello.com/1/cards/${cardId}/customFieldItems?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`
@@ -69,18 +71,22 @@ class Post {
 
         const customFields = customFieldsResponse.data;
 
+        console.log('Fetched custom fields data:', customFields);
+
         // Check if the custom field already exists
         const existingField = customFields.find(field => field.name === fieldName);
 
         if (existingField) {
             // If the custom field exists, update the value
             const customFieldId = existingField.id;
+            console.log(`Custom field ${fieldName} already exists. Updating with value ${fieldValue}`);
             await axios.put(
                 `https://api.trello.com/1/card/${cardId}/customField/${customFieldId}/item?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`,
-                { value: { option: { id: fieldValue } } } // Assuming fieldValue is the key of the selected dropdown option
+                { value: { option: { id: fieldValue } } }
             );
         } else {
             // If the custom field doesn't exist, create it
+            console.log(`Custom field ${fieldName} does not exist. Creating with value ${fieldValue}`);
             await axios.post(
                 `https://api.trello.com/1/card/${cardId}/customField/${fieldName}/item?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`,
                 { value: { option: { id: fieldValue } } }
@@ -96,6 +102,8 @@ class Post {
 
   async setCustomFieldText(cardId, fieldName, fieldValue) {
     try {
+        console.log(`Updating custom field ${fieldName} with text value ${fieldValue} for card ${cardId}`);
+
         // Fetch the current custom fields data for the card
         const customFieldsResponse = await axios.get(
             `https://api.trello.com/1/cards/${cardId}/customFieldItems?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`
@@ -103,18 +111,22 @@ class Post {
 
         const customFields = customFieldsResponse.data;
 
+        console.log('Fetched custom fields data:', customFields);
+
         // Check if the custom field already exists
         const existingField = customFields.find(field => field.name === fieldName);
 
         if (existingField) {
             // If the custom field exists, update the value
             const customFieldId = existingField.id;
+            console.log(`Custom field ${fieldName} already exists. Updating with value ${fieldValue}`);
             await axios.put(
                 `https://api.trello.com/1/card/${cardId}/customField/${customFieldId}/item?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`,
-                { value: { text: fieldValue } } // Assuming fieldValue is the text for the custom field
+                { value: { text: fieldValue } }
             );
         } else {
             // If the custom field doesn't exist, create it
+            console.log(`Custom field ${fieldName} does not exist. Creating with value ${fieldValue}`);
             await axios.post(
                 `https://api.trello.com/1/card/${cardId}/customField/${fieldName}/item?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`,
                 { value: { text: fieldValue } }
@@ -127,6 +139,7 @@ class Post {
         throw error;
     }
   }
+
 
   async addOPFTechNumber(cardId, opfTechNumber) {
     try {
