@@ -103,8 +103,9 @@ class Post {
 
 
   async addOPFTechNumber(cardId, opfTechNumber) {
+    let frontText;
     try {
-      const frontText = `#OPFTech-${opfTechNumber}`;
+      frontText = `#OPFTech-${opfTechNumber}`;
       
       const cardDetailsResponse = await axios.get(
         `https://api.trello.com/1/cards/${cardId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`
