@@ -157,7 +157,7 @@ class Updater {
 
     async updateWorkspace() {
         // Code to create
-        console.log("Update opfwsp");
+        //console.log("Update opfwsp");
     
         // Iterate through each board in the workspace
         for (const board of this.workspace.getBoards()) {

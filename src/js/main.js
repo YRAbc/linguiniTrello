@@ -28,6 +28,7 @@ const ruler = new Ruler(opfwsp, getter, poster);
 
 // update is made to see difference between current and opfwsp
 const updater = new Updater(opfwsp, ruler, getter, poster);
+updater.updateWorkspace();
 
 //OPFTech-Number for cards
 let opfTechCardNumber = 1;
@@ -37,82 +38,6 @@ window.TrelloPowerUp.initialize({
 
     'board-buttons': function (t, options) {
         return [
-            {
-                text: 'Add',
-                callback: function (t) {
-                    // Retrieve the board ID
-                    let boardId = t.getContext().board;
-
-                    // Retrieve the board name using Trello API
-                    //console.log("Update Linguini");
-                    t.board('name')
-                        .then(function (board) {
-                            const id = boardId;
-                            const nam = board.name;
-
-                            if (id && nam) {
-
-                                // For each Trello list, create a new List object and add it to the board
-                                t.lists('all')
-                                .then(function (lists) {
-                                    const listObjects = lists.map((list) => {
-                                        // Create a new List object for each Trello list
-                                        const listObj = new List(list.id, list.name || 'Unknown List');
-
-                                        // Log information about the current list
-                                        //console.log(`List ID: ${list.id}`);
-                                        //console.log(`List Name: ${list.name || 'Unknown List'}`);
-
-                                        // For each card in the Trello list, create a Card object and add it to the list
-                                        list.cards.forEach((card) => {
-                                            // Extract items from Trello card if available
-                                            const items = card.items || [];
-
-                                            // Create a Card object for each Trello card
-                                            const cardObj = new Card(card.id, card.name, listObj.id, listObj.name || 'Unknown List', items);
-
-                                            // Log information about the current card
-                                            //console.log(`  Card ID: ${card.id}`);
-                                            //console.log(`  Card Name: ${card.name}`);
-                                            //console.log(`  Card Items: ${JSON.stringify(items)}`);
-
-                                            // Add the card object to the list object
-                                            listObj.addCard(cardObj);
-                                        });
-
-                                        // Return the new List object
-                                        return listObj;
-                                    });
-
-                                    const boardObj = new Board(id, nam, listObjects);
-                                    opfwsp.addBoard(boardObj);
-                                    //console.log('Board added to workspace.');
-
-                                    // Call the function to set up periodic
-                                    setupPeriodicUpdates();
-                                })
-                                .catch(function (error) {
-                                    console.error('Error fetching lists:', error);
-                                });
-                            }
-                        })
-                        .catch(function (error) {
-                            console.error('Error retrieving board information:', error);
-                        });
-                },
-            },
-            {
-                text: 'Remove',
-                callback: function (t) {
-                    // Retrieve the board ID
-                    let boardId = t.getContext().board;
-
-                    // Remove the board from the workspace using removeBoardById
-                    opfwsp.removeBoardById(boardId);
-                    
-                    console.log('Board removed from workspace:', boardId);
-                },
-            },
             {
                 text: 'See Workspace Settings',
                 callback: function (t) {

@@ -11,9 +11,9 @@ class Workspace {
 
         this.name = name;
         this.boards = [];
-        /*this.boards.push(new Board("65a5339acc54164519f0561a", "OPF Todo List", []));
+        this.boards.push(new Board("65a5339acc54164519f0561a", "OPF Todo List", []));
         this.boards.push(new Board("65a906575cbb2953f63286e9", "Information System", []));
-        this.boards.push(new Board("65a533acf8bdb823367134d5", "OPF Tech - Task Board Test", []));*/ 
+        this.boards.push(new Board("65a533acf8bdb823367134d5", "OPF Tech - Task Board Test", []));
     }
 
     addBoard(board) {
