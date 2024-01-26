@@ -101,7 +101,6 @@ class Post {
     }
   }
 
-
   async addOPFTechNumber(cardId, opfTechNumber) {
     let frontText;
     try {
