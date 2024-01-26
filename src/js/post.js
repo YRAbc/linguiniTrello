@@ -89,7 +89,7 @@ class Post {
     }
   }
 
-  async setCustomField(customField , fieldValue) {
+  async setCustomField(cardId, customField, fieldName,  fieldValue) {
     try {
 
       if (!customField) {
