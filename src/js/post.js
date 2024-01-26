@@ -82,7 +82,6 @@ class Post {
             `https://api.trello.com/1/cards/${cardId}/customField/${customFieldId}/item?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`,
             {
                 idValue: valueId,
-                // Add any other parameters required for your specific use case
             }
         );
 
