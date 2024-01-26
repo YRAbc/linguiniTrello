@@ -121,7 +121,7 @@ class Workspace {
             lists: board.getLists().map(list => ({
                 id: list.getListID(),
                 name: list.getListName(),
-                cards: list.getListCards().map(card => ({
+                cards: list.getCards().map(card => ({
                     id: card.id,
                     name: card.name,
                 })),
