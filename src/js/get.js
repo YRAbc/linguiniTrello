@@ -183,7 +183,7 @@ class Get {
     }
   }
 
-  async getCustomField(cardId, fieldName) {
+  async getCustomFieldId(cardId, fieldName) {
     try {
       const response = await axios.get(
         `https://api.trello.com/1/cards/${cardId}/customFields?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`
@@ -192,7 +192,7 @@ class Get {
       const customFields = response.data;
       const matchingField = customFields.find(field => field.name === fieldName);
 
-      return matchingField;
+      return matchingField.id;
     } catch (error) {
       console.error(`Error getting custom fields:`, error.response ? error.response.data : error.message);
       throw error;

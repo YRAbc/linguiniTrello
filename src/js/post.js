@@ -89,16 +89,16 @@ class Post {
     }
   }
 
-  async setCustomField(cardId, customField, fieldName,  fieldValue) {
+  async setCustomField(cardId, customFieldId, fieldValue) {
     try {
 
       if (!customField) {
-        throw new Error(`Custom field '${fieldName}' not found.`);
+        throw new Error(`Custom field ID '${customFieldId}' not found.`);
       }
 
       // Make a POST request to set the custom field value for the card
       const response = await axios.post(
-        `https://api.trello.com/1/card/${cardId}/customField/${customField.id}/item`,
+        `https://api.trello.com/1/card/${cardId}/customField/${customFieldId}/item`,
         {
           value: {
             text: fieldValue,

@@ -51,20 +51,15 @@ class Ruler {
                 await this.poster.addOPFTechNumber(cardID, nextOPFTechNumber);
 
                 //Status custom field
+                // Replace 'desiredOptionID' with the ID of the option you want to set (e.g., '65b3d5f13f9cc8252c325c59')
+                const desiredOptionID = '65b3d5f13f9cc8252c325c59';
                 try {
-                    // Retrieve information about the 'Status' custom field for the specified card
-                    const statusCustomField = await this.getter.getCustomField(cardID, 'Status');
-                  
-                    if (statusCustomField) {
-                      // Set the value of the 'Status' custom field to "Open"
-                      await this.poster.setCustomField(cardID, statusCustomField, 'Status', 'Open');
-                    } else {
-                      console.error('Custom field "Status" not found for the specified card.');
-                    }
+                    // Set the value of the 'Status' custom field to the desired option
+                    await this.poster.setCustomField(cardID, '65b3d5edaf660f2f5bdd1b53', desiredOptionID);
+                    console.log(`Custom field 'Status' set to the desired option on the card successfully.`);
                   } catch (error) {
                     console.error('Error setting custom field:', error.message);
                 }
-
 
                 // Get the updated value of 'Status' using the getCustomField method
                 const updatedStatusField = await this.getter.getCustomField(cardID, 'Status');

@@ -139,6 +139,9 @@ class Workspace {
         return this.boards.find(board => board.getBoardID() === boardId) || null;
     }
 
+    /* IDs */
+
+
 }
 
 export default Workspace;
