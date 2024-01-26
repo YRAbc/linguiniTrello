@@ -139,7 +139,7 @@ class Ruler {
             // Iterate through all boards in the workspace
             for (const board of this.workspace.getBoards()) {
                 // Get all cards in the board
-                const cards = await this.getter.getCards(board.getBoardID());
+                const cards = await this.getter.getBoardCards(board.getBoardID());
 
                 // Iterate through each card to find the max OPFTech number
                 for (const card of cards) {
