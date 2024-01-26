@@ -51,10 +51,10 @@ class Ruler {
                 await this.poster.addOPFTechNumber(cardID, nextOPFTechNumber);
 
                 // Set custom fields for a new OPF Tech card
-                await this.poster.setCustomFieldDropdown(cardID, 'Status', 'Open');
-                await this.poster.setCustomFieldDropdown(cardID, 'Priority', 'To Qualify');
-                await this.poster.setCustomFieldDropdown(cardID, 'Tech', 'To Qualify');
-                await this.poster.setCustomFieldDropdown(cardID, 'Issuer', 'To Qualify');
+                await this.poster.setCustomFieldDropdown(cardID, 'Status', ['Open']);
+                await this.poster.setCustomFieldDropdown(cardID, 'Priority', ['To Qualify']);
+                await this.poster.setCustomFieldDropdown(cardID, 'Tech', ['To Qualify']);
+                await this.poster.setCustomFieldDropdown(cardID, 'Issuer', ['To Qualify']);
 
                 // Get the updated value of 'Status' using the getCustomField method
                 const updatedStatusField = await this.getter.getCustomField(cardID, 'Status');
@@ -143,29 +143,32 @@ class Ruler {
     async findMaxOPFTechNumber() {
         try {
             let maxOPFTechNumber = 0;
-
+    
             // Iterate through all boards in the workspace
             for (const board of this.workspace.getBoards()) {
                 // Get all cards in the board
                 const cards = await this.getter.getBoardCards(board.getBoardID());
-
+    
                 // Iterate through each card to find the max OPFTech number
                 for (const card of cards) {
-                    const opfTechNumber = await this.getter.getOPFTechNumber(card.id);
-
+                    const opfTechNumberString = await this.getter.getOPFTechNumber(card.id);
+                    
+                    // Convert the fetched value to a number
+                    const opfTechNumber = parseFloat(opfTechNumberString);
+    
                     if (!isNaN(opfTechNumber) && opfTechNumber > maxOPFTechNumber) {
                         maxOPFTechNumber = opfTechNumber;
                     }
                 }
             }
-
+    
             // Return the maximum OPFTech number
             return maxOPFTechNumber;
         } catch (error) {
             console.error('Error in findMaxOPFTechNumber:', error);
             throw error;
         }
-    }
+    }    
 
     async updateMatchingCard(matchingCard, sourceCardDetails) {
         try {
