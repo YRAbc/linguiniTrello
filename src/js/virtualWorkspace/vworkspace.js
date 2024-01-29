@@ -11,9 +11,9 @@ class VWorkspace {
         this.Id = "1";
         this.name = name;
         this.boards = [];  
-        //this.boards.push(new VBoard(config.opfBoardId, "BOARD 1", []));
-        //this.boards.push(new VBoard(config.sidBoardId, "BOARD 2", []));
-        //this.boards.push(new VBoard(config.techBoardId, "BOARD 3", []));
+        this.boards.push(new VBoard(config.opfBoardId, "BOARD 1", []));
+        this.boards.push(new VBoard(config.sidBoardId, "BOARD 2", []));
+        this.boards.push(new VBoard(config.techBoardId, "BOARD 3", []));
 
     }
 
