@@ -2,6 +2,7 @@
 // Made by Yoann Raton, 29/01/2024
 
 import VLabel from './vlabel.js';
+import IdsConfigWorkspace from '../idsWorkspace/idsConfigWorkspace.js';
 
 class VCard {
     constructor(Id, name, listId, listName, items, description, opfTechNumber, statusId, priorityId, techId, issuerId) {
