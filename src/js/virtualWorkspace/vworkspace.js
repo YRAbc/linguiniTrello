@@ -33,6 +33,7 @@ class VWorkspace {
     }
 
     updateBoard(newBoard) {
+        console.log("ODHIOAZFHBUIAZPFBHUAPDFBHAZIPDFI");
         const existingIndex = this.boards.findIndex(existingBoard => existingBoard.getBoardId() === newBoard.getBoardId())
     }
 
