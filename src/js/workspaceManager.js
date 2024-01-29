@@ -164,6 +164,7 @@ class WorkspaceManager {
         return IdChanged || nameChanged;
     }
 
+    //Update Workspace
     async updateWorkspace() {
         try {
             // Iterate through each board in the workspace
@@ -172,12 +173,24 @@ class WorkspaceManager {
                     // Get the existing data for the board from opfwsp
                     const existingBoardData = await this.rqtInv.getBoard(board.getBoardId());
     
+                    // Ensure that existingBoardData is defined before proceeding
+                    if (!existingBoardData) {
+                        console.error(`Board data is undefined for boardId: ${board.getBoardId()}`);
+                        continue;
+                    }
+    
                     // Get existing lists for the board
                     const existingLists = await this.rqtInv.getBoardLists(board.getBoardId());
                     const listObjects = [];
     
                     for (const list of existingLists) {
                         try {
+                            // Ensure that list is defined before creating listObj
+                            if (!list) {
+                                console.error(`List data is undefined for boardId: ${board.getBoardId()}`);
+                                continue;
+                            }
+    
                             // Create a new List object for each Trello list
                             const listObj = new VList(list.Id, list.name || 'Unknown List');
     
@@ -221,7 +234,8 @@ class WorkspaceManager {
             console.error('Error updating workspace:', error.response ? error.response.data : error.message);
             throw error;
         }
-    }    
+    }
+    
 
 }
 
