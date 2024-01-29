@@ -4,7 +4,7 @@
 import VBoard from './vboard.js';
 import VList from './vlist.js';
 import VCard from './vcard.js';
-import IdsConfigWorkspace from '././idsWorkspace/idsConfigWorkspace.js';
+import IdsConfigWorkspace from '../idsWorkspace/idsConfigWorkspace.js';
 
 class VWorkspace {
     constructor(name, config) {
