@@ -202,7 +202,7 @@ class WorkspaceManager {
                                     const items = card.items || [];
     
                                     // Create a Card object for each Trello card
-                                    const cardObj = new VCard(card.id, card.name, listObj.getListId()), listObj.name || 'Unknown List', items);
+                                    const cardObj = new VCard(card.id, card.name, listObj.getListId(), listObj.name || 'Unknown List', items);
     
                                     // Add the card object to the list object
                                     listObj.addCard(cardObj);
