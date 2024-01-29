@@ -222,6 +222,7 @@ class WorkspaceManager {
     
                     // Create a Board object and add it to opfwsp
                     const boardObj = new VBoard(existingBoardData.id, existingBoardData.name, listObjects);
+                    console.log("data : ", existingBoardData.name);
                     this.opfvwsp.updateBoard(boardObj);
                 } catch (boardError) {
                     console.error('Error processing board:', boardError.response ? boardError.response.data : boardError.message);
