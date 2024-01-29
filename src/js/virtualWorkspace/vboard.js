@@ -5,14 +5,14 @@ import VList from './vlist.js';
 import VCard from './vcard.js';
 
 class VBoard {
-  constructor(id, name, lists) {
-    this.boardID = id;
+  constructor(Id, name, lists) {
+    this.boardId = Id;
     this.boardName = name;
     this.lists = lists || [];
   }
 
-  getBoardID() {
-    return this.boardID;
+  getBoardId() {
+    return this.boardId;
   }
 
   getBoardName() {
@@ -28,7 +28,7 @@ class VBoard {
   }
 
   setLists(lists) {
-    this.lists = lists.map(list => new List(list.id, list.name, list.cards));
+    this.lists = lists.map(list => new List(list.Id, list.name, list.cards));
   }
 
   getCards() {
@@ -42,7 +42,7 @@ class VBoard {
   }
 
   display() {
-    console.log(`Board ID: ${this.boardID}`);
+    console.log(`Board Id: ${this.boardId}`);
     console.log(`Board Name: ${this.boardName}`);
     console.log('Lists:');
     

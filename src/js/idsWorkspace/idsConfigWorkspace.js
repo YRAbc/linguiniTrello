@@ -1,4 +1,4 @@
-// idsConfigWorkspace.js
+// IdsConfigWorkspace.js
 // Made by Yoann Raton, 26/01/2024
 
 class IdsConfigWorkspace {
@@ -29,7 +29,7 @@ class IdsConfigWorkspace {
         this.opfBoardCustTechId = "65b3cb86318d868a181a0389";
         this.opfBoardCustTechSupportId = "65b3eb73c4b19cd9d7cbeedd";
         this.opfBoardCustTechProjectId = "65b3eb76d5263fe4bded546d";
-        this.opfBoardCustTechSIDId = "65b3eb78ed1de610156e70a6";
+        this.opfBoardCustTechSidId = "65b3eb78ed1de610156e70a6";
         this.opfBoardCustTechNotTechId = "65b3eb7d2cacb867749e3d8c";
         this.opfBoardCustTechToQualifyId = "65b3eb836ba9fb08d1213d61";  
 
@@ -39,12 +39,12 @@ class IdsConfigWorkspace {
         this.opfBoardCustStatusTestingId = "65b3eb975573907f52c734e0";
         this.opfBoardCustStatusPendingDeliveryId = "65b3eb9a6f590846d9787c0c";
         this.opfBoardCustStatusDeliveredId = "65b3eb9d548e8f99ce5ed7dc";  
-        this.opfBoardCustStatusValidatedId = "65b3eb9f351c3e5fcbe7fed3";  
+        this.opfBoardCustStatusValIdatedId = "65b3eb9f351c3e5fcbe7fed3";  
         this.opfBoardCustStatusWaitingId = "65b3eba235d407092e70d969";
         this.opfBoardCustStatusBlockedId = "65b3eba480870508200a2519";      
         this.opfBoardCustStatusCancelledId = "65b3eba84ea65cbbdaff2663";
 
-         SID 
+         SIS
         this.sidBoardId = "65a906575cbb2953f63286e9";
         this.sidBoardTechListId = "65a9065c99f90b6028928dcc";
 
@@ -67,7 +67,7 @@ class IdsConfigWorkspace {
         this.sidBoardCustTechId = "65b3ebceb36afe762e5d97ef";
         this.sidBoardCustTechSupportId = "65b3ebdc811c1e4f2642d0da";
         this.sidBoardCustTechProjectId = "65b3ebdf713d646270df703d";
-        this.sidBoardCustTechSIDId = "65b3ebe1f56b2c9ca3d759ce";
+        this.sidBoardCustTechSIdId = "65b3ebe1f56b2c9ca3d759ce";
         this.sidBoardCustTechNotTechId = "65b3ebe5f674c3d052e34162";
         this.sidBoardCustTechToQualifyId = "65b3ebea626f0fa11ea0452d";  
 
@@ -77,7 +77,7 @@ class IdsConfigWorkspace {
         this.sidBoardCustStatusTestingId = "65b3ec5ce67095f36b4def21";
         this.sidBoardCustStatusPendingDeliveryId = "65b3ec5ce67095f36b4def22";
         this.sidBoardCustStatusDeliveredId = "65b3ec5ce67095f36b4def23";  
-        this.sidBoardCustStatusValidatedId = "65b3ec5ce67095f36b4def24";  
+        this.sidBoardCustStatusValIdatedId = "65b3ec5ce67095f36b4def24";  
         this.sidBoardCustStatusWaitingId = "65b3ec5ce67095f36b4def25";
         this.sidBoardCustStatusBlockedId = "65b3ec5ce67095f36b4def26";      
         this.sidBoardCustStatusCancelledId = "65b3ec5ce67095f36b4def27";
@@ -87,7 +87,7 @@ class IdsConfigWorkspace {
         this.techBoardToClassifyListId = "65a533acf8bdb823367134dc";
         this.techBoardProjectListId = "65a533acf8bdb823367134dd";
         this.techBoardSupportListId = "65a533acf8bdb823367134de";
-        this.techBoardSIDListId = "65a533e0203b31e91571133e";
+        this.techBoardSidListId = "65a533e0203b31e91571133e";
         this.techBoardInProgressListId = "65a533ee14a4b7651e1023b9";
         this.techBoardInReviewListId = "65a533f15ffba80f03ae8ac1";
         this.techBoardPendingDeliveryListId = "65a533f5e072331593b68e87";
@@ -113,7 +113,7 @@ class IdsConfigWorkspace {
         this.techBoardCustTechId = "65a954eb3b1d7548e7d9cb32";
         this.techBoardCustTechSupportId = "65a954eb3b1d7548e7d9cb32";
         this.techBoardCustTechProjectId = "65a954eb3b1d7548e7d9cb34";
-        this.techBoardCustTechSIDId = "65a954eb3b1d7548e7d9cb35";
+        this.techBoardCustTechSIdId = "65a954eb3b1d7548e7d9cb35";
         this.techBoardCustTechNotTechId = "65a954eb3b1d7548e7d9cb36";
         this.techBoardCustTechToQualifyId = "65af9cf98d4f759ce85d2a60";  
 
@@ -123,7 +123,7 @@ class IdsConfigWorkspace {
         this.techBoardCustStatusTestingId = "65a954eb3b1d7548e7d9cb41";
         this.techBoardCustStatusPendingDeliveryId = "65a954eb3b1d7548e7d9cb42";
         this.techBoardCustStatusDeliveredId = "65a954eb3b1d7548e7d9cb43";  
-        this.techBoardCustStatusValidatedId = "65a954eb3b1d7548e7d9cb44";  
+        this.techBoardCustStatusValIdatedId = "65a954eb3b1d7548e7d9cb44";  
         this.techBoardCustStatusWaitingId = "65a954eb3b1d7548e7d9cb45";
         this.techBoardCustStatusBlockedId = "65a954eb3b1d7548e7d9cb46";      
         this.techBoardCustStatusCancelledId = "65a954eb3b1d7548e7d9cb47";
@@ -155,7 +155,7 @@ class IdsConfigWorkspace {
     get opfBoardCustTechId(){ return "65b3cb86318d868a181a0389";}
     get opfBoardCustTechSupportId(){ return "65b3eb73c4b19cd9d7cbeedd";}
     get opfBoardCustTechProjectId(){ return "65b3eb76d5263fe4bded546d";}
-    get opfBoardCustTechSIDId(){ return "65b3eb78ed1de610156e70a6";}
+    get opfBoardCustTechSidId(){ return "65b3eb78ed1de610156e70a6";}
     get opfBoardCustTechNotTechId(){ return "65b3eb7d2cacb867749e3d8c";}
     get opfBoardCustTechToQualifyId(){ return "65b3eb836ba9fb08d1213d61";}  
 
@@ -195,7 +195,7 @@ class IdsConfigWorkspace {
     get sidBoardCustTechId(){ return "65b3ebceb36afe762e5d97ef";}
     get sidBoardCustTechSupportId(){ return "65b3ebdc811c1e4f2642d0da";}
     get sidBoardCustTechProjectId(){ return "65b3ebdf713d646270df703d";}
-    get sidBoardCustTechSIDId(){ return "65b3ebe1f56b2c9ca3d759ce";}
+    get sidBoardCustTechSidId(){ return "65b3ebe1f56b2c9ca3d759ce";}
     get sidBoardCustTechNotTechId(){ return "65b3ebe5f674c3d052e34162";}
     get sidBoardCustTechToQualifyId(){ return "65b3ebea626f0fa11ea0452d";}  
 
@@ -205,7 +205,7 @@ class IdsConfigWorkspace {
     get sidBoardCustStatusTestingId(){ return "65b3ec5ce67095f36b4def21";}
     get sidBoardCustStatusPendingDeliveryId(){ return "65b3ec5ce67095f36b4def22";}
     get sidBoardCustStatusDeliveredId(){ return "65b3ec5ce67095f36b4def23";}  
-    get sidBoardCustStatusValidatedId(){ return "65b3ec5ce67095f36b4def24";}  
+    get sidBoardCustStatusValIdatedId(){ return "65b3ec5ce67095f36b4def24";}  
     get sidBoardCustStatusWaitingId(){ return "65b3ec5ce67095f36b4def25";}
     get sidBoardCustStatusBlockedId(){ return "65b3ec5ce67095f36b4def26";}      
     get sidBoardCustStatusCancelledId(){ return "65b3ec5ce67095f36b4def27";}
@@ -217,12 +217,12 @@ class IdsConfigWorkspace {
     get techBoardToClassifyListId(){ return "65a533acf8bdb823367134dc";}
     get techBoardProjectListId(){ return "65a533acf8bdb823367134dd";}
     get techBoardSupportListId(){ return "65a533acf8bdb823367134de";}
-    get techBoardSIDListId(){ return "65a533e0203b31e91571133e";}
+    get techBoardSidListId(){ return "65a533e0203b31e91571133e";}
     get techBoardInProgressListId(){ return "65a533ee14a4b7651e1023b9";}
     get techBoardInReviewListId(){ return "65a533f15ffba80f03ae8ac1";}
     get techBoardPendingDeliveryListId(){ return "65a533f5e072331593b68e87";}
     get techBoardDoneListId(){ return "65a533f5e072331593b68e87";}
-    get techBoardValidatedListId(){ return "65a533f93359e67ebba68abb";}
+    get techBoardVaidatedListId(){ return "65a533f93359e67ebba68abb";}
 
     get techBoardCustPriorityId(){ return "65b3ebb4c8c7e797dc0cca9b";}
     get techBoardCustPriorityBlockerId(){ return "65b3ebc10b7b671945487b10";}
@@ -243,7 +243,7 @@ class IdsConfigWorkspace {
     get techBoardCustTechId(){ return "65a954eb3b1d7548e7d9cb32";}
     get techBoardCustTechSupportId(){ return "65a954eb3b1d7548e7d9cb32";}
     get techBoardCustTechProjectId(){ return "65a954eb3b1d7548e7d9cb34";}
-    get techBoardCustTechSIDId(){ return "65a954eb3b1d7548e7d9cb35";}
+    get techBoardCustTechSidId(){ return "65a954eb3b1d7548e7d9cb35";}
     get techBoardCustTechNotTechId(){ return "65a954eb3b1d7548e7d9cb36";}
     get techBoardCustTechToQualifyId(){ return "65af9cf98d4f759ce85d2a60";}  
 
@@ -253,7 +253,7 @@ class IdsConfigWorkspace {
     get techBoardCustStatusTestingId(){ return "65a954eb3b1d7548e7d9cb41";}
     get techBoardCustStatusPendingDeliveryId(){ return "65a954eb3b1d7548e7d9cb42";}
     get techBoardCustStatusDeliveredId(){ return "65a954eb3b1d7548e7d9cb43";}  
-    get techBoardCustStatusValidatedId(){ return "65a954eb3b1d7548e7d9cb44";}  
+    get techBoardCustStatusValIdatedId(){ return "65a954eb3b1d7548e7d9cb44";}  
     get techBoardCustStatusWaitingId(){ return "65a954eb3b1d7548e7d9cb45";}
     get techBoardCustStatusBlockedId(){ return "65a954eb3b1d7548e7d9cb46";}      
     get techBoardCustStatusCancelledId(){ return "65a954eb3b1d7548e7d9cb47";}

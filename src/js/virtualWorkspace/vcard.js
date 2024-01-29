@@ -4,11 +4,11 @@
 import VLabel from './vlabel.js';
 
 class VCard {
-    constructor(id, name, listId, listName, items, description, opfTechNumber, statusId, priorityId, techId, issuerId) {
+    constructor(Id, name, listId, listName, items, description, opfTechNumber, statusId, priorityId, techId, issuerId) {
 
         //Config
         const config = new IdsConfiWorkspace();
-        this.cardId = id;
+        this.cardId = Id;
         this.cardName = name;
         this.listId = listId;
         this.listName = listName;
@@ -25,7 +25,7 @@ class VCard {
         this.items.push(item);
     }
 
-    getCardID() {
+    getCardId() {
         return this.cardId;
     }
 

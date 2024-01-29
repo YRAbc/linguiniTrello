@@ -8,7 +8,7 @@ import VCard from './virtualWorkspace/vcard.js';
 
 import TrelloServerWorkspace from './trelloServerWorkspace/trelloServerWorkspace.js';
 import RequestInventory from './trelloServerWorkspace/requestInventory.js';
-import IdsConfigWorkspace from './IdsWorkspace/IdsConfigWorkspace.js';
+import IdsConfigWorkspace from './idsWorkspace/idsConfigWorkspace.js';
 
 class WorkspaceManager {
 

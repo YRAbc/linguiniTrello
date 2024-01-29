@@ -8,18 +8,18 @@ import IdsConfigWorkspace from '../idsWorkspace/idsConfigWorkspace.js';
 
 class VWorkspace {
     constructor(name, config) {
-        this.id = "1";
+        this.Id = "1";
         this.name = name;
         this.boards = [];  
         this.boards.push(new VBoard(config.opfBoardId, "BOARD 1", []));
-        this.boards.push(new VBoard(config.sidBoardId, "BOARD 2", []));
+        this.boards.push(new VBoard(config.sIdBoardId, "BOARD 2", []));
         this.boards.push(new VBoard(config.techBoardId, "BOARD 3", []));
 
     }
 
-    // Getter method to get the workspace id
+    // Getter method to get the workspace Id
     getWorkspaceId() {
-        return this.id;
+        return this.Id;
     }
 
     // Getter method to get the workspace name
@@ -32,9 +32,13 @@ class VWorkspace {
         return this.boards;
     }
 
+    updateBoard(newBoard) {
+        const existingIndex = this.boards.findIndex(existingBoard => existingBoard.getBoardId() === newBoard.getBoardId())
+    }
+
     // Method to display workspace data
     display() {
-        console.log(`Workspace ID: ${this.getWorkspaceId()}`);
+        console.log(`Workspace Id: ${this.getWorkspaceId()}`);
         console.log(`Workspace Name: ${this.getName()}`);
         console.log("Boards:");
         this.getBoards().forEach((board, index) => {
