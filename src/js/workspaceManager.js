@@ -1,40 +1,41 @@
-// updater.js
+// workspaceManager.js
 // Made by Yoann Raton, 24/01/2024
 
-import Workspace from './workspace.js';
-import Board from './board.js';
-import List from './list.js';
-import Card from './card.js';
-import Ruler from './ruler.js';
-import Post from './post.js';
-import Get from './get.js';
+import VWorkspace from './virtualWorkspace/vworkspace.js';
+import VBoard from './virtualWorkspace/vboard.js';
+import VList from './virtualWorkspace/vlist.js';
+import VCard from './virtualWorkspace/vcard.js';
 
-class Updater {
+import TrelloServerWorkspace from './trelloServerWorkspace/trelloServerWorkspace.js';
+import RequestInventory from './trelloServerWorkspace/requestInventory.js';
+import IdsConfigWorkspace from './idsWorkspace/idsConfigWorkspace.js';
 
-    constructor(workspace, ruler, getter, poster) {
-        this.workspace = workspace;
-        this.ruler = ruler;
-        this.getter = getter;
-        this.poster = poster;
+class WorkspaceManager {
+
+    constructor() {
+        this.config = new IdsConfigWorkspace();
+        this.opfvwsp = new VWorkspace("OPF Tech Virtual Workspace", config);
+        this.trellowsp = new TrelloServerWorkspace("OPF Tech Trello Workspace", config)
+        this.rqtInv = new RequestInventory();
     }
 
     async checkForModifications() {
         // Iterate through each board in the workspace
-        for (const board of this.workspace.getBoards()) {
+        for (const board of this.opfvwsp.getBoards()) {
             // Get the existing data for the board from opfwsp
-            const existingBoardData = await this.getter.getBoard(board.getBoardID());
+            const existingBoardData = await this.rqtInv.getBoard(board.getBoardID());
     
             // Compare ID and name of boards
             if (this.boardDataChanged(existingBoardData, board)) {
                 console.log(`Board with ID ${board.getBoardID()} needs to be updated.`);
 
                     //  -> BOARD MODIFIED
-                    this.ruler.boardModifiedRule(board.getBoardID())
+                    this.trellowsp.boardModifiedRule(board.getBoardID())
                     this.updateWorkspace();
             }
     
             // Get existing lists for the board
-            const existingLists = await this.getter.getBoardLists(board.getBoardID());
+            const existingLists = await this.rqtInv.getBoardLists(board.getBoardID());
     
             // Compare lists for each board
             for (const list of board.getLists()) {
@@ -44,7 +45,7 @@ class Updater {
                     console.log(`List with ID ${list.getListID()}, (${list.getListName()}) in Board ${board.getBoardID()} has been removed.`);
 
                         //  -> LIST REMOVE
-                        this.ruler.listRemovedFromBoardRule(list.getListID(), board.getBoardID());
+                        this.trellowsp.listRemovedFromBoardRule(list.getListID(), board.getBoardID());
                         this.updateWorkspace();
 
                 } else {
@@ -52,14 +53,14 @@ class Updater {
                         console.log(`List with ID ${list.getListID()} in Board ${board.getBoardID()} needs to be updated.`);
                         
                             //  -> LIST MODIFIED
-                            this.ruler.listModifiedInBoardRule(list.getListID(), board.getBoardID());
+                            this.trellowsp.listModifiedInBoardRule(list.getListID(), board.getBoardID());
                             this.updateWorkspace();
                     }
                 }
     
                 // Get existing cards for the list and the board
-                const existingListCards = await this.getter.getListCards(list.getListID());
-                const existingBoardCards = await this.getter.getBoardCards(board.getBoardID());
+                const existingListCards = await this.rqtInv.getListCards(list.getListID());
+                const existingBoardCards = await this.rqtInv.getBoardCards(board.getBoardID());
 
                 for (const card of list.getCards()) {
                     const existingInList = existingListCards.find(existingCard => existingCard.id === card.getCardID());
@@ -70,17 +71,17 @@ class Updater {
                         console.log(`Card with ID ${card.getCardID()}, (${card.getCardName()}) in List ${list.getListID()} has been removed.`);
 
                             //  -> CARD REMOVED
-                            this.ruler.cardRemovedFromListRule(card.getCardID(), list.getListID(), board.getBoardID());
+                            this.trellowsp.cardRemovedFromListRule(card.getCardID(), list.getListID(), board.getBoardID());
                             this.updateWorkspace();
                     } 
                     
                     else if (!existingInList) {
                         // Card has been moved
-                        const targetList = await this.getter.getListFromCard(card.getCardID());
+                        const targetList = await this.rqtInv.getListFromCard(card.getCardID());
                         console.log(`Card with ID ${card.getCardID()}, (${card.getCardName()}) has been moved from List ${list.getListName()} to List ${targetList.name}`);
 
                             //  -> CARD MOVED
-                            this.ruler.cardMovedToListRule(card.getCardID(), list.getListID(), board.getBoardID());
+                            this.trellowsp.cardMovedToListRule(card.getCardID(), list.getListID(), board.getBoardID());
                             this.updateWorkspace();
                     }
 
@@ -89,7 +90,7 @@ class Updater {
                         console.log(`Card with ID ${card.getCardID()} in List ${list.getListID()} needs to be updated.`);
 
                             //  -> CARD MODIFIED
-                            this.ruler.cardModifiedInListRule(card.getCardID(), list.getListID(), board.getBoardID());
+                            this.trellowsp.cardModifiedInListRule(card.getCardID(), list.getListID(), board.getBoardID());
                             this.updateWorkspace();
                     } 
                     
@@ -102,7 +103,7 @@ class Updater {
                         console.log(`Card with ID ${existingCard.id}, (${existingCard.name}) in List ${list.getListID()} is a new card.`);
 
                             //  -> CARD ADDED
-                            this.ruler.cardAddedToListRule(existingCard.id, list.getListID(), board.getBoardID());
+                            this.trellowsp.cardAddedToListRule(existingCard.id, list.getListID(), board.getBoardID());
                             this.updateWorkspace();
                     }
                 }
@@ -115,7 +116,7 @@ class Updater {
                     console.log(`List with ID ${existingList.id}, (${existingList.name}) in Board ${board.getBoardID()} is a new list.`);
 
                         //  -> LIST ADDED
-                        this.ruler.listAddedToBoardRule(existingList.id, board.getBoardID());
+                        this.trellowsp.listAddedToBoardRule(existingList.id, board.getBoardID());
                         this.updateWorkspace();
                 }
             }
@@ -163,32 +164,30 @@ class Updater {
         return idChanged || nameChanged;
     }
 
-    async updateWorkspace() {
-        // Code to create
-        //console.log("Update opfwsp");
-    
+    async initWorkspace() {
+
         // Iterate through each board in the workspace
         for (const board of this.workspace.getBoards()) {
             // Get the existing data for the board from opfwsp
-            const existingBoardData = await this.getter.getBoard(board.getBoardID());
+            const existingBoardData = await this.rqtInventory.getBoard(board.getBoardID());
     
             // Get existing lists for the board
-            const existingLists = await this.getter.getBoardLists(board.getBoardID());
+            const existingLists = await this.rqtInventory.getBoardLists(board.getBoardID());
     
             const listObjects = [];
     
             for (const list of existingLists) {
                 // Create a new List object for each Trello list
-                const listObj = new List(list.id, list.name || 'Unknown List');
+                const listObj = new VList(list.id, list.name || 'Unknown List');
     
-                const existingListCards = await this.getter.getListCards(listObj.getListID());
+                const existingListCards = await this.rqtInventory.getListCards(listObj.getListID());
     
                 for (const card of existingListCards) {
                     // Extract items from Trello card if available
                     const items = card.items || [];
     
                     // Create a Card object for each Trello card
-                    const cardObj = new Card(card.id, card.name, listObj.id, listObj.name || 'Unknown List', items);
+                    const cardObj = new VCard(card.id, card.name, listObj.id, listObj.name || 'Unknown List', items);
     
                     // Add the card object to the list object
                     listObj.addCard(cardObj);
@@ -199,11 +198,11 @@ class Updater {
             }
     
             // Create a Board object and add it to opfwsp
-            const boardObj = new Board(existingBoardData.id, existingBoardData.name, listObjects);
+            const boardObj = new VBoard(existingBoardData.id, existingBoardData.name, listObjects);
             this.workspace.updateBoard(boardObj);
         }
     }    
 
 }
 
-export default Updater;
+export default WorkspaceManager;

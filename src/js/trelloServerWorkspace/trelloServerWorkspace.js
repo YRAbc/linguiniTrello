@@ -1,15 +1,14 @@
-// ruler.js
+// trelloServerWorkspace.js
 // Made by Yoann Raton, 24/01/2024
 
-import Workspace from './workspace.js';
-import Post from './post.js';
-import Get from './get.js';
+import RequestInventory from './requestInventory.js';
 
-class Ruler {
-    constructor(workspace, getter, poster) {
-        this.workspace = workspace;
-        this.getter = getter;
-        this.poster = poster;
+class TrelloServerWorkspace {
+
+    constructor(config) {
+        this.name = "name";
+        this.config = config;
+        this.rqtInv = new RequestInventory();
     }
 
     boardModifiedRule(boardID) {
@@ -35,7 +34,7 @@ class Ruler {
     async cardAddedToListRule(cardID, listID, boardID) {
         try {
             // Assuming you have a method in your getter class to get the card details
-            const cardDetails = await this.getter.getCard(cardID);
+            const cardDetails = await this.rqtInv.getCard(cardID);
 
             // Assuming the list ID for OPF Tech cards is '65a5339acc54164519f05621'
             const opfTechListID = '65a5339acc54164519f05621';
@@ -48,10 +47,10 @@ class Ruler {
 
                 // Set label to maxOPFTechNumber + 1
                 const nextOPFTechNumber = Number(maxOPFTechNumber) + 1;
-                await this.poster.addOPFTechNumber(cardID, nextOPFTechNumber);
+                await this.rqtInv.addOPFTechNumber(cardID, nextOPFTechNumber);
 
                 // Set Custom Fields
-                await this.poster.setCustomField(cardID, "65b3cb5da8d2096df151f434", "65b3eb34c91e150132d34f69");
+                await this.rqtInv.setCustomField(cardID, "65b3cb5da8d2096df151f434", "65b3eb34c91e150132d34f69");
 
                 console.log('OPF Tech Card initialized successfully.');
 
@@ -140,11 +139,11 @@ class Ruler {
             // Iterate through all boards in the workspace
             for (const board of this.workspace.getBoards()) {
                 // Get all cards in the board
-                const cards = await this.getter.getBoardCards(board.getBoardID());
+                const cards = await this.rqtInv.getBoardCards(board.getBoardID());
     
                 // Iterate through each card to find the max OPFTech number
                 for (const card of cards) {
-                    const opfTechNumberString = await this.getter.getOPFTechNumber(card.id);
+                    const opfTechNumberString = await this.rqtInv.getOPFTechNumber(card.id);
                     
                     // Convert the fetched value to a number
                     const opfTechNumber = parseFloat(opfTechNumberString);
@@ -167,8 +166,8 @@ class Ruler {
         try {
             // Assuming you want to update specific properties of the matching card
             // You can modify this logic based on your requirements
-            await this.poster.setCardDescription(matchingCard.id, sourceCardDetails.desc);
-            await this.poster.setCardPriority(matchingCard.id, sourceCardDetails.priority);
+            await this.rqtInv.setCardDescription(matchingCard.id, sourceCardDetails.desc);
+            await this.rqtInv.setCardPriority(matchingCard.id, sourceCardDetails.priority);
             // Add more update logic as needed
         } catch (error) {
             console.error('Error updating matching card:', error);

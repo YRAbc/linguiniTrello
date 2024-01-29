@@ -1,19 +1,24 @@
-// card.js
-// Made by Yoann Raton, 19/01/2024
+// vcard.js
+// Made by Yoann Raton, 29/01/2024
 
-class Card {
-    constructor(id, name, listId, listName, items, description, opfTechNumber, status, priority, tech, issuer) {
+import VLabel from './vlabel.js';
+
+class VCard {
+    constructor(id, name, listId, listName, items, description, opfTechNumber, statusId, priorityId, techId, issuerId) {
+
+        //Config
+        const config = new IdsConfiWorkspace();
         this.cardId = id;
-        this.cardTitle = name;
+        this.cardName = name;
         this.listId = listId;
         this.listName = listName;
         this.items = items || [];
         this.description = description || '';
         this.opfTechNumber = opfTechNumber || '';
-        this.status = status || '';
-        this.priority = priority || '';
-        this.tech = tech || '';
-        this.issuer = issuer || '';
+        this.status = new VLabel(statusId, "Status");
+        this.priority = new VLabel(priorityId, "Priority");
+        this.tech = new VLabel(techId, "Tech");
+        this.issuer = new VLabel(issuerId, "Issuer");
     }
 
     addItem(item) {
@@ -25,7 +30,7 @@ class Card {
     }
 
     getCardName() {
-        return this.cardTitle;
+        return this.cardName;
     }
 
     getItems() {
@@ -81,55 +86,4 @@ class Card {
     }
 }
 
-export default Card;
-
-
-  /* Cards
-
-for opf tech a card should have
-
-  an id
-  a name/title
-  a description
-
-  an #OPFTech-Number based on the creation of the card
-
-  4 labels
-    Status :
-        Open
-        In Progress
-        Testing
-        Pending Delivery
-        Delivered
-        Validated
-        Waiting
-        Blocked
-        Cancelled
-
-    Priority :
-        Blocker
-        Critic
-        Major
-        Minor
-        To Qualify
-
-    Tech :
-        OPF Tech Support
-        OPF Tech Project
-        SID
-        Not A Tech Card
-        To Qualify
-
-    Issuer :
-        PBTeam
-        Support Trading
-        Treasury
-        Valudationn
-        Access Market
-        OPF Tech
-        Manager
-        To Qualify
-
-    
-  */
-  
+export default VCard;

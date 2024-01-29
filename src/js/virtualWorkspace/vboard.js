@@ -1,10 +1,10 @@
-// board.js
-// Made by Yoann Raton, 19/01/2024
+// vboard.js
+// Made by Yoann Raton, 29/01/2024
 
-import List from './list.js';
-import Card from './card.js';
+import VList from './vlist.js';
+import VCard from './vcard.js';
 
-class Board {
+class VBoard {
   constructor(id, name, lists) {
     this.boardID = id;
     this.boardName = name;
@@ -19,8 +19,16 @@ class Board {
     return this.boardName;
   }
 
+  addList(list) {
+    this.lists.push(list);
+  }
+
   getLists() {
     return this.lists;
+  }
+
+  setLists(lists) {
+    this.lists = lists.map(list => new List(list.id, list.name, list.cards));
   }
 
   getCards() {
@@ -32,17 +40,8 @@ class Board {
   
     return cards;
   }
-  
 
-  addList(list) {
-    this.lists.push(list);
-  }
-
-  setLists(lists) {
-    this.lists = lists.map(list => new List(list.id, list.name, list.cards));
-  }
-
-  displayLists() {
+  display() {
     console.log(`Board ID: ${this.boardID}`);
     console.log(`Board Name: ${this.boardName}`);
     console.log('Lists:');
@@ -54,4 +53,4 @@ class Board {
   }
 }
 
-export default Board;
+export default VBoard;

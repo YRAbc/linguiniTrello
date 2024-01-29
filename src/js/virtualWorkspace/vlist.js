@@ -1,9 +1,9 @@
-// list.js
-// Made by Yoann Raton, 19/01/2024
+// vlist.js
+// Made by Yoann Raton, 29/01/2024
 
-import Card from './card.js';
+import Card from './vcard.js';
 
-class List {
+class VList {
   constructor(id, name, cards) {
     this.listId = id;
     this.listName = name;
@@ -30,8 +30,7 @@ class List {
     return this.listCards;
   }
 
-
-  displayListDetails() {
+  display() {
     console.log(`List ID: ${this.listId}`);
     console.log(`List Name: ${this.listName}`);
     console.log('Cards:');
@@ -41,4 +40,4 @@ class List {
   }
 }
 
-export default List;
+export default VList;
