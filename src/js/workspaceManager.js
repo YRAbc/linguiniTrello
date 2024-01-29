@@ -129,13 +129,12 @@ class WorkspaceManager {
     // Method to compare the Id and name of the latest Trello board with existing data in opfwsp
     boardDataChanged(existingBoard, latestBoardData) {
         const IdChanged = existingBoard.id !== latestBoardData.getBoardId();
-        const nameChanged = existingBoard.name !== latestBoardData.getBoardName();
 
-        if (IdChanged || nameChanged) {
-            console.log(`Board Name change - ${existingBoard.name} from ${latestBoardData.getBoardName()}`);
+        if (IdChanged) {
+            console.log(`Board Id change - ${existingBoard.id}`);
         }
 
-        return IdChanged || nameChanged;
+        return IdChanged;
     }
 
     // Method to compare the Id and name of the latest Trello list with existing data in opfwsp
