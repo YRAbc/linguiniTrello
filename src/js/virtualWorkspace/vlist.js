@@ -4,13 +4,13 @@
 import Card from './vcard.js';
 
 class VList {
-  constructor(id, name, cards) {
-    this.listId = id;
+  constructor(Id, name, cards) {
+    this.listId = Id;
     this.listName = name;
     this.listCards = cards || [];
   }
 
-  getListID() {
+  getListId() {
     return this.listId;
   }
 
@@ -31,11 +31,11 @@ class VList {
   }
 
   display() {
-    console.log(`List ID: ${this.listId}`);
+    console.log(`List Id: ${this.listId}`);
     console.log(`List Name: ${this.listName}`);
     console.log('Cards:');
     this.listCards.forEach((card) => {
-      console.log(`  - Card ID: ${card.cardId}, Card Name: ${card.cardTitle}`);
+      console.log(`  - Card Id: ${card.cardId}, Card Name: ${card.cardTitle}`);
     });
   }
 }
