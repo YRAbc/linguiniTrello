@@ -5,7 +5,6 @@ import axios from 'axios';
 import oAuth from './authSettings.js';
 
 class RequestInventory {
-  
   constructor() {
     this.oauth = new oAuth();
   }

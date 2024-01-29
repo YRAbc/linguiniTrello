@@ -8,7 +8,7 @@ import IdsConfigWorkspace from '../idsWorkspace/idsConfigWorkspace.js';
 
 class VWorkspace {
     constructor(name, config) {
-        this.Id = "1";
+        this.id = "1";
         this.name = name;
         this.boards = [];  
         this.boards.push(new VBoard(config.opfBoardId, "BOARD 1", []));
@@ -19,7 +19,7 @@ class VWorkspace {
 
     // Getter method to get the workspace Id
     getWorkspaceId() {
-        return this.Id;
+        return this.id;
     }
 
     // Getter method to get the workspace name

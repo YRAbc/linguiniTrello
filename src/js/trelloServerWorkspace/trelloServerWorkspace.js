@@ -143,7 +143,7 @@ class TrelloServerWorkspace {
     
                 // Iterate through each card to find the max OPFTech number
                 for (const card of cards) {
-                    const opfTechNumberString = await this.rqtInv.getOPFTechNumber(card.Id);
+                    const opfTechNumberString = await this.rqtInv.getOPFTechNumber(card.id);
                     
                     // Convert the fetched value to a number
                     const opfTechNumber = parseFloat(opfTechNumberString);
@@ -166,8 +166,8 @@ class TrelloServerWorkspace {
         try {
             // Assuming you want to update specific properties of the matching card
             // You can modify this logic based on your requirements
-            await this.rqtInv.setCardDescription(matchingCard.Id, sourceCardDetails.desc);
-            await this.rqtInv.setCardPriority(matchingCard.Id, sourceCardDetails.priority);
+            await this.rqtInv.setCardDescription(matchingCard.id, sourceCardDetails.desc);
+            await this.rqtInv.setCardPriority(matchingCard.id, sourceCardDetails.priority);
             // Add more update logic as needed
         } catch (error) {
             console.error('Error updating matching card:', error);

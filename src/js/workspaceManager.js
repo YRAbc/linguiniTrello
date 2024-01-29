@@ -39,7 +39,7 @@ class WorkspaceManager {
     
             // Compare lists for each board
             for (const list of board.getLists()) {
-                const existingListData = existingLists.find(existingList => existingList.Id === list.getListId());
+                const existingListData = existingLists.find(existingList => existingList.id === list.getListId());
     
                 if (!existingListData) {
                     console.log(`List with Id ${list.getListId()}, (${list.getListName()}) in Board ${board.getBoardId()} has been removed.`);
@@ -63,8 +63,8 @@ class WorkspaceManager {
                 const existingBoardCards = await this.rqtInv.getBoardCards(board.getBoardId());
 
                 for (const card of list.getCards()) {
-                    const existingInList = existingListCards.find(existingCard => existingCard.Id === card.getCardId());
-                    const existingInBoard = existingBoardCards.some(existingCard => existingCard.Id === card.getCardId());
+                    const existingInList = existingListCards.find(existingCard => existingCard.id === card.getCardId());
+                    const existingInBoard = existingBoardCards.some(existingCard => existingCard.id === card.getCardId());
 
                     if (!existingInBoard && !existingInList) {
                         // Card is removed
@@ -98,12 +98,12 @@ class WorkspaceManager {
 
                 // Check for added cards
                 for (const existingCard of existingListCards) {
-                    const cardStillExists = board.getCards().some(card => card.getCardId() === existingCard.Id);
+                    const cardStillExists = board.getCards().some(card => card.getCardId() === existingCard.id);
                     if (!cardStillExists) {
-                        console.log(`Card with Id ${existingCard.Id}, (${existingCard.name}) in List ${list.getListId()} is a new card.`);
+                        console.log(`Card with Id ${existingCard.id}, (${existingCard.name}) in List ${list.getListId()} is a new card.`);
 
                             //  -> CARD ADDED
-                            this.trellowsp.cardAddedToListRule(existingCard.Id, list.getListId(), board.getBoardId());
+                            this.trellowsp.cardAddedToListRule(existingCard.id, list.getListId(), board.getBoardId());
                             this.updateWorkspace();
                     }
                 }
@@ -111,12 +111,12 @@ class WorkspaceManager {
     
             // Check for added lists
             for (const existingList of existingLists) {
-                const listStillExists = board.getLists().some(list => list.getListId() === existingList.Id);
+                const listStillExists = board.getLists().some(list => list.getListId() === existingList.id);
                 if (!listStillExists) {
-                    console.log(`List with Id ${existingList.Id}, (${existingList.name}) in Board ${board.getBoardId()} is a new list.`);
+                    console.log(`List with Id ${existingList.id}, (${existingList.name}) in Board ${board.getBoardId()} is a new list.`);
 
                         //  -> LIST ADDED
-                        this.trellowsp.listAddedToBoardRule(existingList.Id, board.getBoardId());
+                        this.trellowsp.listAddedToBoardRule(existingList.id, board.getBoardId());
                         this.updateWorkspace();
                 }
             }
@@ -128,7 +128,7 @@ class WorkspaceManager {
 
     // Method to compare the Id and name of the latest Trello board with existing data in opfwsp
     boardDataChanged(existingBoard, latestBoardData) {
-        const IdChanged = existingBoard.Id !== latestBoardData.getBoardId();
+        const IdChanged = existingBoard.id !== latestBoardData.getBoardId();
         const nameChanged = existingBoard.name !== latestBoardData.getBoardName();
 
         if (IdChanged || nameChanged) {
@@ -140,7 +140,7 @@ class WorkspaceManager {
 
     // Method to compare the Id and name of the latest Trello list with existing data in opfwsp
     listDataChanged(existingList, latestListData) {
-        const IdChanged = existingList.Id !== latestListData.getListId();
+        const IdChanged = existingList.id !== latestListData.getListId();
         const nameChanged = existingList.name !== latestListData.getListName();
 
         if (IdChanged || nameChanged) {
@@ -152,7 +152,7 @@ class WorkspaceManager {
 
     // Method to compare the Id and name of the latest Trello card with existing data in opfwsp
     cardDataChanged(existingCard, latestCardData) {
-        const IdChanged = existingCard.Id !== latestCardData.getCardId();
+        const IdChanged = existingCard.id !== latestCardData.getCardId();
         const nameChanged = existingCard.name !== latestCardData.getCardName();
 
         if (IdChanged || nameChanged) {
@@ -192,7 +192,7 @@ class WorkspaceManager {
                             }
     
                             // Create a new List object for each Trello list
-                            const listObj = new VList(list.Id, list.name || 'Unknown List');
+                            const listObj = new VList(list.id, list.name || 'Unknown List');
     
                             const existingListCards = await this.rqtInv.getListCards(listObj.getListId());
     
@@ -202,7 +202,7 @@ class WorkspaceManager {
                                     const items = card.items || [];
     
                                     // Create a Card object for each Trello card
-                                    const cardObj = new VCard(card.Id, card.name, listObj.Id, listObj.name || 'Unknown List', items);
+                                    const cardObj = new VCard(card.id, card.name, listObj.getListId()), listObj.name || 'Unknown List', items);
     
                                     // Add the card object to the list object
                                     listObj.addCard(cardObj);
@@ -221,7 +221,7 @@ class WorkspaceManager {
                     }
     
                     // Create a Board object and add it to opfwsp
-                    const boardObj = new VBoard(existingBoardData.Id, existingBoardData.name, listObjects);
+                    const boardObj = new VBoard(existingBoardData.id, existingBoardData.name, listObjects);
                     this.opfvwsp.updateBoard(boardObj);
                 } catch (boardError) {
                     console.error('Error processing board:', boardError.response ? boardError.response.data : boardError.message);
