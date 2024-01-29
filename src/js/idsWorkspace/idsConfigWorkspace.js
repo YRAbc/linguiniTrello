@@ -2,9 +2,9 @@
 // Made by Yoann Raton, 26/01/2024
 
 class IdsConfigWorkspace {
-    constructor() {
+    /*constructor() {
 
-        /* OPF ToDo Liss */
+         OPF ToDo Liss 
         this.opfBoardId = "65a5339acc54164519f0561a";
         this.opfBoardTechListId = "65a5339acc54164519f05621";
         this.opfBoardDoingListId = "65a5339acc54164519f05622";
@@ -44,7 +44,7 @@ class IdsConfigWorkspace {
         this.opfBoardCustStatusBlockedId = "65b3eba480870508200a2519";      
         this.opfBoardCustStatusCancelledId = "65b3eba84ea65cbbdaff2663";
 
-        /* SID */
+         SID 
         this.sidBoardId = "65a906575cbb2953f63286e9";
         this.sidBoardTechListId = "65a9065c99f90b6028928dcc";
 
@@ -82,7 +82,7 @@ class IdsConfigWorkspace {
         this.sidBoardCustStatusBlockedId = "65b3ec5ce67095f36b4def26";      
         this.sidBoardCustStatusCancelledId = "65b3ec5ce67095f36b4def27";
 
-        /* OPF TECH TASK BOARD */
+         OPF TECH TASK BOARD 
         this.techBoardId = "65a533acf8bdb823367134d5";
         this.techBoardToClassifyListId = "65a533acf8bdb823367134dc";
         this.techBoardProjectListId = "65a533acf8bdb823367134dd";
@@ -127,7 +127,7 @@ class IdsConfigWorkspace {
         this.techBoardCustStatusWaitingId = "65a954eb3b1d7548e7d9cb45";
         this.techBoardCustStatusBlockedId = "65a954eb3b1d7548e7d9cb46";      
         this.techBoardCustStatusCancelledId = "65a954eb3b1d7548e7d9cb47";
-    }
+    }*/
 
         get opfBoardId(){ return "65a5339acc54164519f0561a";}
         get opfBoardTechListId(){ return "65a5339acc54164519f05621";}
