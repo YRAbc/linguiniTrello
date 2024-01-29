@@ -164,7 +164,7 @@ class WorkspaceManager {
         return idChanged || nameChanged;
     }
 
-    async initWorkspace() {
+    async updateWorkspace() {
 
         // Iterate through each board in the workspace
         for (const board of this.workspace.getBoards()) {
