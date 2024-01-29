@@ -173,7 +173,6 @@ class WorkspaceManager {
     
             // Get existing lists for the board
             const existingLists = await this.rqtInv.getBoardLists(board.getBoardId());
-    
             const listObjects = [];
     
             for (const list of existingLists) {
