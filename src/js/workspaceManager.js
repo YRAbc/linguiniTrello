@@ -165,43 +165,62 @@ class WorkspaceManager {
     }
 
     async updateWorkspace() {
-
-        // Iterate through each board in the workspace
-        for (const board of this.opfvwsp.getBoards()) {
-            // Get the existing data for the board from opfwsp
-            const existingBoardData = await this.rqtInv.getBoard(board.getBoardId());
+        try {
+            // Iterate through each board in the workspace
+            for (const board of this.opfvwsp.getBoards()) {
+                try {
+                    // Get the existing data for the board from opfwsp
+                    const existingBoardData = await this.rqtInv.getBoard(board.getBoardId());
     
-            // Get existing lists for the board
-            const existingLists = await this.rqtInv.getBoardLists(board.getBoardId());
-            const listObjects = [];
+                    // Get existing lists for the board
+                    const existingLists = await this.rqtInv.getBoardLists(board.getBoardId());
+                    const listObjects = [];
     
-            for (const list of existingLists) {
-                // Create a new List object for each Trello list
-                const listObj = new VList(list.Id, list.name || 'Unknown List');
+                    for (const list of existingLists) {
+                        try {
+                            // Create a new List object for each Trello list
+                            const listObj = new VList(list.Id, list.name || 'Unknown List');
     
-                const existingListCards = await this.rqtInv.getListCards(listObj.getListId());
+                            const existingListCards = await this.rqtInv.getListCards(listObj.getListId());
     
-                for (const card of existingListCards) {
-                    // Extract items from Trello card if available
-                    const items = card.items || [];
+                            for (const card of existingListCards) {
+                                try {
+                                    // Extract items from Trello card if available
+                                    const items = card.items || [];
     
-                    // Create a Card object for each Trello card
-                    const cardObj = new VCard(card.Id, card.name, listObj.Id, listObj.name || 'Unknown List', items);
+                                    // Create a Card object for each Trello card
+                                    const cardObj = new VCard(card.Id, card.name, listObj.Id, listObj.name || 'Unknown List', items);
     
-                    // Add the card object to the list object
-                    listObj.addCard(cardObj);
+                                    // Add the card object to the list object
+                                    listObj.addCard(cardObj);
+                                } catch (cardError) {
+                                    console.error('Error processing card:', cardError.response ? cardError.response.data : cardError.message);
+                                    // Handle or log the card processing error
+                                }
+                            }
+    
+                            // Add the list object to the array
+                            listObjects.push(listObj);
+                        } catch (listError) {
+                            console.error('Error processing list:', listError.response ? listError.response.data : listError.message);
+                            // Handle or log the list processing error
+                        }
+                    }
+    
+                    // Create a Board object and add it to opfwsp
+                    const boardObj = new VBoard(existingBoardData.Id, existingBoardData.name, listObjects);
+                    this.opfvwsp.updateBoard(boardObj);
+                } catch (boardError) {
+                    console.error('Error processing board:', boardError.response ? boardError.response.data : boardError.message);
+                    // Handle or log the board processing error
                 }
-    
-                // Add the list object to the array
-                listObjects.push(listObj);
             }
     
-            // Create a Board object and add it to opfwsp
-            const boardObj = new VBoard(existingBoardData.Id, existingBoardData.name, listObjects);
-            this.opfvwsp.updateBoard(boardObj);
+            console.log("Updating");
+        } catch (error) {
+            console.error('Error updating workspace:', error.response ? error.response.data : error.message);
+            throw error;
         }
-
-        console.log("Updating");
     }    
 
 }
