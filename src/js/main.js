@@ -19,7 +19,6 @@ window.TrelloPowerUp.initialize({
 function setupPeriodicUpdates() {
 
     setInterval(async () => {
-      console.log("Checking");
       try {
         // Check for modifications
         await wspmanaager.checkForModifications();

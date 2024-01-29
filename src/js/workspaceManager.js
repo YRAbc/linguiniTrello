@@ -201,6 +201,8 @@ class WorkspaceManager {
             const boardObj = new VBoard(existingBoardData.Id, existingBoardData.name, listObjects);
             this.opfvwsp.updateBoard(boardObj);
         }
+
+        console.log("Updating");
     }    
 
 }
