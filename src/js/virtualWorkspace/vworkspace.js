@@ -11,9 +11,9 @@ class VWorkspace {
         this.id = "1";
         this.name = name;
         this.boards = [];  
-        this.boards.push(new VBoard(config.opfBoardId, "BOARD 1", []));
-        this.boards.push(new VBoard(config.sidBoardId, "BOARD 2", []));
-        this.boards.push(new VBoard(config.techBoardId, "BOARD 3", []));
+        this.boards.push(new VBoard(config.opfBoardId, "OPF Todo List", []));
+        this.boards.push(new VBoard(config.sidBoardId, "Information System", []));
+        this.boards.push(new VBoard(config.techBoardId, "OPF Tech - Task Board Test", []));
 
     }
 
@@ -33,8 +33,19 @@ class VWorkspace {
     }
 
     updateBoard(newBoard) {
-        const existingIndex = this.boards.findIndex(existingBoard => existingBoard.getBoardId() === newBoard.getBoardId())
+        const existingIndex = this.boards.findIndex(existingBoard => existingBoard.getBoardId() === newBoard.getBoardId());
+    
+        if (existingIndex !== -1) {
+            // Replace the existing board with the new board
+            this.boards.splice(existingIndex, 1, newBoard);
+    
+            console.log('Board updated successfully.');
+        } else {
+            console.error('Board not found in the workspace.');
+            // Alternatively, you might want to throw an error or handle the case where the board is not found.
+        }
     }
+    
 
     // Method to display workspace data
     display() {
