@@ -7,156 +7,207 @@ import oAuth from './authSettings.js';
 class RequestInventory {
   constructor() {
     this.oauth = new oAuth();
+    this.defaultTimeout = 5000; 
+
   }
 
-  async getBoard(boardId) {
+  async getBoard(boardId, retryCount = 3, delay = 1000) {
     try {
       const response = await axios.get(`https://api.trello.com/1/boards/${boardId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`);
       
-      //console.log('Full response:', response); // Log the entire response
-      
       if (response.data && typeof response.data === 'object') {
         const board = response.data;
-        //console.log('Board information:', board);
         return board;
       } else {
         console.error('Invalid board response:', response.data);
         throw new Error('Invalid board response');
       }
     } catch (error) {
-      console.error('Error getting board:', error.response ? error.response.data : error.message);
-      throw error;
+      if (error.response && error.response.status === 429) {
+        // Handle rate limiting
+        if (retryCount > 0) {
+          console.warn(`Rate limit exceeded. Retrying after ${delay / 1000} seconds. Retries left: ${retryCount}`);
+          await new Promise(resolve => setTimeout(resolve, delay));
+          return this.getBoard(boardId, retryCount - 1, delay * 2); // Exponential backoff
+        } else {
+          console.error('Exceeded maximum retry attempts. Aborting.');
+          throw error;
+        }
+      } else {
+        console.error('Error getting board:', error.response ? error.response.data : error.message);
+        throw error;
+      }
     }
   }
 
-  async getList(listId) {
+  async getList(listId, retryCount = 3, delay = 1000) {
     try {
       const response = await axios.get(`https://api.trello.com/1/lists/${listId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`);
       
-      //console.log('Full response:', response); // Log the entire response
-      
       if (response.data && typeof response.data === 'object') {
         const list = response.data;
-        //console.log('List information:', list);
         return list;
       } else {
         console.error('Invalid list response:', response.data);
         throw new Error('Invalid list response');
       }
     } catch (error) {
-      console.error('Error getting list:', error.response ? error.response.data : error.message);
-      throw error;
+      if (error.response && error.response.status === 429) {
+        // Handle rate limiting
+        if (retryCount > 0) {
+          console.warn(`Rate limit exceeded. Retrying after ${delay / 1000} seconds. Retries left: ${retryCount}`);
+          await new Promise(resolve => setTimeout(resolve, delay));
+          return this.getList(listId, retryCount - 1, delay * 2); // Exponential backoff
+        } else {
+          console.error('Exceeded maximum retry attempts. Aborting.');
+          throw error;
+        }
+      } else {
+        console.error('Error getting list:', error.response ? error.response.data : error.message);
+        throw error;
+      }
     }
   }
 
-  async getCard(cardId) {
+  async getCard(cardId, retryCount = 3, delay = 1000) {
     try {
       const response = await axios.get(`https://api.trello.com/1/cards/${cardId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`);
       
-      //console.log('Full response:', response); // Log the entire response
-      
       if (response.data && typeof response.data === 'object') {
         const card = response.data;
-        //console.log('Card information:', card);
         return card;
       } else {
         console.error('Invalid card response:', response.data);
         throw new Error('Invalid card response');
       }
     } catch (error) {
-      console.error('Error getting card:', error.response ? error.response.data : error.message);
-      throw error;
+      if (error.response && error.response.status === 429) {
+        // Handle rate limiting
+        if (retryCount > 0) {
+          console.warn(`Rate limit exceeded. Retrying after ${delay / 1000} seconds. Retries left: ${retryCount}`);
+          await new Promise(resolve => setTimeout(resolve, delay));
+          return this.getCard(cardId, retryCount - 1, delay * 2); // Exponential backoff
+        } else {
+          console.error('Exceeded maximum retry attempts. Aborting.');
+          throw error;
+        }
+      } else {
+        console.error('Error getting card:', error.response ? error.response.data : error.message);
+        throw error;
+      }
     }
   }
 
-  //Sub elements
-  async getBoardLists(boardId) {
+  async getBoardLists(boardId, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
     try {
-        const response = await axios.get(`https://api.trello.com/1/boards/${boardId}/lists?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`);
-      
-        //console.log('Full response:', response); // Log the entire response
-      
-        if (response.data && Array.isArray(response.data)) {
-            const lists = response.data;
-            //console.log('Lists:', lists);
-            return lists;
-        } else {
-            console.error('Invalid board response:', response.data);
-            throw new Error('Invalid board response');
-        }
+      const response = await axios.get(`https://api.trello.com/1/boards/${boardId}/lists?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`, {
+        timeout: timeout,
+      });
+
+      if (response.data && Array.isArray(response.data)) {
+        const lists = response.data;
+        return lists;
+      } else {
+        console.error('Invalid board response:', response.data);
+        throw new Error('Invalid board response');
+      }
     } catch (error) {
+      if (error.response && error.response.status === 429) {
+        // Handle rate limiting
+        if (retryCount > 0) {
+          console.warn(`Rate limit exceeded. Retrying after ${delay / 1000} seconds. Retries left: ${retryCount}`);
+          await new Promise(resolve => setTimeout(resolve, delay));
+          return this.getBoardLists(boardId, retryCount - 1, delay * 2, timeout); // Exponential backoff
+        } else {
+          console.error('Exceeded maximum retry attempts. Aborting.');
+          throw error;
+        }
+      } else {
         console.error('Error getting board lists:', error.response ? error.response.data : error.message);
         throw error;
+      }
     }
   }
 
-  async getBoardCards(boardId) {
+  async getBoardCards(boardId, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
     try {
-        const response = await axios.get(`https://api.trello.com/1/boards/${boardId}/cards?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`);
-      
-        //console.log('Full response:', response); // Log the entire response
-      
-        if (response.data && Array.isArray(response.data)) {
-            const cards = response.data;
-            //console.log('Cards:', cards);
-            return cards;
-        } else {
-            console.error('Invalid board response:', response.data);
-            throw new Error('Invalid board response');
-        }
+      const response = await axios.get(`https://api.trello.com/1/boards/${boardId}/cards?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`, {
+        timeout: timeout,
+      });
+
+      if (response.data && Array.isArray(response.data)) {
+        const cards = response.data;
+        return cards;
+      } else {
+        console.error('Invalid board response:', response.data);
+        throw new Error('Invalid board response');
+      }
     } catch (error) {
+      if (error.response && error.response.status === 429) {
+        // Handle rate limiting
+        if (retryCount > 0) {
+          console.warn(`Rate limit exceeded. Retrying after ${delay / 1000} seconds. Retries left: ${retryCount}`);
+          await new Promise(resolve => setTimeout(resolve, delay));
+          return this.getBoardCards(boardId, retryCount - 1, delay * 2, timeout); // Exponential backoff
+        } else {
+          console.error('Exceeded maximum retry attempts. Aborting.');
+          throw error;
+        }
+      } else {
         console.error('Error getting board cards:', error.response ? error.response.data : error.message);
         throw error;
+      }
     }
   }
 
-  async getListCards(listId) {
+  async getListCards(listId, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
     try {
-        const response = await axios.get(`https://api.trello.com/1/lists/${listId}/cards?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`);
-      
-        //console.log('Full response:', response); // Log the entire response
-      
-        if (response.data && Array.isArray(response.data)) {
-            const cards = response.data;
-            //console.log('Cards:', cards);
-            return cards;
-        } else {
-            console.error('Invalid list response:', response.data);
-            throw new Error('Invalid list response');
-        }
+      const response = await axios.get(`https://api.trello.com/1/lists/${listId}/cards?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`, {
+        timeout: timeout,
+      });
+
+      if (response.data && Array.isArray(response.data)) {
+        const cards = response.data;
+        return cards;
+      } else {
+        console.error('Invalid list response:', response.data);
+        throw new Error('Invalid list response');
+      }
     } catch (error) {
+      if (error.response && error.response.status === 429) {
+        // Handle rate limiting
+        if (retryCount > 0) {
+          console.warn(`Rate limit exceeded. Retrying after ${delay / 1000} seconds. Retries left: ${retryCount}`);
+          await new Promise(resolve => setTimeout(resolve, delay));
+          return this.getListCards(listId, retryCount - 1, delay * 2, timeout); // Exponential backoff
+        } else {
+          console.error('Exceeded maximum retry attempts. Aborting.');
+          throw error;
+        }
+      } else {
         console.error('Error getting list cards:', error.response ? error.response.data : error.message);
         throw error;
+      }
     }
   }
 
-
-  //Upper element
-  async getListFromCard(cardId) {
+  async getListFromCard(cardId, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
     try {
-      const response = await axios.get(`https://api.trello.com/1/cards/${cardId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`);
-
-      // console.log('Full response:', response); // Log the entire response
+      const response = await axios.get(`https://api.trello.com/1/cards/${cardId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`, {
+        timeout: timeout,
+      });
 
       if (response.data && typeof response.data === 'object') {
-          const card = response.data;
-          const listId = card.idList;
+        const card = response.data;
+        const listId = card.idList;
 
-          // Retrieve the list information using the listId
-          const listResponse = await axios.get(`https://api.trello.com/1/lists/${listId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`);
-          
-          // console.log('List information:', listResponse.data);
-          
-          if (listResponse.data && typeof listResponse.data === 'object') {
-              const list = listResponse.data;
-              return list;
-          } else {
-              console.error('Invalid list response:', listResponse.data);
-              throw new Error('Invalid list response');
-          }
+        // Retrieve the list information using the listId
+        const listResponse = await this.getList(listId, retryCount, delay, timeout);
+
+        return listResponse;
       } else {
-          console.error('Invalid card response:', response.data);
-          throw new Error('Invalid card response');
+        console.error('Invalid card response:', response.data);
+        throw new Error('Invalid card response');
       }
     } catch (error) {
       console.error('Error getting list for card:', error.response ? error.response.data : error.message);
@@ -220,53 +271,65 @@ class RequestInventory {
 
 
   // Card getters
-  async getOPFTechNumber(cardId) {
+  async getOPFTechNumber(cardId, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
     try {
-        // Get the card details
-        const cardDetails = await this.getCard(cardId);
+      // Get the card details with retry logic and custom timeout
+      const cardDetails = await this.getCard(cardId, retryCount, delay, timeout);
 
-        // Check if the OPFTech label exists on the card
-        const opfTechLabel = cardDetails.labels.find(label => label.name.startsWith('#OPFTech-'));
+      // Check if the OPFTech label exists on the card
+      const opfTechLabel = cardDetails.labels.find(label => label.name.startsWith('#OPFTech-'));
 
-        if (opfTechLabel) {
-            // Extract the number from the label
-            const number = opfTechLabel.name.replace('#OPFTech-', '');
-            return number;
-        } else {
-            // Return null or another indicator if the OPFTech label is not found
-            return null;
-        }
+      if (opfTechLabel) {
+        // Extract the number from the label
+        const number = opfTechLabel.name.replace('#OPFTech-', '');
+        return number;
+      } else {
+        // Return null or another indicator if the OPFTech label is not found
+        return null;
+      }
     } catch (error) {
-        console.error('Error in getOPFTechNumber:', error);
-        throw error;
+      console.error('Error in getOPFTechNumber:', error);
+      throw error;
     }
   }
 
-  async getCustomField(cardId, fieldName) {
+  async getCustomField(cardId, fieldName, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
     try {
-      const response = await axios.get(`https://api.trello.com/1/cards/${cardId}/customFields?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`);
+      const response = await axios.get(`https://api.trello.com/1/cards/${cardId}/customFields?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`, {
+        timeout: timeout,
+      });
 
       const customFields = response.data;
       const matchingField = customFields.find(field => field.name === fieldName);
 
       return matchingField;
     } catch (error) {
-      console.error('Error getting custom fields:', error.response ? error.response.data : error.message);
-      throw error;
+      if (error.response && error.response.status === 429) {
+        // Handle rate limiting
+        if (retryCount > 0) {
+          console.warn(`Rate limit exceeded. Retrying after ${delay / 1000} seconds. Retries left: ${retryCount}`);
+          await new Promise(resolve => setTimeout(resolve, delay));
+          return this.getCustomField(cardId, fieldName, retryCount - 1, delay * 2, timeout); // Exponential backoff
+        } else {
+          console.error('Exceeded maximum retry attempts. Aborting.');
+          throw error;
+        }
+      } else {
+        console.error('Error getting custom fields:', error.response ? error.response.data : error.message);
+        throw error;
+      }
     }
   }
 
 
   // POST
-  async addOPFTechNumber(cardId, opfTechNumber) {
+  async addOPFTechNumber(cardId, opfTechNumber, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
     let frontText;
     try {
       frontText = `#OPFTech-${opfTechNumber}`;
-      
-      const cardDetailsResponse = await axios.get(
-        `https://api.trello.com/1/cards/${cardId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`
-      );
 
+      // Get the card details with retry logic and custom timeout
+      const cardDetailsResponse = await this.getCard(cardId, retryCount, delay, timeout);
       const cardDetails = cardDetailsResponse.data;
 
       const existingLabel = cardDetails.labels.find(label => label.name === frontText);
@@ -287,53 +350,104 @@ class RequestInventory {
     }
   }
 
-  async setCustomField(cardId, customFieldId, valueId) {
+  async setCustomField(cardId, customFieldId, valueId, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
     try {
-        await axios.put(
-            `https://api.trello.com/1/cards/${cardId}/customField/${customFieldId}/item?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`,
-            {
-                idValue: valueId,
-            }
-        );
+      await axios.put(
+        `https://api.trello.com/1/cards/${cardId}/customField/${customFieldId}/item?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`,
+        { idValue: valueId },
+        {
+          timeout: timeout,
+        }
+      );
 
-        console.log('Custom field updated successfully.');
+      console.log('Custom field updated successfully.');
     } catch (error) {
+      if (error.response && error.response.status === 429) {
+        // Handle rate limiting
+        if (retryCount > 0) {
+          console.warn(`Rate limit exceeded. Retrying after ${delay / 1000} seconds. Retries left: ${retryCount}`);
+          await new Promise(resolve => setTimeout(resolve, delay));
+          return this.setCustomField(cardId, customFieldId, valueId, retryCount - 1, delay * 2, timeout); // Exponential backoff
+        } else {
+          console.error('Exceeded maximum retry attempts. Aborting.');
+          throw error;
+        }
+      } else {
         console.error('Error updating custom field:', error.response ? error.response.data : error.message);
         throw error;
+      }
     }
   }
 
-  async setCardDescription(cardId, cardDescription) {
+  async setCardDescription(cardId, cardDescription, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
     try {
       await axios.put(
-        `https://api.trello.com/1/cards/${cardId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}&desc=${encodeURIComponent(cardDescription)}`
+        `https://api.trello.com/1/cards/${cardId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}&desc=${encodeURIComponent(cardDescription)}`,
+        null,
+        {
+          timeout: timeout,
+        }
       );
 
       console.log('Card description updated successfully.');
     } catch (error) {
-      console.error('Error updating card description:', error.response ? error.response.data : error.message);
-      throw error;
+      if (error.response && error.response.status === 429) {
+        // Handle rate limiting
+        if (retryCount > 0) {
+          console.warn(`Rate limit exceeded. Retrying after ${delay / 1000} seconds. Retries left: ${retryCount}`);
+          await new Promise(resolve => setTimeout(resolve, delay));
+          return this.setCardDescription(cardId, cardDescription, retryCount - 1, delay * 2, timeout); // Exponential backoff
+        } else {
+          console.error('Exceeded maximum retry attempts. Aborting.');
+          throw error;
+        }
+      } else {
+        console.error('Error updating card description:', error.response ? error.response.data : error.message);
+        throw error;
+      }
     }
   }
 
-  async createCard(boardId, listId, cardName, cardDescription) {
+  async createCard(boardId, listId, cardName, cardDescription, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
     try {
       const response = await axios.post(
-        `https://api.trello.com/1/cards?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}&idBoard=${boardId}&idList=${listId}&name=${encodeURIComponent(cardName)}&desc=${encodeURIComponent(cardDescription)}`
+        `https://api.trello.com/1/cards?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}&idBoard=${boardId}&idList=${listId}&name=${encodeURIComponent(cardName)}&desc=${encodeURIComponent(cardDescription)}`,
+        null,
+        {
+          timeout: timeout,
+        }
       );
 
       const createdCard = response.data;
       console.log('Card created successfully:', createdCard);
       return createdCard;
     } catch (error) {
-      console.error('Error creating card:', error.response ? error.response.data : error.message);
-      throw error;
+      if (error.response && error.response.status === 429) {
+        // Handle rate limiting
+        if (retryCount > 0) {
+          console.warn(`Rate limit exceeded. Retrying after ${delay / 1000} seconds. Retries left: ${retryCount}`);
+          await new Promise(resolve => setTimeout(resolve, delay));
+          return this.createCard(boardId, listId, cardName, cardDescription, retryCount - 1, delay * 2, timeout); // Exponential backoff
+        } else {
+          console.error('Exceeded maximum retry attempts. Aborting.');
+          throw error;
+        }
+      } else {
+        console.error('Error creating card:', error.response ? error.response.data : error.message);
+        throw error;
+      }
     }
   }
 
-  async moveCardToList(cardId, listId) {
+  async moveCardToList(cardId, listId, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
     try {
-      const response = await axios.put(`https://api.trello.com/1/cards/${cardId}/idList?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`, { value: listId });
+      const response = await axios.put(
+        `https://api.trello.com/1/cards/${cardId}/idList?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`,
+        { value: listId },
+        {
+          timeout: timeout,
+        }
+      );
 
       if (response.data && typeof response.data === 'object') {
         const movedCard = response.data;
@@ -343,18 +457,36 @@ class RequestInventory {
         throw new Error('Invalid card move response');
       }
     } catch (error) {
-      console.error('Error moving card to list:', error.response ? error.response.data : error.message);
-      throw error;
+      if (error.response && error.response.status === 429) {
+        // Handle rate limiting
+        if (retryCount > 0) {
+          console.warn(`Rate limit exceeded. Retrying after ${delay / 1000} seconds. Retries left: ${retryCount}`);
+          await new Promise(resolve => setTimeout(resolve, delay));
+          return this.moveCardToList(cardId, listId, retryCount - 1, delay * 2, timeout); // Exponential backoff
+        } else {
+          console.error('Exceeded maximum retry attempts. Aborting.');
+          throw error;
+        }
+      } else {
+        console.error('Error moving card to list:', error.response ? error.response.data : error.message);
+        throw error;
+      }
     }
   }
 
-  async copyCardToList(cardId, listId, copyData) {
+  async copyCardToList(cardId, listId, copyData, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
     try {
-      const response = await axios.post(`https://api.trello.com/1/cards?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`, {
-        ...copyData,
-        idList: listId,
-        idCardSource: cardId
-      });
+      const response = await axios.post(
+        `https://api.trello.com/1/cards?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`,
+        {
+          ...copyData,
+          idList: listId,
+          idCardSource: cardId,
+        },
+        {
+          timeout: timeout,
+        }
+      );
 
       if (response.data && typeof response.data === 'object') {
         const copiedCard = response.data;
@@ -364,12 +496,22 @@ class RequestInventory {
         throw new Error('Invalid card copy response');
       }
     } catch (error) {
-      console.error('Error copying card to list:', error.response ? error.response.data : error.message);
-      throw error;
+      if (error.response && error.response.status === 429) {
+        // Handle rate limiting
+        if (retryCount > 0) {
+          console.warn(`Rate limit exceeded. Retrying after ${delay / 1000} seconds. Retries left: ${retryCount}`);
+          await new Promise(resolve => setTimeout(resolve, delay));
+          return this.copyCardToList(cardId, listId, copyData, retryCount - 1, delay * 2, timeout); // Exponential backoff
+        } else {
+          console.error('Exceeded maximum retry attempts. Aborting.');
+          throw error;
+        }
+      } else {
+        console.error('Error copying card to list:', error.response ? error.response.data : error.message);
+        throw error;
+      }
     }
   }
-
-
 }
 
 export default RequestInventory;
