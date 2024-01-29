@@ -1,7 +1,7 @@
 // idsConfigWorkspace.js
 // Made by Yoann Raton, 26/01/2024
 
-class IdsConfiWorkspace {
+class IdsConfigWorkspace {
     constructor() {
 
         /* OPF ToDo Liss */
@@ -258,4 +258,4 @@ class IdsConfiWorkspace {
 
 }
 
-export default idsConfigWorkspaces;
+export default IdsConfigWorkspace;
