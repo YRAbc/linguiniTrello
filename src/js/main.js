@@ -22,7 +22,7 @@ function setupPeriodicUpdates() {
       console.log("Checking");
       try {
         // Check for modifications
-        await updater.checkForModifications();
+        await wspmanaager.checkForModifications();
       } catch (error) {
         console.error('Error during periodic update:', error);
 
