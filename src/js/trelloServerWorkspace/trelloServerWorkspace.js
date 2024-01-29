@@ -179,4 +179,4 @@ class TrelloServerWorkspace {
 
 }
 
-export default Ruler;
+export default TrelloServerWorkspace;
