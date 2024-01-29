@@ -7,7 +7,7 @@ class VCard {
     constructor(Id, name, listId, listName, items, description, opfTechNumber, statusId, priorityId, techId, issuerId) {
 
         //Config
-        const config = new IdsConfiWorkspace();
+        const config = new IdsConfigWorkspace();
         this.cardId = Id;
         this.cardName = name;
         this.listId = listId;
