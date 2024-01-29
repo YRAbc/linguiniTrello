@@ -167,7 +167,7 @@ class WorkspaceManager {
     async updateWorkspace() {
 
         // Iterate through each board in the workspace
-        for (const board of this.workspace.getBoards()) {
+        for (const board of this.opfvwsp.getBoards()) {
             // Get the existing data for the board from opfwsp
             const existingBoardData = await this.rqtInventory.getBoard(board.getBoardID());
     
