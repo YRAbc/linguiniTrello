@@ -2,8 +2,7 @@
 // Made by Yoann Raton, 29/01/2024
 
 class VLabel {
-    constructor(Id, name) {
-        this.labelId = Id;
+    constructor(name) {
         this.labelName = name;
         this.labelOption = 0;
         
@@ -53,10 +52,6 @@ class VLabel {
         
     }
 
-    getLabelId() {
-        return this.labelId;
-      }
-    
     getLabelName() {
         return this.labelName;
     }
@@ -86,7 +81,6 @@ class VLabel {
 
     // Method to display label data
     display() {
-        console.log(`Label Id: ${this.getLabelId()}`);
         console.log(`Label Name: ${this.getLabelName()}`);
         console.log("Label Options:");
         this.getLabelOptions().forEach((option, index) => {
