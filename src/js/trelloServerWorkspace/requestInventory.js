@@ -293,7 +293,7 @@ class RequestInventory {
     }
   }
 
-  async getOPFTechMaxNumber(boardId, retryCount = 3, delay = 1000, timeout = defaultTimeout) {
+  async getOPFTechMaxNumber(boardId, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
       try {
           // Get all cards in the specified Trello board
           const cardsResponse = await axios.get(`https://api.trello.com/1/boards/${boardId}/cards?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`);
