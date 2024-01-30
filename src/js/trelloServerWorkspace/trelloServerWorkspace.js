@@ -2,6 +2,8 @@
 // Made by Yoann Raton, 24/01/2024
 
 import RequestInventory from './requestInventory.js';
+import IdsConfigWorkspace from '../idsWorkspace/idsConfigWorkspace.js';
+import VWorkspace from '../virtualWorkspace/vworkspace.js';
 
 class TrelloServerWorkspace {
 
