@@ -363,9 +363,7 @@ class RequestInventory {
 
           // Get the card details with retry logic and custom timeout
           const cardDetailsResponse = await this.getCard(cardId, retryCount, delay, timeout);
-          console.log("card : ", cardDetailsResponse.name);
-          console.log("card : ", cardDetailsResponse.id);
-          console.log("card : ", cardDetailsResponse.labels);
+          console.log(" hola ", cardDetailsResponse.data?.labels);
 
           // Check if labels is an array
           if (Array.isArray(cardDetailsResponse.data?.labels)) {
