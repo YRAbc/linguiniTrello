@@ -179,17 +179,17 @@ class WorkspaceManager {
                 try {
                     // Get the existing data for the board from opfwsp
                     const existingBoardData = await this.rqtInv.getBoard(board.getBoardId());
-    
+                    console.log("Hola");
                     // Ensure that existingBoardData is defined before proceeding
                     if (!existingBoardData) {
                         console.error(`Board data is undefined for boardId: ${board.getBoardId()}`);
                         continue;
                     }
-    
+                    console.log("Hola");
                     // Get existing lists for the board
                     const existingLists = await this.rqtInv.getBoardLists(board.getBoardId());
                     const listObjects = [];
-    
+                    console.log("Hola");
                     for (const list of existingLists) {
                         try {
                             // Ensure that list is defined before creating listObj
@@ -212,7 +212,6 @@ class WorkspaceManager {
                                     // Create a Card object for each Trello card
                                     const cardObj = new VCard(card.id, card.name, JSON.stringify(card, null, 2), listObj.getListId(), listObj.getListName(), opfTechNumber);
                                     
-                                    /*
                                     //STATUS
                                     const statusFieldIds = [this.config.opfBoardCustStatusId, this.config.sidBoardCustStatusId, this.config.techBoardCustStatusId];
                                     const statusField = card.customFieldItems.find(field => statusFieldIds.includes(field.idCustomField));
@@ -240,7 +239,6 @@ class WorkspaceManager {
                                     if (techField && techField.value) {
                                         cardObj.setTechT(techField.value.text || '');
                                     }
-                                    */
 
                                     // Add the card object to the list object
                                     listObj.addCard(cardObj);
@@ -259,7 +257,7 @@ class WorkspaceManager {
                             // Handle or log the list processing error
                         }
                     }
-    
+                    console.log("Holaaaa");
                     // Create a Board object and add it to opfwsp
                     const boardObj = new VBoard(existingBoardData.id, existingBoardData.name, JSON.stringify(existingBoardData, null, 2), listObjects);
                     this.opfvwsp.updateBoard(boardObj);
@@ -268,7 +266,7 @@ class WorkspaceManager {
                     // Handle or log the board processing error
                 }
             }
-    
+            console.log("Hola");
             this.opfvwsp.display();
             console.log("wksp Updated");
         } catch (error) {
