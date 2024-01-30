@@ -202,7 +202,7 @@ class WorkspaceManager {
                                     const items = card.items || [];
     
                                     // Create a Card object for each Trello card
-                                    const cardObj = new VCard(card.id, card.name, listObj.getListId(), listObj.name || 'Unknown List', items);
+                                    const cardObj = new VCard(card.id, card.name, listObj.getListId(), listObj.getListName() || 'Unknown List', items);
     
                                     // Add the card object to the list object
                                     listObj.addCard(cardObj);
@@ -224,7 +224,7 @@ class WorkspaceManager {
     
                     // Create a Board object and add it to opfwsp
                     const boardObj = new VBoard(existingBoardData.id, existingBoardData.name, listObjects);
-                    console.log("data : ", existingBoardData.name);
+                    console.log("data : ", boardObj.getBoardName());
                     this.opfvwsp.updateBoard(boardObj);
                 } catch (boardError) {
                     console.error('Error processing board:', boardError.response ? boardError.response.data : boardError.message);
