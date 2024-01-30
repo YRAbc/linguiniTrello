@@ -8,7 +8,7 @@ import VWorkspace from '../virtualWorkspace/vworkspace.js';
 class TrelloServerWorkspace {
 
     constructor(name, config, opfvwsp) {
-        this.name = "name";
+        this.name = name;
         this.config = config;
         this.opfvwsp = opfvwsp;
         this.rqtInv = new RequestInventory();
