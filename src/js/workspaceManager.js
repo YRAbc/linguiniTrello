@@ -176,22 +176,22 @@ class WorkspaceManager {
         try {
             // Iterate through each board in the workspace
             for (const board of this.opfvwsp.getBoards()) {
-                console.log("Hola 1");
+
                 try {
 
                     // Get the existing data for the board from opfwsp
                     const existingBoardData = await this.rqtInv.getBoard(board.getBoardId());
-                    console.log("Hola 2");
+
                     // Ensure that existingBoardData is defined before proceeding
                     if (!existingBoardData) {
                         console.error(`Board data is undefined for boardId: ${board.getBoardId()}`);
                         continue;
                     }
-                    console.log("Hola 3");
+
                     // Get existing lists for the board
                     const existingLists = await this.rqtInv.getBoardLists(board.getBoardId());
                     const listObjects = [];
-                    console.log("Hola 4");
+
                     for (const list of existingLists) {
                         try {
                             // Ensure that list is defined before creating listObj
@@ -202,11 +202,12 @@ class WorkspaceManager {
     
                             // Create a new List object for each Trello list
                             const listObj = new VList(list.id, list.name, JSON.stringify(list, null, 2) || 'Unknown List');
+                            listObj.display();
                             const existingListCards = await this.rqtInv.getListCards(listObj.getListId());
     
                             for (const card of existingListCards) {
                                 try {
-
+                                    
                                     // Check if the card has a label with the format "#OPFTech-XXX" && Extract it, set to 0 if do not have one
                                     const opfTechNumberLabel = card.labels.find(label => /^#OPFTech-\d+$/.test(label.name));
                                     const opfTechNumber = opfTechNumberLabel ? parseInt(opfTechNumberLabel.name.match(/\d+/)[0], 10) : 0;
@@ -239,7 +240,6 @@ class WorkspaceManager {
                                     console.log("Card added to list, ", cardObj.getCardId(), ", ", cardObj.getCardName());
                                 } catch (cardError) {
                                     console.error('Error processing card:', cardError.response ? cardError.response.data : cardError.message);
-                                    // Handle or log the card processing error
                                 }
                             }
     
