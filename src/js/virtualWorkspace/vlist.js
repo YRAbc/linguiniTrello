@@ -23,6 +23,10 @@ class VList {
     return this.listJson;
   }
 
+  setListJson(json) {
+    this.listJson = json;
+  }
+
   addCard(card) {
     this.listCards.push(card);
   }

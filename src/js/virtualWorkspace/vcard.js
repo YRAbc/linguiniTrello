@@ -75,6 +75,11 @@ class VCard {
         this.opfTechNumber = opfTechNumber || '';
     }
 
+    setCardJson(json)
+    {
+        this.cardJson = json;
+    }
+
     setStatusT(status) {
         this.status.setLabelOptionT(status);
     }

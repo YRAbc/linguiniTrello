@@ -134,6 +134,7 @@ class WorkspaceManager {
 
         if (IdChanged || nameChanged || jsonChanged) {
             // console.log(`Board Name change - ${existingBoard.name} from ${latestBoardData.getBoardName()}`);
+            console.log("JSON : ", JSON.stringify(existingBoard, null, 2) , "  ", latestBoardData.getBoardJson());
         }
 
         return IdChanged || nameChanged || jsonChanged;

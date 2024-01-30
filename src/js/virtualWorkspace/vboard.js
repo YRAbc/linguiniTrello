@@ -24,6 +24,10 @@ class VBoard {
     return this.boardJson;
   }
 
+  setBoardJson(json) {
+    this.boardJson = json;
+  }
+  
   addList(list) {
     this.lists.push(list);
   }
