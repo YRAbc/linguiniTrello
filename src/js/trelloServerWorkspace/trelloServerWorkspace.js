@@ -137,7 +137,7 @@ class TrelloServerWorkspace {
             let maxOPFTechNumber = 0;
     
             // Iterate through all boards in the workspace
-            for (const board of this.workspace.getBoards()) {
+            for (const board of this.opfvwsp.getBoards()) {
                 // Get all cards in the board
                 const cards = await this.rqtInv.getBoardCards(board.getBoardId());
     
