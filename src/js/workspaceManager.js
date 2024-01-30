@@ -212,6 +212,7 @@ class WorkspaceManager {
                                     // Create a Card object for each Trello card
                                     const cardObj = new VCard(card.id, card.name, JSON.stringify(card, null, 2), listObj.getListId(), listObj.getListName(), opfTechNumber);
                                     
+                                    /*
                                     //STATUS
                                     const statusFieldIds = [this.config.opfBoardCustStatusId, this.config.sidBoardCustStatusId, this.config.techBoardCustStatusId];
                                     const statusField = card.customFieldItems.find(field => statusFieldIds.includes(field.idCustomField));
@@ -239,6 +240,7 @@ class WorkspaceManager {
                                     if (techField && techField.value) {
                                         cardObj.setTechT(techField.value.text || '');
                                     }
+                                    */
 
                                     // Add the card object to the list object
                                     listObj.addCard(cardObj);
