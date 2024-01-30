@@ -68,8 +68,8 @@ class VWorkspace {
                     console.log(`           Card Id: ${card.getCardId()}`);
                     console.log(`           Card Name: ${card.getCardName()}`);
                     console.log(`           Card JSON: ${card.getCardJson()}`);
-                    console.log(           `List Id: ${card.getListId()}`);
-                    console.log(`           List Name: ${card.getListName()}`);
+                    console.log(           `List Id: ${card.getCardListId()}`);
+                    console.log(`           List Name: ${card.getCardListName()}`);
                     console.log(`           OPF Tech Number: ${card.getOPFTechNumber()}`);
                     console.log(`           Status: ${card.getStatus()}`);
                     console.log(`           Priority: ${card.getPriority()}`);

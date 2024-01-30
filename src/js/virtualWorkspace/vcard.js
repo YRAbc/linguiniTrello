@@ -31,7 +31,15 @@ class VCard {
 
     getCardJson() {
         return this.cardJson;
-    }    
+    }  
+
+    getCardListId() {
+        return this.listId;
+    }  
+    
+    getCardListName() {
+        return this.listName;
+    }  
 
     getOPFTechNumber() {
         return this.opfTechNumber;
