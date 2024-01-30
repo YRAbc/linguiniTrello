@@ -127,11 +127,39 @@ class TrelloServerWorkspace {
 
 
     /* HAS LABEL AND UPDATE */
+    async findMaxOPFTechNumber() {
+        try {
+            // Get all cards in the specified Trello board
+            const cardsResponse = await axios.get(`https://api.trello.com/1/boards/${this.config.opfBoardId}/cards?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`);
+            const cards = cardsResponse.data;
     
-    hasOPFTechLabel(labels) {
-        // Check if the labels array contains the desired label (e.g., #OPFTech-XXX)
-        return labels.some(label => label.name.startsWith('#OPFTech-'));
+            let maxOPFTechNumber = 0;
+    
+            // Iterate through the cards to find the maximum OPFTechNumber
+            cards.forEach(card => {
+                const labels = card.labels || [];
+    
+                labels.forEach(label => {
+                    const labelName = label.name || '';
+                    const match = labelName.match(/^#OPFTech-(\d+)$/);
+    
+                    if (match && match[1]) {
+                        const currentOPFTechNumber = parseInt(match[1], 10);
+                        if (!isNaN(currentOPFTechNumber) && currentOPFTechNumber > maxOPFTechNumber) {
+                            maxOPFTechNumber = currentOPFTechNumber;
+                        }
+                    }
+                });
+            });
+    
+            console.log('Max OPFTechNumber:', maxOPFTechNumber);
+            return maxOPFTechNumber;
+        } catch (error) {
+            console.error('Error finding max OPFTechNumber:', error.response ? error.response.data : error.message);
+            throw error;
+        }
     }
+    
 
     async addOPFTechNumber(cardId, opfTechNumber, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
         let frontText;
@@ -140,10 +168,7 @@ class TrelloServerWorkspace {
     
             // Get the card details with retry logic and custom timeout
             const cardDetailsResponse = await this.getCard(cardId, retryCount, delay, timeout);
-            console.log("card : ", cardDetailsResponse.name);
-            console.log("card : ", cardDetailsResponse.id);
-            console.log("card : ", cardDetailsResponse.labels);
-    
+
             // Check if 'labels' property exists and is an array
             if (cardDetailsResponse.data) {
                 if (!Array.isArray(cardDetailsResponse.data.labels)) {
