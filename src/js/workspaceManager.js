@@ -202,7 +202,6 @@ class WorkspaceManager {
     
                             // Create a new List object for each Trello list
                             const listObj = new VList(list.id, list.name, JSON.stringify(list, null, 2) || 'Unknown List');
-                            listObj.display();
                             const existingListCards = await this.rqtInv.getListCards(listObj.getListId());
     
                             for (const card of existingListCards) {
