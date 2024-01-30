@@ -49,6 +49,7 @@ class TrelloServerWorkspace {
                 await this.rqtInv.setCustomField(cardId, this.config.opfBoardCustIssuerId, this.config.opfBoardCustIssuerToQualifyId, null);
                 await this.rqtInv.setCustomField(cardId, this.config.opfBoardCustStatusId, this.config.opfBoardCustStatusOpenId, null);
 
+                await this.rqtInv.copyCardToList(cardId, this.config.techBoardToClassifyListId);
                 console.log('OPF Tech Card initialized successfully.');
             }
 
@@ -60,13 +61,15 @@ class TrelloServerWorkspace {
 
     async cardModifiedInListRule(cardId, listId, boardId) {
 
+        //Update Similar cards
+        this.updateMatchingCard();
     }
 
     async cardMovedToListRule(cardId, listId, boardId) {
         
     }
 
-    cardRemovedFromListRule(cardId, listId, boardId) {
+    async cardRemovedFromListRule(cardId, listId, boardId) {
 
     }
     

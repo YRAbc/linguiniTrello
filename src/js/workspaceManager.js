@@ -251,7 +251,6 @@ class WorkspaceManager {
                             // Handle or log the list processing error
                         }
                     }
-                    console.log("Hola 5");
                     // Create a Board object and add it to opfwsp
                     const boardObj = new VBoard(existingBoardData.id, existingBoardData.name, JSON.stringify(existingBoardData, null, 2), listObjects);
                     this.opfvwsp.updateBoard(boardObj);
@@ -261,7 +260,6 @@ class WorkspaceManager {
                 }
             }
 
-            this.opfvwsp.display();
             console.log("wksp Updated");
         } catch (error) {
             console.error('Error updating workspace:', error.response ? error.response.data : error.message);
