@@ -324,31 +324,36 @@ class RequestInventory {
 
   // POST
   async addOPFTechNumber(cardId, opfTechNumber, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
-    let frontText;
-    try {
-      frontText = `#OPFTech-${opfTechNumber}`;
+      let frontText;
+      try {
+          frontText = `#OPFTech-${opfTechNumber}`;
 
-      // Get the card details with retry logic and custom timeout
-      const cardDetailsResponse = await this.getCard(cardId, retryCount, delay, timeout);
-      const cardDetails = cardDetailsResponse.data;
+          // Get the card details with retry logic and custom timeout
+          const cardDetailsResponse = await this.getCard(cardId, retryCount, delay, timeout);
+          const cardDetails = cardDetailsResponse.data;
 
-      const existingLabel = cardDetails.labels.find(label => label.name === frontText);
+          if (cardDetails.labels && Array.isArray(cardDetails.labels)) {
+              const existingLabel = cardDetails.labels.find(label => label.name === frontText);
 
-      if (!existingLabel) {
-        const labelCreationResponse = await axios.post(
-          `https://api.trello.com/1/cards/${cardId}/labels?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`,
-          { name: frontText, color: "null", pos: "top", display_cardFront: "true" }
-        );
+              if (!existingLabel) {
+                  const labelCreationResponse = await axios.post(
+                      `https://api.trello.com/1/cards/${cardId}/labels?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`,
+                      { name: frontText, color: "null", pos: "top", display_cardFront: "true" }
+                  );
 
-        console.log(`Label ${frontText} added successfully. Response:`, labelCreationResponse.data);
-      } else {
-        console.log(`Label ${frontText} already exists on the card.`);
+                  console.log(`Label ${frontText} added successfully. Response:`, labelCreationResponse.data);
+              } else {
+                  console.log(`Label ${frontText} already exists on the card.`);
+              }
+          } else {
+              console.error(`Error: 'labels' property is undefined or not an array.`);
+          }
+      } catch (error) {
+          console.error(`Error adding label ${frontText}:`, error.response ? error.response.data : error.message);
+          throw error;
       }
-    } catch (error) {
-      console.error(`Error adding label ${frontText}:`, error.response ? error.response.data : error.message);
-      throw error;
-    }
   }
+
 
   async setCustomField(cardId, customFieldId, valueId, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
     try {
