@@ -65,16 +65,16 @@ class VWorkspace {
                 // Display cards for the current list
                 console.log("        Cards:");
                 list.getCards().forEach((card, cardIndex) => {
-                    console.log(`           Card Id: ${this.getCardId()}`);
-                    console.log(`           Card Name: ${this.getCardName()}`);
-                    console.log(`           Card JSON: ${this.getCardJson()}`);
-                    console.log(           `List Id: ${this.getListId()}`);
-                    console.log(`           List Name: ${this.getListName()}`);
-                    console.log(`           OPF Tech Number: ${this.getOPFTechNumber()}`);
-                    console.log(`           Status: ${this.getStatus()}`);
-                    console.log(`           Priority: ${this.getPriority()}`);
-                    console.log(`           Tech: ${this.getTech()}`);
-                    console.log(`           Issuer: ${this.getIssuer()}`);
+                    console.log(`           Card Id: ${card.getCardId()}`);
+                    console.log(`           Card Name: ${card.getCardName()}`);
+                    console.log(`           Card JSON: ${card.getCardJson()}`);
+                    console.log(           `List Id: ${card.getListId()}`);
+                    console.log(`           List Name: ${card.getListName()}`);
+                    console.log(`           OPF Tech Number: ${card.getOPFTechNumber()}`);
+                    console.log(`           Status: ${card.getStatus()}`);
+                    console.log(`           Priority: ${card.getPriority()}`);
+                    console.log(`           Tech: ${card.getTech()}`);
+                    console.log(`           Issuer: ${card.getIssuer()}`);
                     console.log("------------------------");
 
                 });
