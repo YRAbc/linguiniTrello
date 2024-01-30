@@ -133,36 +133,45 @@ class TrelloServerWorkspace {
         return labels.some(label => label.name.startsWith('#OPFTech-'));
     }
 
-    async findMaxOPFTechNumber() {
+    async addOPFTechNumber(cardId, opfTechNumber, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
+        let frontText;
         try {
-            let maxOPFTechNumber = 0;
+            frontText = `#OPFTech-${opfTechNumber}`;
     
-            // Iterate through all boards in the workspace
-            for (const board of this.opfvwsp.getBoards()) {
-                // Get all cards in the board
-                const cards = await this.rqtInv.getBoardCards(board.getBoardId());
+            // Get the card details with retry logic and custom timeout
+            const cardDetailsResponse = await this.getCard(cardId, retryCount, delay, timeout);
+            console.log("card : ", cardDetailsResponse.name);
+            console.log("card : ", cardDetailsResponse.id);
+            console.log("card : ", cardDetailsResponse.labels);
     
-                // Iterate through each card to find the max OPFTech number
-                for (const card of cards) {
-                    const opfTechNumberString = await this.rqtInv.getOPFTechNumber(card.id);
-                    
-                    // Convert the fetched value to a number
-                    const opfTechNumber = parseFloat(opfTechNumberString);
-    
-                    if (!isNaN(opfTechNumber) && opfTechNumber > maxOPFTechNumber) {
-                        maxOPFTechNumber = opfTechNumber;
-                    }
+            // Check if 'labels' property exists and is an array
+            if (cardDetailsResponse.data) {
+                if (!Array.isArray(cardDetailsResponse.data.labels)) {
+                    // If 'labels' is not an array or is undefined, create an empty array
+                    cardDetailsResponse.data.labels = [];
                 }
-            }
     
-            // Return the maximum OPFTech number
-            return maxOPFTechNumber;
+                const existingLabel = cardDetailsResponse.data.labels.find(label => label.name === frontText);
+    
+                if (!existingLabel) {
+                    const labelCreationResponse = await axios.post(
+                        `https://api.trello.com/1/cards/${cardId}/labels?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`,
+                        { name: frontText, color: "null", pos: "top", display_cardFront: "true" }
+                    );
+    
+                    console.log(`Label ${frontText} added successfully. Response:`, labelCreationResponse.data);
+                } else {
+                    console.log(`Label ${frontText} already exists on the card.`);
+                }
+            } else {
+                console.error(`Error: 'data' property is undefined.`);
+            }
         } catch (error) {
-            console.error('Error in findMaxOPFTechNumber:', error);
+            console.error(`Error adding label ${frontText}:`, error.response ? error.response.data : error.message);
             throw error;
         }
-    }    
-
+    }
+    
     async updateMatchingCard(matchingCard, sourceCardDetails) {
         try {
             // Assuming you want to update specific properties of the matching card
