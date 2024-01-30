@@ -365,7 +365,7 @@ class RequestInventory {
           const cardDetailsResponse = await this.getCard(cardId, retryCount, delay, timeout);
           const cardDetails = cardDetailsResponse.data;
 
-          const labelCreationResponse = await axios.post(`https://api.trello.com/1/cards/${cardId}/labels`, {
+          const labelCreationResponse = await axios.post(`https://api.trello.com/1/cards/${cardId}/labels?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`, {
               name: frontText,
               color: "null",
               pos: "top",
