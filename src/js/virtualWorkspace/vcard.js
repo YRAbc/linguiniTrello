@@ -84,15 +84,15 @@ class VCard {
         this.status.setLabelOptionT(status);
     }
 
-    setPriorit(priority) {
+    setPriorityT(priority) {
         this.priority.setLabelOptionT(priority);
     }
 
-    setTech(tech) {
+    setTechT(tech) {
         this.tech.setLabelOptionT(tech);
     }
 
-    setIssuer(issuer) {
+    setIssuerT(issuer) {
         this.issuer.setLabelOptionT(issuer);
     }
 }
