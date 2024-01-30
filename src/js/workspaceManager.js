@@ -27,7 +27,7 @@ class WorkspaceManager {
     
             // Compare Id and name of boards
             if (this.boardDataChanged(existingBoardData, board)) {
-                //console.log(`Board with Id ${board.getBoardId()} needs to be updated.`);
+                console.log(`Board with Id ${board.getBoardId()} needs to be updated.`);
 
                     //  -> BOARD MODIFIED
                     this.trellowsp.boardModifiedRule(board.getBoardId())
@@ -42,7 +42,7 @@ class WorkspaceManager {
                 const existingListData = existingLists.find(existingList => existingList.id === list.getListId());
     
                 if (!existingListData) {
-                    //console.log(`List with Id ${list.getListId()}, (${list.getListName()}) in Board ${board.getBoardId()} has been removed.`);
+                    console.log(`List with Id ${list.getListId()}, (${list.getListName()}) in Board ${board.getBoardId()} has been removed.`);
 
                         //  -> LIST REMOVE
                         this.trellowsp.listRemovedFromBoardRule(list.getListId(), board.getBoardId());
@@ -50,7 +50,7 @@ class WorkspaceManager {
 
                 } else {
                     if (this.listDataChanged(existingListData, list)) {
-                        //console.log(`List with Id ${list.getListId()} in Board ${board.getBoardId()} needs to be updated.`);
+                        console.log(`List with Id ${list.getListId()} in Board ${board.getBoardId()} needs to be updated.`);
                         
                             //  -> LIST MODIFIED
                             this.trellowsp.listModifiedInBoardRule(list.getListId(), board.getBoardId());
@@ -68,7 +68,7 @@ class WorkspaceManager {
 
                     if (!existingInBoard && !existingInList) {
                         // Card is removed
-                        //console.log(`Card with Id ${card.getCardId()}, (${card.getCardName()}) in List ${list.getListId()} has been removed.`);
+                        console.log(`Card with Id ${card.getCardId()}, (${card.getCardName()}) in List ${list.getListId()} has been removed.`);
 
                             //  -> CARD REMOVED
                             this.trellowsp.cardRemovedFromListRule(card.getCardId(), list.getListId(), board.getBoardId());
@@ -78,7 +78,7 @@ class WorkspaceManager {
                     else if (!existingInList) {
                         // Card has been moved
                         const targetList = await this.rqtInv.getListFromCard(card.getCardId());
-                        //console.log(`Card with Id ${card.getCardId()}, (${card.getCardName()}) has been moved from List ${list.getListName()} to List ${targetList.name}`);
+                        console.log(`Card with Id ${card.getCardId()}, (${card.getCardName()}) has been moved from List ${list.getListName()} to List ${targetList.name}`);
 
                             //  -> CARD MOVED
                             this.trellowsp.cardMovedToListRule(card.getCardId(), list.getListId(), board.getBoardId());
@@ -87,7 +87,7 @@ class WorkspaceManager {
 
                     else if (this.cardDataChanged(existingInList, card)) {
                         // Card needs to be updated
-                        //console.log(`Card with Id ${card.getCardId()} in List ${list.getListId()} needs to be updated.`);
+                        console.log(`Card with Id ${card.getCardId()} in List ${list.getListId()} needs to be updated.`);
 
                             //  -> CARD MODIFIED
                             this.trellowsp.cardModifiedInListRule(card.getCardId(), list.getListId(), board.getBoardId());
@@ -100,7 +100,7 @@ class WorkspaceManager {
                 for (const existingCard of existingListCards) {
                     const cardStillExists = board.getCards().some(card => card.getCardId() === existingCard.id);
                     if (!cardStillExists) {
-                        //console.log(`Card with Id ${existingCard.id}, (${existingCard.name}) in List ${list.getListId()} is a new card.`);
+                        console.log(`Card with Id ${existingCard.id}, (${existingCard.name}) in List ${list.getListId()} is a new card.`);
 
                             //  -> CARD ADDED
                             this.trellowsp.cardAddedToListRule(existingCard.id, list.getListId(), board.getBoardId());
@@ -113,7 +113,7 @@ class WorkspaceManager {
             for (const existingList of existingLists) {
                 const listStillExists = board.getLists().some(list => list.getListId() === existingList.id);
                 if (!listStillExists) {
-                    //console.log(`List with Id ${existingList.id}, (${existingList.name}) in Board ${board.getBoardId()} is a new list.`);
+                    console.log(`List with Id ${existingList.id}, (${existingList.name}) in Board ${board.getBoardId()} is a new list.`);
 
                         //  -> LIST ADDED
                         this.trellowsp.listAddedToBoardRule(existingList.id, board.getBoardId());
@@ -132,7 +132,7 @@ class WorkspaceManager {
         const nameChanged = existingBoard.name !== latestBoardData.getBoardName();
 
         if (IdChanged || nameChanged) {
-            console.log(`Board Name change - ${existingBoard.name} from ${latestBoardData.getBoardName()}`);
+            //console.log(`Board Name change - ${existingBoard.name} from ${latestBoardData.getBoardName()}`);
         }
 
         return IdChanged || nameChanged;
@@ -144,7 +144,7 @@ class WorkspaceManager {
         const nameChanged = existingList.name !== latestListData.getListName();
 
         if (IdChanged || nameChanged) {
-            console.log(`List Name change - ${existingList.name} from ${latestListData.getListName()}`);
+            //console.log(`List Name change - ${existingList.name} from ${latestListData.getListName()}`);
         }
 
         return IdChanged || nameChanged;
@@ -156,7 +156,7 @@ class WorkspaceManager {
         const nameChanged = existingCard.name !== latestCardData.getCardName();
 
         if (IdChanged || nameChanged) {
-            console.log(`Card Name Change -  ${existingCard.name} from ${latestCardData.getCardName()}`);
+            //console.log(`Card Name Change -  ${existingCard.name} from ${latestCardData.getCardName()}`);
         }
 
         //add additionnal modifications for card updates
@@ -206,7 +206,7 @@ class WorkspaceManager {
     
                                     // Add the card object to the list object
                                     listObj.addCard(cardObj);
-                                    console.log("Card added to list, ", cardObj.getCardId(), ", ", cardObj.getCardName());
+                                    //console.log("Card added to list, ", cardObj.getCardId(), ", ", cardObj.getCardName());
                                 } catch (cardError) {
                                     console.error('Error processing card:', cardError.response ? cardError.response.data : cardError.message);
                                     // Handle or log the card processing error
@@ -215,7 +215,7 @@ class WorkspaceManager {
     
                             // Add the list object to the array
                             listObjects.push(listObj);
-                            console.log("List added to Board, ", listObj.getListId(), ", ", listObj.getListName());
+                            //console.log("List added to Board, ", listObj.getListId(), ", ", listObj.getListName());
                         } catch (listError) {
                             console.error('Error processing list:', listError.response ? listError.response.data : listError.message);
                             // Handle or log the list processing error
@@ -224,7 +224,6 @@ class WorkspaceManager {
     
                     // Create a Board object and add it to opfwsp
                     const boardObj = new VBoard(existingBoardData.id, existingBoardData.name, listObjects);
-                    console.log("data : ", boardObj.getBoardName());
                     this.opfvwsp.updateBoard(boardObj);
                 } catch (boardError) {
                     console.error('Error processing board:', boardError.response ? boardError.response.data : boardError.message);
@@ -232,7 +231,7 @@ class WorkspaceManager {
                 }
             }
     
-            console.log("Updating");
+            console.log("wksp Updated");
         } catch (error) {
             console.error('Error updating workspace:', error.response ? error.response.data : error.message);
             throw error;
