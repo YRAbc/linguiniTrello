@@ -215,25 +215,25 @@ class WorkspaceManager {
                                     // Create a Card object for each Trello card
                                     const cardObj = new VCard(card.id, card.name, JSON.stringify(card, null, 2), listObj.getListId(), listObj.getListName(), opfTechNumber);
                                     
-                                    //STATUS
+                                    // STATUS
                                     const statusFieldIds = [this.config.opfBoardCustStatusId, this.config.sidBoardCustStatusId, this.config.techBoardCustStatusId];
-                                    const statusField = card.customFieldItems.find(field => statusFieldIds.includes(field.idCustomField));
-                                    cardObj.setStatusT(statusField.value.text || '');
-                                    
-                                    //PRIORITY
+                                    const statusField = card.customFieldItems && card.customFieldItems.find(field => statusFieldIds.includes(field.idCustomField));
+                                    cardObj.setStatusT(statusField ? statusField.value.text || '' : '');
+
+                                    // PRIORITY
                                     const priorityFieldIds = [this.config.opfBoardCustPriorityId, this.config.sidBoardCustPriorityId, this.config.techBoardCustPriorityId];
-                                    const priorityField = card.customFieldItems.find(field => priorityFieldIds.includes(field.idCustomField));
-                                    cardObj.setPriorityT(priorityField.value.text || '');
+                                    const priorityField = card.customFieldItems && card.customFieldItems.find(field => priorityFieldIds.includes(field.idCustomField));
+                                    cardObj.setPriorityT(priorityField ? priorityField.value.text || '' : '');
 
-                                    //ISSUER
+                                    // ISSUER
                                     const issuerFieldIds = [this.config.opfBoardCustIssuerId, this.config.sidBoardCustIssuerId, this.config.techBoardCustIssuerId];
-                                    const issuerField = card.customFieldItems.find(field => issuerFieldIds.includes(field.idCustomField));
-                                    cardObj.setIssuerT(issuerField.value.text || '');
+                                    const issuerField = card.customFieldItems && card.customFieldItems.find(field => issuerFieldIds.includes(field.idCustomField));
+                                    cardObj.setIssuerT(issuerField ? issuerField.value.text || '' : '');
 
-                                    //TECH
+                                    // TECH
                                     const techFieldIds = [this.config.opfBoardCustTechId, this.config.sidBoardCustTechId, this.config.techBoardCustTechId];
-                                    const techField = card.customFieldItems.find(field => techFieldIds.includes(field.idCustomField));
-                                    cardObj.setTechT(techField.value.text || '');
+                                    const techField = card.customFieldItems && card.customFieldItems.find(field => techFieldIds.includes(field.idCustomField));
+                                    cardObj.setTechT(techField ? techField.value.text || '' : '');
 
                                     // Add the card object to the list object
                                     listObj.addCard(cardObj);
