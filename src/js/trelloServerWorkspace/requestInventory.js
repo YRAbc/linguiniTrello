@@ -293,6 +293,39 @@ class RequestInventory {
     }
   }
 
+  async getOPFTechMaxNumber(boardId, apiKey, appAccessToken, retryCount = 3, delay = 1000, timeout = defaultTimeout) {
+      try {
+          // Get all cards in the specified Trello board
+          const cardsResponse = await axios.get(`https://api.trello.com/1/boards/${boardId}/cards?key=${apiKey}&token=${appAccessToken}`);
+          const cards = cardsResponse.data;
+
+          let maxOPFTechNumber = 0;
+
+          // Iterate through the cards to find the maximum OPFTechNumber
+          for (const card of cards) {
+              const labels = card.labels || [];
+
+              labels.forEach(label => {
+                  const labelName = label.name || '';
+                  const match = labelName.match(/^#OPFTech-(\d+)$/);
+
+                  if (match && match[1]) {
+                      const currentOPFTechNumber = parseInt(match[1], 10);
+                      if (!isNaN(currentOPFTechNumber) && currentOPFTechNumber > maxOPFTechNumber) {
+                          maxOPFTechNumber = currentOPFTechNumber;
+                      }
+                  }
+              });
+          }
+
+          console.log('Max OPFTechNumber:', maxOPFTechNumber);
+          return maxOPFTechNumber;
+      } catch (error) {
+          console.error('Error in getOPFTechMaxNumber:', error.response ? error.response.data : error.message);
+          throw error;
+      }
+  }
+
   async getCustomField(cardId, fieldName, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
     try {
       const response = await axios.get(`https://api.trello.com/1/cards/${cardId}/customFields?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`, {
