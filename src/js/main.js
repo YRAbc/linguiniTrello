@@ -10,7 +10,6 @@ console.log("Start Linguini For Trello Power Up");
 // update is made to see difference between current and opfwsp
 const wspmanaager = new WorkspaceManager();
 wspmanaager.updateWorkspace();
-await sleep(10000);
 setupPeriodicUpdates();
 
 // Initialize Trello Power-Up
