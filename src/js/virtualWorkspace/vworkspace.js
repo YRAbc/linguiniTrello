@@ -23,7 +23,7 @@ class VWorkspace {
     }
 
     // Getter method to get the workspace name
-    getName() {
+    getWorkspaceName() {
         return this.name;
     }
 
@@ -38,14 +38,12 @@ class VWorkspace {
         if (existingIndex !== -1) {
             // Replace the existing board with the new board
             this.boards.splice(existingIndex, 1, newBoard);
-    
-            console.log('Board updated successfully.');
         } else {
             console.error('Board not found in the workspace.');
             // Alternatively, you might want to throw an error or handle the case where the board is not found.
         }
 
-        this.display();
+        //this.display();
     }
     
 
@@ -53,21 +51,21 @@ class VWorkspace {
     display() {
         console.log('Display Worksapce informations :');
         console.log(`Workspace Id: ${this.getWorkspaceId()}`);
-        console.log(`Workspace Name: ${this.getName()}`);
+        console.log(`Workspace Name: ${this.getWorkspacepName()}`);
         console.log("Boards:");
 
         this.getBoards().forEach((board, index) => {
-            console.log(`  ${index + 1}. ${board.getName()}`); // Assuming there is a getName() method for the board
+            console.log(`  ${index + 1}. ${board.getBoardName()}`); // Assuming there is a getBoardName() method for the board
 
             // Display lists for the current board
             console.log("    Lists:");
             board.getLists().forEach((list, listIndex) => {
-                console.log(`      ${listIndex + 1}. ${list.getName()}`); // Assuming there is a getName() method for the list
+                console.log(`      ${listIndex + 1}. ${list.getListName()}`); // Assuming there is a getListName() method for the list
 
                 // Display cards for the current list
                 console.log("        Cards:");
                 list.getCards().forEach((card, cardIndex) => {
-                    console.log(`          ${cardIndex + 1}. ${card.getName()}`); // Assuming there is a getName() method for the card
+                    console.log(`          ${cardIndex + 1}. ${card.getCardName()}`); // Assuming there is a getCardName() method for the card
                 });
             });
         });
