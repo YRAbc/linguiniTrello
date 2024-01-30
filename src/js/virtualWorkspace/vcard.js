@@ -5,12 +5,13 @@ import VLabel from './vlabel.js';
 import IdsConfigWorkspace from '../idsWorkspace/idsConfigWorkspace.js';
 
 class VCard {
-    constructor(Id, name, listId, listName, items, description, opfTechNumber, statusId, priorityId, techId, issuerId) {
+    constructor(Id, name, json, listId, listName, items, description, opfTechNumber, statusId, priorityId, techId, issuerId) {
 
         //Config
         const config = new IdsConfigWorkspace();
         this.cardId = Id;
         this.cardName = name;
+        this.cardJson = json;
         this.listId = listId;
         this.listName = listName;
         this.items = items || [];
@@ -34,6 +35,10 @@ class VCard {
         return this.cardName;
     }
 
+    getCardJson() {
+        return this.cardJson;
+    }    
+
     getItems() {
         return this.items;
     }
@@ -47,19 +52,19 @@ class VCard {
     }
 
     getStatus() {
-        return this.status;
+        return this.status.getLabelOption();
     }
 
     getPriority() {
-        return this.priority;
+        return this.priority.getLabelOption();
     }
 
     getTech() {
-        return this.tech;
+        return this.tech.getLabelOption();
     }
 
     getIssuer() {
-        return this.issuer;
+        return this.issuer.getLabelOption();
     }
 
     setDescription(description) {
@@ -70,20 +75,20 @@ class VCard {
         this.opfTechNumber = opfTechNumber || '';
     }
 
-    setStatus(status) {
-        this.status = status || '';
+    setStatusT(status) {
+        this.status.setLabelOptionT(status);
     }
 
-    setPriority(priority) {
-        this.priority = priority || '';
+    setPriorit(priority) {
+        this.priority.setLabelOptionT(priority);
     }
 
     setTech(tech) {
-        this.tech = tech || '';
+        this.tech.setLabelOptionT(tech);
     }
 
     setIssuer(issuer) {
-        this.issuer = issuer || '';
+        this.issuer.setLabelOptionT(issuer);
     }
 }
 

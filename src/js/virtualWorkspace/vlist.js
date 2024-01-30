@@ -4,9 +4,10 @@
 import Card from './vcard.js';
 
 class VList {
-  constructor(Id, name, cards) {
+  constructor(Id, name, json, cards) {
     this.listId = Id;
     this.listName = name;
+    this.listJson = json;
     this.listCards = cards || [];
   }
 
@@ -16,6 +17,10 @@ class VList {
 
   getListName() {
     return this.listName;
+  }
+
+  getListJson() {
+    return this.listJson;
   }
 
   addCard(card) {

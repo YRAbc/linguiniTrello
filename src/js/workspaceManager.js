@@ -126,43 +126,47 @@ class WorkspaceManager {
     }
     
 
-    // Method to compare the Id and name of the latest Trello board with existing data in opfwsp
+    // Method to compare the Id, name, and JSON of the latest Trello board with existing data in opfwsp
     boardDataChanged(existingBoard, latestBoardData) {
         const IdChanged = existingBoard.id !== latestBoardData.getBoardId();
         const nameChanged = existingBoard.name !== latestBoardData.getBoardName();
+        const jsonChanged = JSON.stringify(existingBoard, null, 2) !== latestBoardData.getBoardJson();
 
-        if (IdChanged || nameChanged) {
-            //console.log(`Board Name change - ${existingBoard.name} from ${latestBoardData.getBoardName()}`);
+        if (IdChanged || nameChanged || jsonChanged) {
+            // console.log(`Board Name change - ${existingBoard.name} from ${latestBoardData.getBoardName()}`);
         }
 
-        return IdChanged || nameChanged;
+        return IdChanged || nameChanged || jsonChanged;
     }
 
-    // Method to compare the Id and name of the latest Trello list with existing data in opfwsp
+    // Method to compare the Id, name, and JSON of the latest Trello list with existing data in opfwsp
     listDataChanged(existingList, latestListData) {
         const IdChanged = existingList.id !== latestListData.getListId();
         const nameChanged = existingList.name !== latestListData.getListName();
+        const jsonChanged = JSON.stringify(existingList, null, 2) !== latestListData.getListJson();
 
-        if (IdChanged || nameChanged) {
-            //console.log(`List Name change - ${existingList.name} from ${latestListData.getListName()}`);
+        if (IdChanged || nameChanged || jsonChanged) {
+            // console.log(`List Name change - ${existingList.name} from ${latestListData.getListName()}`);
         }
 
-        return IdChanged || nameChanged;
+        return IdChanged || nameChanged || jsonChanged;
     }
 
-    // Method to compare the Id and name of the latest Trello card with existing data in opfwsp
+    // Method to compare the Id, name, and JSON of the latest Trello card with existing data in opfwsp
     cardDataChanged(existingCard, latestCardData) {
         const IdChanged = existingCard.id !== latestCardData.getCardId();
         const nameChanged = existingCard.name !== latestCardData.getCardName();
+        const jsonChanged = JSON.stringify(existingCard, null, 2) !== latestCardData.getCardJson();
 
-        if (IdChanged || nameChanged) {
-            //console.log(`Card Name Change -  ${existingCard.name} from ${latestCardData.getCardName()}`);
+        if (IdChanged || nameChanged || jsonChanged) {
+            // console.log(`Card Name Change -  ${existingCard.name} from ${latestCardData.getCardName()}`);
         }
 
-        //add additionnal modifications for card updates
+        // add additional modifications for card updates
 
-        return IdChanged || nameChanged;
+        return IdChanged || nameChanged || jsonChanged;
     }
+
 
     //Update Workspace
     async updateWorkspace() {
@@ -192,7 +196,7 @@ class WorkspaceManager {
                             }
     
                             // Create a new List object for each Trello list
-                            const listObj = new VList(list.id, list.name || 'Unknown List');
+                            const listObj = new VList(list.id, list.name, JSON.stringify(list, null, 2) || 'Unknown List');
     
                             const existingListCards = await this.rqtInv.getListCards(listObj.getListId());
     
@@ -202,8 +206,36 @@ class WorkspaceManager {
                                     const items = card.items || [];
     
                                     // Create a Card object for each Trello card
-                                    const cardObj = new VCard(card.id, card.name, listObj.getListId(), listObj.getListName() || 'Unknown List', items);
-    
+                                    const cardObj = new VCard(card.id, card.name, JSON.stringify(card, null, 2), listObj.getListId(), listObj.getListName() || 'Unknown List', items);
+                                    
+                                    //STATUS
+                                    const statusFieldIds = [this.config.opfBoardCustStatusId, this.config.sidBoardCustStatusCancelledId, this.config.techBoardCustStatusCancelledId];
+                                    const statusField = card.customFieldItems.find(field => statusFieldIds.includes(field.idCustomField));
+                                    if (statusField && statusField.value) {
+                                        cardObj.setStatusT(statusField.value.text || 'Unknown Status');
+                                    }
+                                    
+                                    //PRIORITY
+                                    const priorityFieldIds = [this.config.opfBoardCustPriorityId, this.config.sidBoardCustPriorityCancelledId, this.config.techBoardCustPriorityCancelledId];
+                                    const priorityField = card.customFieldItems.find(field => priorityFieldIds.includes(field.idCustomField));
+                                    if (priorityField && priorityField.value) {
+                                        cardObj.setPriorityT(priorityField.value.text || 'Unknown Priority');
+                                    }
+
+                                    //ISSUER
+                                    const issuerFieldIds = [this.config.opfBoardCustIssuerId, this.config.sidBoardCustIssuerCancelledId, this.config.techBoardCustIssuerCancelledId];
+                                    const issuerField = card.customFieldItems.find(field => issuerFieldIds.includes(field.idCustomField));
+                                    if (issuerField && issuerField.value) {
+                                        cardObj.setIssuerT(issuerField.value.text || 'Unknown Issuer');
+                                    }
+
+                                    //TECH
+                                    const techFieldIds = [this.config.opfBoardCustTechId, this.config.sidBoardCustTechCancelledId, this.config.techBoardCustTechCancelledId];
+                                    const techField = card.customFieldItems.find(field => techFieldIds.includes(field.idCustomField));
+                                    if (techField && techField.value) {
+                                        cardObj.setTechT(techField.value.text || 'Unknown Tech');
+                                    }
+
                                     // Add the card object to the list object
                                     listObj.addCard(cardObj);
                                     //console.log("Card added to list, ", cardObj.getCardId(), ", ", cardObj.getCardName());
@@ -223,7 +255,7 @@ class WorkspaceManager {
                     }
     
                     // Create a Board object and add it to opfwsp
-                    const boardObj = new VBoard(existingBoardData.id, existingBoardData.name, listObjects);
+                    const boardObj = new VBoard(existingBoardData.id, existingBoardData.name, JSON.stringify(existingBoardData, null, 2), listObjects);
                     this.opfvwsp.updateBoard(boardObj);
                 } catch (boardError) {
                     console.error('Error processing board:', boardError.response ? boardError.response.data : boardError.message);

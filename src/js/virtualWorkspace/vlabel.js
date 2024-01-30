@@ -61,16 +61,27 @@ class VLabel {
         return this.labelName;
     }
 
-    setLabelOption(option) {
-        return this.labelOption = option;
-    }
-
     getLabelOption() {
         return this.labelOptions[option];
     }
 
     getLabelOptions() {
         return this.labelOptions;
+    }
+
+    setLabelOption(option) {
+        this.labelOption = option;
+    }
+
+    setLabelOptionT(optionText) {
+        const index = this.labelOptions.findIndex(option => option === optionText);
+    
+        if (index !== -1) {
+            this.labelOption = index;
+            console.log(`Label option set to index: ${index}`);
+        } else {
+            console.warn(`Label option "${optionText}" not found in labelOptions.`);
+        }
     }
 
     // Method to display label data
