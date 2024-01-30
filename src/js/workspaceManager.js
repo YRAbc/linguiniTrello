@@ -176,7 +176,9 @@ class WorkspaceManager {
         try {
             // Iterate through each board in the workspace
             for (const board of this.opfvwsp.getBoards()) {
+                console.log("Hola 11");
                 try {
+
                     // Get the existing data for the board from opfwsp
                     const existingBoardData = await this.rqtInv.getBoard(board.getBoardId());
                     console.log("Hola");
@@ -266,6 +268,7 @@ class WorkspaceManager {
                     // Handle or log the board processing error
                 }
             }
+
             console.log("Hola");
             this.opfvwsp.display();
             console.log("wksp Updated");

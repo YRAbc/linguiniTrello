@@ -44,10 +44,10 @@ class TrelloServerWorkspace {
                 await this.rqtInv.addOPFTechNumber(cardId, nextOPFTechNumber);
 
                 // Set Custom Fields
-                await this.rqtInv.setCustomField(cardId, this.config.opfBoardCustPriorityId, this.config.opfBoardCustPriorityToQualifyId);
-                await this.rqtInv.setCustomField(cardId, this.config.opfBoardCustTechId, this.config.opfBoardCustTechToQualifyId);
-                await this.rqtInv.setCustomField(cardId, this.config.opfBoardCustIssuerId, this.config.opfBoardCustIssuerToQualifyId);
-                await this.rqtInv.setCustomField(cardId, this.config.opfBoardCustStatusId, this.config.opfBoardCustStatusOpenId);
+                await this.rqtInv.setCustomField(cardId, this.config.opfBoardCustPriorityId, this.config.opfBoardCustPriorityToQualifyId, null);
+                await this.rqtInv.setCustomField(cardId, this.config.opfBoardCustTechId, this.config.opfBoardCustTechToQualifyId, null);
+                await this.rqtInv.setCustomField(cardId, this.config.opfBoardCustIssuerId, this.config.opfBoardCustIssuerToQualifyId, null);
+                await this.rqtInv.setCustomField(cardId, this.config.opfBoardCustStatusId, this.config.opfBoardCustStatusOpenId, null);
 
                 console.log('OPF Tech Card initialized successfully.');
             }
