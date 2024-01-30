@@ -51,7 +51,7 @@ class VWorkspace {
     display() {
         console.log('Display Worksapce informations :');
         console.log(`Workspace Id: ${this.getWorkspaceId()}`);
-        console.log(`Workspace Name: ${this.getWorkspacepName()}`);
+        console.log(`Workspace Name: ${this.getWorkspaceName()}`);
         console.log("Boards:");
 
         this.getBoards().forEach((board, index) => {
