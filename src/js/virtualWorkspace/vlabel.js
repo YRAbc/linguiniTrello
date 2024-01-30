@@ -57,7 +57,7 @@ class VLabel {
     }
 
     getLabelOption() {
-        return this.labelOptions[option];
+        return this.labelOptions[this.labelOption];
     }
 
     getLabelOptions() {
