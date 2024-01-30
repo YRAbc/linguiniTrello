@@ -268,6 +268,7 @@ class WorkspaceManager {
                 }
             }
     
+            this.opfvwsp.display();
             console.log("wksp Updated");
         } catch (error) {
             console.error('Error updating workspace:', error.response ? error.response.data : error.message);
