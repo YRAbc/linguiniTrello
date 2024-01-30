@@ -15,8 +15,8 @@ class VCard {
         this.listId = listId;
         this.listName = listName;
         this.opfTechNumber = opfTechNumber || '';
-        this.status = new VLabel(statusId, "Status");
-        this.priority = new VLabel(priorityId, "Priority");
+        this.status = new VLabel(0, "Status");
+        this.priority = new VLabel(0, "Priority");
         this.tech = new VLabel(techId, "Tech");
         this.issuer = new VLabel(issuerId, "Issuer");
     }
