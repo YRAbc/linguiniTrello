@@ -313,6 +313,7 @@ class RequestInventory {
                       const currentOPFTechNumber = parseInt(match[1], 10);
                       if (!isNaN(currentOPFTechNumber) && currentOPFTechNumber > maxOPFTechNumber) {
                           maxOPFTechNumber = currentOPFTechNumber;
+                          console.log(maxOPFTechNumber);
                       }
                   }
               });
