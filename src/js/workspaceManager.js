@@ -91,6 +91,7 @@ class WorkspaceManager {
 
                             //  -> CARD MODIFIED
                             this.trellowsp.cardModifiedInListRule(card.getCardId(), list.getListId(), board.getBoardId());
+                            this.updateDuplicates(card);
                             this.updateWorkspace();
                     } 
                     
@@ -170,6 +171,51 @@ class WorkspaceManager {
         return IdChanged || nameChanged || jsonChanged;
     }
 
+    //Update duplicates
+    async updateDuplicates(card) {
+        try {
+          // If the card has an OPFTech label
+          if (card.labels.some(label => label.name.startsWith('#OPFTech-'))) {
+            // Get the OPFTech number from the card label
+            const opftechnumber = await this.rqtInv.getOPFTechNumber(card.id);
+      
+            // If there is an OPFTech number, proceed to find duplicates
+            if (opftechnumber) {
+              // Get all boards
+              const boards = await this.opfvwsp.getBoards();
+      
+              // Iterate through boards
+              for (const board of boards) {
+                // Get all cards in the current board
+                const cards = await board.getCards();
+      
+                // Find cards with the same OPFTech number in the current board
+                const duplicateCards = cards.filter(async (card) => {
+                  const cardOpfTechNumber = await this.rqtInv.getOPFTechNumber(card.id);
+                  return cardOpfTechNumber === opftechnumber;
+                });
+      
+                // Update the json of duplicate cards
+                for (const duplicateCard of duplicateCards) {
+                  // Get the json of the original card
+                  const json = JSON.stringify(card, null, 2);
+      
+                  // Update the json of the duplicate card
+                  await this.rqtInv.setJson(duplicateCard.id, json);
+                }
+              }
+            } else {
+              console.warn('Card does not have a valid OPFTech label. No duplicates to update.');
+            }
+          } else {
+            console.warn('Card does not have an OPFTech label. No duplicates to update.');
+          }
+        } catch (error) {
+          console.error('Error updating duplicates:', error);
+          throw error;
+        }
+    }
+      
 
     //Update Workspace
     async updateWorkspace() {
