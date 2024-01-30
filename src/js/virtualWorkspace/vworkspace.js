@@ -44,11 +44,14 @@ class VWorkspace {
             console.error('Board not found in the workspace.');
             // Alternatively, you might want to throw an error or handle the case where the board is not found.
         }
+
+        this.display();
     }
     
 
     // Method to display workspace data along with lists and cards in each board
     display() {
+        console.log('Display Worksapce informations :');
         console.log(`Workspace Id: ${this.getWorkspaceId()}`);
         console.log(`Workspace Name: ${this.getName()}`);
         console.log("Boards:");

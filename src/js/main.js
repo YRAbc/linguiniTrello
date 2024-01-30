@@ -5,7 +5,7 @@
 import WorkspaceManager from './workspaceManager.js';
 
 // Start info
-console.log("Start Linguini For Trello *");
+console.log("Start Linguini For Trello Power Up");
 
 // update is made to see difference between current and opfwsp
 const wspmanaager = new WorkspaceManager();
