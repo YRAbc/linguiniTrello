@@ -33,8 +33,14 @@ class VBoard {
   }
 
   setLists(lists) {
-    this.lists = lists.map(list => new List(list.Id, list.name, list.cards));
+      if (!Array.isArray(lists)) {
+          throw new Error('Invalid parameter. Expected an array of lists.');
+      }
+
+      this.lists = lists.map(list => new VList(list.id, list.name, list.json, list.cards));
+      // Assuming list.json corresponds to the JSON property in your VList constructor
   }
+
 
   getCards() {
     const cards = [];

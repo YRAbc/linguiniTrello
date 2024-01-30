@@ -202,11 +202,13 @@ class WorkspaceManager {
     
                             for (const card of existingListCards) {
                                 try {
-                                    // Extract items from Trello card if available
-                                    const items = card.items || [];
-    
+
+                                    // Check if the card has a label with the format "#OPFTech-XXX" && Extract it, set to 0 if do not have one
+                                    const opfTechNumberLabel = card.labels.find(label => /^#OPFTech-\d+$/.test(label.name));
+                                    const opfTechNumber = opfTechNumberLabel ? parseInt(opfTechNumberLabel.name.match(/\d+/)[0], 10) : 0;
+
                                     // Create a Card object for each Trello card
-                                    const cardObj = new VCard(card.id, card.name, JSON.stringify(card, null, 2), listObj.getListId(), listObj.getListName() || 'Unknown List', items);
+                                    const cardObj = new VCard(card.id, card.name, JSON.stringify(card, null, 2), listObj.getListId(), listObj.getListName(), opfTechNumber);
                                     
                                     //STATUS
                                     const statusFieldIds = [this.config.opfBoardCustStatusId, this.config.sidBoardCustStatusCancelledId, this.config.techBoardCustStatusCancelledId];

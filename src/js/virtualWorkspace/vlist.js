@@ -1,7 +1,7 @@
 // vlist.js
 // Made by Yoann Raton, 29/01/2024
 
-import Card from './vcard.js';
+import VCard from './vcard.js';
 
 class VList {
   constructor(Id, name, json, cards) {
@@ -28,7 +28,17 @@ class VList {
   }
 
   setCards(cards) {
-    this.listCards = cards.map(cards => new Card(cardId, cardName, this.listId, this.listName, items));
+      if (!Array.isArray(cards)) {
+          throw new Error('Invalid parameter. Expected an array of cards.');
+      }
+
+      this.listCards = cards.map(card => new VCard(
+          card.id,
+          card.name,
+          card.json,
+          this.listId,
+          this.listName,
+      ));
   }
 
   getCards() {

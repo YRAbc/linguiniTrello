@@ -5,7 +5,7 @@ import VLabel from './vlabel.js';
 import IdsConfigWorkspace from '../idsWorkspace/idsConfigWorkspace.js';
 
 class VCard {
-    constructor(Id, name, json, listId, listName, items, description, opfTechNumber, statusId, priorityId, techId, issuerId) {
+    constructor(Id, name, json, listId, listName, opfTechNumber) {
 
         //Config
         const config = new IdsConfigWorkspace();
