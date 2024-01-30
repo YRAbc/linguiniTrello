@@ -216,22 +216,22 @@ class WorkspaceManager {
                                     const cardObj = new VCard(card.id, card.name, JSON.stringify(card, null, 2), listObj.getListId(), listObj.getListName(), opfTechNumber);
                                     
                                     //STATUS
-                                    const statusFieldIds = [this.config.opfBoardCustStatusId(), this.config.sidBoardCustStatusId(), this.config.techBoardCustStatusId()];
+                                    const statusFieldIds = [this.config.opfBoardCustStatusId, this.config.sidBoardCustStatusId, this.config.techBoardCustStatusId];
                                     const statusField = card.customFieldItems.find(field => statusFieldIds.includes(field.idCustomField));
                                     cardObj.setStatusT(statusField.value.text || '');
                                     
                                     //PRIORITY
-                                    const priorityFieldIds = [this.config.opfBoardCustPriorityId(), this.config.sidBoardCustPriorityId(), this.config.techBoardCustPriorityId()];
+                                    const priorityFieldIds = [this.config.opfBoardCustPriorityId, this.config.sidBoardCustPriorityId, this.config.techBoardCustPriorityId];
                                     const priorityField = card.customFieldItems.find(field => priorityFieldIds.includes(field.idCustomField));
                                     cardObj.setPriorityT(priorityField.value.text || '');
 
                                     //ISSUER
-                                    const issuerFieldIds = [this.config.opfBoardCustIssuerId(), this.config.sidBoardCustIssuerId(), this.config.techBoardCustIssuerId()];
+                                    const issuerFieldIds = [this.config.opfBoardCustIssuerId, this.config.sidBoardCustIssuerId, this.config.techBoardCustIssuerId];
                                     const issuerField = card.customFieldItems.find(field => issuerFieldIds.includes(field.idCustomField));
                                     cardObj.setIssuerT(issuerField.value.text || '');
 
                                     //TECH
-                                    const techFieldIds = [this.config.opfBoardCustTechId(), this.config.sidBoardCustTechId(), this.config.techBoardCustTechId()];
+                                    const techFieldIds = [this.config.opfBoardCustTechId, this.config.sidBoardCustTechId, this.config.techBoardCustTechId];
                                     const techField = card.customFieldItems.find(field => techFieldIds.includes(field.idCustomField));
                                     cardObj.setTechT(techField.value.text || '');
 
