@@ -363,31 +363,24 @@ class RequestInventory {
 
           // Get the card details with retry logic and custom timeout
           const cardDetailsResponse = await this.getCard(cardId, retryCount, delay, timeout);
-          console.log(" hola ", cardDetailsResponse.data?.labels);
+          const cardDetails = cardDetailsResponse.data;
 
-          // Check if labels is an array
-          if (Array.isArray(cardDetailsResponse.data?.labels)) {
-              const existingLabel = cardDetailsResponse.data.labels.find(label => label.name === frontText);
+          const existingLabel = cardDetails.labels.find(label => label.name === frontText);
 
-              if (!existingLabel) {
-                  const labelCreationResponse = await axios.post(
-                      `https://api.trello.com/1/cards/${cardId}/labels?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`,
-                      { name: frontText, color: "null", pos: "top", display_cardFront: "true" }
-                  );
-
-                  console.log(`Label ${frontText} added successfully. Response:`, labelCreationResponse.data);
-              } else {
-                  console.log(`Label ${frontText} already exists on the card.`);
-              }
-          } else {
-              console.error(`Error: 'labels' property is not an array.`);
+          if (!existingLabel) { // Fixed the typo here (existingLbale -> existingLabel)
+              const labelCreationResponse = await axios.post(`https://api.trello.com/1/cards/${cardId}/labels`, {
+                  name: frontText,
+                  color: "null",
+                  pos: "top",
+                  display_cardFront: "true"
+              });
+              console.log(`Label ${frontText} added successfully. Response:`, labelCreationResponse.data);
           }
       } catch (error) {
           console.error(`Error adding label ${frontText}:`, error.response ? error.response.data : error.message);
           throw error;
       }
   }
-
 
   async setCustomField(cardId, customFieldId, valueId, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
     try {
