@@ -7,7 +7,7 @@ import oAuth from './authSettings.js';
 class RequestInventory {
   constructor() {
     this.oauth = new oAuth();
-    this.defaultTimeout = 5000; 
+    this.defaultTimeout = 10000; 
 
   }
 
