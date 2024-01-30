@@ -8,7 +8,7 @@ import IdsConfigWorkspace from '../idsWorkspace/idsConfigWorkspace.js';
 
 class VWorkspace {
     constructor(name, config) {
-        this.id = "1";
+        this.id = "Linguini Workspace for OPF TECH";
         this.name = name;
         this.boards = [];  
         this.boards.push(new VBoard(config.opfBoardId, "OPF Todo List", []));

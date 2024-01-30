@@ -243,7 +243,7 @@ class WorkspaceManager {
 
                                     // Add the card object to the list object
                                     listObj.addCard(cardObj);
-                                    //console.log("Card added to list, ", cardObj.getCardId(), ", ", cardObj.getCardName());
+                                    console.log("Card added to list, ", cardObj.getCardId(), ", ", cardObj.getCardName());
                                 } catch (cardError) {
                                     console.error('Error processing card:', cardError.response ? cardError.response.data : cardError.message);
                                     // Handle or log the card processing error
