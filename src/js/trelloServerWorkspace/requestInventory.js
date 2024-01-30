@@ -365,17 +365,15 @@ class RequestInventory {
           const cardDetailsResponse = await this.getCard(cardId, retryCount, delay, timeout);
           const cardDetails = cardDetailsResponse.data;
 
-          const existingLabel = cardDetails.labels.find(label => label.name === frontText);
+          const labelCreationResponse = await axios.post(`https://api.trello.com/1/cards/${cardId}/labels`, {
+              name: frontText,
+              color: "null",
+              pos: "top",
+              display_cardFront: "true"
+          });
 
-          if (!existingLabel) { // Fixed the typo here (existingLbale -> existingLabel)
-              const labelCreationResponse = await axios.post(`https://api.trello.com/1/cards/${cardId}/labels`, {
-                  name: frontText,
-                  color: "null",
-                  pos: "top",
-                  display_cardFront: "true"
-              });
-              console.log(`Label ${frontText} added successfully. Response:`, labelCreationResponse.data);
-          }
+          console.log(`Label ${frontText} added successfully. Response:`, labelCreationResponse.data);
+
       } catch (error) {
           console.error(`Error adding label ${frontText}:`, error.response ? error.response.data : error.message);
           throw error;
