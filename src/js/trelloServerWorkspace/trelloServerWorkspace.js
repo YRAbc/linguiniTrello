@@ -38,7 +38,7 @@ class TrelloServerWorkspace {
             const cardDetails = await this.rqtInv.getCard(cardId);
 
             // Check if the card is added to the OPF Tech list
-            if (listId === this.config.opfBoardTechListId()) {
+            if (listId === this.config.opfBoardTechListId) {
 
                 // Get the maximum OPFTech number
                 const maxOPFTechNumber = await this.findMaxOPFTechNumber();
