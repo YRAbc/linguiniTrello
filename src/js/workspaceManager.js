@@ -148,6 +148,7 @@ class WorkspaceManager {
 
         if (IdChanged || nameChanged || jsonChanged) {
             // console.log(`List Name change - ${existingList.name} from ${latestListData.getListName()}`);
+            console.log("JSON : ", JSON.stringify(existingList, null, 2) , "  ", latestListData.getListJson());
         }
 
         return IdChanged || nameChanged || jsonChanged;
@@ -161,6 +162,7 @@ class WorkspaceManager {
 
         if (IdChanged || nameChanged || jsonChanged) {
             // console.log(`Card Name Change -  ${existingCard.name} from ${latestCardData.getCardName()}`);
+            console.log("JSON : ", JSON.stringify(existingCard, null, 2) , "  ", latestCardData.getCardJson());
         }
 
         // add additional modifications for card updates
