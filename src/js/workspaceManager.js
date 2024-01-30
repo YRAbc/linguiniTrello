@@ -176,22 +176,22 @@ class WorkspaceManager {
         try {
             // Iterate through each board in the workspace
             for (const board of this.opfvwsp.getBoards()) {
-                console.log("Hola 11");
+                console.log("Hola 1");
                 try {
 
                     // Get the existing data for the board from opfwsp
                     const existingBoardData = await this.rqtInv.getBoard(board.getBoardId());
-                    console.log("Hola");
+                    console.log("Hola 2");
                     // Ensure that existingBoardData is defined before proceeding
                     if (!existingBoardData) {
                         console.error(`Board data is undefined for boardId: ${board.getBoardId()}`);
                         continue;
                     }
-                    console.log("Hola");
+                    console.log("Hola 3");
                     // Get existing lists for the board
                     const existingLists = await this.rqtInv.getBoardLists(board.getBoardId());
                     const listObjects = [];
-                    console.log("Hola");
+                    console.log("Hola 4");
                     for (const list of existingLists) {
                         try {
                             // Ensure that list is defined before creating listObj
@@ -259,7 +259,7 @@ class WorkspaceManager {
                             // Handle or log the list processing error
                         }
                     }
-                    console.log("Holaaaa");
+                    console.log("Hola 5");
                     // Create a Board object and add it to opfwsp
                     const boardObj = new VBoard(existingBoardData.id, existingBoardData.name, JSON.stringify(existingBoardData, null, 2), listObjects);
                     this.opfvwsp.updateBoard(boardObj);
@@ -269,7 +269,6 @@ class WorkspaceManager {
                 }
             }
 
-            console.log("Hola");
             this.opfvwsp.display();
             console.log("wksp Updated");
         } catch (error) {
