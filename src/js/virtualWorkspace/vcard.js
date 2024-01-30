@@ -14,17 +14,12 @@ class VCard {
         this.cardJson = json;
         this.listId = listId;
         this.listName = listName;
-        this.items = items || [];
         this.description = description || '';
         this.opfTechNumber = opfTechNumber || '';
         this.status = new VLabel(statusId, "Status");
         this.priority = new VLabel(priorityId, "Priority");
         this.tech = new VLabel(techId, "Tech");
         this.issuer = new VLabel(issuerId, "Issuer");
-    }
-
-    addItem(item) {
-        this.items.push(item);
     }
 
     getCardId() {
@@ -38,10 +33,6 @@ class VCard {
     getCardJson() {
         return this.cardJson;
     }    
-
-    getItems() {
-        return this.items;
-    }
 
     getDescription() {
         return this.description;
