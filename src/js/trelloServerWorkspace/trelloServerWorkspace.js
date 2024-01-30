@@ -5,9 +5,10 @@ import RequestInventory from './requestInventory.js';
 
 class TrelloServerWorkspace {
 
-    constructor(config) {
+    constructor(name, config, opfvwsp) {
         this.name = "name";
         this.config = config;
+        this.opfvwsp = opfvwsp;
         this.rqtInv = new RequestInventory();
     }
 
@@ -36,11 +37,8 @@ class TrelloServerWorkspace {
             // Assuming you have a method in your getter class to get the card details
             const cardDetails = await this.rqtInv.getCard(cardId);
 
-            // Assuming the list Id for OPF Tech cards is '65a5339acc54164519f05621'
-            const opfTechListId = '65a5339acc54164519f05621';
-
             // Check if the card is added to the OPF Tech list
-            if (listId === opfTechListId) {
+            if (listId === this.config.opfBoardTechListId()) {
 
                 // Get the maximum OPFTech number
                 const maxOPFTechNumber = await this.findMaxOPFTechNumber();
