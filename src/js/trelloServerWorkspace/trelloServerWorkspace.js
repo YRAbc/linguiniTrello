@@ -32,8 +32,7 @@ class TrelloServerWorkspace {
     }
 
     async cardAddedToListRule(cardId, listId, boardId) {
-        
-        /*try {
+        try {
             // Assuming you have a method in your getter class to get the card details
             const cardDetails = await this.rqtInv.getCard(cardId);
 
@@ -60,7 +59,7 @@ class TrelloServerWorkspace {
         } catch (error) {
             console.error('Error in cardAddedToListRule:', error);
             throw error;
-        }*/
+        }
     }
 
     async cardModifiedInListRule(cardId, listId, boardId) {
