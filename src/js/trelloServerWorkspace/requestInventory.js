@@ -304,18 +304,13 @@ class RequestInventory {
           // Iterate through the cards to find the maximum OPFTechNumber
           for (const card of cards) {
               const labels = card.labels || [];
-
-              console.log(maxOPFTechNumber);
-
               labels.forEach(label => {
                   const labelName = label.name || '';
                   const match = labelName.match(/^#OPFTech-(\d+)$/);
-                  console.log(maxOPFTechNumber);
                   if (match && match[1]) {
                       const currentOPFTechNumber = parseInt(match[1], 10);
                       if (!isNaN(currentOPFTechNumber) && currentOPFTechNumber > maxOPFTechNumber) {
                           maxOPFTechNumber = currentOPFTechNumber;
-                          console.log(maxOPFTechNumber);
                       }
                   }
               });
