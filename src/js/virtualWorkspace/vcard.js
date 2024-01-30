@@ -14,7 +14,6 @@ class VCard {
         this.cardJson = json;
         this.listId = listId;
         this.listName = listName;
-        this.description = description || '';
         this.opfTechNumber = opfTechNumber || '';
         this.status = new VLabel(statusId, "Status");
         this.priority = new VLabel(priorityId, "Priority");
@@ -34,10 +33,6 @@ class VCard {
         return this.cardJson;
     }    
 
-    getDescription() {
-        return this.description;
-    }
-
     getOPFTechNumber() {
         return this.opfTechNumber;
     }
@@ -56,10 +51,6 @@ class VCard {
 
     getIssuer() {
         return this.issuer.getLabelOption();
-    }
-
-    setDescription(description) {
-        this.description = description || '';
     }
 
     setOPFTechNumber(opfTechNumber) {

@@ -55,17 +55,28 @@ class VWorkspace {
         console.log("Boards:");
 
         this.getBoards().forEach((board, index) => {
-            console.log(`  ${index + 1}. ${board.getBoardName()}`); // Assuming there is a getBoardName() method for the board
+            console.log(`  ${index + 1}. ${board.getBoardName()}`);
 
             // Display lists for the current board
             console.log("    Lists:");
             board.getLists().forEach((list, listIndex) => {
-                console.log(`      ${listIndex + 1}. ${list.getListName()}`); // Assuming there is a getListName() method for the list
+                console.log(`      ${listIndex + 1}. ${list.getListName()}`);
 
                 // Display cards for the current list
                 console.log("        Cards:");
                 list.getCards().forEach((card, cardIndex) => {
-                    console.log(`          ${cardIndex + 1}. ${card.getCardName()}`); // Assuming there is a getCardName() method for the card
+                    console.log(`           Card Id: ${this.getCardId()}`);
+                    console.log(`           Card Name: ${this.getCardName()}`);
+                    console.log(`           Card JSON: ${this.getCardJson()}`);
+                    console.log(           `List Id: ${this.getListId()}`);
+                    console.log(`           List Name: ${this.getListName()}`);
+                    console.log(`           OPF Tech Number: ${this.getOPFTechNumber()}`);
+                    console.log(`           Status: ${this.getStatus()}`);
+                    console.log(`           Priority: ${this.getPriority()}`);
+                    console.log(`           Tech: ${this.getTech()}`);
+                    console.log(`           Issuer: ${this.getIssuer()}`);
+                    console.log("------------------------");
+
                 });
             });
         });
