@@ -200,7 +200,6 @@ class WorkspaceManager {
     
                             // Create a new List object for each Trello list
                             const listObj = new VList(list.id, list.name, JSON.stringify(list, null, 2) || 'Unknown List');
-    
                             const existingListCards = await this.rqtInv.getListCards(listObj.getListId());
     
                             for (const card of existingListCards) {
@@ -214,31 +213,31 @@ class WorkspaceManager {
                                     const cardObj = new VCard(card.id, card.name, JSON.stringify(card, null, 2), listObj.getListId(), listObj.getListName(), opfTechNumber);
                                     
                                     //STATUS
-                                    const statusFieldIds = [this.config.opfBoardCustStatusId, this.config.sidBoardCustStatusCancelledId, this.config.techBoardCustStatusCancelledId];
+                                    const statusFieldIds = [this.config.opfBoardCustStatusId, this.config.sidBoardCustStatusId, this.config.techBoardCustStatusId];
                                     const statusField = card.customFieldItems.find(field => statusFieldIds.includes(field.idCustomField));
                                     if (statusField && statusField.value) {
-                                        cardObj.setStatusT(statusField.value.text || 'Unknown Status');
+                                        cardObj.setStatusT(statusField.value.text || '');
                                     }
                                     
                                     //PRIORITY
-                                    const priorityFieldIds = [this.config.opfBoardCustPriorityId, this.config.sidBoardCustPriorityCancelledId, this.config.techBoardCustPriorityCancelledId];
+                                    const priorityFieldIds = [this.config.opfBoardCustPriorityId, this.config.sidBoardCustPriorityId, this.config.techBoardCustPriorityId];
                                     const priorityField = card.customFieldItems.find(field => priorityFieldIds.includes(field.idCustomField));
                                     if (priorityField && priorityField.value) {
-                                        cardObj.setPriorityT(priorityField.value.text || 'Unknown Priority');
+                                        cardObj.setPriorityT(priorityField.value.text || '');
                                     }
 
                                     //ISSUER
-                                    const issuerFieldIds = [this.config.opfBoardCustIssuerId, this.config.sidBoardCustIssuerCancelledId, this.config.techBoardCustIssuerCancelledId];
+                                    const issuerFieldIds = [this.config.opfBoardCustIssuerId, this.config.sidBoardCustIssuerId, this.config.techBoardCustIssuerId];
                                     const issuerField = card.customFieldItems.find(field => issuerFieldIds.includes(field.idCustomField));
                                     if (issuerField && issuerField.value) {
-                                        cardObj.setIssuerT(issuerField.value.text || 'Unknown Issuer');
+                                        cardObj.setIssuerT(issuerField.value.text || '');
                                     }
 
                                     //TECH
-                                    const techFieldIds = [this.config.opfBoardCustTechId, this.config.sidBoardCustTechCancelledId, this.config.techBoardCustTechCancelledId];
+                                    const techFieldIds = [this.config.opfBoardCustTechId, this.config.sidBoardCustTechId, this.config.techBoardCustTechId];
                                     const techField = card.customFieldItems.find(field => techFieldIds.includes(field.idCustomField));
                                     if (techField && techField.value) {
-                                        cardObj.setTechT(techField.value.text || 'Unknown Tech');
+                                        cardObj.setTechT(techField.value.text || '');
                                     }
 
                                     // Add the card object to the list object
