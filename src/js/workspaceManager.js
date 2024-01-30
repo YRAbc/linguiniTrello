@@ -129,12 +129,13 @@ class WorkspaceManager {
     // Method to compare the Id and name of the latest Trello board with existing data in opfwsp
     boardDataChanged(existingBoard, latestBoardData) {
         const IdChanged = existingBoard.id !== latestBoardData.getBoardId();
+        const nameChanged = existingBoard.name !== latestBoardData.getBoardName();
 
-        if (IdChanged) {
-            console.log(`Board Id change - ${existingBoard.id}`);
+        if (IdChanged || nameChanged) {
+            console.log(`Board Name change - ${existingBoard.name} from ${latestBoardData.getBoardName()}`);
         }
 
-        return IdChanged;
+        return IdChanged || nameChanged;
     }
 
     // Method to compare the Id and name of the latest Trello list with existing data in opfwsp
@@ -205,6 +206,7 @@ class WorkspaceManager {
     
                                     // Add the card object to the list object
                                     listObj.addCard(cardObj);
+                                    console.log("Card added to list, ", card.id);
                                 } catch (cardError) {
                                     console.error('Error processing card:', cardError.response ? cardError.response.data : cardError.message);
                                     // Handle or log the card processing error
@@ -213,6 +215,7 @@ class WorkspaceManager {
     
                             // Add the list object to the array
                             listObjects.push(listObj);
+                            console.log("List added to board, ", list.id);
                         } catch (listError) {
                             console.error('Error processing list:', listError.response ? listError.response.data : listError.message);
                             // Handle or log the list processing error
