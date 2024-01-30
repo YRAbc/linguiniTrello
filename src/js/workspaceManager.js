@@ -206,7 +206,7 @@ class WorkspaceManager {
     
                                     // Add the card object to the list object
                                     listObj.addCard(cardObj);
-                                    console.log("Card added to list, ", card.id);
+                                    console.log("Card added to list, ", cardObj.getCardId(), ", ", cardObj.getCardName());
                                 } catch (cardError) {
                                     console.error('Error processing card:', cardError.response ? cardError.response.data : cardError.message);
                                     // Handle or log the card processing error
@@ -215,7 +215,7 @@ class WorkspaceManager {
     
                             // Add the list object to the array
                             listObjects.push(listObj);
-                            console.log("List added to board, ", list.id);
+                            console.log("List added to Board, ", listObj.getListId(), ", ", listObj.getListName());
                         } catch (listError) {
                             console.error('Error processing list:', listError.response ? listError.response.data : listError.message);
                             // Handle or log the list processing error
