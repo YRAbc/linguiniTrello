@@ -183,12 +183,12 @@ class WorkspaceManager {
               // If there is an OPFTech number, proceed to find duplicates
               if (opftechnumber) {
                 // Get all boards
-                const boards = await this.opfvwsp.getBoards();
+                const boards = this.opfvwsp.getBoards();
       
                 // Iterate through boards
                 for (const board of boards) {
                   // Get all cards in the current board
-                  const cards = await board.getCards();
+                  const cards = board.getCards();
       
                   // Find cards with the same OPFTech number in the current board
                   const duplicateCards = cards.filter(async (boardCard) => {
@@ -198,10 +198,8 @@ class WorkspaceManager {
       
                   // Update the json of duplicate cards
                   for (const duplicateCard of duplicateCards) {
-                    // Get the json of the original card
+                    // Get the json of the original card and update it
                     const json = JSON.stringify(card, null, 2);
-      
-                    // Update the json of the duplicate card
                     await this.rqtInv.setJson(duplicateCard.id, json);
                   }
                 }
