@@ -587,6 +587,21 @@ class RequestInventory {
         {
             name: card.name,
             desc: card.desc,
+            closed: card.closed,
+            idMembers: card.idMembers,
+            idAttachmentCover: card.idAttachmentCover,
+            idLabels: card.idLabels,
+            pos: card.pos,
+            due: card.due,
+            start: card.start,
+            dueComplete: card.dueComplete,
+            subscribed: card.subscribed,
+            address: card.address,
+            locationName: locationName,
+            coordinates: coordinates,
+            cover: card.cover,
+            
+            
         },
         { timeout }
       );   
