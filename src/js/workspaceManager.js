@@ -202,30 +202,38 @@ class WorkspaceManager {
                             const cards = board.getCards();
 
                             console.log('All cards in the current board:', cards);
-                            
-                            // Find cards with the same OPFTech number in the current board
-                            const duplicateCards = cards.filter((boardCard) => {
-                                const cardOpfTechNumber = boardCard.opfTechNumber;
-                                console.log(`Card ID: ${boardCard.id}, OPFTech Number: ${cardOpfTechNumber}`);
-                                return cardOpfTechNumber === opftechnumber;
-                            });
 
-                            console.log('Duplicate cards:', duplicateCards);
+// Find cards with the same OPFTech number in the current board
+const duplicateCards = cards.filter((boardCard) => {
+    const cardOpfTechNumber = boardCard.opfTechNumber;
+    
+    // Ensure boardCard has an 'id' property
+    if (!boardCard.id) {
+        console.warn('Card does not have an ID:', boardCard);
+        return false;
+    }
 
-                            // Get the IDs of the duplicate cards
-                            const duplicateCardIds = duplicateCards.map(card => card.id);
-                            console.log('Duplicate card IDs:', duplicateCardIds);
+    console.log(`Card ID: ${boardCard.id}, OPFTech Number: ${cardOpfTechNumber}`);
+    return cardOpfTechNumber === opftechnumber;
+});
 
-                            // Update the json of duplicate cards
-                            for (const duplicateCardId of duplicateCardIds) {
-                                console.log('Updating duplicate card with ID:', duplicateCardId);
+console.log('Duplicate cards:', duplicateCards);
 
-                                // Get the json of the original card and update it
-                                const json = JSON.stringify(card, null, 2);
-                                await this.rqtInv.setJson(duplicateCardId, json);
+// Get the IDs of the duplicate cards
+const duplicateCardIds = duplicateCards.map(card => card.id);
+console.log('Duplicate card IDs:', duplicateCardIds);
 
-                                console.log('Duplicate card updated.');
-                            }
+// Update the json of duplicate cards
+for (const duplicateCardId of duplicateCardIds) {
+    console.log('Updating duplicate card with ID:', duplicateCardId);
+
+    // Get the json of the original card and update it
+    const json = JSON.stringify(card, null, 2);
+    await this.rqtInv.setJson(duplicateCardId, json);
+
+    console.log('Duplicate card updated.');
+}
+
 
                         }
                     } else {
