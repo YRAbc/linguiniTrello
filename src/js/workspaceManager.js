@@ -222,11 +222,11 @@ class WorkspaceManager {
                                     cardOpfTechNumberInt === opftechnumberInt &&
                                     card.id !== boardCard.cardId) {
 
-                                    console.log(`Card ID: ${boardCard.cardId}, OPFTech Number: ${cardOpfTechNumber}`);
-                                    console.log(`Main Card ID: ${card.id}, OPFTech Number: ${opftechnumber}`);
+                                    //console.log(`Card ID: ${boardCard.cardId}, OPFTech Number: ${cardOpfTechNumber}`);
+                                    //console.log(`Main Card ID: ${card.id}, OPFTech Number: ${opftechnumber}`);
 
                                     const json = JSON.stringify(card, null, 2);
-                                    console.log('Original JSON:', json);
+                                    //console.log('Original JSON:', json);
                                     await this.rqtInv.setJson(boardCard.cardId, json);
                                     console.log('Duplicate card updated.');
                                 }
