@@ -582,27 +582,38 @@ class RequestInventory {
   //PUT Card Parameters
   async setCard(cardId, card, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
     try {
-      const response = await axios.put(
-        `https://api.trello.com/1/cards/${cardId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`,
-        {
-            name: card.name,
-            desc: card.desc,
-            closed: card.closed,
-            idMembers: card.idMembers,
-            idAttachmentCover: card.idAttachmentCover,
-            idLabels: card.idLabels,
-            pos: card.pos,
-            due: card.due,
-            start: card.start,
-            dueComplete: card.dueComplete,
-            subscribed: card.subscribed,
-            address: card.address,
-            cover: card.cover,
-
-            
-        },
-        { timeout }
-      );   
+        const payload = {
+          name: card.name,
+          desc: card.desc,
+          closed: card.closed,
+          idMembers: card.idMembers,
+          idAttachmentCover: card.idAttachmentCover,
+          idLabels: card.idLabels,
+          pos: card.pos,
+          due: card.due,
+          start: card.start,
+          dueComplete: card.dueComplete,
+          subscribed: card.subscribed,
+          address: card.address,
+          cover: card.cover,
+        };
+        
+        // Check and conditionally add properties
+        if (card.locationName) {
+          payload.locationName = card.locationName;
+        }
+        
+        if (card.coordinates) {
+          payload.coordinates = card.coordinates;
+        }
+        
+        // Add other checks for parameters you want to conditionally include
+        
+        const response = await axios.put(
+          `https://api.trello.com/1/cards/${cardId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`,
+          payload,
+          { timeout }
+        );
 
       if (response.data && typeof response.data === 'object') {
         const updatedCard = response.data;
