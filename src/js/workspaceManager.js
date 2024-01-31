@@ -91,7 +91,7 @@ class WorkspaceManager {
 
                             //  -> CARD MODIFIED
                             this.trellowsp.cardModifiedInListRule(card.getCardId(), list.getListId(), board.getBoardId());
-                            this.updateDuplicates(existingInList);
+                            this.updateDuplicates(board.id, existingInList);
                             this.updateWorkspace();
                     } 
                     
@@ -171,7 +171,7 @@ class WorkspaceManager {
         return IdChanged || nameChanged || jsonChanged;
     }
 
-    async updateDuplicates(card) {
+    async updateDuplicates(boardId, card) {
         try {
             //console.log('Starting update duplicates with card:', card.id);
     
@@ -206,8 +206,8 @@ class WorkspaceManager {
                             for (const boardCard of cards) {
                                 const cardOpfTechNumber = boardCard.opfTechNumber;
 
-                                // Ensure boardCard has a 'cardId' property
-                                if (!boardCard.cardId) {
+                                // Ensure boardCard has a 'id' property
+                                if (!boardCard.id) {
                                     console.warn('Card does not have a cardId:', boardCard);
                                     continue;
                                 }
@@ -216,21 +216,39 @@ class WorkspaceManager {
                                 const cardOpfTechNumberInt = parseInt(cardOpfTechNumber, 10);
                                 const opftechnumberInt = parseInt(opftechnumber, 10);
 
-                                // Check if the card has the same OPFTech number and a different cardId
+                                // Check if the card has the same OPFTech number and a different id
                                 if (!isNaN(cardOpfTechNumberInt) &&
                                     !isNaN(opftechnumberInt) &&
                                     cardOpfTechNumberInt === opftechnumberInt &&
-                                    card.id !== boardCard.cardId) {
+                                    card.id !== boardCard.id) {
 
-                                    //console.log(`Card ID: ${boardCard.cardId}, OPFTech Number: ${cardOpfTechNumber}`);
+                                    //console.log(`Card ID: ${boardCard.id}, OPFTech Number: ${cardOpfTechNumber}`);
                                     //console.log(`Main Card ID: ${card.id}, OPFTech Number: ${opftechnumber}`);
 
                                     const json = JSON.stringify(card, null, 2);
                                     console.log('Original JSON:', json);
-                                    await this.rqtInv.setCardUpdate(boardCard.cardId, card);
-                                    //await this.rqtInv.setJson(boardCard.cardId, json);
-                                    await this.updateFields(boardCard, card);
+                                    await this.rqtInv.setCardUpdate(boardCard.id, card);
+                                    //await this.rqtInv.setJson(boardCard.id, json);
                                     
+                                    // Iterate over each customFieldItem in boardCard.customFieldItems array.
+                                    boardCard.customFieldItems.forEach(async (boardCardCustomFieldItem) => {
+                                        const mainCardCustomFieldId = this.config.mappingCustIds[boardId + boardCard.id];
+                                        let mainCardCustomFieldValue = '';
+                                        
+                                        // Iterate over each customFieldItem in card.customFieldItems array.
+                                        card.customFieldItems.forEach(async (cardCustomFieldItem) => {
+                                            if (cardCustomFieldItem.id === mainCardCustomFieldId) {
+                                                mainCardCustomFieldValue = cardCustomFieldItem.value;
+                                            }
+                                        });
+
+                                        const customFieldOptionsId = this.config.mappingCustOptionsIds[board.getBoardId() + mainCardCustomFieldValue];
+                                        
+                                        // Assuming this.rqtInv.setCustomField is an asynchronous function,
+                                        // you may need to handle its result or use await if it returns a promise.
+                                        await this.rqtInv.setCustomField(boardCard.id, boardCardCustomFieldItem.id, customFieldOptionsId, null);
+                                    });
+                                                                        
                                     console.log('Duplicate card updated.');
                                 }
                             }
@@ -249,17 +267,6 @@ class WorkspaceManager {
             console.error('Error updating duplicates:', error);
             throw error;
         }
-    }
-
-    //Update fields
-    async updateFields(boardCard, card) {
-
-      // Iterate over each customFieldItem in card.customFieldItems array.
-      card.customFieldItems.forEach(async (customFieldItem) => {
-        // Find custom field id based on customFieldItem.name.
-        const customFieldId = await this.findCustomFieldId(card, customFieldItem.name);
-
-      });
     }
       
     //Update Workspace
