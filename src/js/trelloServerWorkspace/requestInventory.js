@@ -597,10 +597,8 @@ class RequestInventory {
             dueComplete: card.dueComplete,
             subscribed: card.subscribed,
             address: card.address,
-            locationName: locationName,
-            coordinates: coordinates,
             cover: card.cover,
-            
+
             
         },
         { timeout }
