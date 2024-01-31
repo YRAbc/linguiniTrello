@@ -215,8 +215,8 @@ class WorkspaceManager {
                                 console.log(`Card ID: ${boardCard.cardId}, OPFTech Number: ${cardOpfTechNumber}`);
                                 console.log(`Main Card ID: ${card.id}, OPFTech Number: ${opftechnumber}`);
 
-                                // Check if the card has the same OPFTech number
-                                if (cardOpfTechNumber === opftechnumber && card.id !== boardCard.cardId) {
+                                // Check if the card has the same OPFTech number  && card.id !== boardCard.cardId
+                                if (cardOpfTechNumber === opftechnumber) {
                                     console.log('Duplicate card found !!!!');
                                     // Get the json of the original card and update it
                                     const json = JSON.stringify(card, null, 2);
