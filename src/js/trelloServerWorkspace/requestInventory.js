@@ -583,19 +583,46 @@ class RequestInventory {
   async setCard(cardId, card, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
     try {
         const payload = {
-          name: card.name,
-          desc: card.desc,
+          badges: card.badges,
+          /*  location: card.location,
+            votes: card.votes,
+            viewingMemberVoted: card.viewingMemberVoted,
+            subscribed: card.subscribed,
+            fogbugz: card.fogbugz,
+            checkItems: card.checkItems,
+            checkItemsChecked: card.checkItemsChecked,
+            checkItemsEarliestDue: card.checkItemsEarliestDue,
+            comments: card.comments,
+            attachments: card.attachments,
+            description: card.description,
+            due: card.due,
+            dueComplete: card.dueComplete,
+            start: card.start,*/
+
+          checkItemStates: card.checkItemStates,
           closed: card.closed,
-          idMembers: card.idMembers,
-          idAttachmentCover: card.idAttachmentCover,
-          idLabels: card.idLabels,
-          pos: card.pos,
-          due: card.due,
-          start: card.start,
           dueComplete: card.dueComplete,
+          dateLastActivity: card.dateLastActivity,
+          desc: card.desc,
+          descData: card.descData,
+          due: card.due,
+          dueReminder: card.dueReminder,
+          email: card.email,
+          idChecklists: card.idChecklists,
+          idMembers: card.idMembers,
+          idMembersVoted: card.idMembersVoted,
+          idAttachmentCover: card.idAttachmentCover,
+          labels: card.label,
+          idLabels: card.idLabels,
+          manualCoverAttachment: card.manualCoverAttachment,
+          name: card.name,
+          pos: card.pos,
+          start: card.start,
           subscribed: card.subscribed,
-          address: card.address,
           cover: card.cover,
+          isTemplate: card.isTemplate,
+          cardRole: card.cardRole
+
         };
         
         // Check and conditionally add properties
@@ -628,7 +655,7 @@ class RequestInventory {
         if (retryCount > 0) {
           console.warn(`Rate limit exceeded. Retrying after ${delay / 1000} seconds. Retries left: ${retryCount}`);
           await new Promise(resolve => setTimeout(resolve, delay));
-          return this.setJson(cardId, json, retryCount - 1, delay * 2, timeout); // Exponential backoff
+          return this.setCard(cardId, card, retryCount - 1, delay * 2, timeout);  // Exponential backoff
         } else {
           console.error('Exceeded maximum retry attempts. Aborting.');
           throw error;
