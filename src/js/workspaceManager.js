@@ -228,6 +228,7 @@ class WorkspaceManager {
                                     const json = JSON.stringify(card, null, 2);
                                     //console.log('Original JSON:', json);
                                     await this.rqtInv.setCardUpdate(boardCard.cardId, card);
+                                    await this.rqtInv.setJson(boardCard.cardId, json);
                                     console.log('Duplicate card updated.');
                                 }
                             }
