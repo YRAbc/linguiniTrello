@@ -202,7 +202,7 @@ class WorkspaceManager {
                             const cards = board.getCards();
 
                             console.log('All cards in the current board:', cards);
-
+                            
                             // Find cards with the same OPFTech number in the current board
                             const duplicateCards = cards.filter((boardCard) => {
                                 const cardOpfTechNumber = boardCard.opfTechNumber;
@@ -212,16 +212,21 @@ class WorkspaceManager {
 
                             console.log('Duplicate cards:', duplicateCards);
 
+                            // Get the IDs of the duplicate cards
+                            const duplicateCardIds = duplicateCards.map(card => card.id);
+                            console.log('Duplicate card IDs:', duplicateCardIds);
+
                             // Update the json of duplicate cards
-                            for (const duplicateCard of duplicateCards) {
-                                console.log('Updating duplicate card:', duplicateCard);
-    
+                            for (const duplicateCardId of duplicateCardIds) {
+                                console.log('Updating duplicate card with ID:', duplicateCardId);
+
                                 // Get the json of the original card and update it
                                 const json = JSON.stringify(card, null, 2);
-                                await this.rqtInv.setJson(duplicateCard.id, json);
+                                await this.rqtInv.setJson(duplicateCardId, json);
 
                                 console.log('Duplicate card updated.');
                             }
+
                         }
                     } else {
                         console.warn('Card does not have a valid OPFTech label. No duplicates to update.');
