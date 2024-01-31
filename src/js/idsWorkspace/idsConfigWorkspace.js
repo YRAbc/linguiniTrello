@@ -258,6 +258,12 @@ class IdsConfigWorkspace {
     get techBoardCustStatusBlockedId(){ return "65a954eb3b1d7548e7d9cb46";}      
     get techBoardCustStatusCancelledId(){ return "65a954eb3b1d7548e7d9cb47";}
 
+    get mappingIds(){
+
+        return [ this.opfBoardId+this.opfBoardCustPriorityId];
+
+    }
+
 }
 
 export default IdsConfigWorkspace;

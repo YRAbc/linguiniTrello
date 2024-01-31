@@ -316,7 +316,7 @@ class RequestInventory {
               });
           }
 
-          console.log('Max OPFTechNumber:', maxOPFTechNumber);
+          //console.log('Max OPFTechNumber:', maxOPFTechNumber);
           return maxOPFTechNumber;
       } catch (error) {
           console.error('Error in getOPFTechMaxNumber:', error.response ? error.response.data : error.message);
@@ -370,7 +370,7 @@ class RequestInventory {
             display_cardFront: "true"
         });
 
-        console.log(`Label ${frontText} added successfully. Response:`, labelCreationResponse.data);
+        //console.log(`Label ${frontText} added successfully. Response:`, labelCreationResponse.data);
 
     } catch (error) {
         console.error(`Error adding label ${frontText}:`, error.response ? error.response.data : error.message);
@@ -391,7 +391,7 @@ class RequestInventory {
         }
       );
 
-      console.log('Custom field updated successfully.');
+      //console.log('Custom field updated successfully.');
     } catch (error) {
       if (error.response && error.response.status === 429) {
         // Handle rate limiting
@@ -584,10 +584,6 @@ class RequestInventory {
     try {
         const payload = {
           /*
-          location: card.location,
-          votes: card.votes,
-          viewingMemberVoted: card.viewingMemberVoted,
-          subscribed: card.subscribed,
           fogbugz: card.fogbugz,
           checkItems: card.checkItems,
           checkItemsChecked: card.checkItemsChecked,
@@ -625,6 +621,8 @@ class RequestInventory {
           desc: card.desc,
           location: card.location,
           votes: card.votes,
+          viewingMemberVoted: card.viewingMemberVoted,
+          subscribed: card.subscribed,
         };
         
         // Check and conditionally add properties
