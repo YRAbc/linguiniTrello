@@ -204,23 +204,26 @@ class WorkspaceManager {
                             console.log('All cards in the current board:', cards);
 
                             // Find cards with the same OPFTech number in the current board
-                            const duplicateCards = cards.filter((boardCard) => {
+                            for (const boardCard of cards) {
                                 const cardOpfTechNumber = boardCard.opfTechNumber;
 
                                 // Ensure boardCard has a 'cardId' property
                                 if (!boardCard.cardId) {
                                     console.warn('Card does not have a cardId:', boardCard);
-                                    return false;
+                                    continue;
                                 }
 
                                 console.log(`Card ID: ${boardCard.cardId}, OPFTech Number: ${cardOpfTechNumber}`);
 
-                                // Get the json of the original card and update it
-                                const json = JSON.stringify(boardCard, null, 2);
-                                await this.rqtInv.setJson(boardCard.cardId, json);
+                                // Check if the card has the same OPFTech number
+                                if (cardOpfTechNumber === opftechnumber) {
+                                    // Get the json of the original card and update it
+                                    const json = JSON.stringify(boardCard, null, 2);
+                                    await this.rqtInv.setJson(boardCard.cardId, json);
 
-                                console.log('Duplicate card updated.');
-                            });
+                                    console.log('Duplicate card updated.');
+                                }
+                            }
                         }
 
                     } else {
