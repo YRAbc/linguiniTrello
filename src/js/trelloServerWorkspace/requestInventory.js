@@ -646,8 +646,8 @@ class RequestInventory {
         const updatedCard = response.data;
         return updatedCard;
       } else {
-        console.error('Invalid card json update response:', response.data);
-        throw new Error('Invalid card json update response');
+        console.error('Invalid card update response:', response.data);
+        throw new Error('Invalid card update response');
       }
     } catch (error) {
       if (error.response && error.response.status === 429) {
@@ -661,7 +661,7 @@ class RequestInventory {
           throw error;
         }
       } else {
-        console.error('Error updating card with json:', error.response ? error.response.data : error.message);
+        console.error('Error updating card:', error.response ? error.response.data : error.message);
         throw error;
       }
     }
