@@ -204,26 +204,14 @@ class WorkspaceManager {
                             console.log('All cards in the current board:', cards);
 
                             // Find cards with the same OPFTech number in the current board
-                            const duplicateCardsPromises = cards.map(async (boardCard) => {
-                                const cardOpfTechNumber = await this.rqtInv.getOPFTechNumber(boardCard.id);
+                            const duplicateCards = cards.filter((boardCard) => {
+                                const cardOpfTechNumber = boardCard.opfTechNumber;
                                 console.log(`Card ID: ${boardCard.id}, OPFTech Number: ${cardOpfTechNumber}`);
-                                return { card: boardCard, opfTechNumber: cardOpfTechNumber };
+                                return cardOpfTechNumber === opftechnumber;
                             });
 
-                            // Wait for all async operations to complete
-                            const duplicateCardsResults = await Promise.all(duplicateCardsPromises);
-
-                            console.log('Results of async operations:', duplicateCardsResults);
-
-                            // Filter the results to get only matching cards
-                            const duplicateCards = duplicateCardsResults.filter(result => result.opfTechNumber === opftechnumber)
-                                                                        .map(result => result.card);
-
                             console.log('Duplicate cards:', duplicateCards);
 
-
-                            console.log('Duplicate cards:', duplicateCards);
-    
                             // Update the json of duplicate cards
                             for (const duplicateCard of duplicateCards) {
                                 console.log('Updating duplicate card:', duplicateCard);
