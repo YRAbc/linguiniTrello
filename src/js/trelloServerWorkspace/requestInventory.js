@@ -593,7 +593,7 @@ class RequestInventory {
           ...(card.fogbugz && { fogbugz: card.fogbugz }),
           ...(card.checkItems && { checkItems: card.checkItems }),
           ...(card.checkItemsChecked && { checkItemsChecked: card.checkItemsChecked }),
-          ...(card.checkItemsEarliestDue && { checkItemsEarliestDue: card.checkItemsEarliestDue }),
+          /*...(card.checkItemsEarliestDue && { checkItemsEarliestDue: card.checkItemsEarliestDue }),
           ...(card.comments && { comments: card.comments }),
           ...(card.attachments && { attachments: card.attachments }),
           ...(card.description && { description: card.description }),
@@ -617,7 +617,7 @@ class RequestInventory {
           ...(card.subscribed && { subscribed: card.subscribed }),
           ...(card.cover && { cover: card.cover }),
           ...(card.isTemplate && { isTemplate: card.isTemplate }),
-          ...(card.cardRole && { cardRole: card.cardRole }),
+          ...(card.cardRole && { cardRole: card.cardRole }),*/
         };
         
         // Check and conditionally add properties
