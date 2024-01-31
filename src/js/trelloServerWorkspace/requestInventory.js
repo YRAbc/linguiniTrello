@@ -624,6 +624,7 @@ class RequestInventory {
 
           name: card.name,
           desc: card.desc,
+          badges: card.badges,
 
         };
         
