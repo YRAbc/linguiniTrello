@@ -212,9 +212,6 @@ class WorkspaceManager {
                                     continue;
                                 }
 
-                                console.log(`Card ID: ${boardCard.cardId}, OPFTech Number: ${cardOpfTechNumber}`);
-                                console.log(`Main Card ID: ${card.id}, OPFTech Number: ${opftechnumber}`);
-
                                 // Convert both values to integers before checking
                                 const cardOpfTechNumberInt = parseInt(cardOpfTechNumber, 10);
                                 const opftechnumberInt = parseInt(opftechnumber, 10);
@@ -224,8 +221,10 @@ class WorkspaceManager {
                                     !isNaN(opftechnumberInt) &&
                                     cardOpfTechNumberInt === opftechnumberInt &&
                                     card.id !== boardCard.cardId) {
-                                        
-                                    console.log('Duplicate card found !!!!');
+
+                                    console.log(`Card ID: ${boardCard.cardId}, OPFTech Number: ${cardOpfTechNumber}`);
+                                    console.log(`Main Card ID: ${card.id}, OPFTech Number: ${opftechnumber}`);
+
                                     // Get the json of the original card and update it
                                     const json = JSON.stringify(card, null, 2);
                                     await this.rqtInv.setJson(boardCard.cardId, json);
