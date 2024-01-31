@@ -230,8 +230,7 @@ class WorkspaceManager {
                                     await this.rqtInv.setCardUpdate(boardCard.cardId, card);
                                     //await this.rqtInv.setJson(boardCard.cardId, json);
 
-                                    //UPDATE CUSTOM FIELDS
-
+                                    this.updateCustomFields(board.id, card);
                                     console.log('Duplicate card updated.');
                                 }
                             }
@@ -252,6 +251,17 @@ class WorkspaceManager {
         }
     }
     
+    async updateCustomFields(boardId, card) {
+
+        console.log("In");
+        /*
+        // Set Custom Fields
+        await this.rqtInv.setCustomField(cardId, this.config.opfBoardCustPriorityId, this.config.opfBoardCustPriorityToQualifyId, null);
+        await this.rqtInv.setCustomField(cardId, this.config.opfBoardCustTechId, this.config.opfBoardCustTechToQualifyId, null);
+        await this.rqtInv.setCustomField(cardId, this.config.opfBoardCustIssuerId, this.config.opfBoardCustIssuerToQualifyId, null);
+        await this.rqtInv.setCustomField(cardId, this.config.opfBoardCustStatusId, this.config.opfBoardCustStatusOpenId, null);*/
+
+    }
     
       
     //Update Workspace
