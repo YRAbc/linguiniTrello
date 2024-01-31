@@ -203,38 +203,36 @@ class WorkspaceManager {
 
                             console.log('All cards in the current board:', cards);
 
-// Find cards with the same OPFTech number in the current board
-const duplicateCards = cards.filter((boardCard) => {
-    const cardOpfTechNumber = boardCard.opfTechNumber;
-    
-    // Ensure boardCard has an 'id' property
-    if (!boardCard.id) {
-        console.warn('Card does not have an ID:', boardCard);
-        return false;
-    }
+                            // Find cards with the same OPFTech number in the current board
+                            const duplicateCards = cards.filter((boardCard) => {
+                                const cardOpfTechNumber = boardCard.opfTechNumber;
+                                
+                                // Ensure boardCard has a 'cardId' property
+                                if (!boardCard.cardId) {
+                                    console.warn('Card does not have a cardId:', boardCard);
+                                    return false;
+                                }
 
-    console.log(`Card ID: ${boardCard.id}, OPFTech Number: ${cardOpfTechNumber}`);
-    return cardOpfTechNumber === opftechnumber;
-});
+                                console.log(`Card ID: ${boardCard.cardId}, OPFTech Number: ${cardOpfTechNumber}`);
+                                return cardOpfTechNumber === opftechnumber;
+                            });
 
-console.log('Duplicate cards:', duplicateCards);
+                            console.log('Duplicate cards:', duplicateCards);
 
-// Get the IDs of the duplicate cards
-const duplicateCardIds = duplicateCards.map(card => card.id);
-console.log('Duplicate card IDs:', duplicateCardIds);
+                            // Get the IDs of the duplicate cards
+                            const duplicateCardIds = duplicateCards.map(card => card.cardId);
+                            console.log('Duplicate card IDs:', duplicateCardIds);
 
-// Update the json of duplicate cards
-for (const duplicateCardId of duplicateCardIds) {
-    console.log('Updating duplicate card with ID:', duplicateCardId);
+                            // Update the json of duplicate cards
+                            for (const duplicateCardId of duplicateCardIds) {
+                                console.log('Updating duplicate card with ID:', duplicateCardId);
 
-    // Get the json of the original card and update it
-    const json = JSON.stringify(card, null, 2);
-    await this.rqtInv.setJson(duplicateCardId, json);
+                                // Get the json of the original card and update it
+                                const json = JSON.stringify(card, null, 2);
+                                await this.rqtInv.setJson(duplicateCardId, json);
 
-    console.log('Duplicate card updated.');
-}
-
-
+                                console.log('Duplicate card updated.');
+                            }
                         }
                     } else {
                         console.warn('Card does not have a valid OPFTech label. No duplicates to update.');
