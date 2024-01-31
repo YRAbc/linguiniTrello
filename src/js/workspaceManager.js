@@ -225,12 +225,12 @@ class WorkspaceManager {
                                     //console.log(`Card ID: ${boardCard.cardId}, OPFTech Number: ${cardOpfTechNumber}`);
                                     //console.log(`Main Card ID: ${card.id}, OPFTech Number: ${opftechnumber}`);
 
-                                    //const json = JSON.stringify(card, null, 2);
-                                    //console.log('Original JSON:', json);
+                                    const json = JSON.stringify(card, null, 2);
+                                    console.log('Original JSON:', json);
                                     await this.rqtInv.setCardUpdate(boardCard.cardId, card);
                                     //await this.rqtInv.setJson(boardCard.cardId, json);
-
-                                    this.updateCustomFields(board.id, card);
+                                    await this.updateFields(boardCard, card);
+                                    
                                     console.log('Duplicate card updated.');
                                 }
                             }
@@ -250,19 +250,27 @@ class WorkspaceManager {
             throw error;
         }
     }
-    
-    async updateCustomFields(boardId, card) {
 
-        console.log("In");
+
+
+    //Update fields
+    async updateFields(boardCard, card) {
+
+
+        //Find the boardCard boardId parameter.
+        //Find also card custom field priority id
+        //Find also card custom field issuer id
+        //Find also card custom field tech id
+        //Find also card custom field status id
+
         /*
-        // Set Custom Fields
-        await this.rqtInv.setCustomField(cardId, this.config.opfBoardCustPriorityId, this.config.opfBoardCustPriorityToQualifyId, null);
-        await this.rqtInv.setCustomField(cardId, this.config.opfBoardCustTechId, this.config.opfBoardCustTechToQualifyId, null);
-        await this.rqtInv.setCustomField(cardId, this.config.opfBoardCustIssuerId, this.config.opfBoardCustIssuerToQualifyId, null);
-        await this.rqtInv.setCustomField(cardId, this.config.opfBoardCustStatusId, this.config.opfBoardCustStatusOpenId, null);*/
+        await this.rqtInv.setCustomField(boardCard.cardId, this.config.opfBoardCustPriorityId, this.config.opfBoardCustPriorityToQualifyId, null);
+        await this.rqtInv.setCustomField(boardCard.cardId, this.config.opfBoardCustTechId, this.config.opfBoardCustTechToQualifyId, null);
+        await this.rqtInv.setCustomField(boardCard.cardId, this.config.opfBoardCustIssuerId, this.config.opfBoardCustIssuerToQualifyId, null);
+        await this.rqtInv.setCustomField(boardCard.cardId, this.config.opfBoardCustStatusId, this.config.opfBoardCustStatusOpenId, null);
+        */
 
     }
-    
       
     //Update Workspace
     async updateWorkspace() {
