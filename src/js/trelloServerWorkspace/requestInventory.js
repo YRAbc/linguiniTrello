@@ -657,7 +657,7 @@ class RequestInventory {
         if (retryCount > 0) {
           console.warn(`Rate limit exceeded. Retrying after ${delay / 1000} seconds. Retries left: ${retryCount}`);
           await new Promise(resolve => setTimeout(resolve, delay));
-          return this.setCard(cardId, card, retryCount - 1, delay * 2, timeout);  // Exponential backoff
+          return this.setCardUpdate(cardId, card, retryCount - 1, delay * 2, timeout);  // Exponential backoff
         } else {
           console.error('Exceeded maximum retry attempts. Aborting.');
           throw error;
