@@ -551,7 +551,7 @@ class RequestInventory {
         `https://api.trello.com/1/cards/${cardId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`,
         { json },
         { timeout }
-      );
+      );      
 
       if (response.data && typeof response.data === 'object') {
         const updatedCard = response.data;
@@ -577,7 +577,6 @@ class RequestInventory {
       }
     }
   }
-
 }
 
 export default RequestInventory;
