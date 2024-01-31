@@ -549,7 +549,7 @@ class RequestInventory {
     try {
       const response = await axios.put(
         `https://api.trello.com/1/cards/${cardId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`,
-        { json },
+        json,
         { timeout }
       );   
       console.log('set json on card,', cardId, '    ; JSON ', json);   
