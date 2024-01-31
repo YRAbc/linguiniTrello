@@ -91,7 +91,7 @@ class WorkspaceManager {
 
                             //  -> CARD MODIFIED
                             this.trellowsp.cardModifiedInListRule(card.getCardId(), list.getListId(), board.getBoardId());
-                            this.updateDuplicates(board.getBoardId(), existingInList);
+                            this.updateDuplicates(existingInList);
                             this.updateWorkspace();
                     } 
                     
@@ -171,7 +171,7 @@ class WorkspaceManager {
         return IdChanged || nameChanged || jsonChanged;
     }
 
-    async updateDuplicates(boardId, card) {
+    async updateDuplicates(card) {
         try {
             //console.log('Starting update duplicates with card:', card.id);
     
@@ -229,7 +229,7 @@ class WorkspaceManager {
                                     console.log('Original JSON:', json);
                                     await this.rqtInv.setCardUpdate(boardCard.id, card);
                                     //await this.rqtInv.setJson(boardCard.id, json);
-                                    
+                                    /*
                                     // Iterate over each customFieldItem in boardCard.customFieldItems array.
                                     boardCard.customFieldItems.forEach(async (boardCardCustomFieldItem) => {
                                         const mainCardCustomFieldId = this.config.mappingCustIds[boardId + boardCard.id];
@@ -248,6 +248,7 @@ class WorkspaceManager {
                                         // you may need to handle its result or use await if it returns a promise.
                                         await this.rqtInv.setCustomField(boardCard.id, boardCardCustomFieldItem.id, customFieldOptionsId, null);
                                     });
+                                    */
                                                                         
                                     console.log('Duplicate card updated.');
                                 }
