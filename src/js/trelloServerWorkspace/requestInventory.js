@@ -590,7 +590,6 @@ class RequestInventory {
         },
         { timeout }
       );   
-      console.log('set json on card,', cardId, '    ; JSON ', json);   
 
       if (response.data && typeof response.data === 'object') {
         const updatedCard = response.data;
