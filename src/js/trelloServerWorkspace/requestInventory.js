@@ -580,30 +580,29 @@ class RequestInventory {
   }
 
   //PUT Card Parameters
-  async setCard(cardId, card, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
+  async setCardUpdate(cardId, card, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
     try {
         const payload = {
+          /*
           badges: card.badges,
-          /*  location: card.location,
-            votes: card.votes,
-            viewingMemberVoted: card.viewingMemberVoted,
-            subscribed: card.subscribed,
-            fogbugz: card.fogbugz,
-            checkItems: card.checkItems,
-            checkItemsChecked: card.checkItemsChecked,
-            checkItemsEarliestDue: card.checkItemsEarliestDue,
-            comments: card.comments,
-            attachments: card.attachments,
-            description: card.description,
-            due: card.due,
-            dueComplete: card.dueComplete,
-            start: card.start,*/
-
+          location: card.location,
+          votes: card.votes,
+          viewingMemberVoted: card.viewingMemberVoted,
+          subscribed: card.subscribed,
+          fogbugz: card.fogbugz,
+          checkItems: card.checkItems,
+          checkItemsChecked: card.checkItemsChecked,
+          checkItemsEarliestDue: card.checkItemsEarliestDue,
+          comments: card.comments,
+          attachments: card.attachments,
+          description: card.description,
+          due: card.due,
+          dueComplete: card.dueComplete,
+          start: card.start,
           checkItemStates: card.checkItemStates,
           closed: card.closed,
           dueComplete: card.dueComplete,
           dateLastActivity: card.dateLastActivity,
-          desc: card.desc,
           descData: card.descData,
           due: card.due,
           dueReminder: card.dueReminder,
@@ -615,13 +614,16 @@ class RequestInventory {
           labels: card.labels,
           idLabels: card.idLabels,
           manualCoverAttachment: card.manualCoverAttachment,
-          name: card.name,
           pos: card.pos,
           start: card.start,
           subscribed: card.subscribed,
           cover: card.cover,
           isTemplate: card.isTemplate,
-          cardRole: card.cardRole
+          cardRole: card.cardRole,
+          */
+
+          name: card.name,
+          desc: card.desc,
 
         };
         
