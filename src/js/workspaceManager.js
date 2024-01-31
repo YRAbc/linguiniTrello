@@ -91,7 +91,7 @@ class WorkspaceManager {
 
                             //  -> CARD MODIFIED
                             this.trellowsp.cardModifiedInListRule(card.getCardId(), list.getListId(), board.getBoardId());
-                            this.updateDuplicates(existingInList);
+                            //this.updateDuplicates(existingInList);
                             this.updateWorkspace();
                     } 
                     
