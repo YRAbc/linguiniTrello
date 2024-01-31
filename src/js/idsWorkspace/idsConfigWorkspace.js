@@ -137,24 +137,100 @@ class IdsConfigWorkspace {
         return {
 
             //PRIORITY
-            [this.opfBoardId + 'Priority']: this.opfBoardCustPriorityId,
-            [this.sidBoardId + 'Priority']: this.sidBoardCustPriorityId,
-            [this.techBoardId + 'Priority']: this.techBoardCustPriorityId,
+            [this.opfBoardId + this.opfBoardCustPriorityBlockerId]: this.opfBoardCustPriorityId,
+            [this.opfBoardId + this.opfBoardCustPriorityCriticId]: this.opfBoardCustPriorityId,
+            [this.opfBoardId + this.opfBoardCustPriorityMajorId]: this.opfBoardCustPriorityId,
+            [this.opfBoardId + this.opfBoardCustPriorityMinorId]: this.opfBoardCustPriorityId,
+            [this.opfBoardId + this.opfBoardCustPriorityToQualifyId]: this.opfBoardCustPriorityId,
+
+            [this.sidBoardId + this.sidBoardCustPriorityBlockerId]: this.sidBoardCustPriorityId,
+            [this.sidBoardId + this.sidBoardCustPriorityCriticId]: this.sidBoardCustPriorityId,
+            [this.sidBoardId + this.sidBoardCustPriorityMajorId]: this.sidBoardCustPriorityId,
+            [this.sidBoardId + this.sidBoardCustPriorityMinorId]: this.sidBoardCustPriorityId,
+            [this.sidBoardId + this.sidBoardCustPriorityToQualifyId]: this.sidBoardCustPriorityId,
+
+            [this.techBoardId + this.techBoardCustPriorityBlockerId]: this.techBoardCustPriorityId,
+            [this.techBoardId + this.techBoardCustPriorityCriticId]: this.techBoardCustPriorityId,
+            [this.techBoardId + this.techBoardCustPriorityMajorId]: this.techBoardCustPriorityId,
+            [this.techBoardId + this.techBoardCustPriorityMinorId]: this.techBoardCustPriorityId,
+            [this.techBoardId + this.techBoardCustPriorityToQualifyId]: this.techBoardCustPriorityId,
+
 
             //ISSUER
-            [this.opfBoardId + 'Issuer']: this.opfBoardCustIssuerId,
-            [this.sidBoardId + 'Issuer']: this.sidBoardCustIssuerId,
-            [this.techBoardId + 'Issuer']: this.techBoardCustIssuerId,
+            [this.opfBoardId + this.opfBoardCustIssuerPBTeamId]: this.opfBoardCustIssuerId,
+            [this.opfBoardId + this.opfBoardCustIssuerSupportTradingId]: this.opfBoardCustIssuerId,
+            [this.opfBoardId + this.opfBoardCustIssuerTreasuryId]: this.opfBoardCustIssuerId,
+            [this.opfBoardId + this.opfBoardCustIssuerValuationId]: this.opfBoardCustIssuerId,
+            [this.opfBoardId + this.opfBoardCustIssuerAccessMarketId]: this.opfBoardCustIssuerId,
+            [this.opfBoardId + this.opfBoardCustIssuerManagerId]: this.opfBoardCustIssuerId,
+            [this.opfBoardId + this.opfBoardCustIssuerToQualifyId]: this.opfBoardCustIssuerId,
+
+            [this.sidBoardId + this.sidBoardCustIssuerPBTeamId]: this.sidBoardCustIssuerId,
+            [this.sidBoardId + this.sidBoardCustIssuerSupportTradingId]: this.sidBoardCustIssuerId,
+            [this.sidBoardId + this.sidBoardCustIssuerTreasuryId]: this.sidBoardCustIssuerId,
+            [this.sidBoardId + this.sidBoardCustIssuerValuationId]: this.sidBoardCustIssuerId,
+            [this.sidBoardId + this.sidBoardCustIssuerAccessMarketId]: this.sidBoardCustIssuerId,
+            [this.sidBoardId + this.sidBoardCustIssuerManagerId]: this.sidBoardCustIssuerId,
+            [this.sidBoardId + this.sidBoardCustIssuerToQualifyId]: this.sidBoardCustIssuerId,
+
+            [this.techBoardId + this.techBoardCustIssuerPBTeamId]: this.techBoardCustIssuerId,
+            [this.techBoardId + this.techBoardCustIssuerSupportTradingId]: this.techBoardCustIssuerId,
+            [this.techBoardId + this.techBoardCustIssuerTreasuryId]: this.techBoardCustIssuerId,
+            [this.techBoardId + this.techBoardCustIssuerValuationId]: this.techBoardCustIssuerId,
+            [this.techBoardId + this.techBoardCustIssuerAccessMarketId]: this.techBoardCustIssuerId,
+            [this.techBoardId + this.techBoardCustIssuerManagerId]: this.techBoardCustIssuerId,
+            [this.techBoardId + this.techBoardCustIssuerToQualifyId]: this.techBoardCustIssuerId,
+
 
             //TECH
-            [this.opfBoardId + 'Tech']: this.opfBoardCustTechId,
-            [this.sidBoardId + 'Tech']: this.sidBoardCustTechId,
-            [this.techBoardId + 'Tech']: this.techBoardCustTechId,
+            [this.opfBoardId + this.opfBoardCustTechSupportId]: this.opfBoardCustTechId,
+            [this.opfBoardId + this.opfBoardCustTechProjectId]: this.opfBoardCustTechId,
+            [this.opfBoardId + this.opfBoardCustTechSidId]: this.opfBoardCustTechId,
+            [this.opfBoardId + this.opfBoardCustTechNotTechId]: this.opfBoardCustTechId,
+            [this.opfBoardId + this.opfBoardCustTechToQualifyId]: this.opfBoardCustTechId,
+
+            [this.sidBoardId + this.sidBoardCustTechSupportId]: this.sidBoardCustTechId,
+            [this.sidBoardId + this.sidBoardCustTechProjectId]: this.sidBoardCustTechId,
+            [this.sidBoardId + this.sidBoardCustTechSidId]: this.sidBoardCustTechId,
+            [this.sidBoardId + this.sidBoardCustTechNotTechId]: this.sidBoardCustTechId,
+            [this.sidBoardId + this.sidBoardCustTechToQualifyId]: this.sidBoardCustTechId,
+
+            [this.techBoardId + this.techBoardCustTechSupportId]: this.techBoardCustTechId,
+            [this.techBoardId + this.techBoardCustTechProjectId]: this.techBoardCustTechId,
+            [this.techBoardId + this.techBoardCustTechSidId]: this.techBoardCustTechId,
+            [this.techBoardId + this.techBoardCustTechNotTechId]: this.techBoardCustTechId,
+            [this.techBoardId + this.techBoardCustTechToQualifyId]: this.techBoardCustTechId,
 
             //STATUS
-            [this.opfBoardId + 'Status']: this.opfBoardCustStatusId,
-            [this.sidBoardId + 'Status']: this.sidBoardCustStatusId,
-            [this.techBoardId + 'Status']: this.techBoardCustStatusId,
+            [this.opfBoardId + this.opfBoardCustStatusOpenId]: this.opfBoardCustStatusId,
+            [this.opfBoardId + this.opfBoardCustStatusInProgressId]: this.opfBoardCustStatusId,
+            [this.opfBoardId + this.opfBoardCustStatusTestingId]: this.opfBoardCustStatusId,
+            [this.opfBoardId + this.opfBoardCustStatusPendingDeliveryId]: this.opfBoardCustStatusId,
+            [this.opfBoardId + this.opfBoardCustStatusDeliveredId]: this.opfBoardCustStatusId,
+            [this.opfBoardId + this.opfBoardCustStatusValidatedId]: this.opfBoardCustStatusId,
+            [this.opfBoardId + this.opfBoardCustStatusWaitingId]: this.opfBoardCustStatusId,
+            [this.opfBoardId + this.opfBoardCustStatusBlockedId]: this.opfBoardCustStatusId,
+            [this.opfBoardId + this.opfBoardCustStatusCancelledId]: this.opfBoardCustStatusId,
+
+            [this.sidBoardId + this.sidBoardCustStatusOpenId]: this.sidBoardCustStatusId,
+            [this.sidBoardId + this.sidBoardCustStatusInProgressId]: this.sidBoardCustStatusId,
+            [this.sidBoardId + this.sidBoardCustStatusTestingId]: this.sidBoardCustStatusId,
+            [this.sidBoardId + this.sidBoardCustStatusPendingDeliveryId]: this.sidBoardCustStatusId,
+            [this.sidBoardId + this.sidBoardCustStatusDeliveredId]: this.sidBoardCustStatusId,
+            [this.sidBoardId + this.sidBoardCustStatusValidatedId]: this.sidBoardCustStatusId,
+            [this.sidBoardId + this.sidBoardCustStatusWaitingId]: this.sidBoardCustStatusId,
+            [this.sidBoardId + this.sidBoardCustStatusBlockedId]: this.sidBoardCustStatusId,
+            [this.sidBoardId + this.sidBoardCustStatusCancelledId]: this.sidBoardCustStatusId,
+
+            [this.techBoardId + this.techBoardCustStatusOpenId]: this.techBoardCustStatusId,
+            [this.techBoardId + this.techBoardCustStatusInProgressId]: this.techBoardCustStatusId,
+            [this.techBoardId + this.techBoardCustStatusTestingId]: this.techBoardCustStatusId,
+            [this.techBoardId + this.techBoardCustStatusPendingDeliveryId]: this.techBoardCustStatusId,
+            [this.techBoardId + this.techBoardCustStatusDeliveredId]: this.techBoardCustStatusId,
+            [this.techBoardId + this.techBoardCustStatusValidatedId]: this.techBoardCustStatusId,
+            [this.techBoardId + this.techBoardCustStatusWaitingId]: this.techBoardCustStatusId,
+            [this.techBoardId + this.techBoardCustStatusBlockedId]: this.techBoardCustStatusId,
+            [this.techBoardId + this.techBoardCustStatusCancelledId]: this.techBoardCustStatusId,
         };
     };
 

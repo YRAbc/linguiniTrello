@@ -251,25 +251,15 @@ class WorkspaceManager {
         }
     }
 
-
-
     //Update fields
     async updateFields(boardCard, card) {
 
+      // Iterate over each customFieldItem in card.customFieldItems array.
+      card.customFieldItems.forEach(async (customFieldItem) => {
+        // Find custom field id based on customFieldItem.name.
+        const customFieldId = await this.findCustomFieldId(card, customFieldItem.name);
 
-        //Find the boardCard boardId parameter.
-        //Find also card custom field priority id
-        //Find also card custom field issuer id
-        //Find also card custom field tech id
-        //Find also card custom field status id
-
-        /*
-        await this.rqtInv.setCustomField(boardCard.cardId, this.config.opfBoardCustPriorityId, this.config.opfBoardCustPriorityToQualifyId, null);
-        await this.rqtInv.setCustomField(boardCard.cardId, this.config.opfBoardCustTechId, this.config.opfBoardCustTechToQualifyId, null);
-        await this.rqtInv.setCustomField(boardCard.cardId, this.config.opfBoardCustIssuerId, this.config.opfBoardCustIssuerToQualifyId, null);
-        await this.rqtInv.setCustomField(boardCard.cardId, this.config.opfBoardCustStatusId, this.config.opfBoardCustStatusOpenId, null);
-        */
-
+      });
     }
       
     //Update Workspace
