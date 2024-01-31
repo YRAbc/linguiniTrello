@@ -215,13 +215,21 @@ class WorkspaceManager {
                                 console.log(`Card ID: ${boardCard.cardId}, OPFTech Number: ${cardOpfTechNumber}`);
                                 console.log(`Main Card ID: ${card.id}, OPFTech Number: ${opftechnumber}`);
 
-                                // Check if the card has the same OPFTech number
-                                if (cardOpfTechNumber === opftechnumber && card.id !== boardCard.cardId) {
+                                // Convert both values to integers before checking
+                                const cardOpfTechNumberInt = parseInt(cardOpfTechNumber, 10);
+                                const opftechnumberInt = parseInt(opftechnumber, 10);
+
+                                // Check if the card has the same OPFTech number and a different cardId
+                                if (!isNaN(cardOpfTechNumberInt) &&
+                                    !isNaN(opftechnumberInt) &&
+                                    cardOpfTechNumberInt === opftechnumberInt &&
+                                    card.id !== boardCard.cardId) {
+                                        
                                     console.log('Duplicate card found !!!!');
                                     // Get the json of the original card and update it
-                                    //const json = JSON.stringify(card, null, 2);
-                                    //await this.rqtInv.setJson(boardCard.cardId, json);
-                                    //console.log('Duplicate card updated.');
+                                    const json = JSON.stringify(card, null, 2);
+                                    await this.rqtInv.setJson(boardCard.cardId, json);
+                                    console.log('Duplicate card updated.');
                                 }
                             }
                         }
