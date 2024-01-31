@@ -197,7 +197,7 @@ class WorkspaceManager {
                         // Iterate through boards
                         for (const board of boards) {
                             console.log('Checking board:', board);
-    
+
                             // Get all cards in the current board
                             const cards = board.getCards();
 
@@ -206,7 +206,7 @@ class WorkspaceManager {
                             // Find cards with the same OPFTech number in the current board
                             const duplicateCards = cards.filter((boardCard) => {
                                 const cardOpfTechNumber = boardCard.opfTechNumber;
-                                
+
                                 // Ensure boardCard has a 'cardId' property
                                 if (!boardCard.cardId) {
                                     console.warn('Card does not have a cardId:', boardCard);
@@ -214,26 +214,15 @@ class WorkspaceManager {
                                 }
 
                                 console.log(`Card ID: ${boardCard.cardId}, OPFTech Number: ${cardOpfTechNumber}`);
-                                return cardOpfTechNumber === opftechnumber;
-                            });
-
-                            console.log('Duplicate cards:', duplicateCards);
-
-                            // Get the IDs of the duplicate cards
-                            const duplicateCardIds = duplicateCards.map(card => card.cardId);
-                            console.log('Duplicate card IDs:', duplicateCardIds);
-
-                            // Update the json of duplicate cards
-                            for (const duplicateCardId of duplicateCardIds) {
-                                console.log('Updating duplicate card with ID:', duplicateCardId);
 
                                 // Get the json of the original card and update it
-                                const json = JSON.stringify(card, null, 2);
-                                await this.rqtInv.setJson(duplicateCardId, json);
+                                const json = JSON.stringify(boardCard, null, 2);
+                                await this.rqtInv.setJson(boardCard.cardId, json);
 
                                 console.log('Duplicate card updated.');
-                            }
+                            });
                         }
+
                     } else {
                         console.warn('Card does not have a valid OPFTech label. No duplicates to update.');
                     }
