@@ -91,7 +91,7 @@ class WorkspaceManager {
 
                             //  -> CARD MODIFIED
                             this.trellowsp.cardModifiedInListRule(card.getCardId(), list.getListId(), board.getBoardId());
-                            this.updateDuplicates(existingInList);
+                            this.updateDuplicates(board.getBoardId(), existingInList);
                             this.updateWorkspace();
                     } 
                     
@@ -171,90 +171,94 @@ class WorkspaceManager {
         return IdChanged || nameChanged || jsonChanged;
     }
 
-    async updateDuplicates(card) {
+    async updateDuplicates(boardId, card) {
         try {
-            //console.log('Starting update duplicates with card:', card.id);
+            console.log('Starting update duplicates with card:', card.id);
     
             // Check if the card object and its labels property are defined
             if (card && card.labels && Array.isArray(card.labels)) {
-                //console.log('Card object and labels are valid.');
+                console.log('Card object and labels are valid.');
     
                 // If the card has an OPFTech label
                 if (card.labels.some(label => label.name.startsWith('#OPFTech-'))) {
-                    //console.log('Card has an OPFTech label.');
+                    console.log('Card has an OPFTech label.');
     
                     // Get the OPFTech number from the card label
                     const opftechnumber = await this.rqtInv.getOPFTechNumber(card.id);
-                    //console.log('OPFTech number:', opftechnumber);
+                    console.log('OPFTech number:', opftechnumber);
     
                     // If there is an OPFTech number, proceed to find duplicates
                     if (opftechnumber) {
-                        //console.log('OPFTech number exists. Proceeding to find duplicates.');
+                        console.log('OPFTech number exists. Proceeding to find duplicates.');
     
                         // Get all boards
                         const boards = this.opfvwsp.getBoards();
     
                         // Iterate through boards
                         for (const board of boards) {
-                            //console.log('Checking board:', board);
-
+                            console.log('Checking board:', board);
+    
                             // Get all cards in the current board
                             const cards = board.getCards();
-                            //console.log('All cards in the current board:', cards);
-
+                            console.log('All cards in the current board:', cards);
+    
                             // Find cards with the same OPFTech number in the current board
                             for (const boardCard of cards) {
                                 const cardOpfTechNumber = boardCard.opfTechNumber;
-
+    
                                 // Ensure boardCard has a 'id' property
                                 if (!boardCard.id) {
                                     console.warn('Card does not have a cardId:', boardCard);
                                     continue;
                                 }
-
+    
                                 // Convert both values to integers before checking
                                 const cardOpfTechNumberInt = parseInt(cardOpfTechNumber, 10);
                                 const opftechnumberInt = parseInt(opftechnumber, 10);
-
+    
                                 // Check if the card has the same OPFTech number and a different id
                                 if (!isNaN(cardOpfTechNumberInt) &&
                                     !isNaN(opftechnumberInt) &&
                                     cardOpfTechNumberInt === opftechnumberInt &&
                                     card.id !== boardCard.id) {
-
-                                    //console.log(`Card ID: ${boardCard.id}, OPFTech Number: ${cardOpfTechNumber}`);
-                                    //console.log(`Main Card ID: ${card.id}, OPFTech Number: ${opftechnumber}`);
-
+    
+                                    console.log(`Card ID: ${boardCard.id}, OPFTech Number: ${cardOpfTechNumber}`);
+                                    console.log(`Main Card ID: ${card.id}, OPFTech Number: ${opftechnumber}`);
+    
                                     const json = JSON.stringify(card, null, 2);
                                     console.log('Original JSON:', json);
                                     await this.rqtInv.setCardUpdate(boardCard.id, card);
-                                    //await this.rqtInv.setJson(boardCard.id, json);
-                                    /*
+    
                                     // Iterate over each customFieldItem in boardCard.customFieldItems array.
                                     boardCard.customFieldItems.forEach(async (boardCardCustomFieldItem) => {
+                                        console.log('Processing customFieldItem:', boardCardCustomFieldItem);
+    
                                         const mainCardCustomFieldId = this.config.mappingCustIds[boardId + boardCard.id];
+                                        console.log('Main card custom field ID:', mainCardCustomFieldId);
+    
                                         let mainCardCustomFieldValue = '';
-                                        
+    
                                         // Iterate over each customFieldItem in card.customFieldItems array.
                                         card.customFieldItems.forEach(async (cardCustomFieldItem) => {
                                             if (cardCustomFieldItem.id === mainCardCustomFieldId) {
                                                 mainCardCustomFieldValue = cardCustomFieldItem.value;
                                             }
                                         });
-
+    
+                                        console.log('Main card custom field value:', mainCardCustomFieldValue);
+    
                                         const customFieldOptionsId = this.config.mappingCustOptionsIds[board.getBoardId() + mainCardCustomFieldValue];
-                                        
+                                        console.log('Custom field options ID:', customFieldOptionsId);
+    
                                         // Assuming this.rqtInv.setCustomField is an asynchronous function,
                                         // you may need to handle its result or use await if it returns a promise.
                                         await this.rqtInv.setCustomField(boardCard.id, boardCardCustomFieldItem.id, customFieldOptionsId, null);
                                     });
-                                    */
-                                                                        
+    
                                     console.log('Duplicate card updated.');
                                 }
                             }
                         }
-
                     } else {
                         console.warn('Card does not have a valid OPFTech label. No duplicates to update.');
                     }
@@ -269,6 +273,7 @@ class WorkspaceManager {
             throw error;
         }
     }
+    
       
     //Update Workspace
     async updateWorkspace() {
