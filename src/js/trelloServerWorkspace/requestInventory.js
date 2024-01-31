@@ -612,7 +612,7 @@ class RequestInventory {
           idMembers: card.idMembers,
           idMembersVoted: card.idMembersVoted,
           idAttachmentCover: card.idAttachmentCover,
-          labels: card.label,
+          labels: card.labels,
           idLabels: card.idLabels,
           manualCoverAttachment: card.manualCoverAttachment,
           name: card.name,
