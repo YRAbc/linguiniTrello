@@ -229,6 +229,9 @@ class WorkspaceManager {
                                     //console.log('Original JSON:', json);
                                     await this.rqtInv.setCardUpdate(boardCard.cardId, card);
                                     //await this.rqtInv.setJson(boardCard.cardId, json);
+
+                                    //UPDATE CUSTOM FIELDS
+
                                     console.log('Duplicate card updated.');
                                 }
                             }
