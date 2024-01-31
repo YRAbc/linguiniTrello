@@ -213,6 +213,7 @@ class WorkspaceManager {
                                 }
 
                                 console.log(`Card ID: ${boardCard.cardId}, OPFTech Number: ${cardOpfTechNumber}`);
+                                console.log(`Main Card ID: ${card.cardId}, OPFTech Number: ${opftechnumber}`);
 
                                 // Check if the card has the same OPFTech number
                                 if (cardOpfTechNumber === opftechnumber) {
