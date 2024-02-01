@@ -319,9 +319,6 @@ class WorkspaceManager {
                             for (const card of existingListCards) {
                                 try {
                                     
-                                    const existingCard = await this.rqtInv.getCard(card.id);
-                                    console.log(JSON.stringify(existingCard, null, 2), '                  ', JSON.stringify(card, null, 2));
-                                    
                                     // Check if the card has a label with the format "#OPFTech-XXX" && Extract it, set to 0 if do not have one
                                     const opfTechNumberLabel = card.labels.find(label => /^#OPFTech-\d+$/.test(label.name));
                                     const opfTechNumber = opfTechNumberLabel ? parseInt(opfTechNumberLabel.name.match(/\d+/)[0], 10) : 0;

@@ -32,7 +32,7 @@ function setupPeriodicUpdates() {
           await sleep(retryAfter * 1000); // Convert seconds to milliseconds
         }
       }
-    }, 5000); // Update every 5 seconds
+    }, 10000); // Update every 10 seconds
 }
   
 function sleep(ms) {
