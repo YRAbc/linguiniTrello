@@ -240,6 +240,8 @@ class WorkspaceManager {
                                             console.log('Processing customFieldItem:', duplicateCardCustomFieldItem);
                                         
                                             let mainCardCustomFieldId;
+                                            console.log(this.config.mappingCustIds[boardId + duplicateCardCustomFieldItem.id]);
+                                            console.log(boardId + duplicateCardCustomFieldItem.id);
 
                                             // Check if this.config.mappingCustIds is defined before accessing properties
                                             if (this.config.mappingCustIds) {
