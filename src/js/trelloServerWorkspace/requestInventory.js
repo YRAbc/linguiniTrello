@@ -588,7 +588,8 @@ class RequestInventory {
           const propertiesToCheck = [ 'name', 'desc', 'location', 'locationName', 'coordinates',
             'votes', 'viewingMemberVoted', 'subscribed', 'fogbugz', 'checkItems', 'checkItemsChecked',
             'checkItemsEarliestDue', 'comments', 'attachments', 'description', 'due', 'dueComplete',
-            'start', 'checkItemStates', 'closed', 'dateLastActivity', 'descData', 'dueReminder',
+            'start', 'checkItemStates', 'closed', 'dateLastActivity', 'descData', 'dueReminder', 
+            'labels', 'members', 'checklists',
             'email', 'idChecklists', 'idMembers', 'idMembersVoted', 'idAttachmentCover', 
             'manualCoverAttachment', 'pos', 'subscribed', 'cover', 'isTemplate', 'cardRole'
           ];

@@ -231,32 +231,37 @@ class WorkspaceManager {
                                         //Update Dup card
                                         await this.rqtInv.setCardUpdate(duplicateCard.id, mainCard);
                                         
-                                        8/*// Iterate over each customFieldItem in boardCard.customFieldItems array.
-                                        boardCard.customFieldItems.forEach(async (boardCardCustomFieldItem) => {
+                                        // Check if boardCard.customFieldItems is defined and not null
+                                        if (boardCard.customFieldItems) {
+                                            // Iterate over each customFieldItem in boardCard.customFieldItems array.
+                                            boardCard.customFieldItems.forEach(async (boardCardCustomFieldItem) => {
                                             console.log('Processing customFieldItem:', boardCardCustomFieldItem);
-        
+                                        
                                             const mainCardCustomFieldId = this.config.mappingCustIds[boardId + duplicateCard.id];
                                             console.log('Main card custom field ID:', mainCardCustomFieldId);
-        
+                                        
                                             let mainCardCustomFieldValue = '';
-        
+                                        
                                             // Iterate over each customFieldItem in card.customFieldItems array.
                                             card.customFieldItems.forEach(async (cardCustomFieldItem) => {
                                                 if (cardCustomFieldItem.id === mainCardCustomFieldId) {
-                                                    mainCardCustomFieldValue = cardCustomFieldItem.value;
+                                                mainCardCustomFieldValue = cardCustomFieldItem.value;
                                                 }
                                             });
-        
+                                        
                                             console.log('Main card custom field value:', mainCardCustomFieldValue);
-        
+                                        
                                             const customFieldOptionsId = this.config.mappingCustOptionsIds[board.getBoardId() + mainCardCustomFieldValue];
                                             console.log('Custom field options ID:', customFieldOptionsId);
-        
+                                        
                                             // Assuming this.rqtInv.setCustomField is an asynchronous function,
                                             // you may need to handle its result or use await if it returns a promise.
                                             await this.rqtInv.setCustomField(duplicateCard.cardId, boardCardCustomFieldItem.id, customFieldOptionsId, null);
-                                        });*/
-        
+                                            });
+                                        } else {
+                                            console.log('boardCard.customFieldItems is undefined or null. Skipping custom field processing.');
+                                        }
+                                        
                                         console.log('Duplicate card updated.');
                                     }
                                 }
