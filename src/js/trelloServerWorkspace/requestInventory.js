@@ -589,8 +589,8 @@ class RequestInventory {
             'votes', 'viewingMemberVoted', 'subscribed', 'fogbugz', 'checkItems', 'checkItemsChecked',
             'checkItemsEarliestDue', 'comments', 'attachments', 'description', 'due', 'dueComplete',
             'start', 'checkItemStates', 'closed', 'dateLastActivity', 'descData', 'dueReminder',
-            'email', 'idChecklists', 'idMembers', 'idMembersVoted', 'idAttachmentCover', 'labels',
-            'idLabels', 'manualCoverAttachment', 'pos', 'subscribed', 'cover', 'isTemplate', 'cardRole'
+            'email', 'idChecklists', 'idMembers', 'idMembersVoted', 'idAttachmentCover', 
+            'manualCoverAttachment', 'pos', 'subscribed', 'cover', 'isTemplate', 'cardRole'
           ];
           
           // Check and conditionally add properties
