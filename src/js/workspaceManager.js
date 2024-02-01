@@ -31,7 +31,7 @@ class WorkspaceManager {
 
                     //  -> BOARD MODIFIED
                     this.trellowsp.boardModifiedRule(board.getBoardId())
-                    this.updateWorkspace();
+                    await this.updateWorkspace();
             }
     
             // Get existing lists for the board
@@ -46,7 +46,7 @@ class WorkspaceManager {
 
                         //  -> LIST REMOVE
                         this.trellowsp.listRemovedFromBoardRule(list.getListId(), board.getBoardId());
-                        this.updateWorkspace();
+                        await this.updateWorkspace();
 
                 } else {
                     if (this.listDataChanged(existingListData, list)) {
@@ -54,7 +54,7 @@ class WorkspaceManager {
                         
                             //  -> LIST MODIFIED
                             this.trellowsp.listModifiedInBoardRule(list.getListId(), board.getBoardId());
-                            this.updateWorkspace();
+                            await this.updateWorkspace();
                     }
                 }
     
@@ -72,7 +72,7 @@ class WorkspaceManager {
 
                             //  -> CARD REMOVED
                             this.trellowsp.cardRemovedFromListRule(card.getCardId(), list.getListId(), board.getBoardId());
-                            this.updateWorkspace();
+                            await this.updateWorkspace();
                     } 
                     
                     else if (!existingInList) {
@@ -82,7 +82,7 @@ class WorkspaceManager {
 
                             //  -> CARD MOVED
                             this.trellowsp.cardMovedToListRule(card.getCardId(), list.getListId(), board.getBoardId());
-                            this.updateWorkspace();
+                            await this.updateWorkspace();
                     }
 
                     else if (this.cardDataChanged(existingInList, card)) {
@@ -91,8 +91,8 @@ class WorkspaceManager {
 
                             //  -> CARD MODIFIED
                             this.trellowsp.cardModifiedInListRule(card.getCardId(), list.getListId(), board.getBoardId());
-                            this.updateDuplicates(existingInList, board.getBoardId());
-                            this.updateWorkspace();
+                            await this.updateDuplicates(existingInList, board.getBoardId());
+                            await this.updateWorkspace();
                     } 
                     
                 }
@@ -105,7 +105,7 @@ class WorkspaceManager {
 
                             //  -> CARD ADDED
                             this.trellowsp.cardAddedToListRule(existingCard.id, list.getListId(), board.getBoardId());
-                            this.updateWorkspace();
+                            await this.updateWorkspace();
                     }
                 }
             }
@@ -118,7 +118,7 @@ class WorkspaceManager {
 
                         //  -> LIST ADDED
                         this.trellowsp.listAddedToBoardRule(existingList.id, board.getBoardId());
-                        this.updateWorkspace();
+                        await this.updateWorkspace();
                 }
             }
         }
@@ -155,7 +155,6 @@ class WorkspaceManager {
         if (jsonChanged) {
             // console.log(`Card Name Change -  ${existingCard.name} from ${latestCardData.getCardName()}`);
             //console.log("JSON : ", JSON.stringify(existingCard, null, 2) , "  ", latestCardData.getCardJson());
-            console.log("Diff JSONs");
         }
 
         // add additional modifications for card updates
