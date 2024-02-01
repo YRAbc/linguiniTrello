@@ -589,7 +589,7 @@ class RequestInventory {
             'votes', 'viewingMemberVoted', 'subscribed', 'fogbugz', 'checkItems', 'checkItemsChecked',
             'checkItemsEarliestDue', 'comments', 'attachments', 'description', 'due', 'dueComplete',
             'start', 'checkItemStates', 'closed', 'dateLastActivity', 'descData', 'dueReminder', 
-            'labels', 'members', 'checklists',
+            'members', 'checklists',
             'email', 'idChecklists', 'idMembers', 'idMembersVoted', 'idAttachmentCover', 
             'manualCoverAttachment', 'pos', 'subscribed', 'cover', 'isTemplate', 'cardRole'
           ];
