@@ -89,12 +89,9 @@ class WorkspaceManager {
                         // Card needs to be updated
                         console.log(`Card with Id ${card.getCardId()} in List ${list.getListId()} needs to be updated.`);
 
-                            console.log('Board Card (duplicate) JSON:',  JSON.stringify(existingInList, null, 2));
-                            console.log('Main Card JSON:',  JSON.stringify(card, null, 2));
-
                             //  -> CARD MODIFIED
                             this.trellowsp.cardModifiedInListRule(card.getCardId(), list.getListId(), board.getBoardId());
-                            this.updateDuplicates(board.getBoardId(), existingInList);
+                            this.updateDuplicates(existingInList, board.getBoardId());
                             this.updateWorkspace();
                     } 
                     
@@ -174,7 +171,7 @@ class WorkspaceManager {
         return IdChanged || nameChanged || jsonChanged;
     }
 
-    async updateDuplicates(boardId, card) {
+    async updateDuplicates(card, boardId) {
         try {
             console.log('Starting update duplicates with card:', card.id);
     
@@ -228,10 +225,11 @@ class WorkspaceManager {
                                         cardOpfTechNumberInt === opftechnumberInt &&
                                         card.cardId !== boardCard.cardId) {
         
+                                        const mainCard = await this.rqtInv.getCard(card.id);
                                         console.log(`Card ID: ${boardCard.cardId}, name: ${boardCard.cardName}, OPFTech Number: ${cardOpfTechNumber}`);
-                                        console.log(`Main Card ID: ${card.id}, name: ${card.name}, OPFTech Number: ${opftechnumber}`);
+                                        console.log(`Main Card ID: ${mainCard.cardId}, name: ${mainCard.cardId}, OPFTech Number: ${opftechnumber}`);
         
-                                        const json = JSON.stringify(card, null, 2);
+                                        const json = JSON.stringify(mainCard, null, 2);
                                         //console.log('Board Card (duplicate) JSON:',  JSON.stringify(boardCard, null, 2));
                                         //console.log('Main Card JSON:',  JSON.stringify(card, null, 2));
                                         await this.rqtInv.setCardUpdate(boardCard.id, card);
