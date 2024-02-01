@@ -239,7 +239,15 @@ class WorkspaceManager {
                                             dupCardCustFields.forEach(async (duplicateCardCustomFieldItem) => {
                                             console.log('Processing customFieldItem:', duplicateCardCustomFieldItem);
                                         
-                                            const mainCardCustomFieldId = this.config.mappingCustIds[boardId + duplicateCardCustomFieldItem.id];
+                                            let mainCardCustomFieldId;
+
+                                            // Check if this.config.mappingCustIds is defined before accessing properties
+                                            if (this.config.mappingCustIds) {
+                                            mainCardCustomFieldId = this.config.mappingCustIds[boardId + duplicateCardCustomFieldItem.id];
+                                            } else {
+                                            console.error('this.config.mappingCustIds is undefined.');
+                                            }
+
                                             console.log('Main card custom field ID:', mainCardCustomFieldId);
                                         
                                             let mainCardCustomFieldValue = '';
