@@ -196,67 +196,69 @@ class WorkspaceManager {
     
                         // Iterate through boards
                         for (const board of boards) {
-                            console.log('Checking board:', board);
-    
-                            // Get all cards in the current board
-                            const cards = board.getCards();
-                            console.log('All cards in the current board:', cards);
-    
-                            // Find cards with the same OPFTech number in the current board
-                            for (const boardCard of cards) {
-                                const cardOpfTechNumber = boardCard.opfTechNumber;
-                                console.log(`Card ID: ${boardCard.cardId}, name: ${boardCard.cardName},  OPFTech Number: ${cardOpfTechNumber}`);
-    
-                                // Ensure boardCard has a 'id' property
-                                if (!boardCard.cardId) {
-                                    console.warn('Card does not have a cardId:', boardCard);
-                                    continue;
-                                }
-    
-                                // Convert both values to integers before checking
-                                const cardOpfTechNumberInt = parseInt(cardOpfTechNumber, 10);
-                                const opftechnumberInt = parseInt(opftechnumber, 10);
-    
-                                // Check if the card has the same OPFTech number and a different id
-                                if (!isNaN(cardOpfTechNumberInt) &&
-                                    !isNaN(opftechnumberInt) &&
-                                    cardOpfTechNumberInt === opftechnumberInt &&
-                                    card.cardId !== boardCard.cardId) {
-    
-                                    console.log(`Card ID: ${boardCard.cardId}, name: ${boardCard.cardName}, OPFTech Number: ${cardOpfTechNumber}`);
-                                    console.log(`Main Card ID: ${card.id}, name: ${card.name}, OPFTech Number: ${opftechnumber}`);
-    
-                                    const json = JSON.stringify(card, null, 2);
-                                    console.log('Original JSON:', json);
-                                    await this.rqtInv.setCardUpdate(boardCard.id, card);
-    
-                                    // Iterate over each customFieldItem in boardCard.customFieldItems array.
-                                    boardCard.customFieldItems.forEach(async (boardCardCustomFieldItem) => {
-                                        console.log('Processing customFieldItem:', boardCardCustomFieldItem);
-    
-                                        const mainCardCustomFieldId = this.config.mappingCustIds[boardId + boardCard.cardId];
-                                        console.log('Main card custom field ID:', mainCardCustomFieldId);
-    
-                                        let mainCardCustomFieldValue = '';
-    
-                                        // Iterate over each customFieldItem in card.customFieldItems array.
-                                        card.customFieldItems.forEach(async (cardCustomFieldItem) => {
-                                            if (cardCustomFieldItem.id === mainCardCustomFieldId) {
-                                                mainCardCustomFieldValue = cardCustomFieldItem.value;
-                                            }
+                            if(board.getBoardId() !== boardId){
+                                console.log('Checking board:', board);
+        
+                                // Get all cards in the current board
+                                const cards = board.getCards();
+                                console.log('All cards in the current board:', cards);
+        
+                                // Find cards with the same OPFTech number in the current board
+                                for (const boardCard of cards) {
+                                    const cardOpfTechNumber = boardCard.opfTechNumber;
+                                    console.log(`Card ID: ${boardCard.cardId}, name: ${boardCard.cardName},  OPFTech Number: ${cardOpfTechNumber}`);
+        
+                                    // Ensure boardCard has a 'id' property
+                                    if (!boardCard.cardId) {
+                                        console.warn('Card does not have a cardId:', boardCard);
+                                        continue;
+                                    }
+        
+                                    // Convert both values to integers before checking
+                                    const cardOpfTechNumberInt = parseInt(cardOpfTechNumber, 10);
+                                    const opftechnumberInt = parseInt(opftechnumber, 10);
+        
+                                    // Check if the card has the same OPFTech number and a different id
+                                    if (!isNaN(cardOpfTechNumberInt) &&
+                                        !isNaN(opftechnumberInt) &&
+                                        cardOpfTechNumberInt === opftechnumberInt &&
+                                        card.cardId !== boardCard.cardId) {
+        
+                                        console.log(`Card ID: ${boardCard.cardId}, name: ${boardCard.cardName}, OPFTech Number: ${cardOpfTechNumber}`);
+                                        console.log(`Main Card ID: ${card.id}, name: ${card.name}, OPFTech Number: ${opftechnumber}`);
+        
+                                        const json = JSON.stringify(card, null, 2);
+                                        console.log('Original JSON:', json);
+                                        await this.rqtInv.setCardUpdate(boardCard.id, card);
+        
+                                        // Iterate over each customFieldItem in boardCard.customFieldItems array.
+                                        boardCard.customFieldItems.forEach(async (boardCardCustomFieldItem) => {
+                                            console.log('Processing customFieldItem:', boardCardCustomFieldItem);
+        
+                                            const mainCardCustomFieldId = this.config.mappingCustIds[boardId + boardCard.cardId];
+                                            console.log('Main card custom field ID:', mainCardCustomFieldId);
+        
+                                            let mainCardCustomFieldValue = '';
+        
+                                            // Iterate over each customFieldItem in card.customFieldItems array.
+                                            card.customFieldItems.forEach(async (cardCustomFieldItem) => {
+                                                if (cardCustomFieldItem.id === mainCardCustomFieldId) {
+                                                    mainCardCustomFieldValue = cardCustomFieldItem.value;
+                                                }
+                                            });
+        
+                                            console.log('Main card custom field value:', mainCardCustomFieldValue);
+        
+                                            const customFieldOptionsId = this.config.mappingCustOptionsIds[board.getBoardId() + mainCardCustomFieldValue];
+                                            console.log('Custom field options ID:', customFieldOptionsId);
+        
+                                            // Assuming this.rqtInv.setCustomField is an asynchronous function,
+                                            // you may need to handle its result or use await if it returns a promise.
+                                            await this.rqtInv.setCustomField(boardCard.cardId, boardCardCustomFieldItem.id, customFieldOptionsId, null);
                                         });
-    
-                                        console.log('Main card custom field value:', mainCardCustomFieldValue);
-    
-                                        const customFieldOptionsId = this.config.mappingCustOptionsIds[board.getBoardId() + mainCardCustomFieldValue];
-                                        console.log('Custom field options ID:', customFieldOptionsId);
-    
-                                        // Assuming this.rqtInv.setCustomField is an asynchronous function,
-                                        // you may need to handle its result or use await if it returns a promise.
-                                        await this.rqtInv.setCustomField(boardCard.cardId, boardCardCustomFieldItem.id, customFieldOptionsId, null);
-                                    });
-    
-                                    console.log('Duplicate card updated.');
+        
+                                        console.log('Duplicate card updated.');
+                                    }
                                 }
                             }
                         }
