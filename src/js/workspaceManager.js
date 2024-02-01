@@ -177,20 +177,20 @@ class WorkspaceManager {
     
             // Check if the card object and its labels property are defined
             if (card && card.labels && Array.isArray(card.labels)) {
-                console.log('Card object and labels are valid.');
+                //console.log('Card object and labels are valid.');
     
                 // If the card has an OPFTech label
                 if (card.labels.some(label => label.name.startsWith('#OPFTech-'))) {
-                    console.log('Card has an OPFTech label.');
+                    //console.log('Card has an OPFTech label.');
     
                     // Get the OPFTech number from the card label
                     const opftechnumber = await this.rqtInv.getOPFTechNumber(card.id);
-                    console.log('OPFTech number:', opftechnumber);
+                    //console.log('OPFTech number:', opftechnumber);
     
                     // If there is an OPFTech number, proceed to find duplicates
                     if (opftechnumber) {
-                        console.log('OPFTech number exists. Proceeding to find duplicates.');
-                        console.log('board ID : ', boardId);
+                        //console.log('OPFTech number exists. Proceeding to find duplicates.');
+                        //console.log('board ID : ', boardId);
     
                         // Get all boards
                         const boards = this.opfvwsp.getBoards();
@@ -198,16 +198,16 @@ class WorkspaceManager {
                         // Iterate through boards
                         for (const board of boards) {
                             if(board.getBoardId() !== boardId){
-                                console.log('Checking board:', board);
+                                //console.log('Checking board:', board);
         
                                 // Get all cards in the current board
                                 const cards = board.getCards();
-                                console.log('All cards in the current board:', cards);
+                                //console.log('All cards in the current board:', cards);
         
                                 // Find cards with the same OPFTech number in the current board
                                 for (const boardCard of cards) {
                                     const cardOpfTechNumber = boardCard.opfTechNumber;
-                                    console.log(`Card ID: ${boardCard.cardId}, name: ${boardCard.cardName},  OPFTech Number: ${cardOpfTechNumber}`);
+                                    //console.log(`Card ID: ${boardCard.cardId}, name: ${boardCard.cardName},  OPFTech Number: ${cardOpfTechNumber}`);
         
                                     // Ensure boardCard has a 'id' property
                                     if (!boardCard.cardId) {
@@ -229,7 +229,8 @@ class WorkspaceManager {
                                         console.log(`Main Card ID: ${card.id}, name: ${card.name}, OPFTech Number: ${opftechnumber}`);
         
                                         const json = JSON.stringify(card, null, 2);
-                                        console.log('Original JSON:', json);
+                                        console.log('Original Card JSON:',  JSON.stringify(boardCard, null, 2));
+                                        console.log('Original Main JSON:', json);
                                         await this.rqtInv.setCardUpdate(boardCard.id, card);
         
                                         // Iterate over each customFieldItem in boardCard.customFieldItems array.
