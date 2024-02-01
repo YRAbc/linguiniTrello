@@ -129,46 +129,38 @@ class WorkspaceManager {
 
     // Method to compare the Id, name, and JSON of the latest Trello board with existing data in opfwsp
     boardDataChanged(existingBoard, latestBoardData) {
-        const IdChanged = existingBoard.id !== latestBoardData.getBoardId();
-        const nameChanged = existingBoard.name !== latestBoardData.getBoardName();
         const jsonChanged = JSON.stringify(existingBoard, null, 2) !== latestBoardData.getBoardJson();
-
-        if (IdChanged || nameChanged || jsonChanged) {
+        if (jsonChanged) {
             // console.log(`Board Name change - ${existingBoard.name} from ${latestBoardData.getBoardName()}`);
             //console.log("JSON : ", JSON.stringify(existingBoard, null, 2) , "  ", latestBoardData.getBoardJson());
         }
 
-        return IdChanged || nameChanged || jsonChanged;
+        return jsonChanged;
     }
 
     // Method to compare the Id, name, and JSON of the latest Trello list with existing data in opfwsp
     listDataChanged(existingList, latestListData) {
-        const IdChanged = existingList.id !== latestListData.getListId();
-        const nameChanged = existingList.name !== latestListData.getListName();
         const jsonChanged = JSON.stringify(existingList, null, 2) !== latestListData.getListJson();
-
-        if (IdChanged || nameChanged || jsonChanged) {
+        if (jsonChanged) {
             // console.log(`List Name change - ${existingList.name} from ${latestListData.getListName()}`);
             //console.log("JSON : ", JSON.stringify(existingList, null, 2) , "  ", latestListData.getListJson());
         }
 
-        return IdChanged || nameChanged || jsonChanged;
+        return jsonChanged;
     }
 
     // Method to compare the Id, name, and JSON of the latest Trello card with existing data in opfwsp
     cardDataChanged(existingCard, latestCardData) {
-        const IdChanged = existingCard.id !== latestCardData.getCardId();
-        const nameChanged = existingCard.name !== latestCardData.getCardName();
         const jsonChanged = JSON.stringify(existingCard, null, 2) !== latestCardData.getCardJson();
-
-        if (IdChanged || nameChanged || jsonChanged) {
+        if (jsonChanged) {
             // console.log(`Card Name Change -  ${existingCard.name} from ${latestCardData.getCardName()}`);
             //console.log("JSON : ", JSON.stringify(existingCard, null, 2) , "  ", latestCardData.getCardJson());
+            console.log("Diff JSONs");
         }
 
         // add additional modifications for card updates
 
-        return IdChanged || nameChanged || jsonChanged;
+        return jsonChanged;
     }
 
     async updateDuplicates(card, boardId) {
