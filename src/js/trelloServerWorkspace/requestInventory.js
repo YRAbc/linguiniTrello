@@ -594,6 +594,8 @@ class RequestInventory {
             'manualCoverAttachment', 'pos', 'subscribed', 'cover', 'isTemplate', 'cardRole'
           ];
           
+          //Labels and checklists are working like customfields
+
           // Check and conditionally add properties
           for (const property of propertiesToCheck) {
             if (card[property]) {
