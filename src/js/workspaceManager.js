@@ -89,6 +89,9 @@ class WorkspaceManager {
                         // Card needs to be updated
                         console.log(`Card with Id ${card.getCardId()} in List ${list.getListId()} needs to be updated.`);
 
+                            console.log('Board Card (duplicate) JSON:',  JSON.stringify(existingInList, null, 2));
+                            console.log('Main Card JSON:',  JSON.stringify(card, null, 2));
+
                             //  -> CARD MODIFIED
                             this.trellowsp.cardModifiedInListRule(card.getCardId(), list.getListId(), board.getBoardId());
                             this.updateDuplicates(board.getBoardId(), existingInList);
@@ -229,8 +232,8 @@ class WorkspaceManager {
                                         console.log(`Main Card ID: ${card.id}, name: ${card.name}, OPFTech Number: ${opftechnumber}`);
         
                                         const json = JSON.stringify(card, null, 2);
-                                        console.log('Board Card (duplicate) JSON:',  JSON.stringify(boardCard, null, 2));
-                                        console.log('Main Card JSON:',  JSON.stringify(card, null, 2));
+                                        //console.log('Board Card (duplicate) JSON:',  JSON.stringify(boardCard, null, 2));
+                                        //console.log('Main Card JSON:',  JSON.stringify(card, null, 2));
                                         await this.rqtInv.setCardUpdate(boardCard.id, card);
                                         
                                         /*
