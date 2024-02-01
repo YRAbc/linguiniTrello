@@ -231,11 +231,11 @@ class WorkspaceManager {
                                         //Update Dup card
                                         await this.rqtInv.setCardUpdate(duplicateCard.id, mainCard);
                                         
-                                        // Check if boardCard.customFieldItems is defined and not null
-                                        if (boardCard.customFieldItems) {
-                                            // Iterate over each customFieldItem in boardCard.customFieldItems array.
-                                            boardCard.customFieldItems.forEach(async (boardCardCustomFieldItem) => {
-                                            console.log('Processing customFieldItem:', boardCardCustomFieldItem);
+                                        // Check if duplicateCard.customFieldItems is defined and not null
+                                        if (duplicateCard.customFieldItems) {
+                                            // Iterate over each customFieldItem in duplicateCard.customFieldItems array.
+                                            duplicateCard.customFieldItems.forEach(async (duplicateCardCustomFieldItem) => {
+                                            console.log('Processing customFieldItem:', duplicateCardCustomFieldItem);
                                         
                                             const mainCardCustomFieldId = this.config.mappingCustIds[boardId + duplicateCard.id];
                                             console.log('Main card custom field ID:', mainCardCustomFieldId);
@@ -243,7 +243,7 @@ class WorkspaceManager {
                                             let mainCardCustomFieldValue = '';
                                         
                                             // Iterate over each customFieldItem in card.customFieldItems array.
-                                            card.customFieldItems.forEach(async (cardCustomFieldItem) => {
+                                            mainCard.customFieldItems.forEach(async (cardCustomFieldItem) => {
                                                 if (cardCustomFieldItem.id === mainCardCustomFieldId) {
                                                 mainCardCustomFieldValue = cardCustomFieldItem.value;
                                                 }
@@ -256,10 +256,10 @@ class WorkspaceManager {
                                         
                                             // Assuming this.rqtInv.setCustomField is an asynchronous function,
                                             // you may need to handle its result or use await if it returns a promise.
-                                            await this.rqtInv.setCustomField(duplicateCard.cardId, boardCardCustomFieldItem.id, customFieldOptionsId, null);
+                                            await this.rqtInv.setCustomField(duplicateCard.cardId, duplicateCardCustomFieldItem.id, customFieldOptionsId, null);
                                             });
                                         } else {
-                                            console.log('boardCard.customFieldItems is undefined or null. Skipping custom field processing.');
+                                            console.log('duplicateCard.customFieldItems is undefined or null. Skipping custom field processing.');
                                         }
 
                                         console.log('Duplicate card updated.');
