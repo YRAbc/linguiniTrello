@@ -582,53 +582,24 @@ class RequestInventory {
   //PUT Card Parameters
   async setCardUpdate(cardId, card, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
     try {
-        const payload = {
 
-          ...(card.name && { name: card.name }),
-          ...(card.desc && { desc: card.desc }),
-          ...(card.location && { location: card.location }),
-          ...(card.votes && { votes: card.votes }),
-          ...(card.viewingMemberVoted && { viewingMemberVoted: card.viewingMemberVoted }),
-          ...(card.subscribed && { subscribed: card.subscribed }),
-          ...(card.fogbugz && { fogbugz: card.fogbugz }),
-          ...(card.checkItems && { checkItems: card.checkItems }),
-          ...(card.checkItemsChecked && { checkItemsChecked: card.checkItemsChecked }),
-          ...(card.checkItemsEarliestDue && { checkItemsEarliestDue: card.checkItemsEarliestDue }),
-          ...(card.comments && { comments: card.comments }),
-          ...(card.attachments && { attachments: card.attachments }),
-          ...(card.description && { description: card.description }),
-          ...(card.due && { due: card.due }),
-          ...(card.dueComplete && { dueComplete: card.dueComplete }),
-          ...(card.start && { start: card.start }),
-          ...(card.checkItemStates && { checkItemStates: card.checkItemStates }),
-          ...(card.closed && { closed: card.closed }),
-          ...(card.dateLastActivity && { dateLastActivity: card.dateLastActivity }),
-          ...(card.descData && { descData: card.descData }),
-          ...(card.dueReminder && { dueReminder: card.dueReminder }),
-          ...(card.email && { email: card.email }),
-          ...(card.idChecklists && { idChecklists: card.idChecklists }),
-          ...(card.idMembers && { idMembers: card.idMembers }),
-          ...(card.idMembersVoted && { idMembersVoted: card.idMembersVoted }),
-          ...(card.idAttachmentCover && { idAttachmentCover: card.idAttachmentCover }),
-          ...(card.labels && { labels: card.labels }),
-          ...(card.idLabels && { idLabels: card.idLabels }),
-          ...(card.manualCoverAttachment && { manualCoverAttachment: card.manualCoverAttachment }),
-          ...(card.pos && { pos: card.pos }),
-          ...(card.subscribed && { subscribed: card.subscribed }),
-          ...(card.cover && { cover: card.cover }),
-          ...(card.isTemplate && { isTemplate: card.isTemplate }),
-          ...(card.cardRole && { cardRole: card.cardRole }),
-        };
-        
-        // Check and conditionally add properties
-        if (card.locationName) {
-          payload.locationName = card.locationName;
-        }
-        
-        if (card.coordinates) {
-          payload.coordinates = card.coordinates;
-        }
-        
+          const payload = {};
+
+          const propertiesToCheck = [ 'name', 'desc', 'location', 'locationName', 'coordinates',
+            'votes', 'viewingMemberVoted', 'subscribed', 'fogbugz', 'checkItems', 'checkItemsChecked',
+            'checkItemsEarliestDue', 'comments', 'attachments', 'description', 'due', 'dueComplete',
+            'start', 'checkItemStates', 'closed', 'dateLastActivity', 'descData', 'dueReminder',
+            'email', 'idChecklists', 'idMembers', 'idMembersVoted', 'idAttachmentCover', 'labels',
+            'idLabels', 'manualCoverAttachment', 'pos', 'subscribed', 'cover', 'isTemplate', 'cardRole'
+          ];
+          
+          // Check and conditionally add properties
+          for (const property of propertiesToCheck) {
+            if (card[property]) {
+              payload[property] = card[property];
+            }
+          }
+
         // Add other checks for parameters you want to conditionally include
         
         const response = await axios.put(
