@@ -45,8 +45,8 @@ class TrelloServerWorkspace {
 
                 // Set Custom Fields
                 await this.rqtInv.setCustomField(cardId, this.config.opfBoardCustPriorityId, this.config.opfBoardCustPriorityToQualifyId, null);
-                await this.rqtInv.setCustomField(cardId, this.config.opfBoardCustTechId, this.config.opfBoardCustTechToQualifyId, null);
                 await this.rqtInv.setCustomField(cardId, this.config.opfBoardCustIssuerId, this.config.opfBoardCustIssuerToQualifyId, null);
+                await this.rqtInv.setCustomField(cardId, this.config.opfBoardCustTechId, this.config.opfBoardCustTechToQualifyId, null);
                 await this.rqtInv.setCustomField(cardId, this.config.opfBoardCustStatusId, this.config.opfBoardCustStatusOpenId, null);
 
                 await this.rqtInv.copyCardToList(cardId, this.config.techBoardToClassifyListId, cardDetails);

@@ -229,11 +229,14 @@ class WorkspaceManager {
         
                                         //Update Dup card
                                         await this.rqtInv.setCardUpdate(duplicateCard.id, mainCard);
+
+                                        const mainCardCustFields = await this.rqtInv.getCustomFields(mainCard.id);
+                                        const dupCardCustFields = await this.rqtInv.getCustomFields(duplicateCard.id);
                                         
-                                        // Check if duplicateCard.customFieldItems is defined and not null
-                                        if (duplicateCard.customFieldItems) {
+                                        // Check if dupCardCustFields & mainCardCustFields are defined and not null
+                                        if (dupCardCustFields && mainCardCustFields) {
                                             // Iterate over each customFieldItem in duplicateCard.customFieldItems array.
-                                            duplicateCard.customFieldItems.forEach(async (duplicateCardCustomFieldItem) => {
+                                            dupCardCustFields.forEach(async (duplicateCardCustomFieldItem) => {
                                             console.log('Processing customFieldItem:', duplicateCardCustomFieldItem);
                                         
                                             const mainCardCustomFieldId = this.config.mappingCustIds[boardId + duplicateCard.id];
@@ -242,7 +245,7 @@ class WorkspaceManager {
                                             let mainCardCustomFieldValue = '';
                                         
                                             // Iterate over each customFieldItem in card.customFieldItems array.
-                                            mainCard.customFieldItems.forEach(async (cardCustomFieldItem) => {
+                                            mainCardCustFields.forEach(async (cardCustomFieldItem) => {
                                                 if (cardCustomFieldItem.id === mainCardCustomFieldId) {
                                                 mainCardCustomFieldValue = cardCustomFieldItem.value;
                                                 }
