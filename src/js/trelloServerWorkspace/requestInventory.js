@@ -600,6 +600,8 @@ class RequestInventory {
               payload[property] = card[property];
             }
           }
+
+          console.log("out");
         
         const response = await axios.put(
           `https://api.trello.com/1/cards/${cardId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`,
