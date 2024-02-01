@@ -596,6 +596,7 @@ class RequestInventory {
           // Check and conditionally add properties
           for (const property of propertiesToCheck) {
             if (card[property]) {
+              console.log("Property" , property, 'exists in card');
               payload[property] = card[property];
             }
           }
