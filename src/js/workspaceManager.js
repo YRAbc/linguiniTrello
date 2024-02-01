@@ -205,10 +205,10 @@ class WorkspaceManager {
                             // Find cards with the same OPFTech number in the current board
                             for (const boardCard of cards) {
                                 const cardOpfTechNumber = boardCard.opfTechNumber;
-                                console.log(`Card ID: ${boardCard.id}, name : ${boardCard.name},  OPFTech Number: ${cardOpfTechNumber}`);
+                                console.log(`Card ID: ${boardCard.boardId}, name : ${boardCard.name},  OPFTech Number: ${cardOpfTechNumber}`);
     
                                 // Ensure boardCard has a 'id' property
-                                if (!boardCard.id) {
+                                if (!boardCard.boardId) {
                                     console.warn('Card does not have a cardId:', boardCard);
                                     continue;
                                 }
@@ -221,10 +221,10 @@ class WorkspaceManager {
                                 if (!isNaN(cardOpfTechNumberInt) &&
                                     !isNaN(opftechnumberInt) &&
                                     cardOpfTechNumberInt === opftechnumberInt &&
-                                    card.id !== boardCard.id) {
+                                    card.cardId !== boardCard.cardId) {
     
-                                    console.log(`Card ID: ${boardCard.id}, OPFTech Number: ${cardOpfTechNumber}`);
-                                    console.log(`Main Card ID: ${card.id}, OPFTech Number: ${opftechnumber}`);
+                                    console.log(`Card ID: ${boardCard.cardId}, OPFTech Number: ${cardOpfTechNumber}`);
+                                    console.log(`Main Card ID: ${card.cardId}, OPFTech Number: ${opftechnumber}`);
     
                                     const json = JSON.stringify(card, null, 2);
                                     console.log('Original JSON:', json);
