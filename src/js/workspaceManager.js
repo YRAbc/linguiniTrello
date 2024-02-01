@@ -232,7 +232,8 @@ class WorkspaceManager {
                                         console.log('Original Card JSON:',  JSON.stringify(boardCard, null, 2));
                                         console.log('Original Main JSON:', json);
                                         await this.rqtInv.setCardUpdate(boardCard.id, card);
-        
+                                        
+                                        /*
                                         // Iterate over each customFieldItem in boardCard.customFieldItems array.
                                         boardCard.customFieldItems.forEach(async (boardCardCustomFieldItem) => {
                                             console.log('Processing customFieldItem:', boardCardCustomFieldItem);
@@ -260,6 +261,7 @@ class WorkspaceManager {
                                         });
         
                                         console.log('Duplicate card updated.');
+                                        */
                                     }
                                 }
                             }
