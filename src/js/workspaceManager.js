@@ -234,8 +234,8 @@ class WorkspaceManager {
                                         //console.log(`Main Card ID: ${mainCard.id}, name: ${mainCard.name}, OPFTech Number: ${opftechnumber}`);
         
                                         const json = JSON.stringify(mainCard, null, 2);
-                                        //console.log('Board Card (duplicate) JSON:',  JSON.stringify(duplicateCard, null, 2));
-                                        //console.log('Main Card JSON:',  JSON.stringify(mainCard, null, 2));
+                                        console.log('Board Card (duplicate) JSON:',  JSON.stringify(duplicateCard, null, 2));
+                                        console.log('Main Card JSON:',  JSON.stringify(mainCard, null, 2));
         
                                         //Update Dup card
                                         await this.rqtInv.setCardUpdate(duplicateCard.id, mainCard);
