@@ -190,6 +190,7 @@ class WorkspaceManager {
                     // If there is an OPFTech number, proceed to find duplicates
                     if (opftechnumber) {
                         console.log('OPFTech number exists. Proceeding to find duplicates.');
+                        console.log('board ID : ', boardId);
     
                         // Get all boards
                         const boards = this.opfvwsp.getBoards();
