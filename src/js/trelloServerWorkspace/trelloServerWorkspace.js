@@ -14,19 +14,19 @@ class TrelloServerWorkspace {
         this.rqtInv = new RequestInventory();
     }
 
-    boardModifiedRule(boardId) {
+    async boardModifiedRule(boardId) {
 
     }
 
-    listAddedToBoardRule(listId, boardId) {
+    async listAddedToBoardRule(listId, boardId) {
 
     }
 
-    listModifiedInBoardRule(listId, boardId) {
+    async listModifiedInBoardRule(listId, boardId) {
 
     }
 
-    listRemovedFromBoardRule(listId, boardId) {
+    async listRemovedFromBoardRule(listId, boardId) {
 
     }
 
