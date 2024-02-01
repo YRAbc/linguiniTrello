@@ -205,7 +205,7 @@ class WorkspaceManager {
                             // Find cards with the same OPFTech number in the current board
                             for (const boardCard of cards) {
                                 const cardOpfTechNumber = boardCard.opfTechNumber;
-                                console.log(`Card ID: ${boardCard.cardId}, OPFTech Number: ${cardOpfTechNumber}`);
+                                console.log(`Card ID: ${boardCard.cardId}, name: ${boardCard.cardName},  OPFTech Number: ${cardOpfTechNumber}`);
     
                                 // Ensure boardCard has a 'id' property
                                 if (!boardCard.cardId) {
@@ -223,8 +223,8 @@ class WorkspaceManager {
                                     cardOpfTechNumberInt === opftechnumberInt &&
                                     card.cardId !== boardCard.cardId) {
     
-                                    console.log(`Card ID: ${boardCard.cardId}, OPFTech Number: ${cardOpfTechNumber}`);
-                                    console.log(`Main Card ID: ${card.cardId}, OPFTech Number: ${opftechnumber}`);
+                                    console.log(`Card ID: ${boardCard.cardId}, name: ${boardCard.cardName}, OPFTech Number: ${cardOpfTechNumber}`);
+                                    console.log(`Main Card ID: ${card.cardId}, name: ${card.cardName}, OPFTech Number: ${opftechnumber}`);
     
                                     const json = JSON.stringify(card, null, 2);
                                     console.log('Original JSON:', json);
