@@ -267,7 +267,6 @@ class WorkspaceManager {
                                         });
         
                                         console.log('Duplicate card updated.');
-                                        */
                                     }
                                 }
                             }
