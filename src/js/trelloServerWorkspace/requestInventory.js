@@ -600,8 +600,6 @@ class RequestInventory {
               payload[property] = card[property];
             }
           }
-
-        // Add other checks for parameters you want to conditionally include
         
         const response = await axios.put(
           `https://api.trello.com/1/cards/${cardId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`,
