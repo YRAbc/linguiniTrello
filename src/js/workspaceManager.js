@@ -234,13 +234,13 @@ class WorkspaceManager {
                                         //console.log(`Main Card ID: ${mainCard.id}, name: ${mainCard.name}, OPFTech Number: ${opftechnumber}`);
         
                                         const json = JSON.stringify(mainCard, null, 2);
-                                        console.log('Board Card (duplicate) JSON:',  JSON.stringify(duplicateCard, null, 2));
-                                        console.log('Main Card JSON:',  JSON.stringify(mainCard, null, 2));
+                                        //console.log('Board Card (duplicate) JSON:',  JSON.stringify(duplicateCard, null, 2));
+                                        //console.log('Main Card JSON:',  JSON.stringify(mainCard, null, 2));
         
                                         //Update Dup card
                                         await this.rqtInv.setCardUpdate(duplicateCard.id, mainCard);
                                         
-                                        // Iterate over each customFieldItem in boardCard.customFieldItems array.
+                                        8/*// Iterate over each customFieldItem in boardCard.customFieldItems array.
                                         boardCard.customFieldItems.forEach(async (boardCardCustomFieldItem) => {
                                             console.log('Processing customFieldItem:', boardCardCustomFieldItem);
         
@@ -264,7 +264,7 @@ class WorkspaceManager {
                                             // Assuming this.rqtInv.setCustomField is an asynchronous function,
                                             // you may need to handle its result or use await if it returns a promise.
                                             await this.rqtInv.setCustomField(duplicateCard.cardId, boardCardCustomFieldItem.id, customFieldOptionsId, null);
-                                        });
+                                        });*/
         
                                         console.log('Duplicate card updated.');
                                     }

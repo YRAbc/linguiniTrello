@@ -596,12 +596,10 @@ class RequestInventory {
           // Check and conditionally add properties
           for (const property of propertiesToCheck) {
             if (card[property]) {
-              console.log("Property" , property, 'exists in card');
+              //console.log("Property" , property, 'exists in card');
               payload[property] = card[property];
             }
           }
-
-          console.log("out");
         
         const response = await axios.put(
           `https://api.trello.com/1/cards/${cardId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`,
