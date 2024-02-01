@@ -205,10 +205,10 @@ class WorkspaceManager {
                             // Find cards with the same OPFTech number in the current board
                             for (const boardCard of cards) {
                                 const cardOpfTechNumber = boardCard.opfTechNumber;
-                                console.log(`Card ID: ${boardCard.cardId}, name : ${boardCard.name},  OPFTech Number: ${cardOpfTechNumber}`);
+                                console.log(`Card ID: ${boardCard.cardId}, OPFTech Number: ${cardOpfTechNumber}`);
     
                                 // Ensure boardCard has a 'id' property
-                                if (!boardCard.boardId) {
+                                if (!boardCard.cardId) {
                                     console.warn('Card does not have a cardId:', boardCard);
                                     continue;
                                 }
