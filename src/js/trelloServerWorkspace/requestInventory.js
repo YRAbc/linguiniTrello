@@ -586,7 +586,7 @@ class RequestInventory {
 
           ...(card.name && { name: card.name }),
           ...(card.desc && { desc: card.desc }),
-          /*...(card.location && { location: card.location }),
+          ...(card.location && { location: card.location }),
           ...(card.votes && { votes: card.votes }),
           ...(card.viewingMemberVoted && { viewingMemberVoted: card.viewingMemberVoted }),
           ...(card.subscribed && { subscribed: card.subscribed }),
@@ -617,7 +617,7 @@ class RequestInventory {
           ...(card.subscribed && { subscribed: card.subscribed }),
           ...(card.cover && { cover: card.cover }),
           ...(card.isTemplate && { isTemplate: card.isTemplate }),
-          ...(card.cardRole && { cardRole: card.cardRole }),*/
+          ...(card.cardRole && { cardRole: card.cardRole }),
         };
         
         // Check and conditionally add properties
