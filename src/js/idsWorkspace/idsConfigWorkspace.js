@@ -132,6 +132,14 @@ class IdsConfigWorkspace {
     get techBoardCustStatusBlockedId(){ return "65a954eb3b1d7548e7d9cb46";}      
     get techBoardCustStatusCancelledId(){ return "65a954eb3b1d7548e7d9cb47";}
 
+    // Add a static method to initialize and return the config with mappingCustIds
+    static initializeConfig() {
+        const config = new IdsConfigWorkspace();
+        config.mappingCustIds = IdsConfigWorkspace.mappingCustIds();
+        config.mappingCustOptionsIds = IdsConfigWorkspace.mappingCustOptionsIds();
+        return config;
+    }
+
     //Mapping for CustomFields ID
     static mappingCustIds = () => {
         return {

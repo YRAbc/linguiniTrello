@@ -13,7 +13,7 @@ import IdsConfigWorkspace from './idsWorkspace/idsConfigWorkspace.js';
 class WorkspaceManager {
 
     constructor() {
-        this.config = new IdsConfigWorkspace();
+        this.config = IdsConfigWorkspace.initializeConfig();
         this.opfvwsp = new VWorkspace("OPF Tech Virtual Workspace", this.config);
         this.trellowsp = new TrelloServerWorkspace("OPF Tech Trello Workspace", this.config, this.opfvwsp)
         this.rqtInv = new RequestInventory();
