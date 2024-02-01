@@ -30,7 +30,7 @@ class WorkspaceManager {
                 console.log(`Board with Id ${board.getBoardId()} needs to be updated.`);
 
                     //  -> BOARD MODIFIED
-                    this.trellowsp.boardModifiedRule(board.getBoardId())
+                    await this.trellowsp.boardModifiedRule(board.getBoardId())
                     await this.updateWorkspace();
             }
     
@@ -45,7 +45,7 @@ class WorkspaceManager {
                     console.log(`List with Id ${list.getListId()}, (${list.getListName()}) in Board ${board.getBoardId()} has been removed.`);
 
                         //  -> LIST REMOVE
-                        this.trellowsp.listRemovedFromBoardRule(list.getListId(), board.getBoardId());
+                        await this.trellowsp.listRemovedFromBoardRule(list.getListId(), board.getBoardId());
                         await this.updateWorkspace();
 
                 } else {
@@ -53,7 +53,7 @@ class WorkspaceManager {
                         console.log(`List with Id ${list.getListId()} in Board ${board.getBoardId()} needs to be updated.`);
                         
                             //  -> LIST MODIFIED
-                            this.trellowsp.listModifiedInBoardRule(list.getListId(), board.getBoardId());
+                            await this.trellowsp.listModifiedInBoardRule(list.getListId(), board.getBoardId());
                             await this.updateWorkspace();
                     }
                 }
@@ -71,7 +71,7 @@ class WorkspaceManager {
                         console.log(`Card with Id ${card.getCardId()}, (${card.getCardName()}) in List ${list.getListId()} has been removed.`);
 
                             //  -> CARD REMOVED
-                            this.trellowsp.cardRemovedFromListRule(card.getCardId(), list.getListId(), board.getBoardId());
+                            await this.trellowsp.cardRemovedFromListRule(card.getCardId(), list.getListId(), board.getBoardId());
                             await this.updateWorkspace();
                     } 
                     
@@ -81,7 +81,7 @@ class WorkspaceManager {
                         console.log(`Card with Id ${card.getCardId()}, (${card.getCardName()}) has been moved from List ${list.getListName()} to List ${targetList.name}`);
 
                             //  -> CARD MOVED
-                            this.trellowsp.cardMovedToListRule(card.getCardId(), list.getListId(), board.getBoardId());
+                            await this.trellowsp.cardMovedToListRule(card.getCardId(), list.getListId(), board.getBoardId());
                             await this.updateWorkspace();
                     }
 
@@ -104,7 +104,7 @@ class WorkspaceManager {
                         console.log(`Card with Id ${existingCard.id}, (${existingCard.name}) in List ${list.getListId()} is a new card.`);
 
                             //  -> CARD ADDED
-                            this.trellowsp.cardAddedToListRule(existingCard.id, list.getListId(), board.getBoardId());
+                            await this.trellowsp.cardAddedToListRule(existingCard.id, list.getListId(), board.getBoardId());
                             await this.updateWorkspace();
                     }
                 }
@@ -117,7 +117,7 @@ class WorkspaceManager {
                     console.log(`List with Id ${existingList.id}, (${existingList.name}) in Board ${board.getBoardId()} is a new list.`);
 
                         //  -> LIST ADDED
-                        this.trellowsp.listAddedToBoardRule(existingList.id, board.getBoardId());
+                        await this.trellowsp.listAddedToBoardRule(existingList.id, board.getBoardId());
                         await this.updateWorkspace();
                 }
             }
