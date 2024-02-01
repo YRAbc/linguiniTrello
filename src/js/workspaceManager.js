@@ -224,7 +224,7 @@ class WorkspaceManager {
                                     card.cardId !== boardCard.cardId) {
     
                                     console.log(`Card ID: ${boardCard.cardId}, name: ${boardCard.cardName}, OPFTech Number: ${cardOpfTechNumber}`);
-                                    console.log(`Main Card ID: ${card.cardId}, name: ${card.cardName}, OPFTech Number: ${opftechnumber}`);
+                                    console.log(`Main Card ID: ${card.id}, name: ${card.name}, OPFTech Number: ${opftechnumber}`);
     
                                     const json = JSON.stringify(card, null, 2);
                                     console.log('Original JSON:', json);
@@ -234,7 +234,7 @@ class WorkspaceManager {
                                     boardCard.customFieldItems.forEach(async (boardCardCustomFieldItem) => {
                                         console.log('Processing customFieldItem:', boardCardCustomFieldItem);
     
-                                        const mainCardCustomFieldId = this.config.mappingCustIds[boardId + boardCard.id];
+                                        const mainCardCustomFieldId = this.config.mappingCustIds[boardId + boardCard.cardId];
                                         console.log('Main card custom field ID:', mainCardCustomFieldId);
     
                                         let mainCardCustomFieldValue = '';
@@ -253,7 +253,7 @@ class WorkspaceManager {
     
                                         // Assuming this.rqtInv.setCustomField is an asynchronous function,
                                         // you may need to handle its result or use await if it returns a promise.
-                                        await this.rqtInv.setCustomField(boardCard.id, boardCardCustomFieldItem.id, customFieldOptionsId, null);
+                                        await this.rqtInv.setCustomField(boardCard.cardId, boardCardCustomFieldItem.id, customFieldOptionsId, null);
                                     });
     
                                     console.log('Duplicate card updated.');
