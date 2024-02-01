@@ -226,11 +226,12 @@ class WorkspaceManager {
                                         card.cardId !== boardCard.cardId) {
         
                                         const mainCard = await this.rqtInv.getCard(card.id);
-                                        console.log(`Card ID: ${boardCard.cardId}, name: ${boardCard.cardName}, OPFTech Number: ${cardOpfTechNumber}`);
-                                        console.log(`Main Card ID: ${mainCard.cardId}, name: ${mainCard.cardId}, OPFTech Number: ${opftechnumber}`);
+                                        const duplicateCard = await this.rqtInv.getCard(boardCard.cardId);
+                                        console.log(`Dup Card ID: ${duplicateCard.id}, name: ${duplicateCard.name}, OPFTech Number: ${cardOpfTechNumber}`);
+                                        console.log(`Main Card ID: ${mainCard.id}, name: ${mainCard.name}, OPFTech Number: ${opftechnumber}`);
         
                                         const json = JSON.stringify(mainCard, null, 2);
-                                        console.log('Board Card (duplicate) JSON:',  JSON.stringify(boardCard, null, 2));
+                                        console.log('Board Card (duplicate) JSON:',  JSON.stringify(duplicateCard, null, 2));
                                         console.log('Main Card JSON:',  JSON.stringify(mainCard, null, 2));
                                         await this.rqtInv.setCardUpdate(boardCard.id, card);
                                         
