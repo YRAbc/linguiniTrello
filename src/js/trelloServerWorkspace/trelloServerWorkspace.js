@@ -49,7 +49,7 @@ class TrelloServerWorkspace {
                 await this.rqtInv.setCustomField(cardId, this.config.opfBoardCustIssuerId, this.config.opfBoardCustIssuerToQualifyId, null);
                 await this.rqtInv.setCustomField(cardId, this.config.opfBoardCustStatusId, this.config.opfBoardCustStatusOpenId, null);
 
-                await this.rqtInv.copyCardToList(cardId, this.config.techBoardToClassifyListId);
+                await this.rqtInv.copyCardToList(cardId, this.config.techBoardToClassifyListId, cardDetails);
                 console.log('OPF Tech Card initialized successfully.');
             }
 
