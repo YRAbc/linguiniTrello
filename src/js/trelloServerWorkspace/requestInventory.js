@@ -404,12 +404,11 @@ class RequestInventory {
 }
 
 
-  async setCustomField(cardId, customFieldId, valueId, colorV, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
+  async setCustomField(cardId, customFieldId, valueId, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
     try {
       await axios.put(
         `https://api.trello.com/1/cards/${cardId}/customField/${customFieldId}/item?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`,
         { idValue: valueId,
-          color: colorV,
         },
         {
           timeout: timeout,
