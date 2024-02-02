@@ -44,10 +44,10 @@ class TrelloServerWorkspace {
                 await this.rqtInv.addOPFTechNumber(cardId, nextOPFTechNumber);
 
                 // Set Custom Fields
-                await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.opfBoardCustPriorityId, IdsConfigWorkspace.opfBoardCustPriorityToQualifyId, null);
-                await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.opfBoardCustIssuerId, IdsConfigWorkspace.opfBoardCustIssuerToQualifyId, null);
-                await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.opfBoardCustTechId, IdsConfigWorkspace.opfBoardCustTechToQualifyId, null);
-                await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.opfBoardCustStatusId, IdsConfigWorkspace.opfBoardCustStatusOpenId, null);
+                await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustPriorityId, IdsConfigWorkspace.techBoardCustPriorityToQualifyId, null);
+                await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustIssuerId, IdsConfigWorkspace.techBoardCustIssuerToQualifyId, null);
+                await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustTechId, IdsConfigWorkspace.techBoardCustTechToQualifyId, null);
+                await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustStatusId, IdsConfigWorkspace.techBoardCustStatusOpenId, null);
 
                 await this.rqtInv.copyCardToList(cardId, IdsConfigWorkspace.techBoardToClassifyListId, cardDetails);
                 console.log('OPF Tech Card initialized successfully.');

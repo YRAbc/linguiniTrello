@@ -118,7 +118,7 @@ class IdsConfigWorkspace {
         static techBoardCustIssuerToQualifyId = "65af9cf98d4f759ce85d2a5f"; 
     
         static techBoardCustTechId = "65a954eb3b1d7548e7d9cb32"; 
-        static techBoardCustTechSupportId = "65a954eb3b1d7548e7d9cb32"; 
+        static techBoardCustTechSupportId = "65a954eb3b1d7548e7d9cb33"; 
         static techBoardCustTechProjectId = "65a954eb3b1d7548e7d9cb34"; 
         static techBoardCustTechSidId = "65a954eb3b1d7548e7d9cb35"; 
         static techBoardCustTechNotTechId = "65a954eb3b1d7548e7d9cb36"; 
