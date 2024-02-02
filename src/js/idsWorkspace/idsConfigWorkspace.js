@@ -320,4 +320,10 @@ class IdsConfigWorkspace {
                 
 }
 
+// Access static properties directly from the class
+console.log("opfBoardId:", IdsConfigWorkspace.opfBoardId);
+console.log("techBoardCustStatusWaitingId:", IdsConfigWorkspace.techBoardCustStatusWaitingId);
+console.log("techBoardCustStatusBlockedId:", IdsConfigWorkspace.techBoardCustStatusBlockedId);
+console.log("techBoardCustStatusCancelledId:", IdsConfigWorkspace.techBoardCustStatusCancelledId);
+
 export default IdsConfigWorkspace;
