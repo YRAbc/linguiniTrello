@@ -73,7 +73,6 @@ class RequestInventory {
     try {
       const response = await axios.get(`https://api.trello.com/1/cards/${cardId}?fields=all&customFieldItems=true&key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`);
       
-      console.log(`https://api.trello.com/1/cards/${cardId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`);
       if (response.data && typeof response.data === 'object') {
         const card = response.data;
         return card;
@@ -576,7 +575,7 @@ class RequestInventory {
         json,
         { timeout }
       );   
-      console.log('set json on card,', cardId, '    ; JSON ', json);   
+      //console.log('set json on card,', cardId, '    ; JSON ', json);   
 
       if (response.data && typeof response.data === 'object') {
         const updatedCard = response.data;
