@@ -232,7 +232,6 @@ class WorkspaceManager {
     
                                         const mainCardCustFields = await this.rqtInv.getCustomFields(mainCard.id);
                                         const dupCardCustFields = await this.rqtInv.getCustomFields(duplicateCard.id);
-                                        console.log(JSON.stringify(mainCardCustFields, null, 2));
     
                                         // Check if dupCardCustFields & mainCardCustFields are defined and not null
                                         if (dupCardCustFields && mainCardCustFields) {
@@ -249,7 +248,7 @@ class WorkspaceManager {
                                                     mainCardCustomFieldId = IdsConfigWorkspace.mappingCustIds(boardId, duplicateCardCustomFieldItem.id);
                                                     //console.log("MainCardCustomFieldId =", mainCardCustomFieldId);
     
-                                                    const mainCardCustomField = await this.rqtInv.getCustomField(mainCard.id, mainCardCustomFieldId);
+                                                    const mainCardCustomFieldValue = await this.rqtInv.getCustomFieldValue(mainCard.id, mainCardCustomFieldId);
                                                     const dupCardCustomFieldValueId = IdsConfigWorkspace.mappingCustOptionsIds(board.getBoardId(), mainCardCustomFieldValue);
                                                     console.log("Value ", dupCardCustFields);
     
