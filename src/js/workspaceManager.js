@@ -15,8 +15,6 @@ class WorkspaceManager {
     constructor() {
 
         this.config = new IdsConfigWorkspace();
-        this.config.mappingCustIds = IdsConfigWorkspace.mappingCustIds();
-        this.config.mappingCustOptionsIds = IdsConfigWorkspace.mappingCustOptionsIds();
         this.opfvwsp = new VWorkspace("OPF Tech Virtual Workspace", this.config);
         this.trellowsp = new TrelloServerWorkspace("OPF Tech Trello Workspace", this.config, this.opfvwsp)
         this.rqtInv = new RequestInventory();
@@ -268,20 +266,20 @@ class WorkspaceManager {
                                             console.log("Combination Key:", keyToCheck);
 
                                             // Check if the key exists in the mappingCustIds
-                                            if (this.config.mappingCustIds.hasOwnProperty(keyToCheck)) {
+                                            if (IdsConfigWorkspace.mappingCustIds.hasOwnProperty(keyToCheck)) {
                                                 // Access the custom field ID
-                                                mainCardCustomFieldId = this.config.mappingCustIds[keyToCheck];
+                                                mainCardCustomFieldId = IdsConfigWorkspace.mappingCustIds[keyToCheck];
                                                 console.log("MainCardCustomFieldId =", mainCardCustomFieldId);
                                             } else {
                                                 console.log("Custom field ID not found for the given combination.");
                                             }
 
 
-                                            // Check if this.config.mappingCustIds is defined before accessing properties
-                                            if (this.config.mappingCustIds) {
-                                            mainCardCustomFieldId = this.config.mappingCustIds[boardId + duplicateCardCustomFieldItem.id];
+                                            // Check if IdsConfigWorkspace.mappingCustIds is defined before accessing properties
+                                            if (IdsConfigWorkspace.mappingCustIds) {
+                                            mainCardCustomFieldId = IdsConfigWorkspace.mappingCustIds[boardId + duplicateCardCustomFieldItem.id];
                                             } else {
-                                            console.error('this.config.mappingCustIds is undefined.');
+                                            console.error('IdsConfigWorkspace.mappingCustIds is undefined.');
                                             }
 
                                             console.log('Main card custom field ID:', mainCardCustomFieldId);
@@ -297,7 +295,7 @@ class WorkspaceManager {
                                         
                                             console.log('Main card custom field value:', mainCardCustomFieldValue);
                                         
-                                            const customFieldOptionsId = this.config.mappingCustOptionsIds[board.getBoardId() + mainCardCustomFieldValue];
+                                            const customFieldOptionsId = IdsConfigWorkspace.mappingCustOptionsIds[board.getBoardId() + mainCardCustomFieldValue];
                                             console.log('Custom field options ID:', customFieldOptionsId);
                                         
                                             // Assuming this.rqtInv.setCustomField is an asynchronous function,
