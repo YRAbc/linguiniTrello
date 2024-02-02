@@ -586,8 +586,8 @@ class IdsConfigWorkspace {
 const configInstance = new IdsConfigWorkspace();
 
 // Access properties using instance
-console.log("opfBoardId:", configInstance.getOpfBoardId());
-console.log("techBoardCustIssuerId:", configInstance.getTechBoardCustIssuerId());
+console.log("opfBoardId:", configInstance.get_opfBoardId());
+console.log("techBoardCustIssuerId:", configInstance.get_techBoardCustIssuerId());
 
 // Access static properties directly from the class
 console.log("IdsConfigWorkspace.opfBoardId:", IdsConfigWorkspace.opfBoardId);
