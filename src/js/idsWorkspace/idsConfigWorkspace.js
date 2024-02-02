@@ -133,6 +133,138 @@ class IdsConfigWorkspace {
         this.techBoardCustStatusCancelledId = "65a954eb3b1d7548e7d9cb47"; 
     }
 
+    // SET
+    /* OPF */
+    set opfBoardId(value){ this.opfBoardId = value;}
+    set opfBoardTechListId(value){ this.opfBoardTechListId = value;}
+    set opfBoardDoingListId(value){ this.opfBoardDoingListId = value;}
+    set opfBoardValidatedListId(value){ this.opfBoardValidatedListId = value;}
+
+    set opfBoardCustPriorityId(value){ this.opfBoardCustPriorityId = value;}
+    set opfBoardCustPriorityBlockerId(value){ this.opfBoardCustPriorityBlockerId = value;}
+    set opfBoardCustPriorityCriticId(value){ this.opfBoardCustPriorityCriticId = value;}
+    set opfBoardCustPriorityMajorId(value){ this.opfBoardCustPriorityMajorId = value;}
+    set opfBoardCustPriorityMinorId(value){ this.opfBoardCustPriorityMinorId = value;}
+    set opfBoardCustPriorityToQualifyId(value){ this.opfBoardCustPriorityToQualifyId = value;}
+
+    set opfBoardCustIssuerId(value){ this.opfBoardCustIssuerId = value;}
+    set opfBoardCustIssuerPBTeamId(value){ this.opfBoardCustIssuerPBTeamId = value;}
+    set opfBoardCustIssuerSupportTradingId(value){ this.opfBoardCustIssuerSupportTradingId = value;}
+    set opfBoardCustIssuerTreasuryId(value){ this.opfBoardCustIssuerTreasuryId = value;}
+    set opfBoardCustIssuerValuationId(value){ this.opfBoardCustIssuerValuationId = value;}
+    set opfBoardCustIssuerAccessMarketId(value){ this.opfBoardCustIssuerAccessMarketId = value;}  
+    set opfBoardCustIssuerManagerId(value){ this.opfBoardCustIssuerManagerId = value;}  
+    set opfBoardCustIssuerToQualifyId(value){ this.opfBoardCustIssuerToQualifyId = value;}
+
+    set opfBoardCustTechId(value){ this.opfBoardCustTechId = value;}
+    set opfBoardCustTechSupportId(value){ this.opfBoardCustTechSupportId = value;}
+    set opfBoardCustTechProjectId(value){ this.opfBoardCustTechProjectId = value;}
+    set opfBoardCustTechSidId(value){ this.opfBoardCustTechSidId = value;}
+    set opfBoardCustTechNotTechId(value){ this.opfBoardCustTechNotTechId = value;}
+    set opfBoardCustTechToQualifyId(value){ this.opfBoardCustTechToQualifyId = value;}  
+
+    set opfBoardCustStatusId(value){ this.opfBoardCustStatusId = value;}
+    set opfBoardCustStatusOpenId(value){ this.opfBoardCustStatusOpenId = value;}
+    set opfBoardCustStatusInProgressId(value){ this.opfBoardCustStatusInProgressId = value;}
+    set opfBoardCustStatusTestingId(value){ this.opfBoardCustStatusTestingId = value;}
+    set opfBoardCustStatusPendingDeliveryId(value){ this.opfBoardCustStatusPendingDeliveryId = value;}
+    set opfBoardCustStatusDeliveredId(value){ this.opfBoardCustStatusDeliveredId = value;}  
+    set opfBoardCustStatusValidatedId(value){ this.opfBoardCustStatusValidatedId = value;}  
+    set opfBoardCustStatusWaitingId(value){ this.opfBoardCustStatusWaitingId = value;}
+    set opfBoardCustStatusBlockedId(value){ this.opfBoardCustStatusBlockedId = value;}      
+    set opfBoardCustStatusCancelledId(value){ this.opfBoardCustStatusCancelledId = value;}
+
+
+
+    /* SID */
+    set sidBoardId(value){ this.sidBoardId = value;}
+    set sidBoardTechListId(value){ this.sidBoardTechListId = value;}
+
+    set sidBoardCustPriorityId(value){ this.sidBoardCustPriorityId = value;}
+    set sidBoardCustPriorityBlockerId(value){ this.sidBoardCustPriorityBlockerId = value;}
+    set sidBoardCustPriorityCriticId(value){ this.sidBoardCustPriorityCriticId = value;}
+    set sidBoardCustPriorityMajorId(value){ this.sidBoardCustPriorityMajorId = value;}
+    set sidBoardCustPriorityMinorId(value){ this.sidBoardCustPriorityMinorId = value;}
+    set sidBoardCustPriorityToQualifyId(value){ this.sidBoardCustPriorityToQualifyId = value;}
+
+    set sidBoardCustIssuerId(value){ this.sidBoardCustIssuerId = value;}
+    set sidBoardCustIssuerPBTeamId(value){ this.sidBoardCustIssuerPBTeamId = value;}
+    set sidBoardCustIssuerSupportTradingId(value){ this.sidBoardCustIssuerSupportTradingId = value;}
+    set sidBoardCustIssuerTreasuryId(value){ this.sidBoardCustIssuerTreasuryId = value;}
+    set sidBoardCustIssuerValuationId(value){ this.sidBoardCustIssuerValuationId = value;}
+    set sidBoardCustIssuerAccessMarketId(value){ this.sidBoardCustIssuerAccessMarketId = value;}  
+    set sidBoardCustIssuerManagerId(value){ this.sidBoardCustIssuerManagerId = value;}  
+    set sidBoardCustIssuerToQualifyId(value){ this.sidBoardCustIssuerToQualifyId = value;}
+
+    set sidBoardCustTechId(value){ this.sidBoardCustTechId = value;}
+    set sidBoardCustTechSupportId(value){ this.sidBoardCustTechSupportId = value;}
+    set sidBoardCustTechProjectId(value){ this.sidBoardCustTechProjectId = value;}
+    set sidBoardCustTechSidId(value){ this.sidBoardCustTechSidId = value;}
+    set sidBoardCustTechNotTechId(value){ this.sidBoardCustTechNotTechId = value;}
+    set sidBoardCustTechToQualifyId(value){ this.sidBoardCustTechToQualifyId = value;}  
+
+    set sidBoardCustStatusId(value){ this.sidBoardCustStatusId = value;}
+    set sidBoardCustStatusOpenId(value){ this.sidBoardCustStatusOpenId = value;}
+    set sidBoardCustStatusInProgressId(value){ this.sidBoardCustStatusInProgressId = value;}
+    set sidBoardCustStatusTestingId(value){ this.sidBoardCustStatusTestingId = value;}
+    set sidBoardCustStatusPendingDeliveryId(value){ this.sidBoardCustStatusPendingDeliveryId = value;}
+    set sidBoardCustStatusDeliveredId(value){ this.sidBoardCustStatusDeliveredId = value;}  
+    set sidBoardCustStatusValidatedId(value){ this.sidBoardCustStatusValidatedId = value;}  
+    set sidBoardCustStatusWaitingId(value){ this.sidBoardCustStatusWaitingId = value;}
+    set sidBoardCustStatusBlockedId(value){ this.sidBoardCustStatusBlockedId = value;}      
+    set sidBoardCustStatusCancelledId(value){ this.sidBoardCustStatusCancelledId = value;}
+
+
+
+    /* OPF TECH TASK BOARD */
+    set techBoardId(value){ this.techBoardId = value;}
+    set techBoardToClassifyListId(value){ this.techBoardToClassifyListId = value;}
+    set techBoardProjectListId(value){ this.techBoardProjectListId = value;}
+    set techBoardSupportListId(value){ this.techBoardSupportListId = value;}
+    set techBoardSidListId(value){ this.techBoardSidListId = value;}
+    set techBoardInProgressListId(value){ this.techBoardInProgressListId = value;}
+    set techBoardInReviewListId(value){ this.techBoardInReviewListId = value;}
+    set techBoardPendingDeliveryListId(value){ this.techBoardPendingDeliveryListId = value;}
+    set techBoardDoneListId(value){ this.techBoardDoneListId = value;}
+    set techBoardVaidatedListId(value){ this.techBoardVaidatedListId = value;}
+
+    set techBoardCustPriorityId(value){ this.techBoardCustPriorityId = value;}
+    set techBoardCustPriorityBlockerId(value){ this.techBoardCustPriorityBlockerId = value;}
+    set techBoardCustPriorityCriticId(value){ this.techBoardCustPriorityCriticId = value;}
+    set techBoardCustPriorityMajorId(value){ this.techBoardCustPriorityMajorId = value;}
+    set techBoardCustPriorityMinorId(value){ this.techBoardCustPriorityMinorId = value;}
+    set techBoardCustPriorityToQualifyId(value){ this.techBoardCustPriorityToQualifyId = value;}
+
+    set techBoardCustIssuerId(value){ this.techBoardCustIssuerId = value;}
+    set techBoardCustIssuerPBTeamId(value){ this.techBoardCustIssuerPBTeamId = value;}
+    set techBoardCustIssuerSupportTradingId(value){ this.techBoardCustIssuerSupportTradingId = value;}
+    set techBoardCustIssuerTreasuryId(value){ this.techBoardCustIssuerTreasuryId = value;}
+    set techBoardCustIssuerValuationId(value){ this.techBoardCustIssuerValuationId = value;}
+    set techBoardCustIssuerAccessMarketId(value){ this.techBoardCustIssuerAccessMarketId = value;}  
+    set techBoardCustIssuerManagerId(value){ this.techBoardCustIssuerManagerId = value;}  
+    set techBoardCustIssuerToQualifyId(value){ this.techBoardCustIssuerToQualifyId = value;}
+
+    set techBoardCustTechId(value){ this.techBoardCustTechId = value;}
+    set techBoardCustTechSupportId(value){ this.techBoardCustTechSupportId = value;}
+    set techBoardCustTechProjectId(value){ this.techBoardCustTechProjectId = value;}
+    set techBoardCustTechSidId(value){ this.techBoardCustTechSidId = value;}
+    set techBoardCustTechNotTechId(value){ this.techBoardCustTechNotTechId = value;}
+    set techBoardCustTechToQualifyId(value){ this.techBoardCustTechToQualifyId = value,}  
+
+    set techBoardCustStatusId(value){ this.techBoardCustStatusId = value;}
+    set techBoardCustStatusOpenId(value){ this.techBoardCustStatusOpenId = value;}
+    set techBoardCustStatusInProgressId(value){ this.techBoardCustStatusInProgressId = value;}
+    set techBoardCustStatusTestingId(value){ this.techBoardCustStatusTestingId = value;}
+    set techBoardCustStatusPendingDeliveryId(value){ this.techBoardCustStatusPendingDeliveryId = value;}
+    set techBoardCustStatusDeliveredId(value){ this.techBoardCustStatusDeliveredId = value;}  
+    set techBoardCustStatusValidatedId(value){ this. techBoardCustStatusValidatedId = value;}  
+    set techBoardCustStatusWaitingId(value){ this.techBoardCustStatusWaitingId = value;}
+    set techBoardCustStatusBlockedId(value){ this.techBoardCustStatusBlockedId = value;}      
+    set techBoardCustStatusCancelledId(value){ this.techBoardCustStatusCancelledId = value;}
+
+
+    // GET
+    /* OPF */
     get opfBoardId(){ return "65a5339acc54164519f0561a";}
     get opfBoardTechListId(){ return "65a5339acc54164519f05621";}
     get opfBoardDoingListId(){ return "65a5339acc54164519f05622";}
@@ -259,6 +391,7 @@ class IdsConfigWorkspace {
     get techBoardCustStatusWaitingId(){ return "65a954eb3b1d7548e7d9cb45";}
     get techBoardCustStatusBlockedId(){ return "65a954eb3b1d7548e7d9cb46";}      
     get techBoardCustStatusCancelledId(){ return "65a954eb3b1d7548e7d9cb47";}
+
 
     // Add a static method to initialize and return the config with mappingCustIds
     static initializeConfig() {
