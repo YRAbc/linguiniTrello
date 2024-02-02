@@ -255,7 +255,11 @@ class WorkspaceManager {
                                                 console.log("Custom field ID not found for the given combination.");
                                             }
 
-                                            console.log(IdsConfigWorkspace.mappingCustIds["65a5339acc54164519f0561a65a954eb3b1d7548e7d9cb21"]);
+                                            console.log("opfBoardId:", IdsConfigWorkspace.opfBoardId);
+                                            console.log("techBoardCustTechId:", IdsConfigWorkspace.techBoardCustTechId);
+                                            console.log("Combination Key to Check:", IdsConfigWorkspace.opfBoardId + IdsConfigWorkspace.techBoardCustTechId);
+                                            console.log("Mapped Value:", IdsConfigWorkspace.mappingCustIds[IdsConfigWorkspace.opfBoardId + IdsConfigWorkspace.techBoardCustTechId]);
+
 
                                             // Check if IdsConfigWorkspace.mappingCustIds is defined before accessing properties
                                             if (IdsConfigWorkspace.mappingCustIds) {
