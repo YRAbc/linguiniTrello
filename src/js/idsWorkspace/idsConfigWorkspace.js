@@ -172,7 +172,7 @@ class IdsConfigWorkspace {
             [IdsConfigWorkspace.sidBoardId + IdsConfigWorkspace.techBoardCustStatusId]: IdsConfigWorkspace.sidBoardCustStatusId,
 
             [IdsConfigWorkspace.techBoardId + IdsConfigWorkspace.sidBoardCustStatusId]: IdsConfigWorkspace.techBoardCustStatusId,
-            [IdsConfigWorkspace.techBoardId + IdsConfigWorkspace.opfBoardCustStatusId]: IdsConfigWorkspace.techBoardCustStatusId,
+            [IdsConfigWorkspace.techBoardId + IdsConfigWorkspace.opfBoardCustStatusId]: IdsConfigWorkspace.techBoardCustStatusId
         };
     };
 
@@ -313,7 +313,7 @@ class IdsConfigWorkspace {
         [IdsConfigWorkspace.opfBoardId + IdsConfigWorkspace.sidBoardCustStatusBlockedId]: IdsConfigWorkspace.opfBoardCustStatusBlockedId,
         [IdsConfigWorkspace.opfBoardId + IdsConfigWorkspace.techBoardCustStatusBlockedId]: IdsConfigWorkspace.opfBoardCustStatusBlockedId,
         [IdsConfigWorkspace.opfBoardId + IdsConfigWorkspace.sidBoardCustStatusCancelledId]: IdsConfigWorkspace.opfBoardCustStatusCancelledId,
-        [IdsConfigWorkspace.opfBoardId + IdsConfigWorkspace.techBoardCustStatusCancelledId]: IdsConfigWorkspace.opfBoardCustStatusCancelledId,
+        [IdsConfigWorkspace.opfBoardId + IdsConfigWorkspace.techBoardCustStatusCancelledId]: IdsConfigWorkspace.opfBoardCustStatusCancelledId
 
     };
     };
