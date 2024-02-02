@@ -582,4 +582,15 @@ class IdsConfigWorkspace {
                 
 }
 
+// Instantiate the class
+const configInstance = new IdsConfigWorkspace();
+
+// Access properties using instance
+console.log("opfBoardId:", configInstance.getOpfBoardId());
+console.log("techBoardCustIssuerId:", configInstance.getTechBoardCustIssuerId());
+
+// Access static properties directly from the class
+console.log("IdsConfigWorkspace.opfBoardId:", IdsConfigWorkspace.opfBoardId);
+console.log("IdsConfigWorkspace.techBoardCustIssuerId:", IdsConfigWorkspace.techBoardCustIssuerId);
+
 export default IdsConfigWorkspace;
