@@ -11,9 +11,9 @@ class VWorkspace {
         this.id = "Linguini Workspace for OPF TECH";
         this.name = name;
         this.boards = [];  
-        this.boards.push(new VBoard(IdsConfigWorkspace.config.opfBoardId, "OPF Todo List", []));
-        this.boards.push(new VBoard(IdsConfigWorkspace.config.sidBoardId, "Information System", []));
-        this.boards.push(new VBoard(IdsConfigWorkspace.config.techBoardId, "OPF Tech - Task Board Test", []));
+        this.boards.push(new VBoard(IdsConfigWorkspace.opfBoardId, "OPF Todo List", []));
+        this.boards.push(new VBoard(IdsConfigWorkspace.sidBoardId, "Information System", []));
+        this.boards.push(new VBoard(IdsConfigWorkspace.techBoardId, "OPF Tech - Task Board Test", []));
 
     }
 
