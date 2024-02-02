@@ -244,13 +244,12 @@ class WorkspaceManager {
                                                 for (const mainCardCustomFieldItem of mainCard.customFieldItems) {
                                                     if (mainCardCustomFieldItem.idCustomField === mainCardCustomFieldId) {
                                                         const dupCardCustomFieldValueId = IdsConfigWorkspace.mappingCustOptionsIds(board.getBoardId(), mainCardCustomFieldItem.idValue);
-                                                        console.log('Dup ' ,dupCardCustomFieldValueId);
+                                                        console.log('Dup ' , dupCardCustomFieldValueId);
 
-                                                        if (dupCardCustomFieldValueId !== null) {
-                                                            // Assuming customFieldOptionsId is defined elsewhere in your code
-                                                            await this.rqtInv.setCustomField(duplicateCard.cardId, duplicateCardCustomFieldItem.id, dupCardCustomFieldValueId, "green");
-                                                            console.log("Set custom field : ", duplicateCardCustomFieldItem.id, " on options : ", dupCardCustomFieldValueId, " for card : ", duplicateCard.cardId);
-                                                        }
+                                                        console.log("Set custom field : ", duplicateCardCustomFieldItem.id, " on options : ", dupCardCustomFieldValueId, " for card : ", duplicateCard.cardId);
+                                                        // Assuming customFieldOptionsId is defined elsewhere in your code
+                                                        await this.rqtInv.setCustomField(duplicateCard.cardId, duplicateCardCustomFieldItem.id, dupCardCustomFieldValueId, "green");
+                                                        console.log("success");
                                                     }
                                                 }
                                             }
