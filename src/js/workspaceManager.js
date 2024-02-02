@@ -221,10 +221,12 @@ class WorkspaceManager {
                                         const duplicateCard = await this.rqtInv.getCard(boardCard.cardId);
 
                                         // Print info for debug
-                                        // console.log(`Dup Card ID: ${duplicateCard.id}, name: ${duplicateCard.name}, OPFTech Number: ${cardOpfTechNumber}`);
-                                        // console.log(`Main Card ID: ${mainCard.id}, name: ${mainCard.name}, OPFTech Number: ${opftechnumber}`);
                                         console.log('Board Card (duplicate) JSON:', JSON.stringify(duplicateCard, null, 2));
                                         console.log('Main Card JSON:', JSON.stringify(mainCard, null, 2));
+
+                                        // Check if custom fields are present in the retrieved cards
+                                        console.log('Board Card Custom Fields:', duplicateCard.customFieldItems);
+                                        console.log('Main Card Custom Fields:', mainCard.customFieldItems);
 
                                         // Update Dup card
                                         await this.rqtInv.setCardUpdate(duplicateCard.id, mainCard);
