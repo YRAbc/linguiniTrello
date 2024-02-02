@@ -237,7 +237,7 @@ class WorkspaceManager {
                                         if (dupCardCustFields && mainCardCustFields) {
                                             // Iterate over each customFieldItem in duplicateCard.customFieldItems array.
                                             dupCardCustFields.forEach(async (duplicateCardCustomFieldItem) => {
-                                                console.log('Processing customFieldItem:', duplicateCardCustomFieldItem);
+                                                //console.log('Processing customFieldItem:', duplicateCardCustomFieldItem);
     
                                                 // Assuming 'this.config' is an instance of IdsConfigWorkspace
                                                 let mainCardCustomFieldId;
@@ -246,9 +246,9 @@ class WorkspaceManager {
                                                 if (IdsConfigWorkspace.mappingCustIds) {
                                                     // Access the custom field ID
                                                     mainCardCustomFieldId = IdsConfigWorkspace.mappingCustIds(boardId, duplicateCardCustomFieldItem.id);
-                                                    console.log("MainCardCustomFieldId =", mainCardCustomFieldId);
+                                                    //console.log("MainCardCustomFieldId =", mainCardCustomFieldId);
     
-                                                    const mainCardCustomFieldValue = await this.rqtInv.getCustomFieldValue(mainCard.id, mainCardCustomFieldId);
+                                                    const mainCardCustomField = await this.rqtInv.getCustomField(mainCard.id, mainCardCustomFieldId);
                                                     const dupCardCustomFieldValueId = IdsConfigWorkspace.mappingCustOptionsIds(board.getBoardId(), mainCardCustomFieldValue);
                                                     console.log("Value ", dupCardCustFields);
     
