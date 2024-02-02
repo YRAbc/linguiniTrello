@@ -255,6 +255,7 @@ class WorkspaceManager {
                                                     if (dupCardCustomFieldValueId) {
                                                         // Assuming customFieldOptionsId is defined elsewhere in your code
                                                         await this.rqtInv.setCustomField(duplicateCard.cardId, duplicateCardCustomFieldItem.id, dupCardCustomFieldValueId, "green");
+                                                        console.log("Set custom field : " ,  duplicateCardCustomFieldItem.id, " on options : " , dupCardCustomFieldValueId, " for card : ", duplicateCard.cardId);
                                                     }
     
                                                 }
