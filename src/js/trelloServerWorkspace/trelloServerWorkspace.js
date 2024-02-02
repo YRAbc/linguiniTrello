@@ -36,7 +36,7 @@ class TrelloServerWorkspace {
             const cardDetails = await this.rqtInv.getCard(cardId);
 
             // Check if the card is added to the OPF Tech list
-            if (listId === this.config.opfBoardTechListId) {
+            if (listId === this.config.get_opfBoardTechListId) {
 
                 // Get the maximum OPFTech number AND Set label +1
                 const maxOPFTechNumber = await this.rqtInv.getOPFTechMaxNumber(boardId);
@@ -44,12 +44,12 @@ class TrelloServerWorkspace {
                 await this.rqtInv.addOPFTechNumber(cardId, nextOPFTechNumber);
 
                 // Set Custom Fields
-                await this.rqtInv.setCustomField(cardId, this.config.opfBoardCustPriorityId, this.config.opfBoardCustPriorityToQualifyId, null);
-                await this.rqtInv.setCustomField(cardId, this.config.opfBoardCustIssuerId, this.config.opfBoardCustIssuerToQualifyId, null);
-                await this.rqtInv.setCustomField(cardId, this.config.opfBoardCustTechId, this.config.opfBoardCustTechToQualifyId, null);
-                await this.rqtInv.setCustomField(cardId, this.config.opfBoardCustStatusId, this.config.opfBoardCustStatusOpenId, null);
+                await this.rqtInv.setCustomField(cardId, this.config.get_opfBoardCustPriorityId, this.config.get_opfBoardCustPriorityToQualifyId, null);
+                await this.rqtInv.setCustomField(cardId, this.config.get_opfBoardCustIssuerId, this.config.get_opfBoardCustIssuerToQualifyId, null);
+                await this.rqtInv.setCustomField(cardId, this.config.get_opfBoardCustTechId, this.config.get_opfBoardCustTechToQualifyId, null);
+                await this.rqtInv.setCustomField(cardId, this.config.get_opfBoardCustStatusId, this.config.get_opfBoardCustStatusOpenId, null);
 
-                await this.rqtInv.copyCardToList(cardId, this.config.techBoardToClassifyListId, cardDetails);
+                await this.rqtInv.copyCardToList(cardId, this.config.get_techBoardToClassifyListId, cardDetails);
                 console.log('OPF Tech Card initialized successfully.');
             }
 
