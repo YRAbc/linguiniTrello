@@ -359,7 +359,6 @@ class WorkspaceManager {
                             const listObj = new VList(list.id, list.name, JSON.stringify(list, null, 2) || 'Unknown List');
                             const existingListCards = await this.rqtInv.getListCards(listObj.getListId());
     
-                            /*
                             for (const card of existingListCards) {
                                 try {
                                     
@@ -401,7 +400,7 @@ class WorkspaceManager {
                             // Add the list object to the array
                             listObjects.push(listObj);
                             //console.log("List added to Board, ", listObj.getListId(), ", ", listObj.getListName());
-                            */
+                            
                         } catch (listError) {
                             console.error('Error processing list:', listError.response ? listError.response.data : listError.message);
                             // Handle or log the list processing error
