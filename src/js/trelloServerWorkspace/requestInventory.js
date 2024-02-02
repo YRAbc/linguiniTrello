@@ -331,7 +331,6 @@ class RequestInventory {
       });
 
       const customFields = response.data;
-      console.log(response.data);
       const matchingField = customFields.find(field => field.name === fieldName);
 
       return matchingField;
