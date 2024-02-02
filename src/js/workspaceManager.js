@@ -248,7 +248,7 @@ class WorkspaceManager {
                                             console.log("Is config initialized?", this.config !== undefined);
 
                                             // Check if the combination key exists in the mappingCustIds
-                                            const keyToCheck = boardId + duplicateCardCustomFieldItem.id;
+                                            const keyToCheck = `${boardId}${duplicateCardCustomFieldItem.id}`;
                                             console.log("Combination Key:", keyToCheck);
 
                                             // Check if the key exists in the mappingCustIds
