@@ -237,62 +237,41 @@ class WorkspaceManager {
                                         if (dupCardCustFields && mainCardCustFields) {
                                             // Iterate over each customFieldItem in duplicateCard.customFieldItems array.
                                             dupCardCustFields.forEach(async (duplicateCardCustomFieldItem) => {
-                                            console.log('Processing customFieldItem:', duplicateCardCustomFieldItem);
-                                        
-                                            // Assuming 'this.config' is an instance of IdsConfigWorkspace
-                                            let mainCardCustomFieldId;
-
-                                            // Combine checks to ensure key exists and mappingCustIds is defined
-                                            if (IdsConfigWorkspace.mappingCustIds) {
-                                                // Access the custom field ID
-                                                mainCardCustomFieldId = IdsConfigWorkspace.mappingCustIds(boardId, duplicateCardCustomFieldItem.id);
-                                                console.log("MainCardCustomFieldId =", mainCardCustomFieldId);
-                                            } else {
-                                                console.log("Custom field ID not found for the given combination or mappingCustIds is undefined.");
-                                            }
-                                        
-                                            let mainCardCustomFieldValue = '';
-                                        
-                                            // Assume mainCardCustFields and mainCardCustomFieldId are defined earlier
-
-                                            // Iterate over each customFieldItem in card.customFieldItems array.
-                                            mainCardCustFields.forEach(async (cardCustomFieldItem) => {
-                                                console.log("Checking customFieldItem:", cardCustomFieldItem);
+                                                //console.log('Processing customFieldItem:', duplicateCardCustomFieldItem);
                                             
-                                                if (cardCustomFieldItem.id === mainCardCustomFieldId) {
-                                                console.log("Found matching customFieldItem with id:", mainCardCustomFieldId);
-                                                
-                                                mainCardCustomFieldValue = cardCustomFieldItem.value;
-                                            
-                                                console.log("Main card custom field value:", mainCardCustomFieldValue);
+                                                // Assuming 'this.config' is an instance of IdsConfigWorkspace
+                                                let mainCardCustomFieldId;
+
+                                                // Combine checks to ensure key exists and mappingCustIds is defined
+                                                if (IdsConfigWorkspace.mappingCustIds) {
+                                                    // Access the custom field ID
+                                                    mainCardCustomFieldId = IdsConfigWorkspace.mappingCustIds(boardId, duplicateCardCustomFieldItem.id);
+                                                    console.log("MainCardCustomFieldId =", mainCardCustomFieldId);
+
+                                                    const mainCardCustomFieldValue = await this.rqtInv.getCustomFieldValue(mainCard.id, mainCardCustomFieldId);
+                                                    const customFieldOptionsId = IdsConfigWorkspace.mappingCustOptionsIds(board.getBoardId(), mainCardCustomFieldValue);
+
+                                                    if (mainCardCustomFieldId !== undefined && mainCardCustomFieldValue !== undefined) {
+                                                        // Both mainCardCustomFieldId and mainCardCustomFieldValue are defined
+                                                    
+                                                        // Assuming customFieldOptionsId is defined elsewhere in your code
+                                                        await this.rqtInv.setCustomField(duplicateCard.cardId, mainCardCustomFieldId, customFieldOptionsId, mainCardCustomFieldValue);
+                                                    }
+                                                    
                                                 }
-                                            });
-                                            
-                                            // Additional logs for debugging
-                                            console.log("Final mainCardCustomFieldValue:", mainCardCustomFieldValue);
-                                            
-                                        
-                                            console.log('Main card custom field value:', mainCardCustomFieldValue);
-                                        
-                                            const customFieldOptionsId = IdsConfigWorkspace.mappingCustOptionsIds(board.getBoardId(), mainCardCustomFieldValue);
-                                            console.log('Custom field options ID:', customFieldOptionsId);
-                                        
-                                            // Assuming this.rqtInv.setCustomField is an asynchronous function,
-                                            // you may need to handle its result or use await if it returns a promise.
-                                            if (mainCardCustomFieldId !== undefined && mainCardCustomFieldValue !== undefined) {
-                                                // Both mainCardCustomFieldId and mainCardCustomFieldValue are defined
-                                            
-                                                // Assuming customFieldOptionsId is defined elsewhere in your code
-                                                await this.rqtInv.setCustomField(duplicateCard.cardId, mainCardCustomFieldId, customFieldOptionsId, mainCardCustomFieldValue);
-                                            }
-                                            
-                                            });
-                                        } else {
-                                            console.log('duplicateCard.customFieldItems is undefined or null. Skipping custom field processing.');
-                                        }
 
-                                        console.log('Duplicate card updated.');
+                                            });
+
+
+                                        } else {
+                                            console.log("Custom field ID not found for the given combination or mappingCustIds is undefined.");
+                                        }
+                                        
+
+                                    } else {
+                                        console.log('duplicateCard.customFieldItems is undefined or null. Skipping custom field processing.');
                                     }
+                                    console.log('Duplicate card updated.');
                                 }
                             }
                         }

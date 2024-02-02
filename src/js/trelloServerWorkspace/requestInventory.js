@@ -352,6 +352,34 @@ class RequestInventory {
     }
   }
 
+  async getCustomFieldValue(cardId, customFieldId, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
+    try {
+      const response = await axios.get(`https://api.trello.com/1/cards/${cardId}/customField/${customFieldId}/item?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`, {
+        timeout: timeout,
+      });
+  
+      const customFieldItem = response.data;
+      const customFieldValueId = customFieldItem.value.idValue; // Extract the ID value
+  
+      return customFieldValueId;
+    } catch (error) {
+      if (error.response && error.response.status === 429) {
+        // Handle rate limiting
+        if (retryCount > 0) {
+          console.warn(`Rate limit exceeded. Retrying after ${delay / 1000} seconds. Retries left: ${retryCount}`);
+          await new Promise(resolve => setTimeout(resolve, delay));
+          return this.getCustomFieldValue(cardId, customFieldId, retryCount - 1, delay * 2, timeout); // Exponential backoff
+        } else {
+          console.error('Exceeded maximum retry attempts. Aborting.');
+          throw error;
+        }
+      } else {
+        console.error('Error getting custom field value ID:', error.response ? error.response.data : error.message);
+        throw error;
+      }
+    }
+  }  
+
   async getCustomFields(cardId, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
     try {
       const response = await axios.get(`https://api.trello.com/1/cards/${cardId}/customFields?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`, {
