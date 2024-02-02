@@ -247,6 +247,12 @@ class WorkspaceManager {
                                             // Check if 'this.config' is properly initialized
                                             console.log("Is config initialized?", this.config !== undefined);
 
+                                            console.log("IdsConfigWorkspace.opfBoardId:", IdsConfigWorkspace.opfBoardId);
+                                            console.log("IdsConfigWorkspace.techBoardCustIssuerId:", IdsConfigWorkspace.techBoardCustIssuerId);
+                                            console.log("boardId:", boardId);
+                                            console.log("duplicateCardCustomFieldItem.id:", duplicateCardCustomFieldItem.id);
+
+
                                             // Check if the combination key exists in the mappingCustIds
                                             const keyToCheck = `${boardId}${duplicateCardCustomFieldItem.id}`;
                                             console.log("Combination Key:", keyToCheck);
