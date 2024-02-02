@@ -392,58 +392,49 @@ class IdsConfigWorkspace {
     get get_techBoardCustStatusBlockedId(){ return "65a954eb3b1d7548e7d9cb46";}      
     get get_techBoardCustStatusCancelledId(){ return "65a954eb3b1d7548e7d9cb47";}
 
-
-    // Add a static method to initialize and return the config with mappingCustIds
-    static initializeConfig() {
-        const config = new IdsConfigWorkspace();
-        config.mappingCustIds = IdsConfigWorkspace.mappingCustIds();
-        config.mappingCustOptionsIds = IdsConfigWorkspace.mappingCustOptionsIds();
-        return config;
-    }
-
     //Mapping for CustomFields ID
     static mappingCustIds = () => {
         return {
 
             // PRIORITY
-            [this.opfBoardId + this.sidBoardCustPriorityId]: this.opfBoardCustPriorityId,
-            [this.opfBoardId + this.techBoardCustPriorityId]: this.opfBoardCustPriorityId,
+            [IdsConfigWorkspace.opfBoardId + IdsConfigWorkspace.sidBoardCustPriorityId]: IdsConfigWorkspace.opfBoardCustPriorityId,
+            [IdsConfigWorkspace.opfBoardId + IdsConfigWorkspace.techBoardCustPriorityId]: IdsConfigWorkspace.opfBoardCustPriorityId,
 
-            [this.sidBoardId + this.opfBoardCustPriorityId]: this.sidBoardCustPriorityId,
-            [this.sidBoardId + this.techBoardCustPriorityId]: this.sidBoardCustPriorityId,
+            [IdsConfigWorkspace.sidBoardId + IdsConfigWorkspace.opfBoardCustPriorityId]: IdsConfigWorkspace.sidBoardCustPriorityId,
+            [IdsConfigWorkspace.sidBoardId + IdsConfigWorkspace.techBoardCustPriorityId]: IdsConfigWorkspace.sidBoardCustPriorityId,
 
-            [this.techBoardId + this.sidBoardCustPriorityId]: this.techBoardCustPriorityId,
-            [this.techBoardId + this.opfBoardCustPriorityId]: this.techBoardCustPriorityId,
+            [IdsConfigWorkspace.techBoardId + IdsConfigWorkspace.sidBoardCustPriorityId]: IdsConfigWorkspace.techBoardCustPriorityId,
+            [IdsConfigWorkspace.techBoardId + IdsConfigWorkspace.opfBoardCustPriorityId]: IdsConfigWorkspace.techBoardCustPriorityId,
 
             // ISSUER
-            [this.opfBoardId + this.sidBoardCustIssuerId]: this.opfBoardCustIssuerId,
-            [this.opfBoardId + this.techBoardCustIssuerId]: this.opfBoardCustIssuerId,
+            [IdsConfigWorkspace.opfBoardId + IdsConfigWorkspace.sidBoardCustIssuerId]: IdsConfigWorkspace.opfBoardCustIssuerId,
+            [IdsConfigWorkspace.opfBoardId + IdsConfigWorkspace.techBoardCustIssuerId]: IdsConfigWorkspace.opfBoardCustIssuerId,
 
-            [this.sidBoardId + this.opfBoardCustIssuerId]: this.sidBoardCustIssuerId,
-            [this.sidBoardId + this.techBoardCustIssuerId]: this.sidBoardCustIssuerId,
+            [IdsConfigWorkspace.sidBoardId + IdsConfigWorkspace.opfBoardCustIssuerId]: IdsConfigWorkspace.sidBoardCustIssuerId,
+            [IdsConfigWorkspace.sidBoardId + IdsConfigWorkspace.techBoardCustIssuerId]: IdsConfigWorkspace.sidBoardCustIssuerId,
 
-            [this.techBoardId + this.sidBoardCustIssuerId]: this.techBoardCustIssuerId,
-            [this.techBoardId + this.opfBoardCustIssuerId]: this.techBoardCustIssuerId,
+            [IdsConfigWorkspace.techBoardId + IdsConfigWorkspace.sidBoardCustIssuerId]: IdsConfigWorkspace.techBoardCustIssuerId,
+            [IdsConfigWorkspace.techBoardId + IdsConfigWorkspace.opfBoardCustIssuerId]: IdsConfigWorkspace.techBoardCustIssuerId,
 
             // TECH
-            [this.opfBoardId + this.sidBoardCustTechId]: this.opfBoardCustTechId,
-            [this.opfBoardId + this.techBoardCustTechId]: this.opfBoardCustTechId,
+            [IdsConfigWorkspace.opfBoardId + IdsConfigWorkspace.sidBoardCustTechId]: IdsConfigWorkspace.opfBoardCustTechId,
+            [IdsConfigWorkspace.opfBoardId + IdsConfigWorkspace.techBoardCustTechId]: IdsConfigWorkspace.opfBoardCustTechId,
 
-            [this.sidBoardId + this.opfBoardCustTechId]: this.sidBoardCustTechId,
-            [this.sidBoardId + this.techBoardCustTechId]: this.sidBoardCustTechId,
+            [IdsConfigWorkspace.sidBoardId + IdsConfigWorkspace.opfBoardCustTechId]: IdsConfigWorkspace.sidBoardCustTechId,
+            [IdsConfigWorkspace.sidBoardId + IdsConfigWorkspace.techBoardCustTechId]: IdsConfigWorkspace.sidBoardCustTechId,
 
-            [this.techBoardId + this.sidBoardCustTechId]: this.techBoardCustTechId,
-            [this.techBoardId + this.opfBoardCustTechId]: this.techBoardCustTechId,
+            [IdsConfigWorkspace.techBoardId + IdsConfigWorkspace.sidBoardCustTechId]: IdsConfigWorkspace.techBoardCustTechId,
+            [IdsConfigWorkspace.techBoardId + IdsConfigWorkspace.opfBoardCustTechId]: IdsConfigWorkspace.techBoardCustTechId,
 
             // STATUS
-            [this.opfBoardId + this.sidBoardCustStatusId]: this.opfBoardCustStatusId,
-            [this.opfBoardId + this.techBoardCustStatusId]: this.opfBoardCustStatusId,
+            [IdsConfigWorkspace.opfBoardId + IdsConfigWorkspace.sidBoardCustStatusId]: IdsConfigWorkspace.opfBoardCustStatusId,
+            [IdsConfigWorkspace.opfBoardId + IdsConfigWorkspace.techBoardCustStatusId]: IdsConfigWorkspace.opfBoardCustStatusId,
 
-            [this.sidBoardId + this.opfBoardCustStatusId]: this.sidBoardCustStatusId,
-            [this.sidBoardId + this.techBoardCustStatusId]: this.sidBoardCustStatusId,
+            [IdsConfigWorkspace.sidBoardId + IdsConfigWorkspace.opfBoardCustStatusId]: IdsConfigWorkspace.sidBoardCustStatusId,
+            [IdsConfigWorkspace.sidBoardId + IdsConfigWorkspace.techBoardCustStatusId]: IdsConfigWorkspace.sidBoardCustStatusId,
 
-            [this.techBoardId + this.sidBoardCustStatusId]: this.techBoardCustStatusId,
-            [this.techBoardId + this.opfBoardCustStatusId]: this.techBoardCustStatusId,
+            [IdsConfigWorkspace.techBoardId + IdsConfigWorkspace.sidBoardCustStatusId]: IdsConfigWorkspace.techBoardCustStatusId,
+            [IdsConfigWorkspace.techBoardId + IdsConfigWorkspace.opfBoardCustStatusId]: IdsConfigWorkspace.techBoardCustStatusId,
         };
     };
 
