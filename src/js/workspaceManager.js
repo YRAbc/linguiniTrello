@@ -168,110 +168,103 @@ class WorkspaceManager {
     
             // Check if the card object and its labels property are defined
             if (card && card.labels && Array.isArray(card.labels)) {
-                //console.log('Card object and labels are valid.');
+                console.log('Card object and labels are valid.');
     
                 // If the card has an OPFTech label
                 if (card.labels.some(label => label.name.startsWith('#OPFTech-'))) {
-                    //console.log('Card has an OPFTech label.');
+                    console.log('Card has an OPFTech label.');
     
                     // Get the OPFTech number from the card label
                     const opftechnumber = await this.rqtInv.getOPFTechNumber(card.id);
-                    //console.log('OPFTech number:', opftechnumber);
+                    console.log('OPFTech number:', opftechnumber);
     
                     // If there is an OPFTech number, proceed to find duplicates
                     if (opftechnumber) {
-                        //console.log('OPFTech number exists. Proceeding to find duplicates.');
-                        //console.log('board ID : ', boardId);
+                        console.log('OPFTech number exists. Proceeding to find duplicates.');
+                        console.log('board ID : ', boardId);
     
                         // Get all boards
                         const boards = this.opfvwsp.getBoards();
     
                         // Iterate through boards
                         for (const board of boards) {
-                            if(board.getBoardId() !== boardId){
-                                //console.log('Checking board:', board);
-        
+                            if (board.getBoardId() !== boardId) {
+                                console.log('Checking board:', board);
+    
                                 // Get all cards in the current board
                                 const cards = board.getCards();
-                                //console.log('All cards in the current board:', cards);
-        
+                                console.log('All cards in the current board:', cards);
+    
                                 // Find cards with the same OPFTech number in the current board
                                 for (const boardCard of cards) {
                                     const cardOpfTechNumber = boardCard.opfTechNumber;
-                                    //console.log(`Card ID: ${boardCard.cardId}, name: ${boardCard.cardName},  OPFTech Number: ${cardOpfTechNumber}`);
-        
-                                    // Ensure boardCard has a 'id' property
+                                    console.log(`Card ID: ${boardCard.cardId}, name: ${boardCard.cardName},  OPFTech Number: ${cardOpfTechNumber}`);
+    
+                                    // Ensure boardCard has an 'id' property
                                     if (!boardCard.cardId) {
                                         console.warn('Card does not have a cardId:', boardCard);
                                         continue;
                                     }
-        
+    
                                     // Convert both values to integers before checking
                                     const cardOpfTechNumberInt = parseInt(cardOpfTechNumber, 10);
                                     const opftechnumberInt = parseInt(opftechnumber, 10);
-        
+    
                                     // Check if the card has the same OPFTech number and a different id
                                     if (!isNaN(cardOpfTechNumberInt) &&
                                         !isNaN(opftechnumberInt) &&
                                         cardOpfTechNumberInt === opftechnumberInt &&
                                         card.cardId !== boardCard.cardId) {
-        
-                                        //Retreived cards
+    
+                                        // Retrieved cards
                                         const mainCard = await this.rqtInv.getCard(card.id);
                                         const duplicateCard = await this.rqtInv.getCard(boardCard.cardId);
-
-                                        //print info for debug
-                                        //console.log(`Dup Card ID: ${duplicateCard.id}, name: ${duplicateCard.name}, OPFTech Number: ${cardOpfTechNumber}`);
-                                        //console.log(`Main Card ID: ${mainCard.id}, name: ${mainCard.name}, OPFTech Number: ${opftechnumber}`);
+    
+                                        // Print info for debug
+                                        console.log(`Dup Card ID: ${duplicateCard.id}, name: ${duplicateCard.name}, OPFTech Number: ${cardOpfTechNumber}`);
+                                        console.log(`Main Card ID: ${mainCard.id}, name: ${mainCard.name}, OPFTech Number: ${opftechnumber}`);
                                         const json = JSON.stringify(mainCard, null, 2);
-                                        //console.log('Board Card (duplicate) JSON:',  JSON.stringify(duplicateCard, null, 2));
-                                        //console.log('Main Card JSON:',  JSON.stringify(mainCard, null, 2));
-        
-                                        //Update Dup card
+                                        console.log('Board Card (duplicate) JSON:', JSON.stringify(duplicateCard, null, 2));
+                                        console.log('Main Card JSON:', JSON.stringify(mainCard, null, 2));
+    
+                                        // Update Dup card
                                         await this.rqtInv.setCardUpdate(duplicateCard.id, mainCard);
-
+    
                                         const mainCardCustFields = await this.rqtInv.getCustomFields(mainCard.id);
                                         const dupCardCustFields = await this.rqtInv.getCustomFields(duplicateCard.id);
-                                        
+    
                                         // Check if dupCardCustFields & mainCardCustFields are defined and not null
                                         if (dupCardCustFields && mainCardCustFields) {
                                             // Iterate over each customFieldItem in duplicateCard.customFieldItems array.
                                             dupCardCustFields.forEach(async (duplicateCardCustomFieldItem) => {
-                                                //console.log('Processing customFieldItem:', duplicateCardCustomFieldItem);
-                                            
+                                                console.log('Processing customFieldItem:', duplicateCardCustomFieldItem);
+    
                                                 // Assuming 'this.config' is an instance of IdsConfigWorkspace
                                                 let mainCardCustomFieldId;
-
+    
                                                 // Combine checks to ensure key exists and mappingCustIds is defined
                                                 if (IdsConfigWorkspace.mappingCustIds) {
                                                     // Access the custom field ID
                                                     mainCardCustomFieldId = IdsConfigWorkspace.mappingCustIds(boardId, duplicateCardCustomFieldItem.id);
                                                     console.log("MainCardCustomFieldId =", mainCardCustomFieldId);
-
+    
                                                     const mainCardCustomFieldValue = await this.rqtInv.getCustomFieldValue(mainCard.id, mainCardCustomFieldId);
                                                     const customFieldOptionsId = IdsConfigWorkspace.mappingCustOptionsIds(board.getBoardId(), mainCardCustomFieldValue);
-
+    
                                                     if (mainCardCustomFieldId !== undefined && mainCardCustomFieldValue !== undefined) {
                                                         // Both mainCardCustomFieldId and mainCardCustomFieldValue are defined
-                                                    
+    
                                                         // Assuming customFieldOptionsId is defined elsewhere in your code
                                                         await this.rqtInv.setCustomField(duplicateCard.cardId, mainCardCustomFieldId, customFieldOptionsId, mainCardCustomFieldValue);
                                                     }
-                                                    
+    
                                                 }
-
                                             });
-
-
                                         } else {
                                             console.log("Custom field ID not found for the given combination or mappingCustIds is undefined.");
                                         }
-                                        
-
-                                    } else {
-                                        console.log('duplicateCard.customFieldItems is undefined or null. Skipping custom field processing.');
+                                        console.log('Duplicate card updated.');
                                     }
-                                    console.log('Duplicate card updated.');
                                 }
                             }
                         }
@@ -290,7 +283,6 @@ class WorkspaceManager {
         }
     }
     
-      
     //Update Workspace
     async updateWorkspace() {
         try {
