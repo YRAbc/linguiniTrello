@@ -71,7 +71,7 @@ class RequestInventory {
 
   async getCard(cardId, retryCount = 3, delay = 1000) {
     try {
-      const response = await axios.get(`https://api.trello.com/1/cards/${cardId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`);
+      const response = await axios.get(`https://api.trello.com/1/cards/${cardId}?fields=all&customFieldItems=true&key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`);
       
       console.log(`https://api.trello.com/1/cards/${cardId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`);
       if (response.data && typeof response.data === 'object') {
