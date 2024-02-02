@@ -239,7 +239,7 @@ class WorkspaceManager {
                                             if (IdsConfigWorkspace.mappingCustIds) {
                                                 // Access the custom field ID
                                                 const mainCardCustomFieldId = IdsConfigWorkspace.mappingCustIds(boardId, duplicateCardCustomFieldItem.idCustomField);
-                                                console.log('Main ' , mainCardCustomFieldId);
+                                                //console.log('Main ' , mainCardCustomFieldId);
 
                                                 for (const mainCardCustomFieldItem of mainCard.customFieldItems) {
                                                     if (mainCardCustomFieldItem.idCustomField === mainCardCustomFieldId) {
