@@ -243,13 +243,13 @@ class WorkspaceManager {
 
                                                 for (const mainCardCustomFieldItem of mainCard.customFieldItems) {
                                                     if (mainCardCustomFieldItem.idCustomField === mainCardCustomFieldId) {
-                                                        console.log('Debug : ', board.getBoardId(), "   , idValue : ", mainCardCustomFieldItem.idValue);
+                                                        //console.log('Debug : ', board.getBoardId(), "   , idValue : ", mainCardCustomFieldItem.idValue);
+                                                        //console.log('Dup ' , dupCardCustomFieldValueId);
                                                         const dupCardCustomFieldValueId = IdsConfigWorkspace.mappingCustOptionsIds(board.getBoardId(), mainCardCustomFieldItem.idValue);
-                                                        console.log('Dup ' , dupCardCustomFieldValueId);
 
-                                                        console.log("Set custom field : ", duplicateCardCustomFieldItem.id, " on options : ", dupCardCustomFieldValueId, " for card : ", duplicateCard.id);
+                                                        console.log("Set custom field : ", duplicateCardCustomFieldItem.idCustomField, " on options : ", dupCardCustomFieldValueId, " for card : ", duplicateCard.id);
                                                         // Assuming customFieldOptionsId is defined elsewhere in your code
-                                                        await this.rqtInv.setCustomField(duplicateCard.id, duplicateCardCustomFieldItem.id, dupCardCustomFieldValueId);
+                                                        await this.rqtInv.setCustomField(duplicateCard.id, duplicateCardCustomFieldItem.idCustomField, dupCardCustomFieldValueId);
                                                         console.log("success");
                                                     }
                                                 }
