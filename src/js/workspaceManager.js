@@ -246,24 +246,13 @@ class WorkspaceManager {
                                             const keyToCheck = `${boardId}${duplicateCardCustomFieldItem.id}`;
                                             console.log("Combination Key:", keyToCheck);
 
-                                            // Check if the key exists in the mappingCustIds
-                                            if (IdsConfigWorkspace.mappingCustIds.hasOwnProperty(keyToCheck)) {
+                                            // Combine checks to ensure key exists and mappingCustIds is defined
+                                            if (IdsConfigWorkspace.mappingCustIds && IdsConfigWorkspace.mappingCustIds.hasOwnProperty(keyToCheck)) {
                                                 // Access the custom field ID
                                                 mainCardCustomFieldId = IdsConfigWorkspace.mappingCustIds[keyToCheck];
                                                 console.log("MainCardCustomFieldId =", mainCardCustomFieldId);
                                             } else {
-                                                console.log("Custom field ID not found for the given combination.");
-                                            }
-
-                                            const combinationKey = "'" + IdsConfigWorkspace.opfBoardId + IdsConfigWorkspace.techBoardCustTechId + '"';
-                                            console.log("Combination Key:", combinationKey);
-                                            console.log("Mapped Value:", IdsConfigWorkspace.mappingCustIds[combinationKey]);
-
-                                            // Check if IdsConfigWorkspace.mappingCustIds is defined before accessing properties
-                                            if (IdsConfigWorkspace.mappingCustIds) {
-                                            mainCardCustomFieldId = IdsConfigWorkspace.mappingCustIds[boardId + duplicateCardCustomFieldItem.id];
-                                            } else {
-                                            console.error('IdsConfigWorkspace.mappingCustIds is undefined.');
+                                                console.log("Custom field ID not found for the given combination or mappingCustIds is undefined.");
                                             }
 
                                             console.log('Main card custom field ID:', mainCardCustomFieldId);
