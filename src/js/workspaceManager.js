@@ -238,7 +238,7 @@ class WorkspaceManager {
                                             // Combine checks to ensure key exists and mappingCustIds is defined
                                             if (IdsConfigWorkspace.mappingCustIds) {
                                                 // Access the custom field ID
-                                                const mainCardCustomFieldId = IdsConfigWorkspace.mappingCustIds(boardId, duplicateCardCustomFieldItem.id);
+                                                const mainCardCustomFieldId = IdsConfigWorkspace.mappingCustIds(boardId, duplicateCardCustomFieldItem.idCustomField);
                                                 console.log(mainCardCustomFieldId);
 
                                                 for (const mainCardCustomFieldItem of mainCard.customFieldItems) {
