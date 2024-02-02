@@ -255,7 +255,7 @@ class WorkspaceManager {
                                                 console.log("Custom field ID not found for the given combination.");
                                             }
 
-                                            const combinationKey = IdsConfigWorkspace.opfBoardId + IdsConfigWorkspace.techBoardCustTechId;
+                                            const combinationKey = "'" + IdsConfigWorkspace.opfBoardId + IdsConfigWorkspace.techBoardCustTechId + '"';
                                             console.log("Combination Key:", combinationKey);
                                             console.log("Mapped Value:", IdsConfigWorkspace.mappingCustIds[combinationKey]);
 
