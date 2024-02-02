@@ -242,20 +242,8 @@ class WorkspaceManager {
                                             // Assuming 'this.config' is an instance of IdsConfigWorkspace
                                             let mainCardCustomFieldId;
 
-                                            // Check if 'this.config' is properly initialized
-                                            console.log("Is config initialized?", this.config !== undefined);
-
-                                            
-                                            // Instantiate the class
-                                            const configInstance = new IdsConfigWorkspace();
-
-                                            // Access properties using the instance
-                                            console.log("opfBoardId:", configInstance.opfBoardId);
-                                            console.log("techBoardCustIssuerId:", configInstance.techBoardCustIssuerId);
-
-
                                             console.log("IdsConfigWorkspace.opfBoardId:", IdsConfigWorkspace.opfBoardId);
-                                            console.log("IdsConfigWorkspace.techBoardCustIssuerId:", IdsConfigWorkspace.techBoardCustIssuerId);
+                                            console.log("IdsConfigWorkspace.techBoardCustTechId:", IdsConfigWorkspace.techBoardCustTechId);
                                             console.log("boardId:", boardId);
                                             console.log("duplicateCardCustomFieldItem.id:", duplicateCardCustomFieldItem.id);
 
