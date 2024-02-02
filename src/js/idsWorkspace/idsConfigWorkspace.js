@@ -130,6 +130,9 @@ class IdsConfigWorkspace {
         static techBoardCustStatusBlockedId = "65a954eb3b1d7548e7d9cb46";       
         static techBoardCustStatusCancelledId = "65a954eb3b1d7548e7d9cb47"; 
 
+        static un = "1";
+        static deux = "2";
+
     //Mapping for CustomFields ID
     static mappingCustIds = () => {
         return {
@@ -172,7 +175,9 @@ class IdsConfigWorkspace {
             [IdsConfigWorkspace.sidBoardId + IdsConfigWorkspace.techBoardCustStatusId]: IdsConfigWorkspace.sidBoardCustStatusId,
 
             [IdsConfigWorkspace.techBoardId + IdsConfigWorkspace.sidBoardCustStatusId]: IdsConfigWorkspace.techBoardCustStatusId,
-            [IdsConfigWorkspace.techBoardId + IdsConfigWorkspace.opfBoardCustStatusId]: IdsConfigWorkspace.techBoardCustStatusId
+            [IdsConfigWorkspace.techBoardId + IdsConfigWorkspace.opfBoardCustStatusId]: IdsConfigWorkspace.techBoardCustStatusId,
+
+            [IdsConfigWorkspace.un + IdsConfigWorkspace.deux]: "Trois"
         };
     };
 
