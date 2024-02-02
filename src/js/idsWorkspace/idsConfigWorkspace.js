@@ -3,6 +3,7 @@
 
 class IdsConfigWorkspace {
 
+        /* OPF TO DO LIST */
         static opfBoardId = "65a5339acc54164519f0561a";
         static opfBoardTechListId = "65a5339acc54164519f05621";
         static opfBoardDoingListId = "65a5339acc54164519f05622"; 
@@ -96,7 +97,7 @@ class IdsConfigWorkspace {
         static techBoardDoneListId = "65a533f5e072331593b68e87"; 
         static techBoardVaidatedListId = "65a533f93359e67ebba68abb"; 
     
-        static techBoardCustPriorityId = "65b3ebb4c8c7e797dc0cca9b"; 
+        static techBoardCustPriorityId = "65a954eb3b1d7548e7d9cb52"; 
         static techBoardCustPriorityBlockerId = "65b3ebc10b7b671945487b10"; 
         static techBoardCustPriorityCriticId = "65b3ebc3faccc97b451837f0"; 
         static techBoardCustPriorityMajorId = "65b3ebc5cdc5cfd03bf37834"; 
