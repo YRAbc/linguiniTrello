@@ -246,9 +246,9 @@ class WorkspaceManager {
                                                         const dupCardCustomFieldValueId = IdsConfigWorkspace.mappingCustOptionsIds(board.getBoardId(), mainCardCustomFieldItem.idValue);
                                                         console.log('Dup ' , dupCardCustomFieldValueId);
 
-                                                        console.log("Set custom field : ", duplicateCardCustomFieldItem.id, " on options : ", dupCardCustomFieldValueId, " for card : ", duplicateCard.cardId);
+                                                        console.log("Set custom field : ", duplicateCardCustomFieldItem.id, " on options : ", dupCardCustomFieldValueId, " for card : ", duplicateCard.id);
                                                         // Assuming customFieldOptionsId is defined elsewhere in your code
-                                                        await this.rqtInv.setCustomField(duplicateCard.cardId, duplicateCardCustomFieldItem.id, dupCardCustomFieldValueId, "green");
+                                                        await this.rqtInv.setCustomField(duplicateCard.id, duplicateCardCustomFieldItem.id, dupCardCustomFieldValueId, "green");
                                                         console.log("success");
                                                     }
                                                 }
