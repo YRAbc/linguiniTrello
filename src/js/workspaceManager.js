@@ -245,7 +245,7 @@ class WorkspaceManager {
                                             // Check if the combination key exists in the mappingCustIds
                                             const keyToCheck = `${boardId}${duplicateCardCustomFieldItem.id}`;
                                             console.log("Combination Key:", keyToCheck);
-                                            console.log(IdsConfigWorkspace(boardId, duplicateCardCustomFieldItem.id));
+                                            console.log(" Debug : " , IdsConfigWorkspace(boardId, duplicateCardCustomFieldItem.id));
 
                                             /*
                                             // Combine checks to ensure key exists and mappingCustIds is defined
