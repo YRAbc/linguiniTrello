@@ -13,6 +13,7 @@ import IdsConfigWorkspace from './idsWorkspace/idsConfigWorkspace.js';
 class WorkspaceManager {
 
     constructor() {
+
         this.config = new IdsConfigWorkspace();
         this.config.mappingCustIds = IdsConfigWorkspace.mappingCustIds();
         this.config.mappingCustOptionsIds = IdsConfigWorkspace.mappingCustOptionsIds();
@@ -246,6 +247,14 @@ class WorkspaceManager {
 
                                             // Check if 'this.config' is properly initialized
                                             console.log("Is config initialized?", this.config !== undefined);
+
+                                            
+                                            // Instantiate the class
+                                            const configInstance = new IdsConfigWorkspace();
+
+                                            // Access property values
+                                            console.log("opfBoardId:", configInstance.opfBoardId);
+                                            console.log("techBoardCustIssuerId:", configInstance.techBoardCustIssuerId);
 
                                             console.log("IdsConfigWorkspace.opfBoardId:", IdsConfigWorkspace.opfBoardId);
                                             console.log("IdsConfigWorkspace.techBoardCustIssuerId:", IdsConfigWorkspace.techBoardCustIssuerId);
