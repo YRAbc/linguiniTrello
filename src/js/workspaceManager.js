@@ -249,7 +249,7 @@ class WorkspaceManager {
 
                                                         console.log("Set custom field : ", duplicateCardCustomFieldItem.id, " on options : ", dupCardCustomFieldValueId, " for card : ", duplicateCard.id);
                                                         // Assuming customFieldOptionsId is defined elsewhere in your code
-                                                        await this.rqtInv.setCustomField(duplicateCard.id, duplicateCardCustomFieldItem.id, dupCardCustomFieldValueId, "green");
+                                                        await this.rqtInv.setCustomField(duplicateCard.id, duplicateCardCustomFieldItem.id, dupCardCustomFieldValueId);
                                                         console.log("success");
                                                     }
                                                 }
