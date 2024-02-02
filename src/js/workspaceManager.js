@@ -245,7 +245,9 @@ class WorkspaceManager {
                                             // Check if the combination key exists in the mappingCustIds
                                             const keyToCheck = `${boardId}${duplicateCardCustomFieldItem.id}`;
                                             console.log("Combination Key:", keyToCheck);
+                                            console.log(IdsConfigWorkspace(boardId, duplicateCardCustomFieldItem.id));
 
+                                            /*
                                             // Combine checks to ensure key exists and mappingCustIds is defined
                                             if (IdsConfigWorkspace.mappingCustIds && IdsConfigWorkspace.mappingCustIds.hasOwnProperty(keyToCheck)) {
                                                 // Access the custom field ID
@@ -279,6 +281,7 @@ class WorkspaceManager {
                                                 // Assuming customFieldOptionsId is defined elsewhere in your code
                                                 await this.rqtInv.setCustomField(duplicateCard.cardId, mainCardCustomFieldId, customFieldOptionsId, mainCardCustomFieldValue);
                                             }
+                                            */
                                             
                                             });
                                         } else {
