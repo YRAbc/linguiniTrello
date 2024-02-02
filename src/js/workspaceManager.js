@@ -251,7 +251,7 @@ class WorkspaceManager {
                                                     const mainCardCustomFieldValue = await this.rqtInv.getCustomFieldValue(mainCard.id, mainCardCustomFieldId);
                                                     const dupCardCustomFieldValueId = IdsConfigWorkspace.mappingCustOptionsIds(board.getBoardId(), mainCardCustomFieldValue);
     
-                                                    if (mainCardCustomFieldId !== undefined && mainCardCustomFieldValue !== undefined) {
+                                                    if (dupCardCustomFieldValueId) {
                                                         // Assuming customFieldOptionsId is defined elsewhere in your code
                                                         await this.rqtInv.setCustomField(duplicateCard.cardId, duplicateCardCustomFieldItem.id, dupCardCustomFieldValueId, "green");
                                                     }
