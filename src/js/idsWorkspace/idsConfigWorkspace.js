@@ -249,7 +249,7 @@ class IdsConfigWorkspace {
     set techBoardCustTechProjectId(value){ this.techBoardCustTechProjectId = value;}
     set techBoardCustTechSidId(value){ this.techBoardCustTechSidId = value;}
     set techBoardCustTechNotTechId(value){ this.techBoardCustTechNotTechId = value;}
-    set techBoardCustTechToQualifyId(value){ this.techBoardCustTechToQualifyId = value,}  
+    set techBoardCustTechToQualifyId(value){ this.techBoardCustTechToQualifyId = value;}  
 
     set techBoardCustStatusId(value){ this.techBoardCustStatusId = value;}
     set techBoardCustStatusOpenId(value){ this.techBoardCustStatusOpenId = value;}
