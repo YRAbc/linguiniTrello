@@ -241,9 +241,25 @@ class WorkspaceManager {
                                             dupCardCustFields.forEach(async (duplicateCardCustomFieldItem) => {
                                             console.log('Processing customFieldItem:', duplicateCardCustomFieldItem);
                                         
+                                            // Assuming 'this.config' is an instance of IdsConfigWorkspace
                                             let mainCardCustomFieldId;
-                                            console.log(" MaintCardCustFieldId = ", this.config.mappingCustIds[boardId + duplicateCardCustomFieldItem.id]);
-                                            console.log("Combinaison ID = ",boardId + duplicateCardCustomFieldItem.id);
+
+                                            // Check if 'this.config' is properly initialized
+                                            console.log("Is config initialized?", this.config !== undefined);
+
+                                            // Check if the combination key exists in the mappingCustIds
+                                            const keyToCheck = boardId + duplicateCardCustomFieldItem.id;
+                                            console.log("Combination Key:", keyToCheck);
+
+                                            // Check if the key exists in the mappingCustIds
+                                            if (this.config.mappingCustIds.hasOwnProperty(keyToCheck)) {
+                                                // Access the custom field ID
+                                                mainCardCustomFieldId = this.config.mappingCustIds[keyToCheck];
+                                                console.log("MainCardCustomFieldId =", mainCardCustomFieldId);
+                                            } else {
+                                                console.log("Custom field ID not found for the given combination.");
+                                            }
+
 
                                             // Check if this.config.mappingCustIds is defined before accessing properties
                                             if (this.config.mappingCustIds) {
