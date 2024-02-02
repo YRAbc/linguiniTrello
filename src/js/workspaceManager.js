@@ -250,6 +250,7 @@ class WorkspaceManager {
     
                                                     const mainCardCustomFieldValue = await this.rqtInv.getCustomFieldValue(mainCard.id, mainCardCustomFieldId);
                                                     const dupCardCustomFieldValueId = IdsConfigWorkspace.mappingCustOptionsIds(board.getBoardId(), mainCardCustomFieldValue);
+                                                    console.log("Value ", dupCardCustFields);
     
                                                     if (dupCardCustomFieldValueId) {
                                                         // Assuming customFieldOptionsId is defined elsewhere in your code
