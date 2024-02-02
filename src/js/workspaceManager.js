@@ -259,6 +259,7 @@ class WorkspaceManager {
                                             console.log("techBoardCustTechId:", IdsConfigWorkspace.techBoardCustTechId);
                                             console.log("Combination Key to Check:", IdsConfigWorkspace.opfBoardId + IdsConfigWorkspace.techBoardCustTechId);
                                             console.log("Mapped Value:", IdsConfigWorkspace.mappingCustIds[IdsConfigWorkspace.opfBoardId + IdsConfigWorkspace.techBoardCustTechId]);
+                                            console.log("Mapping Content:", IdsConfigWorkspace.mappingCustIds);
 
 
                                             // Check if IdsConfigWorkspace.mappingCustIds is defined before accessing properties
