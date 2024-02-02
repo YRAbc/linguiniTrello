@@ -242,16 +242,10 @@ class WorkspaceManager {
                                             // Assuming 'this.config' is an instance of IdsConfigWorkspace
                                             let mainCardCustomFieldId;
 
-                                            // Check if the combination key exists in the mappingCustIds
-                                            const keyToCheck = `${boardId}${duplicateCardCustomFieldItem.id}`;
-                                            console.log("Combination Key:", keyToCheck);
-                                            console.log(" Debug : " , IdsConfigWorkspace.mappingCustIds(boardId, duplicateCardCustomFieldItem.id));
-
-                                            /*
                                             // Combine checks to ensure key exists and mappingCustIds is defined
-                                            if (IdsConfigWorkspace.mappingCustIds && IdsConfigWorkspace.mappingCustIds.hasOwnProperty(keyToCheck)) {
+                                            if (IdsConfigWorkspace.mappingCustIds) {
                                                 // Access the custom field ID
-                                                mainCardCustomFieldId = IdsConfigWorkspace.mappingCustIds[keyToCheck];
+                                                mainCardCustomFieldId = IdsConfigWorkspace.mappingCustIds(boardId, duplicateCardCustomFieldItem.id);
                                                 console.log("MainCardCustomFieldId =", mainCardCustomFieldId);
                                             } else {
                                                 console.log("Custom field ID not found for the given combination or mappingCustIds is undefined.");
@@ -270,7 +264,7 @@ class WorkspaceManager {
                                         
                                             console.log('Main card custom field value:', mainCardCustomFieldValue);
                                         
-                                            const customFieldOptionsId = IdsConfigWorkspace.mappingCustOptionsIds[board.getBoardId() + mainCardCustomFieldValue];
+                                            const customFieldOptionsId = IdsConfigWorkspace.mappingCustOptionsIds(board.getBoardId(), mainCardCustomFieldValue);
                                             console.log('Custom field options ID:', customFieldOptionsId);
                                         
                                             // Assuming this.rqtInv.setCustomField is an asynchronous function,
@@ -281,7 +275,6 @@ class WorkspaceManager {
                                                 // Assuming customFieldOptionsId is defined elsewhere in your code
                                                 await this.rqtInv.setCustomField(duplicateCard.cardId, mainCardCustomFieldId, customFieldOptionsId, mainCardCustomFieldValue);
                                             }
-                                            */
                                             
                                             });
                                         } else {
