@@ -130,12 +130,12 @@ class IdsConfigWorkspace {
         static techBoardCustStatusBlockedId = "65a954eb3b1d7548e7d9cb46";       
         static techBoardCustStatusCancelledId = "65a954eb3b1d7548e7d9cb47"; 
 
-        static un = "1";
-        static deux = "2";
+  // Mapping for CustomFields ID
+  static mappingCustIds(id1, id2) {
+    const key = id1 + id2;
 
-    //Mapping for CustomFields ID
-    static mappingCustIds = () => {
-        return {
+    // Define a mapping object
+    const mappingObject = {
 
             // PRIORITY
             [IdsConfigWorkspace.opfBoardId + IdsConfigWorkspace.sidBoardCustPriorityId]: IdsConfigWorkspace.opfBoardCustPriorityId,
@@ -177,8 +177,10 @@ class IdsConfigWorkspace {
             [IdsConfigWorkspace.techBoardId + IdsConfigWorkspace.sidBoardCustStatusId]: IdsConfigWorkspace.techBoardCustStatusId,
             [IdsConfigWorkspace.techBoardId + IdsConfigWorkspace.opfBoardCustStatusId]: IdsConfigWorkspace.techBoardCustStatusId,
 
-            [IdsConfigWorkspace.un + IdsConfigWorkspace.deux]: "Trois"
         };
+
+    return mappingObject[key] || null;
+
     };
 
     //Mapping for CustomFields OPTIONS
