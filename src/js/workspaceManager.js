@@ -252,9 +252,10 @@ class WorkspaceManager {
                                             // Instantiate the class
                                             const configInstance = new IdsConfigWorkspace();
 
-                                            // Access property values
+                                            // Access properties using the instance
                                             console.log("opfBoardId:", configInstance.opfBoardId);
                                             console.log("techBoardCustIssuerId:", configInstance.techBoardCustIssuerId);
+
 
                                             console.log("IdsConfigWorkspace.opfBoardId:", IdsConfigWorkspace.opfBoardId);
                                             console.log("IdsConfigWorkspace.techBoardCustIssuerId:", IdsConfigWorkspace.techBoardCustIssuerId);
