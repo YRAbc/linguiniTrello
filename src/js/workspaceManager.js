@@ -223,15 +223,16 @@ class WorkspaceManager {
                                         // Print info for debug
                                         //console.log(`Dup Card ID: ${duplicateCard.id}, name: ${duplicateCard.name}, OPFTech Number: ${cardOpfTechNumber}`);
                                         //console.log(`Main Card ID: ${mainCard.id}, name: ${mainCard.name}, OPFTech Number: ${opftechnumber}`);
-                                        const json = JSON.stringify(mainCard, null, 2);
+                                        //const json = JSON.stringify(mainCard, null, 2);
                                         //console.log('Board Card (duplicate) JSON:', JSON.stringify(duplicateCard, null, 2));
-                                        console.log('Main Card JSON:', JSON.stringify(mainCard, null, 2));
+                                        //console.log('Main Card JSON:', JSON.stringify(mainCard, null, 2));
     
                                         // Update Dup card
                                         await this.rqtInv.setCardUpdate(duplicateCard.id, mainCard);
     
                                         const mainCardCustFields = await this.rqtInv.getCustomFields(mainCard.id);
                                         const dupCardCustFields = await this.rqtInv.getCustomFields(duplicateCard.id);
+                                        console.log(JSON.stringify(mainCardCustFields, null, 2));
     
                                         // Check if dupCardCustFields & mainCardCustFields are defined and not null
                                         if (dupCardCustFields && mainCardCustFields) {
