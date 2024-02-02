@@ -250,17 +250,27 @@ class WorkspaceManager {
                                             } else {
                                                 console.log("Custom field ID not found for the given combination or mappingCustIds is undefined.");
                                             }
-
-                                            console.log('Main card custom field ID:', mainCardCustomFieldId);
                                         
                                             let mainCardCustomFieldValue = '';
                                         
+                                            // Assume mainCardCustFields and mainCardCustomFieldId are defined earlier
+
                                             // Iterate over each customFieldItem in card.customFieldItems array.
                                             mainCardCustFields.forEach(async (cardCustomFieldItem) => {
+                                                console.log("Checking customFieldItem:", cardCustomFieldItem);
+                                            
                                                 if (cardCustomFieldItem.id === mainCardCustomFieldId) {
+                                                console.log("Found matching customFieldItem with id:", mainCardCustomFieldId);
+                                                
                                                 mainCardCustomFieldValue = cardCustomFieldItem.value;
+                                            
+                                                console.log("Main card custom field value:", mainCardCustomFieldValue);
                                                 }
                                             });
+                                            
+                                            // Additional logs for debugging
+                                            console.log("Final mainCardCustomFieldValue:", mainCardCustomFieldValue);
+                                            
                                         
                                             console.log('Main card custom field value:', mainCardCustomFieldValue);
                                         
