@@ -48,18 +48,13 @@ class TrelloServerWorkspace {
                 await this.rqtInv.addOPFTechNumber(cardId, nextOPFTechNumber);
 
                 // Set Custom Fields
-                const setCustomFieldsPromise = Promise.all([
-                    this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.opfBoardCustPriorityId, IdsConfigWorkspace.opfBoardCustPriorityToQualifyId),
-                    this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.opfBoardCustIssuerId, IdsConfigWorkspace.opfBoardCustIssuerToQualifyId),
-                    this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.opfBoardCustTechId, IdsConfigWorkspace.opfBoardCustTechToQualifyId),
-                    this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.opfBoardCustStatusId, IdsConfigWorkspace.opfBoardCustStatusOpenId),
-                ]);
+                await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.opfBoardCustPriorityId, IdsConfigWorkspace.opfBoardCustPriorityToQualifyId),
+                await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.opfBoardCustIssuerId, IdsConfigWorkspace.opfBoardCustIssuerToQualifyId),
+                await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.opfBoardCustTechId, IdsConfigWorkspace.opfBoardCustTechToQualifyId),
+                await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.opfBoardCustStatusId, IdsConfigWorkspace.opfBoardCustStatusOpenId)
 
                 // Copy the card to another list
-                const copyCardPromise = this.rqtInv.copyCardToList(cardId, IdsConfigWorkspace.techBoardToClassifyListId, cardDetails);
-
-                // Wait for all promises to resolve
-                await Promise.all([setCustomFieldsPromise, copyCardPromise]);
+                const copyCardPromise = await this.rqtInv.copyCardToList(cardId, IdsConfigWorkspace.techBoardToClassifyListId, cardDetails);
 
                 console.log('OPF Tech Card initialized successfully.');
             }
@@ -103,7 +98,7 @@ class TrelloServerWorkspace {
     }
 
     async cardMovedToListRule(cardId, startListId, endListId, boardId) {
-        return new Promise(async (resolve, reject) => {    
+ 
         try {
             // TECH CUSTOM FIELD UPDATE WITH CARD MOVE
             const cardDetails = await this.rqtInv.getCard(cardId);
@@ -157,7 +152,6 @@ class TrelloServerWorkspace {
                 console.error('Error in cardMovedToListRule:', error);
                 reject(error);
             }
-        });
     }
 
     async cardRemovedFromListRule(cardId, listId, boardId) {
