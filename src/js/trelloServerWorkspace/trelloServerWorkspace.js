@@ -81,7 +81,8 @@ class TrelloServerWorkspace {
                 listId === IdsConfigWorkspace.techBoardTestingListId ||
                 listId === IdsConfigWorkspace.techBoardPendingDeliveryListId ||
                 listId === IdsConfigWorkspace.techBoardDeliveredListId ||
-                listId === IdsConfigWorkspace.techBoardVaidatedListId ) {
+                listId === IdsConfigWorkspace.techBoardVaidatedListId ||
+                listId === IdsConfigWorkspace.sidBoardTechListId) {
 
                 //Can't add cards to OPF Tech Task board
                 await this.rqtInv.deleteCard(cardId);
