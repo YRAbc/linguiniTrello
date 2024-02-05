@@ -91,32 +91,6 @@ class TrelloServerWorkspace {
 
     async cardModifiedInListRule(cardId, listId, boardId) {
 
-        /* CARD CUSTOM FIELD CAN BE UPDATED BY MODIFICATIONS FROM OTHER BOARDS => NEED TO MOVE THE CARD TO THE RIGHT LIST*/
-        if(boardId === IdsConfigWorkspace.techBoardId)
-        {
-            const customStatusId = await this.rqtInv.getCardCustomFieldValue(cardId, techBoardCustStatusId);
-
-            //MOVE TO LIST if not in list
-            if(customStatusId === IdsConfigWorkspace.techBoardCustStatusInProgressId
-                && listId !== IdsConfigWorkspace.techBoardInProgressListId)
-                {await this.rqtInv.moveCardToList(cardId, listId);}
-
-            if(customStatusId === IdsConfigWorkspace.techBoardCustStatusTestingId
-                && listId !== IdsConfigWorkspace.techBoardTestingListId)
-                {await this.rqtInv.moveCardToList(cardId, listId);}
-
-            if(customStatusId === IdsConfigWorkspace.techBoardCustStatusPendingDeliveryId
-                && listId !== IdsConfigWorkspace.techBoardPendingDeliveryListId)
-                {await this.rqtInv.moveCardToList(cardId, listId);}
-
-            if(customStatusId === IdsConfigWorkspace.techBoardCustStatusDeliveredId
-                && listId !== IdsConfigWorkspace.techBoardDeliveredListId)
-                {await this.rqtInv.moveCardToList(cardId, listId);}
-
-            if(customStatusId === IdsConfigWorkspace.techBoardCustStatusValidatedId
-                && listId !== IdsConfigWorkspace.techBoardVaidatedListId)
-                {await this.rqtInv.moveCardToList(cardId, listId);}
-        }
     }
 
     async cardMovedToListRule(cardId, startListId, endListId, boardId) {
