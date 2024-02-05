@@ -101,11 +101,11 @@ class IdsConfigWorkspace {
         static techBoardVaidatedListId = "65a533f93359e67ebba68abb"; 
     
         static techBoardCustPriorityId = "65a954eb3b1d7548e7d9cb52"; 
-        static techBoardCustPriorityBlockerId = "65b3ebc10b7b671945487b10"; 
-        static techBoardCustPriorityCriticId = "65b3ebc3faccc97b451837f0"; 
-        static techBoardCustPriorityMajorId = "65b3ebc5cdc5cfd03bf37834"; 
-        static techBoardCustPriorityMinorId = "65b3ebc69ac2ef30d37f03c8"; 
-        static techBoardCustPriorityToQualifyId = "65b3ebc9b8a9674a41c2beb6"; 
+        static techBoardCustPriorityBlockerId = "65a954eb3b1d7548e7d9cb53"; 
+        static techBoardCustPriorityCriticId = "65a954eb3b1d7548e7d9cb54"; 
+        static techBoardCustPriorityMajorId = "65a954eb3b1d7548e7d9cb55"; 
+        static techBoardCustPriorityMinorId = "	65a954eb3b1d7548e7d9cb56"; 
+        static techBoardCustPriorityToQualifyId = "65af9cf98d4f759ce85d2a61"; 
     
         static techBoardCustIssuerId = "65a954eb3b1d7548e7d9cb21"; 
         static techBoardCustIssuerPBTeamId = "65b3ec9076d9ac4c4dbdd7f6"; 
