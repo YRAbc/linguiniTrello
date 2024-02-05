@@ -27,12 +27,12 @@ function setupPeriodicUpdates() {
 
         if (error.response && error.response.status === 429) {
           // Rate limiting error
-          const retryAfter = error.response.headers['retry-after'] || 10; // Default to 10 seconds
+          const retryAfter = error.response.headers['retry-after'] || 30; // Default to 30 seconds
           console.log(`Rate limiting error. Retrying after ${retryAfter} seconds.`);
           await sleep(retryAfter * 1000); // Convert seconds to milliseconds
         }
       }
-    }, 10000); // Update every 10 seconds
+    }, 30000); // Update every 30 seconds
 }
   
 function sleep(ms) {
