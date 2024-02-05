@@ -165,7 +165,7 @@ class WorkspaceManager {
 
     async updateDuplicates(card, boardId) {
         try {
-            console.log('Starting update duplicates with card:', card.id);
+            //console.log('Starting update duplicates with card:', card.id);
     
             // Check if the card object and its labels property are defined
             if (card && card.labels && Array.isArray(card.labels)) {

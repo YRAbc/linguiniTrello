@@ -41,7 +41,7 @@ class TrelloServerWorkspace {
             if (listId === IdsConfigWorkspace.opfBoardTechListId) {
 
                 // Get the maximum OPFTech number AND Set label +1
-                const maxOPFTechNumber = await this.rqtInv.getOPFTechMaxNumber(boardId);
+                const maxOPFTechNumber = await this.rqtInv.getOPFTechMaxNumber(IdsConfigWorkspace.opfBoardId);
                 const nextOPFTechNumber = Number(maxOPFTechNumber) + 1;
                 await this.rqtInv.addOPFTechNumber(cardId, nextOPFTechNumber);
 
