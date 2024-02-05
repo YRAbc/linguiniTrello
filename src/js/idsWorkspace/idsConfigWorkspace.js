@@ -3,10 +3,6 @@
 
 class IdsConfigWorkspace {
 
-    /* getting "idCustomField": "65b3d5edaf660f2f5bdd1b53", from JSON &&  idCustomField
-: 
-"65a954eb3b1d7548e7d9cb32" */
-
         /* OPF TO DO LIST */
         static opfBoardId = "65a5339acc54164519f0561a";
         static opfBoardTechListId = "65a5339acc54164519f05621";
