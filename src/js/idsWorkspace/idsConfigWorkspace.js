@@ -48,7 +48,6 @@ class IdsConfigWorkspace {
         static opfBoardCustStatusCancelledId = "65b3eba84ea65cbbdaff2663"; 
     
     
-    
         /* SID */
         static sidBoardId = "65a906575cbb2953f63286e9"; 
         static sidBoardTechListId = "65a9065c99f90b6028928dcc"; 
