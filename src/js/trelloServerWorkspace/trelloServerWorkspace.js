@@ -37,6 +37,8 @@ class TrelloServerWorkspace {
             // Assuming you have a method in your getter class to get the card details
             const cardDetails = await this.rqtInv.getCard(cardId);
 
+            console.log("hola");
+
             // Check if the card is added to the OPF Tech list
             if (listId === IdsConfigWorkspace.opfBoardTechListId) {
 
