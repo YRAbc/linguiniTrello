@@ -253,30 +253,23 @@ class WorkspaceManager {
                                                         await this.rqtInv.setCustomField(duplicateCard.id, duplicateCardCustomFieldItem.idCustomField, dupCardCustomFieldValueId);
 
                                                         /* CARD CUSTOM FIELD CAN BE UPDATED BY MODIFICATIONS FROM OTHER BOARDS => NEED TO MOVE THE CARD TO THE RIGHT LIST*/
-                                                        if(boardId === IdsConfigWorkspace.techBoardId)
+                                                        if(boardId === IdsConfigWorkspace.techBoardId && duplicateCardCustomFieldItem.idCustomField === techBoardCustStatusId)
                                                         {
-                                                            const customStatusId = await this.rqtInv.getCardCustomFieldValue(cardId, techBoardCustStatusId);
-
                                                             //MOVE TO LIST if not in list
-                                                            if(customStatusId === IdsConfigWorkspace.techBoardCustStatusInProgressId
-                                                                && listId !== IdsConfigWorkspace.techBoardInProgressListId)
-                                                                {await this.rqtInv.moveCardToList(cardId, listId);}
+                                                            if(dupCardCustomFieldValueId === IdsConfigWorkspace.techBoardCustStatusInProgressId)
+                                                                {await this.rqtInv.moveCardToList(duplicateCard.id, IdsConfigWorkspace.techBoardInProgressListId);}
 
-                                                            if(customStatusId === IdsConfigWorkspace.techBoardCustStatusTestingId
-                                                                && listId !== IdsConfigWorkspace.techBoardTestingListId)
-                                                                {await this.rqtInv.moveCardToList(cardId, listId);}
+                                                            if(dupCardCustomFieldValueId === IdsConfigWorkspace.techBoardCustStatusTestingId)
+                                                                {await this.rqtInv.moveCardToList(duplicateCard.id, IdsConfigWorkspace.techBoardTestingListId);}
 
-                                                            if(customStatusId === IdsConfigWorkspace.techBoardCustStatusPendingDeliveryId
-                                                                && listId !== IdsConfigWorkspace.techBoardPendingDeliveryListId)
-                                                                {await this.rqtInv.moveCardToList(cardId, listId);}
+                                                            if(dupCardCustomFieldValueId === IdsConfigWorkspace.techBoardCustStatusPendingDeliveryId)
+                                                                {await this.rqtInv.moveCardToList(duplicateCard.id, IdsConfigWorkspace.techBoardPendingDeliveryListId);}
 
-                                                            if(customStatusId === IdsConfigWorkspace.techBoardCustStatusDeliveredId
-                                                                && listId !== IdsConfigWorkspace.techBoardDeliveredListId)
-                                                                {await this.rqtInv.moveCardToList(cardId, listId);}
+                                                            if(dupCardCustomFieldValueId === IdsConfigWorkspace.techBoardCustStatusDeliveredId)
+                                                                {await this.rqtInv.moveCardToList(duplicateCard.id, IdsConfigWorkspace.techBoardDeliveredListId);}
 
-                                                            if(customStatusId === IdsConfigWorkspace.techBoardCustStatusValidatedId
-                                                                && listId !== IdsConfigWorkspace.techBoardVaidatedListId)
-                                                                {await this.rqtInv.moveCardToList(cardId, listId);}
+                                                            if(dupCardCustomFieldValueId === IdsConfigWorkspace.techBoardCustStatusValidatedId)
+                                                                {await this.rqtInv.moveCardToList(duplicateCard.id, IdsConfigWorkspace.techBoardVaidatedListId);}
                                                         }
                                                     }
                                                 }
