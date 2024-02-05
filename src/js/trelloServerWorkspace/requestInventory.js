@@ -567,6 +567,39 @@ class RequestInventory {
     }
   }
 
+  async deleteCard(cardId, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
+    try {
+      const response = await axios.delete(
+        `https://api.trello.com/1/cards/${cardId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`,
+        {
+          timeout: timeout,
+        }
+      );
+  
+      if (response.status === 200) {
+        console.log(`Card with ID ${cardId} deleted successfully.`);
+      } else {
+        console.error('Invalid card deletion response:', response.data);
+        throw new Error('Invalid card deletion response');
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 429) {
+        // Handle rate limiting
+        if (retryCount > 0) {
+          console.warn(`Rate limit exceeded. Retrying after ${delay / 1000} seconds. Retries left: ${retryCount}`);
+          await new Promise(resolve => setTimeout(resolve, delay));
+          return this.deleteCard(cardId, retryCount - 1, delay * 2, timeout); // Exponential backoff
+        } else {
+          console.error('Exceeded maximum retry attempts. Aborting.');
+          throw error;
+        }
+      } else {
+        console.error('Error deleting card:', error.response ? error.response.data : error.message);
+        throw error;
+      }
+    }
+  }  
+
   //PUT JSON
   async setJson(cardId, json, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
     try {

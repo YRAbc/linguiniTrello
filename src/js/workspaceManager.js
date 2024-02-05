@@ -81,7 +81,8 @@ class WorkspaceManager {
                         console.log(`Card with Id ${card.getCardId()}, (${card.getCardName()}) has been moved from List ${list.getListName()} to List ${targetList.name}`);
 
                             //  -> CARD MOVED
-                            await this.trellowsp.cardMovedToListRule(card.getCardId(), list.getListId(), board.getBoardId());
+                            await this.trellowsp.cardMovedToListRule(card.getCardId(), list.getListId(), targetList.id, board.getBoardId());
+                            await this.updateDuplicates(existingInList, board.getBoardId());
                             await this.updateWorkspace();
                     }
 
@@ -247,7 +248,7 @@ class WorkspaceManager {
                                                         //console.log('Dup ' , dupCardCustomFieldValueId);
                                                         const dupCardCustomFieldValueId = IdsConfigWorkspace.mappingCustOptionsIds(board.getBoardId(), mainCardCustomFieldItem.idValue);
 
-                                                        console.log("Set custom field : ", duplicateCardCustomFieldItem.idCustomField, " on options : ", dupCardCustomFieldValueId, " for card : ", duplicateCard.id);
+                                                        //console.log("Set custom field : ", duplicateCardCustomFieldItem.idCustomField, " on options : ", dupCardCustomFieldValueId, " for card : ", duplicateCard.id);
                                                         // Assuming customFieldOptionsId is defined elsewhere in your code
                                                         await this.rqtInv.setCustomField(duplicateCard.id, duplicateCardCustomFieldItem.idCustomField, dupCardCustomFieldValueId);
                                                     }
