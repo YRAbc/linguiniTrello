@@ -253,7 +253,7 @@ class WorkspaceManager {
                                                         await this.rqtInv.setCustomField(duplicateCard.id, duplicateCardCustomFieldItem.idCustomField, dupCardCustomFieldValueId);
 
                                                         /* CARD CUSTOM FIELD CAN BE UPDATED BY MODIFICATIONS FROM OTHER BOARDS => NEED TO MOVE THE CARD TO THE RIGHT LIST*/
-                                                        if(boardId === IdsConfigWorkspace.techBoardId && duplicateCardCustomFieldItem.idCustomField === techBoardCustStatusId)
+                                                        if(boardId === IdsConfigWorkspace.techBoardId && duplicateCardCustomFieldItem.idCustomField === IdsConfigWorkspace.techBoardCustStatusId)
                                                         {
                                                             //MOVE TO LIST if not in list
                                                             if(dupCardCustomFieldValueId === IdsConfigWorkspace.techBoardCustStatusInProgressId)
