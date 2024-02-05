@@ -46,12 +46,18 @@ class TrelloServerWorkspace {
                 await this.rqtInv.addOPFTechNumber(cardId, nextOPFTechNumber);
 
                 // Set Custom Fields
-                await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.opfBoardCustPriorityId, IdsConfigWorkspace.opfBoardCustPriorityToQualifyId);
-                await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.opfBoardCustIssuerId, IdsConfigWorkspace.opfBoardCustIssuerToQualifyId);
-                await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.opfBoardCustTechId, IdsConfigWorkspace.opfBoardCustTechToQualifyId);
-                await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.opfBoardCustStatusId, IdsConfigWorkspace.opfBoardCustStatusOpenId);
-                
-                await this.rqtInv.copyCardToList(cardId, IdsConfigWorkspace.techBoardToClassifyListId, cardDetails);
+                const setCustomFieldsPromise = Promise.all([
+                    this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.opfBoardCustPriorityId, IdsConfigWorkspace.opfBoardCustPriorityToQualifyId),
+                    this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.opfBoardCustIssuerId, IdsConfigWorkspace.opfBoardCustIssuerToQualifyId),
+                    this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.opfBoardCustTechId, IdsConfigWorkspace.opfBoardCustTechToQualifyId),
+                    this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.opfBoardCustStatusId, IdsConfigWorkspace.opfBoardCustStatusOpenId),
+                ]);
+
+                // Copy the card to another list
+                const copyCardPromise = this.rqtInv.copyCardToList(cardId, IdsConfigWorkspace.techBoardToClassifyListId, cardDetails);
+
+                // Wait for all promises to resolve
+                await Promise.all([setCustomFieldsPromise, copyCardPromise]);
 
                 console.log('OPF Tech Card initialized successfully.');
             }
@@ -71,10 +77,10 @@ class TrelloServerWorkspace {
             if (listId === IdsConfigWorkspace.techBoardProjectListId || 
                 listId === IdsConfigWorkspace.techBoardSupportListId ||
                 listId === IdsConfigWorkspace.techBoardSidListId ||
-                listId === IdsConfigWorkspace.techBoardInProgreeListId ||
-                listId === IdsConfigWorkspace.techBoardInReviewListId ||
+                listId === IdsConfigWorkspace.techBoardInProgressListId ||
+                listId === IdsConfigWorkspace.techBoardTestingListId ||
                 listId === IdsConfigWorkspace.techBoardPendingDeliveryListId ||
-                listId === IdsConfigWorkspace.techBoardDoneListId ||
+                listId === IdsConfigWorkspace.techBoardDeliveredListId ||
                 listId === IdsConfigWorkspace.techBoardVaidatedListId ) {
 
                 //Can't add cards to OPF Tech Task board
@@ -94,86 +100,61 @@ class TrelloServerWorkspace {
     }
 
     async cardMovedToListRule(cardId, startListId, endListId, boardId) {
-
-        /* TECH CUSTOM FIELD UPDATE WITH CARD MOVE*/
+        return new Promise(async (resolve, reject) => {    
         try {
-            // Assuming you have a method in your getter class to get the card details
+            // TECH CUSTOM FIELD UPDATE WITH CARD MOVE
             const cardDetails = await this.rqtInv.getCard(cardId);
-
-            // Card is a tech project
+      
             if (endListId === IdsConfigWorkspace.techBoardProjectListId) {
-                await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustTechId, IdsConfigWorkspace.techBoardCustTechProjectId);
+              await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustTechId, IdsConfigWorkspace.techBoardCustTechProjectId);
             }
-            
-            // Card is a tech support
+      
             if (endListId === IdsConfigWorkspace.techBoardSupportListId) {
-                await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustTechId, IdsConfigWorkspace.techBoardCustTechSupportId);
+              await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustTechId, IdsConfigWorkspace.techBoardCustTechSupportId);
             }
-            
-            // Card is a SID task
+      
             if (endListId === IdsConfigWorkspace.techBoardSidListId) {
-                await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustTechId, IdsConfigWorkspace.techBoardCustTechSidId);
-                const cardDetails = await this.rqtInv.getCard(cardId);
-                await this.rqtInv.copyCardToList(cardId, IdsConfigWorkspace.sidBoardTechListId, cardDetails);
+              await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustTechId, IdsConfigWorkspace.techBoardCustTechSidId);
+              const cardDetails = await this.rqtInv.getCard(cardId);
+              await this.rqtInv.copyCardToList(cardId, IdsConfigWorkspace.sidBoardTechListId, cardDetails);
             }
-
-        } catch (error) {
-            console.error('Error in move for Tech:', error);
-            throw error;
-        }
-
-        /* STATUS CUSTOM FIELD UPDATE WITH CARD MOVE*/
-        try {
-
-            // Card is move to InProgress OPF TECH SIDE
+      
+            // STATUS CUSTOM FIELD UPDATE WITH CARD MOVE
             if (endListId === IdsConfigWorkspace.techBoardInProgressListId) {
-                await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustStatusId, IdsConfigWorkspace.techBoardCustStatusInProgressId);
+              await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustStatusId, IdsConfigWorkspace.techBoardCustStatusInProgressId);
             }
-
-            // Card is move to Testing OPF TECH SIDE
+      
             if (endListId === IdsConfigWorkspace.techBoardTestingListId) {
-                await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustStatusId, IdsConfigWorkspace.techBoardCustStatusTestingId);
+              await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustStatusId, IdsConfigWorkspace.techBoardCustStatusTestingId);
             }
-
-             // Card is move to Pending Delivery OPF TECH SIDE
-            if (endListId === IdsConfigWorkspace.techBoardPendingDeliveryListId ) {
-                await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustStatusId, IdsConfigWorkspace.techBoardCustStatusPendingDeliveryId);
+      
+            if (endListId === IdsConfigWorkspace.techBoardPendingDeliveryListId) {
+              await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustStatusId, IdsConfigWorkspace.techBoardCustStatusPendingDeliveryId);
             }
-
-            // Card is move to Delivered OPF TECH SIDE
+      
             if (endListId === IdsConfigWorkspace.techBoardDeliveredListId) {
-                await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustStatusId, IdsConfigWorkspace.techBoardCustStatusDeliveredId);
+              await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustStatusId, IdsConfigWorkspace.techBoardCustStatusDeliveredId);
             }
-
-            // Card is move to Validated OPF TECH SIDE
+      
             if (endListId === IdsConfigWorkspace.techBoardVaidatedListId) {
-                await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustStatusId, IdsConfigWorkspace.techBoardCustStatusValidatedId);
+              await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustStatusId, IdsConfigWorkspace.techBoardCustStatusValidatedId);
             }
-
-            // Card is move to Validated OPF SIDE
+      
             if (endListId === IdsConfigWorkspace.opfBoardValidatedListId) {
-                await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.opfBoardCustStatusId, IdsConfigWorkspace.opfBoardCustStatusValidatedId);
+              await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.opfBoardCustStatusId, IdsConfigWorkspace.opfBoardCustStatusValidatedId);
             }
-
-
-        } catch (error) {
-            console.error('Error in move for Status:', error);
-            throw error;
-        }
-
-        /* CARD IS MOVED FROM SID OPF TECH LIST */
-        try {
-
-            // Card is move to InProgress OPF TECH SIDE
+      
+            // CARD IS MOVED FROM SID OPF TECH LIST
             if (startListId === IdsConfigWorkspace.sidBoardTechListId) {
-                await this.rqtInv.moveCardToList(cardId, startListId);
+              await this.rqtInv.moveCardToList(cardId, startListId);
             }
-
-        } catch (error) {
-            console.error('Error in move for Tech:', error);
-            throw error;
-        }
-
+      
+                resolve('Card move and updates completed successfully.');
+            } catch (error) {
+                console.error('Error in cardMovedToListRule:', error);
+                reject(error);
+            }
+        });
     }
 
     async cardRemovedFromListRule(cardId, listId, boardId) {
