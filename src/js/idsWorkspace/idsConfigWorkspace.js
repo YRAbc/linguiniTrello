@@ -91,9 +91,9 @@ class IdsConfigWorkspace {
         static techBoardSupportListId = "65a533acf8bdb823367134de"; 
         static techBoardSidListId = "65a533e0203b31e91571133e"; 
         static techBoardInProgressListId = "65a533ee14a4b7651e1023b9"; 
-        static techBoardInReviewListId = "65a533f15ffba80f03ae8ac1"; 
+        static techBoardTestingListId = "65a533f15ffba80f03ae8ac1"; 
         static techBoardPendingDeliveryListId = "65a533f5e072331593b68e87"; 
-        static techBoardDoneListId = "65a533f5e072331593b68e87"; 
+        static techBoardDeliveredListId = "65a533f5e072331593b68e87"; 
         static techBoardVaidatedListId = "65a533f93359e67ebba68abb"; 
     
         static techBoardCustPriorityId = "65a954eb3b1d7548e7d9cb52"; 
