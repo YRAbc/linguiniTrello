@@ -51,7 +51,6 @@ class TrelloServerWorkspace {
                 
                 await this.rqtInv.copyCardToList(cardId, IdsConfigWorkspace.techBoardToClassifyListId, cardDetails);
 
-
                 console.log('OPF Tech Card initialized successfully.');
             }
 
