@@ -253,7 +253,7 @@ class WorkspaceManager {
                                                         await this.rqtInv.setCustomField(duplicateCard.id, duplicateCardCustomFieldItem.idCustomField, dupCardCustomFieldValueId);
 
                                                         /* CARD CUSTOM FIELD CAN BE UPDATED BY MODIFICATIONS FROM OTHER BOARDS => NEED TO MOVE THE CARD TO THE RIGHT LIST*/
-                                                        if(duplicateCardCustomFieldItem.idCustomField === IdsConfigWorkspace.techBoardCustStatusId)
+                                                        /*if(duplicateCardCustomFieldItem.idCustomField === IdsConfigWorkspace.techBoardCustStatusId)
                                                         {
                                                             //MOVE TO LIST if not in list
                                                             if(dupCardCustomFieldValueId === IdsConfigWorkspace.techBoardCustStatusInProgressId)
@@ -269,8 +269,8 @@ class WorkspaceManager {
                                                                 {await this.rqtInv.moveCardToList(duplicateCard.id, IdsConfigWorkspace.techBoardDeliveredListId);}
 
                                                             if(dupCardCustomFieldValueId === IdsConfigWorkspace.techBoardCustStatusValidatedId)
-                                                                {await this.rqtInv.moveCardToList(duplicateCard.id, IdsConfigWorkspace.techBoardVaidatedListId);}
-                                                        }
+                                                                {await this.rqtInv.moveCardToList(duplicateCard.id, IdsConfigWorkspace.techBoardVaidatedListId);} TO ADD
+                                                        }*/
                                                     }
                                                 }
                                             }
