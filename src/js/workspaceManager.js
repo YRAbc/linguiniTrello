@@ -82,7 +82,7 @@ class WorkspaceManager {
 
                             //  -> CARD MOVED
                             await this.trellowsp.cardMovedToListRule(card.getCardId(), list.getListId(), targetList.id, board.getBoardId());
-                            await this.updateDuplicates(targetList, board.getBoardId());
+                            //await this.updateDuplicates(targetList, board.getBoardId());
                             await this.updateWorkspace();
                     }
 
