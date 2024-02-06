@@ -11,6 +11,7 @@ class RequestInventory {
 
   }
 
+  /* ITEMS GETTERS */
   async getBoard(boardId, retryCount = 3, delay = 1000) {
     try {
       const response = await axios.get(`https://api.trello.com/1/boards/${boardId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`);
@@ -270,7 +271,8 @@ class RequestInventory {
   }
 
 
-  // Card getters
+
+  /* CARD CHARACTERISTIC GETTERS */
   async getOPFTechNumber(cardId, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
     try {
       // Get the card details with retry logic and custom timeout
@@ -406,6 +408,66 @@ class RequestInventory {
     }
   }  
 
+  async getCardAttachments(cardId, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
+    try {
+      const response = await axios.get(
+        `https://api.trello.com/1/cards/${cardId}/attachments?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`,
+        {
+          timeout: timeout,
+        }
+      );
+  
+      const attachments = response.data;
+      return attachments;
+    } catch (error) {
+      if (error.response && error.response.status === 429) {
+        // Handle rate limiting
+        if (retryCount > 0) {
+          console.warn(`Rate limit exceeded. Retrying after ${delay / 1000} seconds. Retries left: ${retryCount}`);
+          await new Promise(resolve => setTimeout(resolve, delay));
+          return this.getCardAttachments(cardId, retryCount - 1, delay * 2, timeout); // Exponential backoff
+        } else {
+          console.error('Exceeded maximum retry attempts. Aborting.');
+          throw error;
+        }
+      } else {
+        console.error('Error getting card attachments:', error.response ? error.response.data : error.message);
+        throw error;
+      }
+    }
+  }
+
+  async getCardAttachment(cardId, attachmentId, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
+    try {
+      const response = await axios.get(
+        `https://api.trello.com/1/cards/${cardId}/attachments/${attachmentId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`,
+        {
+          timeout: timeout,
+        }
+      );
+  
+      const attachment = response.data;
+      return attachment;
+    } catch (error) {
+      if (error.response && error.response.status === 429) {
+        // Handle rate limiting
+        if (retryCount > 0) {
+          console.warn(`Rate limit exceeded. Retrying after ${delay / 1000} seconds. Retries left: ${retryCount}`);
+          await new Promise(resolve => setTimeout(resolve, delay));
+          return this.getCardAttachment(cardId, attachmentId, retryCount - 1, delay * 2, timeout); // Exponential backoff
+        } else {
+          console.error('Exceeded maximum retry attempts. Aborting.');
+          throw error;
+        }
+      } else {
+        console.error('Error getting card attachment:', error.response ? error.response.data : error.message);
+        throw error;
+      }
+    }
+  }
+  
+  
+  /* SET CARD CHARACTERISTICS */
   // POST
   async addOPFTechNumber(cardId, opfTechNumber, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
     let frontText;
@@ -491,6 +553,100 @@ class RequestInventory {
     }
   }
 
+    /* PUT */
+  //PUT JSON
+  async setJson(cardId, json, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
+    try {
+      const response = await axios.put(
+        `https://api.trello.com/1/cards/${cardId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`,
+        json,
+        { timeout }
+      );   
+      //console.log('set json on card,', cardId, '    ; JSON ', json);   
+
+      if (response.data && typeof response.data === 'object') {
+        const updatedCard = response.data;
+        return updatedCard;
+      } else {
+        console.error('Invalid card json update response:', response.data);
+        throw new Error('Invalid card json update response');
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 429) {
+        // Handle rate limiting
+        if (retryCount > 0) {
+          console.warn(`Rate limit exceeded. Retrying after ${delay / 1000} seconds. Retries left: ${retryCount}`);
+          await new Promise(resolve => setTimeout(resolve, delay));
+          return this.setJson(cardId, json, retryCount - 1, delay * 2, timeout); // Exponential backoff
+        } else {
+          console.error('Exceeded maximum retry attempts. Aborting.');
+          throw error;
+        }
+      } else {
+        console.error('Error updating card with json:', error.response ? error.response.data : error.message);
+        throw error;
+      }
+    }
+  }
+
+  //PUT Card Parameters
+  async setCardUpdate(cardId, card, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
+    try {
+
+          const payload = {};
+
+          const propertiesToCheck = [ 'name', 'desc', 'location', 'locationName', 'coordinates',
+            'votes', 'viewingMemberVoted', 'subscribed', 'fogbugz', 'checkItems', 'checkItemsChecked',
+            'checkItemsEarliestDue', 'comments', 'attachments', 'description', 'due', 'dueComplete',
+            'start', 'closed', 'dateLastActivity', 'descData', 'dueReminder', 'members',
+            'email', 'idMembers', 'idMembersVoted', 'idAttachmentCover', 
+            'manualCoverAttachment', 'pos', 'subscribed', 'cover', 'isTemplate', 'cardRole',
+          ];
+          
+          //Labels and checklists are working like customfields
+
+          // Check and conditionally add properties
+          for (const property of propertiesToCheck) {
+            if (card[property]) {
+              //console.log("Property" , property, 'exists in card');
+              payload[property] = card[property];
+            }
+          }
+        
+        const response = await axios.put(
+          `https://api.trello.com/1/cards/${cardId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`,
+          payload,
+          { timeout }
+        );
+
+      if (response.data && typeof response.data === 'object') {
+        const updatedCard = response.data;
+        return updatedCard;
+      } else {
+        console.error('Invalid card update response:', response.data);
+        throw new Error('Invalid card update response');
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 429) {
+        // Handle rate limiting
+        if (retryCount > 0) {
+          console.warn(`Rate limit exceeded. Retrying after ${delay / 1000} seconds. Retries left: ${retryCount}`);
+          await new Promise(resolve => setTimeout(resolve, delay));
+          return this.setCardUpdate(cardId, card, retryCount - 1, delay * 2, timeout);  // Exponential backoff
+        } else {
+          console.error('Exceeded maximum retry attempts. Aborting.');
+          throw error;
+        }
+      } else {
+        console.error('Error updating card:', error.response ? error.response.data : error.message);
+        throw error;
+      }
+    }
+  } 
+
+
+
+  /* CARD ACTIONS */
   async createCard(boardId, listId, cardName, cardDescription, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
     try {
       const response = await axios.post(
@@ -628,98 +784,6 @@ class RequestInventory {
       }
     }
   }  
-
-  //PUT JSON
-  async setJson(cardId, json, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
-    try {
-      const response = await axios.put(
-        `https://api.trello.com/1/cards/${cardId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`,
-        json,
-        { timeout }
-      );   
-      //console.log('set json on card,', cardId, '    ; JSON ', json);   
-
-      if (response.data && typeof response.data === 'object') {
-        const updatedCard = response.data;
-        return updatedCard;
-      } else {
-        console.error('Invalid card json update response:', response.data);
-        throw new Error('Invalid card json update response');
-      }
-    } catch (error) {
-      if (error.response && error.response.status === 429) {
-        // Handle rate limiting
-        if (retryCount > 0) {
-          console.warn(`Rate limit exceeded. Retrying after ${delay / 1000} seconds. Retries left: ${retryCount}`);
-          await new Promise(resolve => setTimeout(resolve, delay));
-          return this.setJson(cardId, json, retryCount - 1, delay * 2, timeout); // Exponential backoff
-        } else {
-          console.error('Exceeded maximum retry attempts. Aborting.');
-          throw error;
-        }
-      } else {
-        console.error('Error updating card with json:', error.response ? error.response.data : error.message);
-        throw error;
-      }
-    }
-  }
-
-  //PUT Card Parameters
-  async setCardUpdate(cardId, card, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
-    try {
-
-          const payload = {};
-
-          const propertiesToCheck = [ 'name', 'desc', 'location', 'locationName', 'coordinates',
-            'votes', 'viewingMemberVoted', 'subscribed', 'fogbugz', 'checkItems', 'checkItemsChecked',
-            'checkItemsEarliestDue', 'comments', 'attachments', 'description', 'due', 'dueComplete',
-            'start', 'closed', 'dateLastActivity', 'descData', 'dueReminder', 'members',
-            'email', 'idMembers', 'idMembersVoted', 'idAttachmentCover', 
-            'manualCoverAttachment', 'pos', 'subscribed', 'cover', 'isTemplate', 'cardRole',
-
-            'attachement', 'checklists'
-          ];
-          
-          //Labels and checklists are working like customfields
-
-          // Check and conditionally add properties
-          for (const property of propertiesToCheck) {
-            if (card[property]) {
-              //console.log("Property" , property, 'exists in card');
-              payload[property] = card[property];
-            }
-          }
-        
-        const response = await axios.put(
-          `https://api.trello.com/1/cards/${cardId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`,
-          payload,
-          { timeout }
-        );
-
-      if (response.data && typeof response.data === 'object') {
-        const updatedCard = response.data;
-        return updatedCard;
-      } else {
-        console.error('Invalid card update response:', response.data);
-        throw new Error('Invalid card update response');
-      }
-    } catch (error) {
-      if (error.response && error.response.status === 429) {
-        // Handle rate limiting
-        if (retryCount > 0) {
-          console.warn(`Rate limit exceeded. Retrying after ${delay / 1000} seconds. Retries left: ${retryCount}`);
-          await new Promise(resolve => setTimeout(resolve, delay));
-          return this.setCardUpdate(cardId, card, retryCount - 1, delay * 2, timeout);  // Exponential backoff
-        } else {
-          console.error('Exceeded maximum retry attempts. Aborting.');
-          throw error;
-        }
-      } else {
-        console.error('Error updating card:', error.response ? error.response.data : error.message);
-        throw error;
-      }
-    }
-  } 
 
 }
 
