@@ -11,7 +11,10 @@
   "platforms": {
     "trello": {
       "baseUrl": "https://linguini-trello.vercel.app/",
-      "externalUrl": "https://linguini-trello.vercel.app/"
+      "externalUrl": "https://linguini-trello.vercel.app/",
+      "icon": {
+        "dark": "https://linguini-trello.vercel.app/src/image/icon.jpg"
+      }
     }
   },
   "devDependencies": {
