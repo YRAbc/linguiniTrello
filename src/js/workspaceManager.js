@@ -229,9 +229,11 @@ class WorkspaceManager {
                                         //console.log('Board Card Custom Fields:', duplicateCard.customFieldItems);
                                         //console.log('Main Card Custom Fields:', mainCard.customFieldItems);
 
+                                        /* BASIC UPDATE */
                                         // Update Dup card
                                         await this.rqtInv.setCardUpdate(duplicateCard.id, mainCard);
 
+                                        /* CUSTOM FIELDS */
                                         // Iterate over each customFieldItem in duplicateCard.customFieldItems array.
                                         await Promise.all(duplicateCard.customFieldItems.map(async (duplicateCardCustomFieldItem) => {
                                             // console.log('Processing customFieldItem:', duplicateCardCustomFieldItem)
@@ -275,6 +277,12 @@ class WorkspaceManager {
                                                 }
                                             }
                                         }));
+
+                                        /* CHECKLIST */ 
+
+
+                                        /* ATTACHMENT */
+
 
                                         console.log('Duplicate card updated.');
                                     }

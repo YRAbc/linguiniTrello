@@ -673,10 +673,11 @@ class RequestInventory {
           const propertiesToCheck = [ 'name', 'desc', 'location', 'locationName', 'coordinates',
             'votes', 'viewingMemberVoted', 'subscribed', 'fogbugz', 'checkItems', 'checkItemsChecked',
             'checkItemsEarliestDue', 'comments', 'attachments', 'description', 'due', 'dueComplete',
-            'start', 'checkItemStates', 'closed', 'dateLastActivity', 'descData', 'dueReminder', 
-            'members', 'checklists',
-            'email', 'idChecklists', 'idMembers', 'idMembersVoted', 'idAttachmentCover', 
-            'manualCoverAttachment', 'pos', 'subscribed', 'cover', 'isTemplate', 'cardRole'
+            'start', 'closed', 'dateLastActivity', 'descData', 'dueReminder', 'members',
+            'email', 'idMembers', 'idMembersVoted', 'idAttachmentCover', 
+            'manualCoverAttachment', 'pos', 'subscribed', 'cover', 'isTemplate', 'cardRole',
+
+            'attachement'
           ];
           
           //Labels and checklists are working like customfields
