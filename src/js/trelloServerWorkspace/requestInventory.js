@@ -218,10 +218,10 @@ class RequestInventory {
 
   async getBoardFromList(listId) {
     try {
-      const listResponse = await axios.get(`https://api.trello.com/1/lists/${listId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}&source=${this.oauth.appName}`);
+      const response = await axios.get(`https://api.trello.com/1/lists/${listId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}&source=${this.oauth.appName}`);
 
-      if (listResponse.data && typeof listResponse.data === 'object') {
-        const list = listResponse.data;
+      if (response.data && typeof response.data === 'object') {
+        const list = response.data;
         const boardId = list.idBoard;
 
         const boardResponse = await axios.get(`https://api.trello.com/1/boards/${boardId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}&source=${this.oauth.appName}`);
@@ -245,10 +245,10 @@ class RequestInventory {
 
   async getBoardFromCard(cardId) {
     try {
-      const cardResponse = await axios.get(`https://api.trello.com/1/cards/${cardId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}&source=${this.oauth.appName}`);
+      const response = await axios.get(`https://api.trello.com/1/cards/${cardId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}&source=${this.oauth.appName}`);
 
-      if (cardResponse.data && typeof cardResponse.data === 'object') {
-        const card = cardResponse.data;
+      if (response.data && typeof response.data === 'object') {
+        const card = response.data;
         const boardId = card.idBoard;
 
         const boardResponse = await axios.get(`https://api.trello.com/1/boards/${boardId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}&source=${this.oauth.appName}`);
@@ -298,8 +298,8 @@ class RequestInventory {
   async getOPFTechMaxNumber(boardId, retryCount = 1, delay = 1000, timeout = this.defaultTimeout) {
       try {
           // Get all cards in the specified Trello board
-          const cardsResponse = await axios.get(`https://api.trello.com/1/boards/${boardId}/cards?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}&source=${this.oauth.appName}`);
-          const cards = cardsResponse.data;
+          const response = await axios.get(`https://api.trello.com/1/boards/${boardId}/cards?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}&source=${this.oauth.appName}`);
+          const cards = response.data;
 
           let maxOPFTechNumber = 0;
 
@@ -508,7 +508,7 @@ class RequestInventory {
 
   async setCustomField(cardId, customFieldId, valueId, retryCount = 1, delay = 1000, timeout = this.defaultTimeout) {
       try {
-        await axios.put(
+        const response = await axios.put(
           `https://api.trello.com/1/cards/${cardId}/customField/${customFieldId}/item?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}&source=${this.oauth.appName}`,
           { idValue: valueId },
           { timeout: timeout }
@@ -535,7 +535,7 @@ class RequestInventory {
 
   async setCardDescription(cardId, cardDescription, retryCount = 1, delay = 1000, timeout = this.defaultTimeout) {
       try {
-        await axios.put(
+        const response = await axios.put(
           `https://api.trello.com/1/cards/${cardId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}&source=${this.oauth.appName}&desc=${encodeURIComponent(cardDescription)}`,
           null,
           { timeout: timeout }
