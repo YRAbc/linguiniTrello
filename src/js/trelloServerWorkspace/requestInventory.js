@@ -677,7 +677,7 @@ class RequestInventory {
             'email', 'idMembers', 'idMembersVoted', 'idAttachmentCover', 
             'manualCoverAttachment', 'pos', 'subscribed', 'cover', 'isTemplate', 'cardRole',
 
-            'attachement'
+            'attachement', 'checklists'
           ];
           
           //Labels and checklists are working like customfields

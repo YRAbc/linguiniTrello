@@ -271,7 +271,7 @@ class WorkspaceManager {
                                                                 {await this.rqtInv.moveCardToList(duplicateCard.id, IdsConfigWorkspace.techBoardDeliveredListId);}
 
                                                             if(dupCardCustomFieldValueId === IdsConfigWorkspace.techBoardCustStatusValidatedId)
-                                                                {await this.rqtInv.moveCardToList(duplicateCard.id, IdsConfigWorkspace.techBoardVaidatedListId);} TO ADD
+                                                                {await this.rqtInv.moveCardToList(duplicateCard.id, IdsConfigWorkspace.techBoardVaidatedListId);}
                                                         }
                                                     }
                                                 }
