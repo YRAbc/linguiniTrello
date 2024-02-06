@@ -553,6 +553,73 @@ class RequestInventory {
     }
   }
 
+  async addCardAttachment(cardId, attachmentName, attachmentUrl, mimeType = "url", retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
+    try {
+      const response = await axios.post(
+        `https://api.trello.com/1/cards/${cardId}/attachments?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`,
+        {
+          name: attachmentName,
+          url: attachmentUrl,
+          mimeType: mimeType,
+        },
+        {
+          timeout: timeout,
+        }
+      );
+  
+      const newAttachment = response.data;
+      return newAttachment;
+    } catch (error) {
+      if (error.response && error.response.status === 429) {
+        // Handle rate limiting
+        if (retryCount > 0) {
+          console.warn(`Rate limit exceeded. Retrying after ${delay / 1000} seconds. Retries left: ${retryCount}`);
+          await new Promise(resolve => setTimeout(resolve, delay));
+          return this.addCardAttachment(cardId, attachmentName, attachmentUrl, mimeType, retryCount - 1, delay * 2, timeout); // Exponential backoff
+        } else {
+          console.error('Exceeded maximum retry attempts. Aborting.');
+          throw error;
+        }
+      } else {
+        console.error('Error adding card attachment:', error.response ? error.response.data : error.message);
+        throw error;
+      }
+    }
+  }  
+  
+  async removeCardAttachment(cardId, attachmentId, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
+    try {
+      const response = await axios.delete(
+        `https://api.trello.com/1/cards/${cardId}/attachments/${attachmentId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}`,
+        {
+          timeout: timeout,
+        }
+      );
+  
+      // If the response status is 200 OK, the attachment is successfully deleted
+      if (response.status === 200) {
+        return { success: true };
+      } else {
+        throw new Error(`Failed to remove attachment: ${attachmentId}`);
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 429) {
+        // Handle rate limiting
+        if (retryCount > 0) {
+          console.warn(`Rate limit exceeded. Retrying after ${delay / 1000} seconds. Retries left: ${retryCount}`);
+          await new Promise(resolve => setTimeout(resolve, delay));
+          return this.removeCardAttachment(cardId, attachmentId, retryCount - 1, delay * 2, timeout); // Exponential backoff
+        } else {
+          console.error('Exceeded maximum retry attempts. Aborting.');
+          throw error;
+        }
+      } else {
+        console.error('Error removing card attachment:', error.response ? error.response.data : error.message);
+        throw error;
+      }
+    }
+  }  
+
     /* PUT */
   //PUT JSON
   async setJson(cardId, json, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {

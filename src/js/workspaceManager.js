@@ -282,6 +282,18 @@ class WorkspaceManager {
 
 
                                         /* ATTACHMENT */
+                                        const mainCardAttachments = await this.rqtInv.getCardAttachments(card.id);
+                                        const dupCardAttachments = await this.rqtInv.getCardAttachments(boardCard.cardId);
+
+                                        for (const mainAttachment of mainCardAttachments) {
+                                            // Check if the attachment URL is not in the duplicate card's attachments
+                                            const isDuplicate = dupCardAttachments.some(dupAttachment => dupAttachment.url === mainAttachment.url);
+                                            
+                                            // If it's not a duplicate, add the attachment to the duplicate card
+                                            if (!isDuplicate) {
+                                                await this.rqtInv.addCardAttachment(boardCard.cardId, mainAttachment.name, mainAttachment.url);
+                                            }
+                                        }
 
 
                                         console.log('Duplicate card updated.');
