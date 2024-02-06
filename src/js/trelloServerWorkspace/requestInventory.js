@@ -102,7 +102,7 @@ class RequestInventory {
   async getBoardLists(boardId, retryCount = 1, delay = 1000, timeout = this.defaultTimeout) {
     try {
       const response = await axios.get(`https://api.trello.com/1/boards/${boardId}/lists?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}&source=${this.oauth.appName}`, {
-        timeout: timeout,
+        timeout: timeout
       });
 
       if (response.data && Array.isArray(response.data)) {
@@ -133,7 +133,7 @@ class RequestInventory {
   async getBoardCards(boardId, retryCount = 1, delay = 1000, timeout = this.defaultTimeout) {
     try {
       const response = await axios.get(`https://api.trello.com/1/boards/${boardId}/cards?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}&source=${this.oauth.appName}`, {
-        timeout: timeout,
+        timeout: timeout
       });
 
       if (response.data && Array.isArray(response.data)) {
@@ -164,7 +164,7 @@ class RequestInventory {
   async getListCards(listId, retryCount = 1, delay = 1000, timeout = this.defaultTimeout) {
     try {
       const response = await axios.get(`https://api.trello.com/1/lists/${listId}/cards?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}&source=${this.oauth.appName}`, {
-        timeout: timeout,
+        timeout: timeout
       });
 
       if (response.data && Array.isArray(response.data)) {
@@ -195,7 +195,7 @@ class RequestInventory {
   async getListFromCard(cardId, retryCount = 1, delay = 1000, timeout = this.defaultTimeout) {
     try {
       const response = await axios.get(`https://api.trello.com/1/cards/${cardId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}&source=${this.oauth.appName}`, {
-        timeout: timeout,
+        timeout: timeout
       });
 
       if (response.data && typeof response.data === 'object') {
@@ -320,16 +320,28 @@ class RequestInventory {
 
           //console.log('Max OPFTechNumber:', maxOPFTechNumber);
           return maxOPFTechNumber;
-      } catch (error) {
-          console.error('Error in getOPFTechMaxNumber:', error.response ? error.response.data : error.message);
-          throw error;
+        } catch (error) {
+          if (error.response && error.response.status === 429) {
+            // Handle rate limiting
+            if (retryCount > 0) {
+              console.warn(`Rate limit exceeded. Retrying after ${delay / 1000} seconds. Retries left: ${retryCount}`);
+              await new Promise(resolve => setTimeout(resolve, delay));
+              return this.getOPFTechMaxNumber(boardId, retryCount - 1, delay * 2, timeout); // Exponential backoff
+            } else {
+              console.error('Exceeded maximum retry attempts. Aborting.');
+              throw error;
+            }
+          } else {
+            console.error('Error getting max OPF Tech Number:', error.response ? error.response.data : error.message);
+            throw error;
+          }
+        }
       }
-  }
 
   async getCustomField(cardId, fieldName, retryCount = 1, delay = 1000, timeout = this.defaultTimeout) {
     try {
       const response = await axios.get(`https://api.trello.com/1/cards/${cardId}/customFields?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}&source=${this.oauth.appName}`, {
-        timeout: timeout,
+        timeout: timeout
       });
 
       const customFields = response.data;
@@ -357,7 +369,7 @@ class RequestInventory {
   async getCustomFields(cardId, retryCount = 1, delay = 1000, timeout = this.defaultTimeout) {
     try {
       const response = await axios.get(`https://api.trello.com/1/cards/${cardId}/customFields?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}&source=${this.oauth.appName}`, {
-        timeout: timeout,
+        timeout: timeout
       });
 
         return response.data;
@@ -384,7 +396,7 @@ class RequestInventory {
       const response = await axios.get(
         `https://api.trello.com/1/cards/${cardId}/customField/${customFieldId}/item?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}&source=${this.oauth.appName}`,
         {
-          timeout: timeout,
+          timeout: timeout
         }
       );
   
@@ -413,7 +425,7 @@ class RequestInventory {
       const response = await axios.get(
         `https://api.trello.com/1/cards/${cardId}/attachments?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}&source=${this.oauth.appName}`,
         {
-          timeout: timeout,
+          timeout: timeout
         }
       );
   
@@ -442,7 +454,7 @@ class RequestInventory {
       const response = await axios.get(
         `https://api.trello.com/1/cards/${cardId}/attachments/${attachmentId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}&source=${this.oauth.appName}`,
         {
-          timeout: timeout,
+          timeout: timeout
         }
       );
   
@@ -558,7 +570,7 @@ class RequestInventory {
             mimeType: mimeType,
           },
           {
-            timeout: timeout,
+            timeout: timeout
           }
         );
 
@@ -587,7 +599,7 @@ class RequestInventory {
         const response = await axios.delete(
           `https://api.trello.com/1/cards/${cardId}/attachments/${attachmentId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}&source=${this.oauth.appName}`,
           {
-            timeout: timeout,
+            timeout: timeout
           }
         );
     
@@ -711,7 +723,7 @@ class RequestInventory {
         `https://api.trello.com/1/cards?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}&source=${this.oauth.appName}&idBoard=${boardId}&idList=${listId}&name=${encodeURIComponent(cardName)}&desc=${encodeURIComponent(cardDescription)}`,
         null,
         {
-          timeout: timeout,
+          timeout: timeout
         }
       );
 
@@ -742,7 +754,7 @@ class RequestInventory {
           `https://api.trello.com/1/cards/${cardId}/idList?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}&source=${this.oauth.appName}`,
           { value: listId },
           {
-            timeout: timeout,
+            timeout: timeout
           }
         );
 
@@ -781,7 +793,7 @@ class RequestInventory {
             idCardSource: cardId,
           },
           {
-            timeout: timeout,
+            timeout: timeout
           }
         );
 
@@ -817,7 +829,7 @@ class RequestInventory {
               `https://api.trello.com/1/cards/${cardId}/closed?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}&source=${this.oauth.appName}`,
               { value: true },
               {
-                  timeout: timeout,
+                  timeout: timeout
               }
           );
 
@@ -850,7 +862,7 @@ class RequestInventory {
         const response = await axios.delete(
           `https://api.trello.com/1/cards/${cardId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}&source=${this.oauth.appName}`,
           {
-            timeout: timeout,
+            timeout: timeout
           }
         );
 

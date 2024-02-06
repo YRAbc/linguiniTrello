@@ -15,7 +15,7 @@ class WorkspaceManager {
     constructor() {
 
         this.opfvwsp = new VWorkspace("OPF Tech Virtual Workspace", this.config);
-        this.trellowsp = new TrelloServerWorkspace("OPF Tech Trello Workspace", this.config, this.opfvwsp)
+        this.trellowsp = new TrelloServerWorkspace("OPF Tech Trello Workspace", this.config, this.opfvwsp);
         this.rqtInv = new RequestInventory();
     }
 
@@ -29,9 +29,9 @@ class WorkspaceManager {
             if (this.boardDataChanged(existingBoardData, board)) {
                 console.log(`Board with Id ${board.getBoardId()} needs to be updated.`);
 
-                    //  -> BOARD MODIFIED
-                    await this.trellowsp.boardModifiedRule(board.getBoardId())
-                    await this.updateWorkspace();
+                //  -> BOARD MODIFIED
+                await this.trellowsp.boardModifiedRule(board.getBoardId());
+                await this.updateWorkspace();
             }
     
             // Get existing lists for the board

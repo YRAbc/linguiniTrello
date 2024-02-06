@@ -142,10 +142,9 @@ class TrelloServerWorkspace {
               await this.rqtInv.moveCardToList(cardId, startListId);
             }
       
-                resolve('Card move and updates completed successfully.');
+                console.log('Card move and updates completed successfully.');
             } catch (error) {
                 console.error('Error in cardMovedToListRule:', error);
-                reject(error);
             }
     }
 

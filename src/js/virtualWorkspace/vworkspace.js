@@ -2,8 +2,6 @@
 // Made by Yoann Raton, 19/01/2024
 
 import VBoard from './vboard.js';
-import VList from './vlist.js';
-import VCard from './vcard.js';
 import IdsConfigWorkspace from '../idsWorkspace/idsConfigWorkspace.js';
 
 class VWorkspace {

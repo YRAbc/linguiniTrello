@@ -175,13 +175,13 @@ class IdsConfigWorkspace {
             [IdsConfigWorkspace.sidBoardId + IdsConfigWorkspace.techBoardCustStatusId]: IdsConfigWorkspace.sidBoardCustStatusId,
 
             [IdsConfigWorkspace.techBoardId + IdsConfigWorkspace.sidBoardCustStatusId]: IdsConfigWorkspace.techBoardCustStatusId,
-            [IdsConfigWorkspace.techBoardId + IdsConfigWorkspace.opfBoardCustStatusId]: IdsConfigWorkspace.techBoardCustStatusId,
+            [IdsConfigWorkspace.techBoardId + IdsConfigWorkspace.opfBoardCustStatusId]: IdsConfigWorkspace.techBoardCustStatusId
 
         };
 
     return mappingObject[key] || null;
 
-    };
+    }
 
     //Mapping for CustomFields OPTIONS
     static mappingCustOptionsIds(id1, id2){
@@ -367,7 +367,7 @@ class IdsConfigWorkspace {
 
     return mappingObject[key] || null;
 
-    };
+    }
 }
 
 export default IdsConfigWorkspace;

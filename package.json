@@ -1,5 +1,5 @@
 {
-  "name": "linguiniTrello",
+  "name": "linguini-trello",
   "version": "1.0.0",
   "description": "Trello Plugin Manager for OPF Tech & Other",
   "main": "index.js",
