@@ -75,7 +75,7 @@ class VLabel {
             this.labelOption = index;
             console.log(`Label option set to index: ${index}`);
         } else {
-            console.warn(`Label option "${optionText}" not found in labelOptions.`);
+            //console.warn(`Label option "${optionText}" not found in labelOptions.`);
         }
     }
 
