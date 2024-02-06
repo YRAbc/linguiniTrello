@@ -1,9 +1,6 @@
 // authSettings.js
 // Made by Yoann Raton, 18/01/2024
 
-const OAuth = require('oauth');
-const axios = require('axios');
-
 class oAuth {
 
   constructor() {

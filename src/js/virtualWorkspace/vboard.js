@@ -2,7 +2,6 @@
 // Made by Yoann Raton, 29/01/2024
 
 import VList from './vlist.js';
-import VCard from './vcard.js';
 
 class VBoard {
   constructor(Id, name, json, lists) {
