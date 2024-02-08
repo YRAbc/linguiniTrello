@@ -30,7 +30,7 @@ class TrelloServerWorkspace {
 
     }
 
-    async cardAddedToOPFTechListRule(cardId, listId, boardId) {
+    async cardAddedToListRule(cardId, listId, boardId) {
 
         /*CARD ADDED TO OPF TO DO LIST TECH */
         try {
@@ -57,35 +57,8 @@ class TrelloServerWorkspace {
                 console.log('OPF Tech Card initialized successfully.');
             }
 
-        } catch (error) {
-            console.error('Error in cardAddedToListRule:', error);
-            throw error;
-        }
-    }
-
-    async cardFalselyAddedListRule(cardId, listId, boardId) {
-        /*DELETE CARD ADDED TO OPF TECH TASK BOARD IN EVERY OTHER LISTS*/
-        try {
-            // Assuming you have a method in your getter class to get the card details
-            const cardDetails = await this.rqtInv.getCard(cardId);
-
-            // Check if the card is added to the OPF Tech list
-            if (listId === IdsConfigWorkspace.techBoardProjectListId || 
-                listId === IdsConfigWorkspace.techBoardSupportListId ||
-                listId === IdsConfigWorkspace.techBoardSidListId ||
-                listId === IdsConfigWorkspace.techBoardSujetPlanifSidListId ||
-                listId === IdsConfigWorkspace.techBoardSentToSidListId ||
-                listId === IdsConfigWorkspace.techBoardSidListId ||
-                listId === IdsConfigWorkspace.techBoardInProgressListId ||
-                listId === IdsConfigWorkspace.techBoardTestingListId ||
-                listId === IdsConfigWorkspace.techBoardPendingDeliveryListId ||
-                listId === IdsConfigWorkspace.techBoardDeliveredListId ||
-                listId === IdsConfigWorkspace.techBoardVaidatedListId ||
-                
-                listId === IdsConfigWorkspace.sidBoardTechListId ||
-                
-                listId === IdsConfigWorkspace.opfBoardSentToSIDListId ||
-                listId === IdsConfigWorkspace.opfBoardDoingListId) {
+            /*DELETE CARD ADDED TO OPF TECH TASK BOARD IN EVERY OTHER LISTS*/
+            else {
 
                 //Can't add cards to OPF Tech Task board
                 await this.rqtInv.deleteCard(cardId);

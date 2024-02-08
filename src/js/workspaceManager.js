@@ -105,8 +105,7 @@ class WorkspaceManager {
                         console.log(`Card with Id ${existingCard.id}, (${existingCard.name}) in List ${list.getListId()} is a new card.`);
 
                             //  -> CARD ADDED
-                            await this.trellowsp.cardAddedToOPFTechListRule(existingCard.id, list.getListId(), board.getBoardId());
-                            await this.trellowsp.cardFalselyAddedListRule(existingCard.id, list.getListId(), board.getBoardId());
+                            await this.trellowsp.cardAddedToListRule(existingCard.id, list.getListId(), board.getBoardId());
                             await this.updateWorkspace();
                     }
                 }
