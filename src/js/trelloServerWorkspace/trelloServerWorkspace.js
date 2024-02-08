@@ -32,10 +32,9 @@ class TrelloServerWorkspace {
 
     async cardAddedToListRule(cardId, listId, boardId) {
 
-        /*CARD ADDED TO OPF TO DO LIST TECH */
         try {
 
-            // Check if the card is added to the OPF Tech list
+            /*CARD ADDED TO OPF TO DO LIST TECH */
             if (listId === IdsConfigWorkspace.opfBoardTechListId) {
 
                 // Assuming you have a method in your getter class to get the card details
