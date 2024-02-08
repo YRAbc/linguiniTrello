@@ -30,7 +30,7 @@ class TrelloServerWorkspace {
 
     }
 
-    async cardAddedToListRule(cardId, listId, boardId) {
+    async cardAddedToOPFTechListRule(cardId, listId, boardId) {
 
         /*CARD ADDED TO OPF TO DO LIST TECH */
         try {
@@ -61,8 +61,9 @@ class TrelloServerWorkspace {
             console.error('Error in cardAddedToListRule:', error);
             throw error;
         }
+    }
 
-
+    async cardFalselyAddedListRule(cardId, listId, boardId) {
         /*DELETE CARD ADDED TO OPF TECH TASK BOARD IN EVERY OTHER LISTS*/
         try {
             // Assuming you have a method in your getter class to get the card details
@@ -94,10 +95,8 @@ class TrelloServerWorkspace {
             console.error('Error in cardAddedToListRule:', error);
             throw error;
         }
-
-
     }
-
+    
     async cardModifiedInListRule(cardId, listId, boardId) {
 
     }
