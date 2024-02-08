@@ -6,6 +6,7 @@ class IdsConfigWorkspace {
         /* OPF TO DO LIST */
         static opfBoardId = "65a5339acc54164519f0561a";
         static opfBoardTechListId = "65a5339acc54164519f05621";
+        static opfBoardSentToSIDListId = "65c4cc8a8030c95ab7d9eaa9";
         static opfBoardDoingListId = "65a5339acc54164519f05622"; 
         static opfBoardValidatedListId = "65a5339acc54164519f05623"; 
     
@@ -34,6 +35,7 @@ class IdsConfigWorkspace {
     
         static opfBoardCustStatusId = "65b3d5edaf660f2f5bdd1b53"; 
         static opfBoardCustStatusOpenId = "65b3eb90979e87894398354a"; 
+        static opfBoardCustStatusSentToSidId = "65c4ccb694fedce2040fdd37"; 
         static opfBoardCustStatusInProgressId = "65b3eb94c49cc36325a1c3b7"; 
         static opfBoardCustStatusTestingId = "65b3eb975573907f52c734e0"; 
         static opfBoardCustStatusPendingDeliveryId = "65b3eb9a6f590846d9787c0c"; 
@@ -72,7 +74,8 @@ class IdsConfigWorkspace {
         static sidBoardCustTechToQualifyId = "65b3ebea626f0fa11ea0452d";   
     
         static sidBoardCustStatusId = "65b3ec5ce67095f36b4def1e"; 
-        static sidBoardCustStatusOpenId = "65b3ec5ce67095f36b4def1f"; 
+        static sidBoardCustStatusOpenId = "65b3ec5ce67095f36b4def1f";
+        static sidBoardCustStatusSentToSidId = "65c4ccd483596745f4f1f733"; 
         static sidBoardCustStatusInProgressId = "65b3ec5ce67095f36b4def20"; 
         static sidBoardCustStatusTestingId = "65b3ec5ce67095f36b4def21"; 
         static sidBoardCustStatusPendingDeliveryId = "65b3ec5ce67095f36b4def22"; 
@@ -90,6 +93,8 @@ class IdsConfigWorkspace {
         static techBoardProjectListId = "65a533acf8bdb823367134dd"; 
         static techBoardSupportListId = "65a533acf8bdb823367134de"; 
         static techBoardSidListId = "65a533e0203b31e91571133e"; 
+        static techBoardSujetPlanifSidListId = "65c4cc5ed17be55fb912208c"; 
+        static techBoardSentToSidListId = "65c4cc6690466289af53c196"; 
         static techBoardInProgressListId = "65a533ee14a4b7651e1023b9"; 
         static techBoardTestingListId = "65a533f15ffba80f03ae8ac1"; 
         static techBoardPendingDeliveryListId = "65a533f5e072331593b68e87"; 
@@ -121,6 +126,7 @@ class IdsConfigWorkspace {
     
         static techBoardCustStatusId = "65a954eb3b1d7548e7d9cb3e"; 
         static techBoardCustStatusOpenId = "65a954eb3b1d7548e7d9cb3f"; 
+        static techBoardCustStatusSentToSidId = "65c4ccefb7e92ca31614d819"; 
         static techBoardCustStatusInProgressId = "65a954eb3b1d7548e7d9cb40"; 
         static techBoardCustStatusTestingId = "65a954eb3b1d7548e7d9cb41"; 
         static techBoardCustStatusPendingDeliveryId = "65a954eb3b1d7548e7d9cb42"; 
@@ -308,6 +314,8 @@ class IdsConfigWorkspace {
             // STATUS
             [IdsConfigWorkspace.opfBoardId + IdsConfigWorkspace.sidBoardCustStatusOpenId]: IdsConfigWorkspace.opfBoardCustStatusOpenId,
             [IdsConfigWorkspace.opfBoardId + IdsConfigWorkspace.techBoardCustStatusOpenId]: IdsConfigWorkspace.opfBoardCustStatusOpenId,
+            [IdsConfigWorkspace.opfBoardId + IdsConfigWorkspace.sidBoardCustStatusSentToSidId]: IdsConfigWorkspace.opfBoardCustStatusSentToSidId,
+            [IdsConfigWorkspace.opfBoardId + IdsConfigWorkspace.techBoardCustStatusSentToSidId]: IdsConfigWorkspace.opfBoardCustStatusSentToSidId,
             [IdsConfigWorkspace.opfBoardId + IdsConfigWorkspace.sidBoardCustStatusInProgressId]: IdsConfigWorkspace.opfBoardCustStatusInProgressId,
             [IdsConfigWorkspace.opfBoardId + IdsConfigWorkspace.techBoardCustStatusInProgressId]: IdsConfigWorkspace.opfBoardCustStatusInProgressId,
             [IdsConfigWorkspace.opfBoardId + IdsConfigWorkspace.sidBoardCustStatusTestingId]: IdsConfigWorkspace.opfBoardCustStatusTestingId,
@@ -327,6 +335,8 @@ class IdsConfigWorkspace {
 
             [IdsConfigWorkspace.sidBoardId + IdsConfigWorkspace.opfBoardCustStatusOpenId]: IdsConfigWorkspace.sidBoardCustStatusOpenId,
             [IdsConfigWorkspace.sidBoardId + IdsConfigWorkspace.techBoardCustStatusOpenId]: IdsConfigWorkspace.sidBoardCustStatusOpenId,
+            [IdsConfigWorkspace.sidBoardId + IdsConfigWorkspace.opfBoardCustStatusSentToSidId]: IdsConfigWorkspace.sidBoardCustStatusSentToSidId,
+            [IdsConfigWorkspace.sidBoardId + IdsConfigWorkspace.techBoardCustStatusSentToSidId]: IdsConfigWorkspace.sidBoardCustStatusSentToSidId,
             [IdsConfigWorkspace.sidBoardId + IdsConfigWorkspace.opfBoardCustStatusInProgressId]: IdsConfigWorkspace.sidBoardCustStatusInProgressId,
             [IdsConfigWorkspace.sidBoardId + IdsConfigWorkspace.techBoardCustStatusInProgressId]: IdsConfigWorkspace.sidBoardCustStatusInProgressId,
             [IdsConfigWorkspace.sidBoardId + IdsConfigWorkspace.opfBoardCustStatusTestingId]: IdsConfigWorkspace.sidBoardCustStatusTestingId,
@@ -346,6 +356,8 @@ class IdsConfigWorkspace {
 
             [IdsConfigWorkspace.techBoardId + IdsConfigWorkspace.sidBoardCustStatusOpenId]: IdsConfigWorkspace.techBoardCustStatusOpenId,
             [IdsConfigWorkspace.techBoardId + IdsConfigWorkspace.opfBoardCustStatusOpenId]: IdsConfigWorkspace.techBoardCustStatusOpenId,
+            [IdsConfigWorkspace.techBoardId + IdsConfigWorkspace.sidBoardCustStatusSentToSidId]: IdsConfigWorkspace.techBoardCustStatusSentToSidId,
+            [IdsConfigWorkspace.techBoardId + IdsConfigWorkspace.opfBoardCustStatusSentToSidId]: IdsConfigWorkspace.techBoardCustStatusSentToSidId,
             [IdsConfigWorkspace.techBoardId + IdsConfigWorkspace.sidBoardCustStatusInProgressId]: IdsConfigWorkspace.techBoardCustStatusInProgressId,
             [IdsConfigWorkspace.techBoardId + IdsConfigWorkspace.opfBoardCustStatusInProgressId]: IdsConfigWorkspace.techBoardCustStatusInProgressId,
             [IdsConfigWorkspace.techBoardId + IdsConfigWorkspace.sidBoardCustStatusTestingId]: IdsConfigWorkspace.techBoardCustStatusTestingId,

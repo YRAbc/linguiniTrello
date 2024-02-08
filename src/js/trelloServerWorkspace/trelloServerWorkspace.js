@@ -71,12 +71,19 @@ class TrelloServerWorkspace {
             if (listId === IdsConfigWorkspace.techBoardProjectListId || 
                 listId === IdsConfigWorkspace.techBoardSupportListId ||
                 listId === IdsConfigWorkspace.techBoardSidListId ||
+                listId === IdsConfigWorkspace.techBoardSujetPlanifSidListId ||
+                listId === IdsConfigWorkspace.techBoardSentToSidListId ||
+                listId === IdsConfigWorkspace.techBoardSidListId ||
                 listId === IdsConfigWorkspace.techBoardInProgressListId ||
                 listId === IdsConfigWorkspace.techBoardTestingListId ||
                 listId === IdsConfigWorkspace.techBoardPendingDeliveryListId ||
                 listId === IdsConfigWorkspace.techBoardDeliveredListId ||
                 listId === IdsConfigWorkspace.techBoardVaidatedListId ||
-                listId === IdsConfigWorkspace.sidBoardTechListId) {
+                
+                listId === IdsConfigWorkspace.sidBoardTechListId ||
+                
+                listId === IdsConfigWorkspace.opfBoardSentToSIDListId ||
+                listId === IdsConfigWorkspace.opfBoardDoingListId) {
 
                 //Can't add cards to OPF Tech Task board
                 await this.rqtInv.deleteCard(cardId);
@@ -110,11 +117,15 @@ class TrelloServerWorkspace {
       
             if (endListId === IdsConfigWorkspace.techBoardSidListId) {
               await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustTechId, IdsConfigWorkspace.techBoardCustTechSidId);
-              const cardDetails = await this.rqtInv.getCard(cardId);
-              await this.rqtInv.copyCardToList(cardId, IdsConfigWorkspace.sidBoardTechListId, cardDetails);
             }
       
             // STATUS CUSTOM FIELD UPDATE WITH CARD MOVE
+            if (endListId === IdsConfigWorkspace.techBoardSentToSidListId) {
+              await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustStatusSentToSidId, IdsConfigWorkspace.techBoardCustStatusInProgressId);
+              const cardDetails = await this.rqtInv.getCard(cardId);
+              await this.rqtInv.copyCardToList(cardId, IdsConfigWorkspace.sidBoardTechListId, cardDetails);
+            }
+            
             if (endListId === IdsConfigWorkspace.techBoardInProgressListId) {
               await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustStatusId, IdsConfigWorkspace.techBoardCustStatusInProgressId);
             }
