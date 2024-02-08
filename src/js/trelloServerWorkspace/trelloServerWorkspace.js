@@ -95,7 +95,7 @@ class TrelloServerWorkspace {
       
             // STATUS CUSTOM FIELD UPDATE WITH CARD MOVE
             if (endListId === IdsConfigWorkspace.techBoardSentToSidListId) {
-              await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustStatusSentToSidId, IdsConfigWorkspace.techBoardCustStatusInProgressId);
+              await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustStatusId, IdsConfigWorkspace.techBoardCustStatusSentToSidId);
               const cardDetails = await this.rqtInv.getCard(cardId);
               await this.rqtInv.copyCardToList(cardId, IdsConfigWorkspace.sidBoardTechListId, cardDetails);
             }
