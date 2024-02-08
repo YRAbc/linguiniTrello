@@ -28,10 +28,10 @@ class WorkspaceManager {
             // Compare Id and name of boards
             if (this.boardDataChanged(existingBoardData, board)) {
                 console.log(`Board with Id ${board.getBoardId()} needs to be updated.`);
-/*
+
                 //  -> BOARD MODIFIED
-                await this.trellowsp.boardModifiedRule(board.getBoardId());
-                await this.updateWorkspace();*/
+                //await this.trellowsp.boardModifiedRule(board.getBoardId());
+                await this.updateWorkspace();
             }
     
             // Get existing lists for the board
@@ -43,18 +43,18 @@ class WorkspaceManager {
     
                 if (!existingListData) {
                     console.log(`List with Id ${list.getListId()}, (${list.getListName()}) in Board ${board.getBoardId()} has been removed.`);
-/*
+
                         //  -> LIST REMOVE
-                        await this.trellowsp.listRemovedFromBoardRule(list.getListId(), board.getBoardId());
-                        await this.updateWorkspace();*/
+                        //await this.trellowsp.listRemovedFromBoardRule(list.getListId(), board.getBoardId());
+                        await this.updateWorkspace();
 
                 } else {
                     if (this.listDataChanged(existingListData, list)) {
                         console.log(`List with Id ${list.getListId()} in Board ${board.getBoardId()} needs to be updated.`);
-                        /*
+                        
                             //  -> LIST MODIFIED
-                            await this.trellowsp.listModifiedInBoardRule(list.getListId(), board.getBoardId());
-                            await this.updateWorkspace();*/
+                            //await this.trellowsp.listModifiedInBoardRule(list.getListId(), board.getBoardId());
+                            await this.updateWorkspace();
                     }
                 }
     
@@ -69,31 +69,31 @@ class WorkspaceManager {
                     if (!existingInBoard && !existingInList) {
                         // Card is removed
                         console.log(`Card with Id ${card.getCardId()}, (${card.getCardName()}) in List ${list.getListId()} has been removed.`);
-/*
+
                             //  -> CARD REMOVED
-                            await this.trellowsp.cardRemovedFromListRule(card.getCardId(), list.getListId(), board.getBoardId());
-                            await this.updateWorkspace();*/
+                            //await this.trellowsp.cardRemovedFromListRule(card.getCardId(), list.getListId(), board.getBoardId());
+                            await this.updateWorkspace();
                     } 
                     
                     else if (!existingInList) {
                         // Card has been moved
                         const targetList = await this.rqtInv.getListFromCard(card.getCardId());
                         console.log(`Card with Id ${card.getCardId()}, (${card.getCardName()}) has been moved from List ${list.getListName()} to List ${targetList.name}`);
-/*
+
                             //  -> CARD MOVED
-                            await this.trellowsp.cardMovedToListRule(card.getCardId(), list.getListId(), targetList.id, board.getBoardId());
-                            await this.updateDuplicates(targetList, board.getBoardId());
-                            await this.updateWorkspace();*/
+                            //await this.trellowsp.cardMovedToListRule(card.getCardId(), list.getListId(), targetList.id, board.getBoardId());
+                            //await this.updateDuplicates(targetList, board.getBoardId());
+                            await this.updateWorkspace();
                     }
 
                     else if (this.cardDataChanged(existingInList, card)) {
                         // Card needs to be updated
                         console.log(`Card with Id ${card.getCardId()} in List ${list.getListId()} needs to be updated.`);
-/*
+
                             //  -> CARD MODIFIED
-                            this.trellowsp.cardModifiedInListRule(card.getCardId(), list.getListId(), board.getBoardId());
-                            await this.updateDuplicates(existingInList, board.getBoardId());
-                            await this.updateWorkspace();*/
+                            //this.trellowsp.cardModifiedInListRule(card.getCardId(), list.getListId(), board.getBoardId());
+                            //await this.updateDuplicates(existingInList, board.getBoardId());
+                            await this.updateWorkspace();
                     } 
                     
                 }
@@ -103,10 +103,10 @@ class WorkspaceManager {
                     const cardStillExists = board.getCards().some(card => card.getCardId() === existingCard.id);
                     if (!cardStillExists) {
                         console.log(`Card with Id ${existingCard.id}, (${existingCard.name}) in List ${list.getListId()} is a new card.`);
-/*
+
                             //  -> CARD ADDED
-                            await this.trellowsp.cardAddedToListRule(existingCard.id, list.getListId(), board.getBoardId());
-                            await this.updateWorkspace();*/
+                            //await this.trellowsp.cardAddedToListRule(existingCard.id, list.getListId(), board.getBoardId());
+                            await this.updateWorkspace();
                     }
                 }
             }
@@ -116,10 +116,10 @@ class WorkspaceManager {
                 const listStillExists = board.getLists().some(list => list.getListId() === existingList.id);
                 if (!listStillExists) {
                     console.log(`List with Id ${existingList.id}, (${existingList.name}) in Board ${board.getBoardId()} is a new list.`);
-                        /*
+                        
                         //  -> LIST ADDED
-                        await this.trellowsp.listAddedToBoardRule(existingList.id, board.getBoardId());
-                        await this.updateWorkspace();*/
+                        //await this.trellowsp.listAddedToBoardRule(existingList.id, board.getBoardId());
+                        await this.updateWorkspace();
                 }
             }
         }
