@@ -51,7 +51,6 @@ class TrelloServerWorkspace {
                 await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.opfBoardCustTechId, IdsConfigWorkspace.opfBoardCustTechToQualifyId);
                 await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.opfBoardCustStatusId, IdsConfigWorkspace.opfBoardCustStatusOpenId);
 
-                console.log("here");
                 await this.rqtInv.copyCardToList(cardId, IdsConfigWorkspace.techBoardToClassifyListId, cardDetails);
 
                 console.log('OPF Tech Card initialized successfully.');
@@ -62,7 +61,7 @@ class TrelloServerWorkspace {
             throw error;
         }
 
-        elif (boardId === IdsConfigWorkspace.techBoardId ||
+        if (boardId === IdsConfigWorkspace.techBoardId ||
           listId === IdsConfigWorkspace.opfBoardDoingListId ||
           listId === IdsConfigWorkspace.opfBoardSentToSIDListId ||
           listId === IdsConfigWorkspace.sidBoardTechListId)
