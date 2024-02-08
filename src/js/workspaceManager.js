@@ -158,8 +158,6 @@ class WorkspaceManager {
             //console.log("JSON : ", JSON.stringify(existingCard, null, 2) , "  ", latestCardData.getCardJson());
         }
 
-        // add additional modifications for card updates
-
         return jsonChanged;
     }
 
@@ -353,13 +351,15 @@ class WorkspaceManager {
                             for (const card of existingListCards) {
                                 try {
                                     
+                                    /*
                                     // Check if the card has a label with the format "#OPFTech-XXX" && Extract it, set to 0 if do not have one
                                     const opfTechNumberLabel = card.labels.find(label => /^#OPFTech-\d+$/.test(label.name));
-                                    const opfTechNumber = opfTechNumberLabel ? parseInt(opfTechNumberLabel.name.match(/\d+/)[0], 10) : 0;
+                                    const opfTechNumber = opfTechNumberLabel ? parseInt(opfTechNumberLabel.name.match(/\d+/)[0], 10) : 0;*/
 
                                     // Create a Card object for each Trello card
                                     const cardObj = new VCard(card.id, card.name, JSON.stringify(card, null, 2), listObj.getListId(), listObj.getListName(), opfTechNumber);
                                     
+                                    /*
                                     // STATUS
                                     const statusFieldIds = [IdsConfigWorkspace.opfBoardCustStatusId, IdsConfigWorkspace.sidBoardCustStatusId, IdsConfigWorkspace.techBoardCustStatusId];
                                     const statusField = card.customFieldItems && card.customFieldItems.find(field => statusFieldIds.includes(field.idCustomField));
@@ -378,7 +378,7 @@ class WorkspaceManager {
                                     // TECH
                                     const techFieldIds = [IdsConfigWorkspace.opfBoardCustTechId, IdsConfigWorkspace.sidBoardCustTechId, IdsConfigWorkspace.techBoardCustTechId];
                                     const techField = card.customFieldItems && card.customFieldItems.find(field => techFieldIds.includes(field.idCustomField));
-                                    cardObj.setTechT(techField ? techField.value.text || '' : '');
+                                    cardObj.setTechT(techField ? techField.value.text || '' : '');*/
 
                                     // Add the card object to the list object
                                     listObj.addCard(cardObj);
