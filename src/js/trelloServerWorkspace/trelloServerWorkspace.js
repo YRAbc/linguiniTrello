@@ -94,13 +94,22 @@ class TrelloServerWorkspace {
       
             // STATUS CUSTOM FIELD UPDATE WITH CARD MOVE
             if (endListId === IdsConfigWorkspace.techBoardSentToSidListId) {
+
               await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustTechId, IdsConfigWorkspace.techBoardCustTechSidId);
               await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustStatusId, IdsConfigWorkspace.techBoardCustStatusSentToSidId);
               const cardDetails = await this.rqtInv.getCard(cardId);
+
+              const opfTechNumber = await this.rqtInv.getOPFTechNumber(cardId);
+              const dupCardOnOPFTODO = await this.rqtInv.getCardInBoardWithNumber(IdsConfigWorkspace.opfBoardId, opfTechNumber);
+              await this.rqtInv.moveCardToList(dupCardOnOPFTODO.id, IdsConfigWorkspace.opfBoardSentToSIDListId);
+
               await this.rqtInv.copyCardToList(cardId, IdsConfigWorkspace.sidBoardTechListId, cardDetails);
             }
 
             if (endListId === IdsConfigWorkspace.techBoardInProgressListId) {
+              const opfTechNumber = await this.rqtInv.getOPFTechNumber(cardId);
+              const dupCardOnOPFTODO = await this.rqtInv.getCardInBoardWithNumber(IdsConfigWorkspace.opfBoardId, opfTechNumber);
+              await this.rqtInv.moveCardToList(dupCardOnOPFTODO.id, IdsConfigWorkspace.opfBoardDoingListId);
               await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustStatusId, IdsConfigWorkspace.techBoardCustStatusInProgressId);
             }
       

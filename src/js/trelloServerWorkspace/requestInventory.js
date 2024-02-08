@@ -99,6 +99,45 @@ class RequestInventory {
     }
   }
 
+  async getCardInBoardWithNumber(boardId, opfTechNumber, retryCount = 3, delay = 1000) {
+    try {
+      const response = await this.getBoardCards(boardId);
+      // Check if response is not empty
+      if (response && response.length > 0) {
+        for (const cardDetails of response) {
+          // Check if the OPFTech label exists on the card
+          const opfTechLabel = cardDetails.labels.find(label => label.name.startsWith('#OPFTech-'));
+          if (opfTechLabel) {
+            // Extract the number from the label
+            const number = opfTechLabel.name.replace('#OPFTech-', '');
+            // Check if the number matches the opfTechNumber
+            if (number === opfTechNumber) {
+              return cardDetails; // Return the card if number matches
+            }
+          }
+        }
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 429) {
+        // Handle rate limiting
+        if (retryCount > 0) {
+          console.warn(`Rate limit exceeded. Retrying after ${delay / 1000} seconds. Retries left: ${retryCount}`);
+          await new Promise(resolve => setTimeout(resolve, delay));
+          return this.getCardInBoardWithNumber(boardId, opfTechNumber, retryCount - 1, delay * 2, timeout); // Exponential backoff
+        } else {
+          console.error('Exceeded maximum retry attempts. Aborting.');
+          throw error;
+        }
+      } else {
+        console.error('Error getting board lists:', error.response ? error.response.data : error.message);
+        throw error;
+      }
+    }
+    // Return null if card with opfTechNumber is not found
+    return null;
+  }
+  
+
   async getBoardLists(boardId, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
     try {
       const response = await axios.get(`https://api.trello.com/1/boards/${boardId}/lists?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}&source=${this.oauth.appName}`, {
