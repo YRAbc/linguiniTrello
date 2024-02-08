@@ -61,6 +61,14 @@ class TrelloServerWorkspace {
             console.error('Error in cardAddedToListRule:', error);
             throw error;
         }
+
+        elif (boardId === IdsConfigWorkspace.techBoardId ||
+          listId === IdsConfigWorkspace.opfBoardDoingListId ||
+          listId === IdsConfigWorkspace.opfBoardSentToSIDListId ||
+          listId === IdsConfigWorkspace.sidBoardTechListId)
+          {
+            await this.rqtInv.deleteCard(cardId);
+          }
     }
     
     async cardModifiedInListRule(cardId, listId, boardId) {
