@@ -673,7 +673,9 @@ class RequestInventory {
                                   'description', 'due', 'dueComplete', 'start', 'closed', 'dateLastActivity',
                                   'descData', 'dueReminder', 'members', 'email', 'idMembers', 'idMembersVoted',
                                   'idAttachmentCover', 'manualCoverAttachment', 'pos', 'subscribed', 'cover',
-                                  'isTemplate', 'cardRole'];
+                                  'isTemplate', 'cardRole',
+                                  'checklist'
+                                ];
 
         // Check and conditionally add properties
         for (const property of propertiesToCheck) {
