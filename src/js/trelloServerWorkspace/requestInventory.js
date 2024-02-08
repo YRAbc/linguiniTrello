@@ -336,7 +336,7 @@ class RequestInventory {
             throw error;
           }
         }
-      }
+    }
 
   async getCustomField(cardId, fieldName, retryCount = 1, delay = 1000, timeout = this.defaultTimeout) {
     try {

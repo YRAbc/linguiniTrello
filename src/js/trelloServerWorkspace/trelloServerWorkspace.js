@@ -34,11 +34,12 @@ class TrelloServerWorkspace {
 
         /*CARD ADDED TO OPF TO DO LIST TECH */
         try {
-            // Assuming you have a method in your getter class to get the card details
-            const cardDetails = await this.rqtInv.getCard(cardId);
 
             // Check if the card is added to the OPF Tech list
             if (listId === IdsConfigWorkspace.opfBoardTechListId) {
+
+                // Assuming you have a method in your getter class to get the card details
+                const cardDetails = await this.rqtInv.getCard(cardId);
 
                 // Get the maximum OPFTech number AND Set label +1
                 const maxOPFTechNumber = await this.rqtInv.getOPFTechMaxNumber(IdsConfigWorkspace.opfBoardId);
