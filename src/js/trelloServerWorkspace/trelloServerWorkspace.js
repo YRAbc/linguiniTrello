@@ -36,8 +36,7 @@ class TrelloServerWorkspace {
 
           if (boardId === IdsConfigWorkspace.techBoardId ||
             listId === IdsConfigWorkspace.opfBoardDoingListId ||
-            listId === IdsConfigWorkspace.opfBoardSentToSIDListId ||
-            listId === IdsConfigWorkspace.sidBoardTechListId)
+            listId === IdsConfigWorkspace.opfBoardSentToSIDListId)
             {
               await this.rqtInv.deleteCard(cardId);
             }
@@ -95,6 +94,7 @@ class TrelloServerWorkspace {
       
             // STATUS CUSTOM FIELD UPDATE WITH CARD MOVE
             if (endListId === IdsConfigWorkspace.techBoardSentToSidListId) {
+              await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustTechId, IdsConfigWorkspace.techBoardCustTechSidId);
               await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustStatusId, IdsConfigWorkspace.techBoardCustStatusSentToSidId);
               const cardDetails = await this.rqtInv.getCard(cardId);
               await this.rqtInv.copyCardToList(cardId, IdsConfigWorkspace.sidBoardTechListId, cardDetails);

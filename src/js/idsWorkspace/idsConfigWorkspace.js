@@ -23,6 +23,7 @@ class IdsConfigWorkspace {
         static opfBoardCustIssuerTreasuryId = "65b3eb580209c9211e5362f3"; 
         static opfBoardCustIssuerValuationId = "65b3eb5b685aeb9c76816193"; 
         static opfBoardCustIssuerAccessMarketId = "65b3eb63bfd3a0285d98b0d7";   
+        static opfBoardCustIssuerTechId = "65c50cfba076ce71004cba29";   
         static opfBoardCustIssuerManagerId = "65b3eb65c25fdade1a7079a3";   
         static opfBoardCustIssuerToQualifyId = "65b3eb693f12c7d370d50519"; 
     
@@ -62,7 +63,8 @@ class IdsConfigWorkspace {
         static sidBoardCustIssuerSupportTradingId = "65b3ec344cf4eb491d28aa3a"; 
         static sidBoardCustIssuerTreasuryId = "65b3ec344cf4eb491d28aa3b"; 
         static sidBoardCustIssuerValuationId = "65b3ec344cf4eb491d28aa3c"; 
-        static sidBoardCustIssuerAccessMarketId = "65b3ec344cf4eb491d28aa3d";   
+        static sidBoardCustIssuerAccessMarketId = "65b3ec344cf4eb491d28aa3d";  
+        static sidBoardCustIssuerTechId = "65c50cdbddc1d062741ac762";    
         static sidBoardCustIssuerManagerId = "65b3ec344cf4eb491d28aa3e";   
         static sidBoardCustIssuerToQualifyId = "65b3ec344cf4eb491d28aa3f"; 
     
@@ -113,7 +115,8 @@ class IdsConfigWorkspace {
         static techBoardCustIssuerSupportTradingId = "65a954eb3b1d7548e7d9cb24"; 
         static techBoardCustIssuerTreasuryId = "65a954eb3b1d7548e7d9cb25"; 
         static techBoardCustIssuerValuationId = "65a954eb3b1d7548e7d9cb26"; 
-        static techBoardCustIssuerAccessMarketId = "65a954eb3b1d7548e7d9cb27";   
+        static techBoardCustIssuerAccessMarketId = "65a954eb3b1d7548e7d9cb27"; 
+        static techBoardCustIssuerTechId = "65c50d0fd731967d72d66f30"; 
         static techBoardCustIssuerManagerId = "65a954eb3b1d7548e7d9cb28";   
         static techBoardCustIssuerToQualifyId = "65af9cf98d4f759ce85d2a5f"; 
     
@@ -242,6 +245,8 @@ class IdsConfigWorkspace {
             [IdsConfigWorkspace.opfBoardId + IdsConfigWorkspace.techBoardCustIssuerValuationId]: IdsConfigWorkspace.opfBoardCustIssuerValuationId,
             [IdsConfigWorkspace.opfBoardId + IdsConfigWorkspace.sidBoardCustIssuerAccessMarketId]: IdsConfigWorkspace.opfBoardCustIssuerAccessMarketId,
             [IdsConfigWorkspace.opfBoardId + IdsConfigWorkspace.techBoardCustIssuerAccessMarketId]: IdsConfigWorkspace.opfBoardCustIssuerAccessMarketId,
+            [IdsConfigWorkspace.opfBoardId + IdsConfigWorkspace.sidBoardCustIssuerTechId]: IdsConfigWorkspace.opfBoardCustIssuerTechId,
+            [IdsConfigWorkspace.opfBoardId + IdsConfigWorkspace.techBoardCustIssuerTechId]: IdsConfigWorkspace.opfBoardCustIssuerTechId,
             [IdsConfigWorkspace.opfBoardId + IdsConfigWorkspace.sidBoardCustIssuerManagerId]: IdsConfigWorkspace.opfBoardCustIssuerManagerId,
             [IdsConfigWorkspace.opfBoardId + IdsConfigWorkspace.techBoardCustIssuerManagerId]: IdsConfigWorkspace.opfBoardCustIssuerManagerId,
             [IdsConfigWorkspace.opfBoardId + IdsConfigWorkspace.sidBoardCustIssuerToQualifyId]: IdsConfigWorkspace.opfBoardCustIssuerToQualifyId,
@@ -257,6 +262,8 @@ class IdsConfigWorkspace {
             [IdsConfigWorkspace.sidBoardId + IdsConfigWorkspace.techBoardCustIssuerValuationId]: IdsConfigWorkspace.sidBoardCustIssuerValuationId,
             [IdsConfigWorkspace.sidBoardId + IdsConfigWorkspace.opfBoardCustIssuerAccessMarketId]: IdsConfigWorkspace.sidBoardCustIssuerAccessMarketId,
             [IdsConfigWorkspace.sidBoardId + IdsConfigWorkspace.techBoardCustIssuerAccessMarketId]: IdsConfigWorkspace.sidBoardCustIssuerAccessMarketId,
+            [IdsConfigWorkspace.sidBoardId + IdsConfigWorkspace.opfBoardCustIssuerTechId]: IdsConfigWorkspace.sidBoardCustIssuerTechId,
+            [IdsConfigWorkspace.sidBoardId + IdsConfigWorkspace.techBoardCustIssuerTechId]: IdsConfigWorkspace.sidBoardCustIssuerTechId,
             [IdsConfigWorkspace.sidBoardId + IdsConfigWorkspace.opfBoardCustIssuerManagerId]: IdsConfigWorkspace.sidBoardCustIssuerManagerId,
             [IdsConfigWorkspace.sidBoardId + IdsConfigWorkspace.techBoardCustIssuerManagerId]: IdsConfigWorkspace.sidBoardCustIssuerManagerId,
             [IdsConfigWorkspace.sidBoardId + IdsConfigWorkspace.opfBoardCustIssuerToQualifyId]: IdsConfigWorkspace.sidBoardCustIssuerToQualifyId,
@@ -272,6 +279,8 @@ class IdsConfigWorkspace {
             [IdsConfigWorkspace.techBoardId + IdsConfigWorkspace.opfBoardCustIssuerValuationId]: IdsConfigWorkspace.techBoardCustIssuerValuationId,
             [IdsConfigWorkspace.techBoardId + IdsConfigWorkspace.sidBoardCustIssuerAccessMarketId]: IdsConfigWorkspace.techBoardCustIssuerAccessMarketId,
             [IdsConfigWorkspace.techBoardId + IdsConfigWorkspace.opfBoardCustIssuerAccessMarketId]: IdsConfigWorkspace.techBoardCustIssuerAccessMarketId,
+            [IdsConfigWorkspace.techBoardId + IdsConfigWorkspace.sidBoardCustIssuerTechId]: IdsConfigWorkspace.techBoardCustIssuerTechId,
+            [IdsConfigWorkspace.techBoardId + IdsConfigWorkspace.opfBoardCustIssuerTechId]: IdsConfigWorkspace.techBoardCustIssuerTechId,
             [IdsConfigWorkspace.techBoardId + IdsConfigWorkspace.sidBoardCustIssuerManagerId]: IdsConfigWorkspace.techBoardCustIssuerManagerId,
             [IdsConfigWorkspace.techBoardId + IdsConfigWorkspace.opfBoardCustIssuerManagerId]: IdsConfigWorkspace.techBoardCustIssuerManagerId,
             [IdsConfigWorkspace.techBoardId + IdsConfigWorkspace.sidBoardCustIssuerToQualifyId]: IdsConfigWorkspace.techBoardCustIssuerToQualifyId,
