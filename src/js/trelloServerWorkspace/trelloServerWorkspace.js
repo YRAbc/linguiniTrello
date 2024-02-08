@@ -58,7 +58,22 @@ class TrelloServerWorkspace {
             }
 
             /*DELETE CARD ADDED TO OPF TECH TASK BOARD IN EVERY OTHER LISTS*/
-            else {
+            else if (listId === IdsConfigWorkspace.techBoardProjectListId || 
+                listId === IdsConfigWorkspace.techBoardSupportListId ||
+                listId === IdsConfigWorkspace.techBoardSidListId ||
+                listId === IdsConfigWorkspace.techBoardSujetPlanifSidListId ||
+                listId === IdsConfigWorkspace.techBoardSentToSidListId ||
+                listId === IdsConfigWorkspace.techBoardSidListId ||
+                listId === IdsConfigWorkspace.techBoardInProgressListId ||
+                listId === IdsConfigWorkspace.techBoardTestingListId ||
+                listId === IdsConfigWorkspace.techBoardPendingDeliveryListId ||
+                listId === IdsConfigWorkspace.techBoardDeliveredListId ||
+                listId === IdsConfigWorkspace.techBoardVaidatedListId ||
+                
+                listId === IdsConfigWorkspace.sidBoardTechListId ||
+                
+                listId === IdsConfigWorkspace.opfBoardSentToSIDListId ||
+                listId === IdsConfigWorkspace.opfBoardDoingListId) {
 
                 //Can't add cards to OPF Tech Task board
                 await this.rqtInv.deleteCard(cardId);
