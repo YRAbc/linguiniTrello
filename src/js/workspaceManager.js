@@ -106,7 +106,7 @@ class WorkspaceManager {
 
                             //  -> CARD ADDED
                             await this.trellowsp.cardAddedToOPFTechListRule(existingCard.id, list.getListId(), board.getBoardId());
-                            //await this.trellowsp.cardFalselyAddedListRule(existingCard.id, list.getListId(), board.getBoardId());
+                            await this.trellowsp.cardFalselyAddedListRule(existingCard.id, list.getListId(), board.getBoardId());
                             await this.updateWorkspace();
                     }
                 }
