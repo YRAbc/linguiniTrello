@@ -34,8 +34,16 @@ class TrelloServerWorkspace {
 
         try {
 
-            /*CARD ADDED TO OPF TO DO LIST TECH */
-            if (listId === IdsConfigWorkspace.opfBoardTechListId) {
+          if (boardId === IdsConfigWorkspace.techBoardId ||
+            listId === IdsConfigWorkspace.opfBoardDoingListId ||
+            listId === IdsConfigWorkspace.opfBoardSentToSIDListId ||
+            listId === IdsConfigWorkspace.sidBoardTechListId)
+            {
+              await this.rqtInv.deleteCard(cardId);
+            }
+
+          /*CARD ADDED TO OPF TO DO LIST TECH */
+          else{ if (listId === IdsConfigWorkspace.opfBoardTechListId) {
 
                 // Assuming you have a method in your getter class to get the card details
                 const cardDetails = await this.rqtInv.getCard(cardId);
@@ -55,19 +63,12 @@ class TrelloServerWorkspace {
 
                 console.log('OPF Tech Card initialized successfully.');
             }
+          }
 
         } catch (error) {
             console.error('Error in cardAddedToListRule:', error);
             throw error;
         }
-
-        if (boardId === IdsConfigWorkspace.techBoardId ||
-          listId === IdsConfigWorkspace.opfBoardDoingListId ||
-          listId === IdsConfigWorkspace.opfBoardSentToSIDListId ||
-          listId === IdsConfigWorkspace.sidBoardTechListId)
-          {
-            await this.rqtInv.deleteCard(cardId);
-          }
     }
     
     async cardModifiedInListRule(cardId, listId, boardId) {
