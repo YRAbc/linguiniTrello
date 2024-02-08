@@ -357,7 +357,7 @@ class WorkspaceManager {
                                     const opfTechNumber = opfTechNumberLabel ? parseInt(opfTechNumberLabel.name.match(/\d+/)[0], 10) : 0;*/
 
                                     // Create a Card object for each Trello card
-                                    const cardObj = new VCard(card.id, card.name, JSON.stringify(card, null, 2), listObj.getListId(), listObj.getListName(), opfTechNumber);
+                                    const cardObj = new VCard(card.id, card.name, JSON.stringify(card, null, 2), listObj.getListId(), listObj.getListName(), 0);
                                     
                                     /*
                                     // STATUS
