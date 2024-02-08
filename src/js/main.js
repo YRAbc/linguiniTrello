@@ -27,7 +27,7 @@ function setupPeriodicUpdates() {
 
         if (error.response && error.response.status === 429) {
           // Rate limiting error
-          const retryAfter = error.response.headers['retry-after'] || 1; // Default to 1 seconds
+          const retryAfter = error.response.headers['retry-after'] || 5; // Default to 1 seconds
           console.log(`Rate limiting error. Retrying after ${retryAfter} seconds.`);
           await sleep(retryAfter * 1000); // Convert seconds to milliseconds
         }
