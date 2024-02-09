@@ -888,37 +888,43 @@ class RequestInventory {
     }
   }
 
-  async addChecklistItemToChecklist(checkListId, itemName, checked = false, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
-    try {
-        const response = await axios.post(
-            `https://api.trello.com/1/checklists/${checkListId}/checkItems?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}&source=${this.oauth.appName}`,
-            {
-                name: itemName,
-                checked: checked
-            },
-            {
-                timeout: timeout
-            }
-        );
+  async addChecklistItemToChecklist(checkListId, itemData, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
+      try {
+          const response = await axios.post(
+              `https://api.trello.com/1/checklists/${checkListId}/checkItems?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}&source=${this.oauth.appName}`,
+              {
+                  id: itemData.id,
+                  name: itemData.name,
+                  pos: itemData.pos,
+                  state: itemData.state,
+                  due: itemData.due,
+                  dueReminder: itemData.dueReminder,
+                  idMember: itemData.idMember,
+                  idChecklist: itemData.idChecklist
+              },
+              {
+                  timeout: timeout
+              }
+          );
 
-        const newItem = response.data;
-        return newItem;
-    } catch (error) {
-        if (error.response && error.response.status === 429) {
-            // Handle rate limiting
-            if (retryCount > 0) {
-                console.warn(`Rate limit exceeded. Retrying after ${delay / 1000} seconds. Retries left: ${retryCount}`);
-                await new Promise(resolve => setTimeout(resolve, delay));
-                return this.addChecklistItemToChecklist(checkListId, itemName, checked, retryCount - 1, delay * 2, timeout); // Exponential backoff
-            } else {
-                console.error('Exceeded maximum retry attempts. Aborting.');
-                throw error;
-            }
-        } else {
-            console.error('Error adding checklist item:', error.response ? error.response.data : error.message);
-            throw error;
-        }
-    }
+          const newItem = response.data;
+          return newItem;
+      } catch (error) {
+          if (error.response && error.response.status === 429) {
+              // Handle rate limiting
+              if (retryCount > 0) {
+                  console.warn(`Rate limit exceeded. Retrying after ${delay / 1000} seconds. Retries left: ${retryCount}`);
+                  await new Promise(resolve => setTimeout(resolve, delay));
+                  return this.addChecklistItemToChecklist(checkListId, itemData, retryCount - 1, delay * 2, timeout); // Exponential backoff
+              } else {
+                  console.warn('Exceeded maximum retry attempts. Aborting.');
+                  throw error;
+              }
+          } else {
+              console.warn('Error adding checklist item:', error.response ? error.response.data : error.message);
+              throw error;
+          }
+      }
   }
 
   async removeChecklistItemFromChecklist(checkListId, checkItemId, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
