@@ -802,29 +802,28 @@ class RequestInventory {
               const mainChecklistItems = await this.getCheckListItems(mainChecklist.id);
               for (const item of mainChecklistItems) {
                   // Add each checklist item to the newly added checklist on the duplicate card
-                  await this.addChecklistItemToChecklist(newChecklist.id, item.name, item.checked, retryCount, delay, timeout);
+                  await this.addChecklistItemToChecklist(newChecklist.id, item, retryCount, delay, timeout);
               }
           }
 
-          //console.log(`Checklists and checklist items replaced successfully for card ${duplicateCardId}`);
+          console.log(`Checklists and checklist items replaced successfully for card ${duplicateCardId}`);
       } catch (error) {
           if (error.response && error.response.status === 429) {
               // Handle rate limiting
               if (retryCount > 0) {
                   console.warn(`Rate limit exceeded. Retrying after ${delay / 1000} seconds. Retries left: ${retryCount}`);
                   await new Promise(resolve => setTimeout(resolve, delay));
-                  return this.replaceCardChecklist(mainCardId, duplicateCardId, retryCount - 1, delay * 2, timeout); // Exponential backoff
+                  return this.updateCardChecklist(mainCardId, duplicateCardId, retryCount - 1, delay * 2, timeout); // Exponential backoff
               } else {
                   console.error('Exceeded maximum retry attempts. Aborting.');
                   throw error;
               }
           } else {
-              console.error('Error replacing card checklists:', error.response ? error.response.data : error.message);
+              console.error('Error updating card checklists:', error.response ? error.response.data : error.message);
               throw error;
           }
       }
   }
-
   
   async addChecklistToCard(cardId, checklist, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
       try {
