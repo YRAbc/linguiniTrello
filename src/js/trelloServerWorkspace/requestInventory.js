@@ -516,7 +516,65 @@ class RequestInventory {
       }
     }
   }
-  
+
+  async getCardCheckLists(cardId, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
+    try {
+        const response = await axios.get(
+            `https://api.trello.com/1/cards/${cardId}/checklists?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}&source=${this.oauth.appName}`,
+            {
+                timeout: timeout
+            }
+        );
+
+        const checkLists = response.data;
+        return checkLists;
+    } catch (error) {
+        if (error.response && error.response.status === 429) {
+            // Handle rate limiting
+            if (retryCount > 0) {
+                console.warn(`Rate limit exceeded. Retrying after ${delay / 1000} seconds. Retries left: ${retryCount}`);
+                await new Promise(resolve => setTimeout(resolve, delay));
+                return this.getCardCheckLists(cardId, retryCount - 1, delay * 2, timeout); // Exponential backoff
+            } else {
+                console.error('Exceeded maximum retry attempts. Aborting.');
+                throw error;
+            }
+        } else {
+            console.error('Error getting card checklists:', error.response ? error.response.data : error.message);
+            throw error;
+        }
+    }
+  }
+
+  async getCardCheckList(cardId, checkListId, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
+      try {
+          const response = await axios.get(
+              `https://api.trello.com/1/cards/${cardId}/checklists/${checkListId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}&source=${this.oauth.appName}`,
+              {
+                  timeout: timeout
+              }
+          );
+
+          const checkList = response.data;
+          return checkList;
+      } catch (error) {
+          if (error.response && error.response.status === 429) {
+              // Handle rate limiting
+              if (retryCount > 0) {
+                  console.warn(`Rate limit exceeded. Retrying after ${delay / 1000} seconds. Retries left: ${retryCount}`);
+                  await new Promise(resolve => setTimeout(resolve, delay));
+                  return this.getCardCheckList(cardId, checkListId, retryCount - 1, delay * 2, timeout); // Exponential backoff
+              } else {
+                  console.error('Exceeded maximum retry attempts. Aborting.');
+                  throw error;
+              }
+          } else {
+              console.error('Error getting card checklist:', error.response ? error.response.data : error.message);
+              throw error;
+          }
+      }
+  }
+    
   
   /* SET CARD CHARACTERISTICS */
   // POST
@@ -665,6 +723,104 @@ class RequestInventory {
         }
       }
   }
+
+  async updateCardChecklist(mainCardId, duplicateCardId, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
+      try {
+          // Get the main card's checklists
+          const mainCardChecklists = await this.getCardCheckLists(mainCardId);
+
+          // Remove all checklists from the duplicate card
+          const duplicateCardChecklists = await this.getCardCheckLists(duplicateCardId);
+          for (const checklist of duplicateCardChecklists) {
+              await this.removeChecklistFromCard(duplicateCardId, checklist.id, retryCount, delay, timeout);
+          }
+
+          // Add main card's checklists to the duplicate card
+          for (const checklist of mainCardChecklists) {
+              await this.addChecklistToCard(duplicateCardId, checklist, retryCount, delay, timeout);
+          }
+
+          console.log(`Checklists replaced successfully for card ${duplicateCardId}`);
+      } catch (error) {
+          if (error.response && error.response.status === 429) {
+              // Handle rate limiting
+              if (retryCount > 0) {
+                  console.warn(`Rate limit exceeded. Retrying after ${delay / 1000} seconds. Retries left: ${retryCount}`);
+                  await new Promise(resolve => setTimeout(resolve, delay));
+                  return this.replaceCardChecklist(mainCardId, duplicateCardId, retryCount - 1, delay * 2, timeout); // Exponential backoff
+              } else {
+                  console.error('Exceeded maximum retry attempts. Aborting.');
+                  throw error;
+              }
+          } else {
+              console.error('Error replacing card checklists:', error.response ? error.response.data : error.message);
+              throw error;
+          }
+      }
+  }
+  
+  async addChecklistToCard(cardId, checklist, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
+      try {
+          const response = await axios.post(
+              `https://api.trello.com/1/cards/${cardId}/checklists?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}&source=${this.oauth.appName}`,
+              {
+                  name: checklist.name, // Assuming checklist has a 'name' property
+                  // Add other properties of the checklist if required
+              },
+              {
+                  timeout: timeout
+              }
+          );
+
+          const newChecklist = response.data;
+          return newChecklist;
+      } catch (error) {
+          if (error.response && error.response.status === 429) {
+              // Handle rate limiting
+              if (retryCount > 0) {
+                  console.warn(`Rate limit exceeded. Retrying after ${delay / 1000} seconds. Retries left: ${retryCount}`);
+                  await new Promise(resolve => setTimeout(resolve, delay));
+                  return this.addChecklistToCard(cardId, checklist, retryCount - 1, delay * 2, timeout); // Exponential backoff
+              } else {
+                  console.error('Exceeded maximum retry attempts. Aborting.');
+                  throw error;
+              }
+          } else {
+              console.error('Error adding checklist to card:', error.response ? error.response.data : error.message);
+              throw error;
+          }
+      }
+  }
+
+  async removeChecklistFromCard(cardId, checklistId, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
+    try {
+        // Delete the checklist associated with the card
+        await axios.delete(
+            `https://api.trello.com/1/checklists/${checklistId}?key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}&source=${this.oauth.appName}`,
+            {
+                timeout: timeout
+            }
+        );
+
+        console.log(`Checklist removed successfully from card ${cardId}`);
+    } catch (error) {
+        if (error.response && error.response.status === 429) {
+            // Handle rate limiting
+            if (retryCount > 0) {
+                console.warn(`Rate limit exceeded. Retrying after ${delay / 1000} seconds. Retries left: ${retryCount}`);
+                await new Promise(resolve => setTimeout(resolve, delay));
+                return this.removeChecklistFromCard(cardId, checklistId, retryCount - 1, delay * 2, timeout); // Exponential backoff
+            } else {
+                console.error('Exceeded maximum retry attempts. Aborting.');
+                throw error;
+            }
+        } else {
+            console.error('Error removing checklist from card:', error.response ? error.response.data : error.message);
+            throw error;
+        }
+    }
+  }
+
 
     /* PUT */
   //PUT JSON

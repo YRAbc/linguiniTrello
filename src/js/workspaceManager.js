@@ -277,6 +277,7 @@ class WorkspaceManager {
                                         }));
 
                                         /* CHECKLIST */ 
+                                        await this.rqtInv.updateCardChecklist(mainCard.id, duplicateCard.id);
 
 
                                         /* ATTACHMENT */
@@ -358,6 +359,7 @@ class WorkspaceManager {
                                     // Create a Card object for each Trello card
                                     const cardObj = new VCard(card.id, card.name, JSON.stringify(card, null, 2), listObj.getListId(), listObj.getListName(), opfTechNumber);
                                     
+                                    /*
                                     // STATUS
                                     const statusFieldIds = [IdsConfigWorkspace.opfBoardCustStatusId, IdsConfigWorkspace.sidBoardCustStatusId, IdsConfigWorkspace.techBoardCustStatusId];
                                     const statusField = card.customFieldItems && card.customFieldItems.find(field => statusFieldIds.includes(field.idCustomField));
@@ -376,7 +378,7 @@ class WorkspaceManager {
                                     // TECH
                                     const techFieldIds = [IdsConfigWorkspace.opfBoardCustTechId, IdsConfigWorkspace.sidBoardCustTechId, IdsConfigWorkspace.techBoardCustTechId];
                                     const techField = card.customFieldItems && card.customFieldItems.find(field => techFieldIds.includes(field.idCustomField));
-                                    cardObj.setTechT(techField ? techField.value.text || '' : '');
+                                    cardObj.setTechT(techField ? techField.value.text || '' : '');*/
 
                                     // Add the card object to the list object
                                     listObj.addCard(cardObj);
