@@ -806,7 +806,7 @@ class RequestInventory {
               }
           }
 
-          console.log(`Checklists and checklist items replaced successfully for card ${duplicateCardId}`);
+          //console.log(`Checklists and checklist items replaced successfully for card ${duplicateCardId}`);
       } catch (error) {
           if (error.response && error.response.status === 429) {
               // Handle rate limiting
