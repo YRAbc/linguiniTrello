@@ -633,7 +633,35 @@ class RequestInventory {
       }
   }
 
-    
+  async getCardComments(cardId, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
+    try {
+      const response = await axios.get(
+        `https://api.trello.com/1/cards/${cardId}/actions?filter=commentCard&key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}&source=${this.oauth.appName}`,
+        {
+          timeout: timeout
+        }
+      );
+
+      const comments = response.data;
+      return comments;
+    } catch (error) {
+      if (error.response && error.response.status === 429) {
+        // Handle rate limiting
+        if (retryCount > 0) {
+          console.warn(`Rate limit exceeded. Retrying after ${delay / 1000} seconds. Retries left: ${retryCount}`);
+          await new Promise(resolve => setTimeout(resolve, delay));
+          return this.getCardComments(cardId, retryCount - 1, delay * 2, timeout); // Exponential backoff
+        } else {
+          console.error('Exceeded maximum retry attempts. Aborting.');
+          throw error;
+        }
+      } else {
+        console.error('Error getting card comments:', error.response ? error.response.data : error.message);
+        throw error;
+      }
+    }
+  }
+
   /* SET CARD CHARACTERISTICS */
   // POST
   async addOPFTechNumber(cardId, opfTechNumber, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
@@ -955,6 +983,69 @@ class RequestInventory {
               throw error;
           }
       }
+  }
+
+  async updateCardComments(mainCardId, duplicateCardId, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
+    try {
+      // Step 1: Get all the comments from the mainCardId
+      const mainCardComments = await this.getCardComments(mainCardId);
+  
+      // Step 2: Loop through each comment and update the corresponding comment in the duplicateCardId
+      for (const comment of mainCardComments) {
+        const updatedCommentData = {
+          text: comment.text,
+          idMember: comment.idMember, // Optional: idMember to assign the comment to a specific member
+        };
+  
+        // Update the comment in the duplicateCardId
+        await this.setCardComment(duplicateCardId, updatedCommentData);
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 429) {
+        // Handle rate limiting
+        if (retryCount > 0) {
+          console.warn(`Rate limit exceeded. Retrying after ${delay / 1000} seconds. Retries left: ${retryCount}`);
+          await new Promise(resolve => setTimeout(resolve, delay));
+          return this.updateCardComments(mainCardId, duplicateCardId, retryCount - 1, delay * 2, timeout); // Exponential backoff
+        } else {
+          console.error('Exceeded maximum retry attempts. Aborting.');
+          throw error;
+        }
+      } else {
+        console.error('Error updating card comments:', error.response ? error.response.data : error.message);
+        throw error;
+      }
+    }
+  }
+
+  async setCardComments(cardId, commentsData, retryCount = 3, delay = 1000, timeout = this.defaultTimeout) {
+    try {
+      const response = await axios.post(
+        `https://api.trello.com/1/cards/${cardId}/actions?filter=commentCard&key=${this.oauth.apiKey}&token=${this.oauth.appAccessToken}&source=${this.oauth.appName}`,
+        commentsData,
+        {
+          timeout: timeout
+        }
+      );
+  
+      const comments = response.data;
+      return comments;
+    } catch (error) {
+      if (error.response && error.response.status === 429) {
+        // Handle rate limiting
+        if (retryCount > 0) {
+          console.warn(`Rate limit exceeded. Retrying after ${delay / 1000} seconds. Retries left: ${retryCount}`);
+          await new Promise(resolve => setTimeout(resolve, delay));
+          return this.setCardComments(cardId, commentsData, retryCount - 1, delay * 2, timeout); // Exponential backoff
+        } else {
+          console.error('Exceeded maximum retry attempts. Aborting.');
+          throw error;
+        }
+      } else {
+        console.error('Error setting card comments:', error.response ? error.response.data : error.message);
+        throw error;
+      }
+    }
   }
 
     /* PUT */
