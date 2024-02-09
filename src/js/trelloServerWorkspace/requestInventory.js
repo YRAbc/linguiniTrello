@@ -790,19 +790,22 @@ class RequestInventory {
           // Remove all checklists from the duplicate card
           const duplicateCardChecklists = await this.getCardCheckLists(duplicateCardId);
           for (const checklist of duplicateCardChecklists) {
-              await this.removeChecklistFromCard(duplicateCardId, checklist.id, retryCount, delay, timeout);
+              await this.removeChecklistFromCard(duplicateCardId, checklist.id);
           }
 
           // Add main card's checklists to the duplicate card
           for (const mainChecklist of mainCardChecklists) {
               // Add the checklist to the duplicate card
-              const newChecklist = await this.addChecklistToCard(duplicateCardId, mainChecklist, retryCount, delay, timeout);
+              const newChecklist = await this.addChecklistToCard(duplicateCardId, mainChecklist);
 
               // Get the checklist items from the main checklist
               const mainChecklistItems = await this.getCheckListItems(mainChecklist.id);
               for (const item of mainChecklistItems) {
-                  // Add each checklist item to the newly added checklist on the duplicate card
-                  await this.addChecklistItemToChecklist(newChecklist.id, item, retryCount, delay, timeout);
+                  // Log the itemData before adding it to the checklist
+                  console.log("itemData: ", itemData);
+
+                  // Add the checklist item to the checklist
+                  await this.addChecklistItemToChecklist(checkListId, itemData);
               }
           }
 
