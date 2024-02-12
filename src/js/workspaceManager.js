@@ -231,7 +231,7 @@ class WorkspaceManager {
                                         // Update Dup card
                                         await this.rqtInv.setCardUpdate(duplicateCard.id, mainCard);
 
-                                        /* CUSTOM FIELDS */
+                                        /* CUSTOM FIELDS 
                                         // Iterate over each customFieldItem in duplicateCard.customFieldItems array.
                                         await Promise.all(duplicateCard.customFieldItems.map(async (duplicateCardCustomFieldItem) => {
                                             // console.log('Processing customFieldItem:', duplicateCardCustomFieldItem)
@@ -252,7 +252,7 @@ class WorkspaceManager {
                                                         // Assuming customFieldOptionsId is defined elsewhere in your code
                                                         await this.rqtInv.setCustomField(duplicateCard.id, duplicateCardCustomFieldItem.idCustomField, dupCardCustomFieldValueId);
 
-                                                        /* CARD CUSTOM FIELD CAN BE UPDATED BY MODIFICATIONS FROM OTHER BOARDS => NEED TO MOVE THE CARD TO THE RIGHT LIST*/
+                                                        /* CARD CUSTOM FIELD CAN BE UPDATED BY MODIFICATIONS FROM OTHER BOARDS => NEED TO MOVE THE CARD TO THE RIGHT LIST
                                                         if(duplicateCardCustomFieldItem.idCustomField === IdsConfigWorkspace.techBoardCustStatusId)
                                                         {
                                                             //MOVE TO LIST if not in list

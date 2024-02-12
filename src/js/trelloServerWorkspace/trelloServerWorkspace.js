@@ -53,10 +53,12 @@ class TrelloServerWorkspace {
                 await this.rqtInv.addOPFTechNumber(cardId, nextOPFTechNumber);
 
                 // Set Custom Fields
+                /*
                 await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.opfBoardCustPriorityId, IdsConfigWorkspace.opfBoardCustPriorityToQualifyId);
                 await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.opfBoardCustIssuerId, IdsConfigWorkspace.opfBoardCustIssuerToQualifyId);
                 await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.opfBoardCustTechId, IdsConfigWorkspace.opfBoardCustTechToQualifyId);
                 await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.opfBoardCustStatusId, IdsConfigWorkspace.opfBoardCustStatusOpenId);
+                */
 
                 await this.rqtInv.copyCardToList(cardId, IdsConfigWorkspace.techBoardToClassifyListId, cardDetails);
 
@@ -81,22 +83,22 @@ class TrelloServerWorkspace {
             const cardDetails = await this.rqtInv.getCard(cardId);
       
             if (endListId === IdsConfigWorkspace.techBoardProjectListId) {
-              await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustTechId, IdsConfigWorkspace.techBoardCustTechProjectId);
+              //await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustTechId, IdsConfigWorkspace.techBoardCustTechProjectId);
             }
       
             if (endListId === IdsConfigWorkspace.techBoardSupportListId) {
-              await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustTechId, IdsConfigWorkspace.techBoardCustTechSupportId);
+              //await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustTechId, IdsConfigWorkspace.techBoardCustTechSupportId);
             }
       
             if (endListId === IdsConfigWorkspace.techBoardSidListId) {
-              await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustTechId, IdsConfigWorkspace.techBoardCustTechSidId);
+              //await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustTechId, IdsConfigWorkspace.techBoardCustTechSidId);
             }
       
             // STATUS CUSTOM FIELD UPDATE WITH CARD MOVE
             if (endListId === IdsConfigWorkspace.techBoardSentToSidListId) {
 
-              await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustTechId, IdsConfigWorkspace.techBoardCustTechSidId);
-              await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustStatusId, IdsConfigWorkspace.techBoardCustStatusSentToSidId);
+              //await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustTechId, IdsConfigWorkspace.techBoardCustTechSidId);
+              //await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustStatusId, IdsConfigWorkspace.techBoardCustStatusSentToSidId);
               const cardDetails = await this.rqtInv.getCard(cardId);
 
               const opfTechNumber = await this.rqtInv.getOPFTechNumber(cardId);
@@ -110,27 +112,27 @@ class TrelloServerWorkspace {
               const opfTechNumber = await this.rqtInv.getOPFTechNumber(cardId);
               const dupCardOnOPFTODO = await this.rqtInv.getCardInBoardWithNumber(IdsConfigWorkspace.opfBoardId, opfTechNumber);
               await this.rqtInv.moveCardToList(dupCardOnOPFTODO.id, IdsConfigWorkspace.opfBoardDoingListId);
-              await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustStatusId, IdsConfigWorkspace.techBoardCustStatusInProgressId);
+              //await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustStatusId, IdsConfigWorkspace.techBoardCustStatusInProgressId);
             }
       
             if (endListId === IdsConfigWorkspace.techBoardTestingListId) {
-              await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustStatusId, IdsConfigWorkspace.techBoardCustStatusTestingId);
+              //await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustStatusId, IdsConfigWorkspace.techBoardCustStatusTestingId);
             }
       
             if (endListId === IdsConfigWorkspace.techBoardPendingDeliveryListId) {
-              await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustStatusId, IdsConfigWorkspace.techBoardCustStatusPendingDeliveryId);
+              //await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustStatusId, IdsConfigWorkspace.techBoardCustStatusPendingDeliveryId);
             }
       
             if (endListId === IdsConfigWorkspace.techBoardDeliveredListId) {
-              await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustStatusId, IdsConfigWorkspace.techBoardCustStatusDeliveredId);
+              //await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustStatusId, IdsConfigWorkspace.techBoardCustStatusDeliveredId);
             }
       
             if (endListId === IdsConfigWorkspace.techBoardVaidatedListId) {
-              await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustStatusId, IdsConfigWorkspace.techBoardCustStatusValidatedId);
+              //await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.techBoardCustStatusId, IdsConfigWorkspace.techBoardCustStatusValidatedId);
             }
       
             if (endListId === IdsConfigWorkspace.opfBoardValidatedListId) {
-              await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.opfBoardCustStatusId, IdsConfigWorkspace.opfBoardCustStatusValidatedId);
+              //await this.rqtInv.setCustomField(cardId, IdsConfigWorkspace.opfBoardCustStatusId, IdsConfigWorkspace.opfBoardCustStatusValidatedId);
             }
       
             // CARD IS MOVED FROM SID OPF TECH LIST
