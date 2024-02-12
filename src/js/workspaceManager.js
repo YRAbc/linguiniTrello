@@ -231,7 +231,7 @@ class WorkspaceManager {
                                         // Update Dup card
                                         await this.rqtInv.setCardUpdate(duplicateCard.id, mainCard);
 
-                                        /* CUSTOM FIELDS 
+                                        /* CUSTOM FIELDS */
                                         // Iterate over each customFieldItem in duplicateCard.customFieldItems array.
                                         await Promise.all(duplicateCard.customFieldItems.map(async (duplicateCardCustomFieldItem) => {
                                             // console.log('Processing customFieldItem:', duplicateCardCustomFieldItem)
@@ -252,7 +252,7 @@ class WorkspaceManager {
                                                         // Assuming customFieldOptionsId is defined elsewhere in your code
                                                         await this.rqtInv.setCustomField(duplicateCard.id, duplicateCardCustomFieldItem.idCustomField, dupCardCustomFieldValueId);
 
-                                                        /* CARD CUSTOM FIELD CAN BE UPDATED BY MODIFICATIONS FROM OTHER BOARDS => NEED TO MOVE THE CARD TO THE RIGHT LIST
+                                                        /* CARD CUSTOM FIELD CAN BE UPDATED BY MODIFICATIONS FROM OTHER BOARDS => NEED TO MOVE THE CARD TO THE RIGHT LIST */
                                                         if(duplicateCardCustomFieldItem.idCustomField === IdsConfigWorkspace.techBoardCustStatusId)
                                                         {
                                                             //MOVE TO LIST if not in list
@@ -359,7 +359,6 @@ class WorkspaceManager {
                                     // Create a Card object for each Trello card
                                     const cardObj = new VCard(card.id, card.name, JSON.stringify(card, null, 2), listObj.getListId(), listObj.getListName(), opfTechNumber);
                                     
-                                    /*
                                     // STATUS
                                     const statusFieldIds = [IdsConfigWorkspace.opfBoardCustStatusId, IdsConfigWorkspace.sidBoardCustStatusId, IdsConfigWorkspace.techBoardCustStatusId];
                                     const statusField = card.customFieldItems && card.customFieldItems.find(field => statusFieldIds.includes(field.idCustomField));
@@ -378,7 +377,7 @@ class WorkspaceManager {
                                     // TECH
                                     const techFieldIds = [IdsConfigWorkspace.opfBoardCustTechId, IdsConfigWorkspace.sidBoardCustTechId, IdsConfigWorkspace.techBoardCustTechId];
                                     const techField = card.customFieldItems && card.customFieldItems.find(field => techFieldIds.includes(field.idCustomField));
-                                    cardObj.setTechT(techField ? techField.value.text || '' : '');*/
+                                    cardObj.setTechT(techField ? techField.value.text || '' : '');
 
                                     // Add the card object to the list object
                                     listObj.addCard(cardObj);
